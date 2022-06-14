@@ -5,59 +5,84 @@
 //  Created by Prince Avecillas on 6/2/22.
 //
 
-//try error
-//while delegate closure completion handlers
 //mvvm
 //next arrorw cells
 //more info
-//change button change
 
 
 import Foundation
 
+struct SchoolServiceURLs {
+    static let schoolDataUrl = "https://data.cityofnewyork.us/resource/s3k6-pzi2.json"
+    static let scoresDataUrl = "https://data.cityofnewyork.us/resource/f9bf-2cp4.json"
+}
+
+enum APIError: Error {
+    case failedTogetData
+}
+
 
 class SchoolServiceAPI {
-    var schoolData = [School]()
-    var schoolsSATData = [SchoolScore]()
+    static let shared = SchoolServiceAPI()
     
-    func getSchoolData() {
+    func getSchoolData(completion: @escaping (Result<[School], Error>) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: URL(string: "https://data.cityofnewyork.us/resource/s3k6-pzi2.json")!) { data, response, error in
+        guard let url = URL(string: "\(SchoolServiceURLs.schoolDataUrl)") else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
             
-            if let data = data {
-                if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    as? [[String: Any]]) != nil {
-                    do {
-                        self.schoolData = try JSONDecoder().decode([School].self, from: data)
-                    } catch {
-                        print("ERROR")
-                    }
-                }
+            do {
+                let results = try JSONDecoder().decode([School].self, from: data)
+                completion(.success(results))
+            } catch {
+                completion(.failure(APIError.failedTogetData))
             }
         }
         task.resume()
     }
     
 
-    func getTestData(){
+    func getTestData(completion: @escaping (Result<[SchoolScore], Error>) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: URL(string: "https://data.cityofnewyork.us/resource/f9bf-2cp4.json")!) { data, response, error in
-                        
-            if let data = data {
-                if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    as? [[String: Any]]) != nil {
-                    do {
-                        self.schoolsSATData = try JSONDecoder().decode([SchoolScore].self, from: data)
-                    } catch {
-                        print("ERROR")
-                    }
-                }
+        guard let url = URL(string: "\(SchoolServiceURLs.scoresDataUrl)") else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode([SchoolScore].self, from: data)
+                completion(.success(results))
+            } catch {
+                completion(.failure(APIError.failedTogetData))
             }
         }
         task.resume()
     }
 }
 
+
+//func getTestData(){
+//
+//    let task = URLSession.shared.dataTask(with: URL(string: "https://data.cityofnewyork.us/resource/f9bf-2cp4.json")!) { data, response, error in
+//
+//        if let data = data {
+//            if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                as? [[String: Any]]) != nil {
+//                do {
+//                    self.schoolsSATData = try JSONDecoder().decode([SchoolScore].self, from: data)
+//                } catch {
+//                    print("ERROR")
+//                }
+//            }
+//        }
+//    }
+//    task.resume()
+//}
 
 
 //

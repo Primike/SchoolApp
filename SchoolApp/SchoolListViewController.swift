@@ -9,96 +9,72 @@ import UIKit
 
 class SchoolListViewController: UIViewController {
     
-    //variables to store api info
-    var testData = [SchoolScore]()
+    var satData = [SchoolScore]()
+    var schoolData = [School]()
+
     var group = DispatchGroup()
     var tableView = UITableView()
     var activityIndicator = UIActivityIndicatorView(style: .large)
     var completedAPICount = 0
-    let urls = ["https://data.cityofnewyork.us/resource/s3k6-pzi2.json", "https://data.cityofnewyork.us/resource/f9bf-2cp4.json"]
-    var schoolServiceApi = SchoolServiceAPI()
-    var schoolData = [School]()
-    var schoolsSATData = [SchoolScore]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingIndicator()
+        
+        getData()
+        group.notify(queue: .main, execute: {
+            if self.completedAPICount == 2 {
+                self.view.backgroundColor = .systemTeal
+                self.style()
+                self.layout()
+                self.setup()
+            }
+        })
+    }
+    
+    func getData(){
+        group.enter()
+        SchoolServiceAPI.shared.getSchoolData { result in
+            defer {
+                self.group.leave()
+            }
+            switch result {
+            case .success(let schools):
+                self.schoolData = schools
+                self.completedAPICount += 1
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        group.enter()
+        SchoolServiceAPI.shared.getTestData { result in
+            defer {
+                self.group.leave()
+            }
+            switch result {
+            case .success(let scores):
+                self.satData = scores
+                self.completedAPICount += 1
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+
+
+extension SchoolListViewController {
+    func loadingIndicator() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         activityIndicator.startAnimating()
         activityIndicator.color = .red
-        getData()
-        //used this so that the code waits for the api data to fill
-        print("done")
     }
     
-    func getData(){
-        group.enter()
-        let task = URLSession.shared.dataTask(with: URL(string: urls[0])!) { data, response, error in
-            defer {
-                self.group.leave()
-            }
-            if let data = data {
-                if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    as? [[String: Any]]) != nil {
-                    self.schoolData = try! JSONDecoder().decode([School].self, from: data)
-                }
-            }
-        }
-        task.resume()
-        group.notify(queue: .main, execute: {
-            self.completedAPICount += 1
-            if self.completedAPICount == 2 {
-                self.view.backgroundColor = .systemTeal
-                self.style()
-                self.layout()
-                self.setup()
-            }
-        })
-
-        group.enter()
-        let task2 = URLSession.shared.dataTask(with: URL(string: urls[1])!) { data, response, error in
-            defer {
-                self.group.leave()
-            }
-            if let data = data {
-                if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    as? [[String: Any]]) != nil {
-                    self.testData = try! JSONDecoder().decode([SchoolScore].self, from: data)
-                }
-            }
-        }
-        task2.resume()
-        group.notify(queue: .main, execute: {
-            self.completedAPICount += 1
-            if self.completedAPICount == 2 {
-                self.view.backgroundColor = .systemTeal
-                self.style()
-                self.layout()
-                self.setup()
-            }
-        })
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//setting up stuff here in this extension
-extension SchoolListViewController {
     func style(){
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -126,7 +102,6 @@ extension SchoolListViewController {
     
 }
 
-//this extension sets up the table properties
 extension SchoolListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SchoolTableViewCell()
@@ -147,7 +122,6 @@ extension SchoolListViewController: UITableViewDataSource {
     }
 }
 
-//this extension allows table cells to be clickable and present another VC
 extension SchoolListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var modifiedTestData: SchoolScore?
@@ -155,9 +129,7 @@ extension SchoolListViewController: UITableViewDelegate {
                                        sat_math_avg_score: "Not Available",
                                        sat_writing_avg_score: "Not Available")
         
-        //if a school does not have test data in the testData api then
-        //i am adding a generic not available for that dbn
-        for i in testData {
+        for i in satData {
             if i.dbn == schoolData[indexPath.row].dbn {
                 modifiedTestData = i
                 break
