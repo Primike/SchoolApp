@@ -7,9 +7,12 @@
 
 import Foundation
 
+struct Schools: Decodable {
+    let status: String
+    let data: [School]
+}
+
 struct School: Decodable {
-//    let x: String
-    
     var dbn: String
     var school_name: String
     var overview_paragraph: String
@@ -18,6 +21,6 @@ struct School: Decodable {
     var boro: String
 }
 
-struct Response: Decodable {
-    var users : [School]
-}
+//struct Response: Decodable {
+//    var users : [School]
+//}

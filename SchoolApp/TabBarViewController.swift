@@ -77,8 +77,9 @@ class TabBarViewController: UITabBarController {
     }
 
     private func setupTabBar() {
-        tabBar.tintColor = appColor
+        tabBar.tintColor = .black
         tabBar.isTranslucent = false
+        tabBar.backgroundColor = .systemBackground
     }
 
     

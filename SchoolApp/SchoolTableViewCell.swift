@@ -87,7 +87,6 @@ extension SchoolTableViewCell {
             addressLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             
             boroLabel.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),
-            boroLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
     }
 }

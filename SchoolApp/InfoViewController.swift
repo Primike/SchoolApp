@@ -42,6 +42,7 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
         style()
         layout()
+        backgroundColor()
     }
     
     func style() {
@@ -77,7 +78,7 @@ class InfoViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             image.topAnchor.constraint(equalTo: stackView.topAnchor),
@@ -93,6 +94,22 @@ class InfoViewController: UIViewController {
             paragraph.topAnchor.constraint(equalTo: link.bottomAnchor, constant: 10),
             paragraph.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
         ])
+    }
+    
+    func backgroundColor() {
+        switch school.boro {
+        case "M":
+            view.backgroundColor = .systemCyan
+        case "X":
+            view.backgroundColor = .systemOrange
+        case "K":
+            paragraph.textColor = .white
+            view.backgroundColor = .black
+        case "Q":
+            view.backgroundColor = .systemBlue
+        default:
+            view.backgroundColor = .systemBackground
+        }
     }
 }
 

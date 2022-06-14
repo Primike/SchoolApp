@@ -11,6 +11,7 @@
 		B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B5284933C700303EEE /* SchoolsStruct.swift */; };
 		B848D3CE28565F9B00FE01C9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3CD28565F9B00FE01C9 /* File.swift */; };
 		B848D3D02856637A00FE01C9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3CF2856637A00FE01C9 /* TabBarViewController.swift */; };
+		B848D3D2285905C100FE01C9 /* SchoolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3D1285905C100FE01C9 /* SchoolsViewModel.swift */; };
 		B87473B4284904B200821AC9 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87473B3284904B200821AC9 /* APICalls.swift */; };
 		B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2B9284E61FF0071E43D /* SchoolScoreStruct.swift */; };
 		B880A2BE284ED2310071E43D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BD284ED2310071E43D /* InfoViewController.swift */; };
@@ -47,6 +48,7 @@
 		B83017B5284933C700303EEE /* SchoolsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsStruct.swift; sourceTree = "<group>"; };
 		B848D3CD28565F9B00FE01C9 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		B848D3CF2856637A00FE01C9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		B848D3D1285905C100FE01C9 /* SchoolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsViewModel.swift; sourceTree = "<group>"; };
 		B87473B3284904B200821AC9 /* APICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
 		B880A2B9284E61FF0071E43D /* SchoolScoreStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScoreStruct.swift; sourceTree = "<group>"; };
 		B880A2BD284ED2310071E43D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				B87473B3284904B200821AC9 /* APICalls.swift */,
 				B83017B1284932D900303EEE /* DataManipulation.swift */,
+				B848D3D1285905C100FE01C9 /* SchoolsViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -154,8 +157,8 @@
 				B8E8173C2846A45F0052C1AE /* AppDelegate.swift */,
 				B804315A28523188004C9BAF /* Models */,
 				B804315B28523198004C9BAF /* ViewModels */,
-				B804315C2852319F004C9BAF /* ViewControllers */,
 				B804315928523181004C9BAF /* Views */,
+				B804315C2852319F004C9BAF /* ViewControllers */,
 				B8E8176D2846AACE0052C1AE /* Files */,
 			);
 			path = SchoolApp;
@@ -313,6 +316,7 @@
 				B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */,
 				B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */,
 				B880A2C3284F7F680071E43D /* TestGraphViewController.swift in Sources */,
+				B848D3D2285905C100FE01C9 /* SchoolsViewModel.swift in Sources */,
 				B848D3D02856637A00FE01C9 /* TabBarViewController.swift in Sources */,
 				B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */,
 				B880A2BE284ED2310071E43D /* InfoViewController.swift in Sources */,

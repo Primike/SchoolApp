@@ -9,6 +9,8 @@ import UIKit
 
 class SchoolListViewController: UIViewController {
     
+    private var schoolsViewModel: SchoolsViewModel!
+    
     var satData = [SchoolScore]()
     var schoolData = [School]()
 
@@ -20,59 +22,72 @@ class SchoolListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingIndicator()
-        
-        getData()
-        group.notify(queue: .main, execute: {
-            if self.completedAPICount == 2 {
-                self.view.backgroundColor = .systemTeal
-                self.style()
-                self.layout()
-                self.setup()
-            }
-        })
-    }
-    
-    func getData(){
-        group.enter()
-        SchoolServiceAPI.shared.getSchoolData { result in
-            defer {
-                self.group.leave()
-            }
-            switch result {
-            case .success(let schools):
-                self.schoolData = schools
-                self.completedAPICount += 1
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-
-        group.enter()
-        SchoolServiceAPI.shared.getTestData { result in
-            defer {
-                self.group.leave()
-            }
-            switch result {
-            case .success(let scores):
-                self.satData = scores
-                self.completedAPICount += 1
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-}
-
-
-
-extension SchoolListViewController {
-    func loadingIndicator() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         activityIndicator.startAnimating()
         activityIndicator.color = .red
+
+        callToViewModelForUIUpdate()    
+
+//        group.notify(queue: .main, execute: {
+//            if self.completedAPICount == 2 {
+//                self.view.backgroundColor = .white
+//                self.style()
+//                self.layout()
+//                self.setup()
+//            }
+//        })
+    }
+    
+    func callToViewModelForUIUpdate() {
+        self.schoolsViewModel = SchoolsViewModel()
+        self.schoolsViewModel.bindSchoolViewModelToController = {
+            self.view.backgroundColor = .white
+            self.style()
+            self.layout()
+            self.setup()
+        }
+    }
+    
+
+//    func getData(){
+//        group.enter()
+//        SchoolServiceAPI.shared.getSchoolData { result in
+//            defer {
+//                self.group.leave()
+//            }
+//            switch result {
+//            case .success(let schools):
+//                self.schoolData = schools
+//                self.completedAPICount += 1
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//
+//        group.enter()
+//        SchoolServiceAPI.shared.getTestData { result in
+//            defer {
+//                self.group.leave()
+//            }
+//            switch result {
+//            case .success(let scores):
+//                self.satData = scores
+//                self.completedAPICount += 1
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+}
+
+
+
+extension SchoolListViewController {
+    func loadingIndicator() {
+
     }
     
     func style(){
@@ -110,6 +125,24 @@ extension SchoolListViewController: UITableViewDataSource {
         cell.addressLabel.text = schoolData[indexPath.row].location
         cell.addressLabel.numberOfLines = 0
         cell.boroLabel.text = schoolData[indexPath.row].boro
+        cell.accessoryType = .disclosureIndicator
+        switch schoolData[indexPath.row].boro {
+        case "M":
+            cell.backgroundColor = .lightGray
+        case "X":
+            cell.backgroundColor = .systemOrange
+        case "K":
+            cell.backgroundColor = .black
+            cell.schoolNameLabel.textColor =  UIColor.white
+            cell.addressLabel.textColor = UIColor.white
+            cell.boroLabel.textColor = UIColor.white
+        case "Q":
+            cell.backgroundColor = .systemCyan
+    
+        default:
+            cell.backgroundColor = .systemBackground
+        }
+
         return cell
     }
     
@@ -135,7 +168,7 @@ extension SchoolListViewController: UITableViewDelegate {
                 break
             }
         }
-        
         navigationController?.pushViewController(TabBarViewController(school: schoolData[indexPath.row], tests: modifiedTestData ?? notAvailable), animated: true)
+        navigationController?.title = schoolData[indexPath.row].school_name
     }
 }

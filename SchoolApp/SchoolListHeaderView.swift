@@ -48,7 +48,7 @@ class SchoolListHeaderView: UIView {
         dateFormatter.dateFormat = "MM/dd/YY"
         let x = dateFormatter.string(from: date)
         
-        header.backgroundColor = .systemCyan
+        header.backgroundColor = .systemFill
         header.translatesAutoresizingMaskIntoConstraints = false
 
         schoolHeader.translatesAutoresizingMaskIntoConstraints = false

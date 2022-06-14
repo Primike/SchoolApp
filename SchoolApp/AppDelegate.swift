@@ -6,7 +6,7 @@
 //
 
 import UIKit
-let appColor: UIColor = .systemCyan
+let appColor: UIColor = .systemFill
 
  
 @main
@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //specifing that SLVC is a navigation controller
         let navigationController = UINavigationController(rootViewController: SchoolListViewController())
-//        let navigationContr = UINavigationController(rootViewController: TabBarViewController())
         window?.rootViewController = navigationController
         return true
     }

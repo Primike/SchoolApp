@@ -5,10 +5,8 @@
 //  Created by Prince Avecillas on 6/2/22.
 //
 
-//mvvm
-//next arrorw cells
-//more info
-
+//alert on api failure retry
+//apicall
 
 import Foundation
 
@@ -25,7 +23,7 @@ enum APIError: Error {
 class SchoolServiceAPI {
     static let shared = SchoolServiceAPI()
     
-    func getSchoolData(completion: @escaping (Result<[School], Error>) -> Void) {
+    func getSchoolData(completion: @escaping (Schools) -> ()) {
         
         guard let url = URL(string: "\(SchoolServiceURLs.schoolDataUrl)") else { return }
         
@@ -35,10 +33,10 @@ class SchoolServiceAPI {
             }
             
             do {
-                let results = try JSONDecoder().decode([School].self, from: data)
-                completion(.success(results))
+                let results = try JSONDecoder().decode(Schools.self, from: data)
+                completion(results)
             } catch {
-                completion(.failure(APIError.failedTogetData))
+//                completion(.failure(APIError.failedTogetData))
             }
         }
         task.resume()
