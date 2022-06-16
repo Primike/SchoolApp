@@ -8,9 +8,7 @@
 import UIKit
 
 class SchoolListViewController: UIViewController {
-    
-    private var schoolsViewModel: SchoolsViewModel!
-    
+        
     var satData = [SchoolScore]()
     var schoolData = [School]()
 
@@ -21,7 +19,6 @@ class SchoolListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingIndicator()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -29,66 +26,53 @@ class SchoolListViewController: UIViewController {
         activityIndicator.startAnimating()
         activityIndicator.color = .red
 
-        callToViewModelForUIUpdate()    
-
-//        group.notify(queue: .main, execute: {
-//            if self.completedAPICount == 2 {
-//                self.view.backgroundColor = .white
-//                self.style()
-//                self.layout()
-//                self.setup()
-//            }
-//        })
+        getData()
+        
+        group.notify(queue: .main, execute: {
+            if self.completedAPICount == 2 {
+                self.view.backgroundColor = .white
+                self.style()
+                self.layout()
+                self.setup()
+            }
+        })
     }
     
-    func callToViewModelForUIUpdate() {
-        self.schoolsViewModel = SchoolsViewModel()
-        self.schoolsViewModel.bindSchoolViewModelToController = {
-            self.view.backgroundColor = .white
-            self.style()
-            self.layout()
-            self.setup()
+
+    func getData(){
+        group.enter()
+        SchoolServiceAPI.shared.getSchoolData { result in
+            defer {
+                self.group.leave()
+            }
+            switch result {
+            case .success(let schools):
+                self.schoolData = schools
+                self.completedAPICount += 1
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        group.enter()
+        SchoolServiceAPI.shared.getTestData { result in
+            defer {
+                self.group.leave()
+            }
+            switch result {
+            case .success(let scores):
+                self.satData = scores
+                self.completedAPICount += 1
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
-    
-
-//    func getData(){
-//        group.enter()
-//        SchoolServiceAPI.shared.getSchoolData { result in
-//            defer {
-//                self.group.leave()
-//            }
-//            switch result {
-//            case .success(let schools):
-//                self.schoolData = schools
-//                self.completedAPICount += 1
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//
-//        group.enter()
-//        SchoolServiceAPI.shared.getTestData { result in
-//            defer {
-//                self.group.leave()
-//            }
-//            switch result {
-//            case .success(let scores):
-//                self.satData = scores
-//                self.completedAPICount += 1
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
 }
 
 
 
 extension SchoolListViewController {
-    func loadingIndicator() {
-
-    }
     
     func style(){
         tableView.translatesAutoresizingMaskIntoConstraints = false

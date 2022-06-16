@@ -23,7 +23,7 @@ enum APIError: Error {
 class SchoolServiceAPI {
     static let shared = SchoolServiceAPI()
     
-    func getSchoolData(completion: @escaping (Schools) -> ()) {
+    func getSchoolData(completion: @escaping (Result<[School], Error>) -> Void) {
         
         guard let url = URL(string: "\(SchoolServiceURLs.schoolDataUrl)") else { return }
         
@@ -33,10 +33,10 @@ class SchoolServiceAPI {
             }
             
             do {
-                let results = try JSONDecoder().decode(Schools.self, from: data)
-                completion(results)
+                let results = try JSONDecoder().decode([School].self, from: data)
+                completion(.success(results))
             } catch {
-//                completion(.failure(APIError.failedTogetData))
+                completion(.failure(APIError.failedTogetData))
             }
         }
         task.resume()

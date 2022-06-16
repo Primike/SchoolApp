@@ -7,27 +7,27 @@
 
 import Foundation
 
-class SchoolsViewModel: NSObject {
-    
-    private var schoolService: SchoolServiceAPI!
-    
-    private(set) var schoolData: Schools! {
-        didSet {
-            self.bindSchoolViewModelToController()
-        }
-    }
-    
-    var bindSchoolViewModelToController: (() -> ()) = {}
-    
-    override init() {
-        super.init()
-        self.schoolService = SchoolServiceAPI()
-        callFuncToGetSchoolData()
-    }
-    
-    func callFuncToGetSchoolData() {
-        self.schoolService.getSchoolData { (schoolData) in
-            self.schoolData = schoolData
-        }
-    }
-}
+//class SchoolsViewModel: NSObject {
+//    
+//    private var schoolService: SchoolServiceAPI!
+//    
+//    private(set) var schoolData: Schools! {
+//        didSet {
+//            self.bindSchoolViewModelToController()
+//        }
+//    }
+//    
+//    var bindSchoolViewModelToController: (() -> ()) = {}
+//    
+//    override init() {
+//        super.init()
+//        self.schoolService = SchoolServiceAPI()
+//        callFuncToGetSchoolData()
+//    }
+//    
+//    func callFuncToGetSchoolData() {
+//        self.schoolService.getSchoolData { (schoolData) in
+//            self.schoolData = schoolData
+//        }
+//    }
+//}
