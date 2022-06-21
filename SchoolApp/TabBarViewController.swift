@@ -44,7 +44,7 @@ class TabBarViewController: UITabBarController {
     private func setupViews() {
         let summaryVC = InfoViewController(school: school, tests: tests)
         let satScoresVC = TestsViewController(school: school, tests: tests)
-        let moreVC = MoreViewController()
+        let moreVC = ViewController()
 
         summaryVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Summary", tag: 0)
         satScoresVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "SAT Scores", tag: 1)
@@ -54,7 +54,7 @@ class TabBarViewController: UITabBarController {
         let satScoresNC = UINavigationController(rootViewController: satScoresVC)
         let moreNC = UINavigationController(rootViewController: moreVC)
 
-        summaryNC.navigationBar.barTintColor = appColor
+        summaryNC.navigationBar.barTintColor = .white
         //the next four lines could be put into a method that just calls one line that passes the correct navigation bar.
         let img = UIImage()
         summaryNC.navigationBar.shadowImage = img
@@ -79,15 +79,11 @@ class TabBarViewController: UITabBarController {
     private func setupTabBar() {
         tabBar.tintColor = .black
         tabBar.isTranslucent = false
-        tabBar.backgroundColor = .systemBackground
+        tabBar.backgroundColor = .white
     }
 
     
 }
-
-
-
-
 
 
 
@@ -105,24 +101,6 @@ extension UIViewController {
         
         statusBarView.backgroundColor = appColor
         view.addSubview(statusBarView)
-    }
-}
-
-class AccountSummaryViewController: UIViewController {
-    override func viewDidLoad() {
-        view.backgroundColor = .systemGreen
-    }
-}
-
-class MoveMoneyViewController: UIViewController {
-    override func viewDidLoad() {
-        view.backgroundColor = .systemOrange
-    }
-}
-
-class MoreViewController: UIViewController {
-    override func viewDidLoad() {
-        view.backgroundColor = .systemPurple
     }
 }
 

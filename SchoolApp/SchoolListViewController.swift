@@ -11,7 +11,9 @@ class SchoolListViewController: UIViewController {
         
     var satData = [SchoolScore]()
     var schoolData = [School]()
-
+     
+    var schoolDataSearchResults = [School]()
+    
     var group = DispatchGroup()
     var tableView = UITableView()
     var activityIndicator = UIActivityIndicatorView(style: .large)
@@ -39,7 +41,7 @@ class SchoolListViewController: UIViewController {
     }
     
 
-    func getData(){
+    func getData() {
         group.enter()
         SchoolServiceAPI.shared.getSchoolData { result in
             defer {
@@ -74,12 +76,12 @@ class SchoolListViewController: UIViewController {
 
 extension SchoolListViewController {
     
-    func style(){
+    func style() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
     }
     
-    func layout(){
+    func layout() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -92,17 +94,18 @@ extension SchoolListViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        //        let header = SchoolListHeader(frame: .zero)
-        //        var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        //        size.width = UIScreen.main.bounds.width
-        //        header.frame.size = size
-        //        tableView.tableHeaderView = header
+        let header = SchoolListHeaderView(frame: .zero)
+        var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        size.width = UIScreen.main.bounds.width
+        header.frame.size = size
+        tableView.tableHeaderView = header
     }
     
 }
 
 extension SchoolListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = SchoolTableViewCell()
         cell.schoolNameLabel.text = schoolData[indexPath.row].school_name
         cell.schoolNameLabel.numberOfLines = 0
@@ -110,21 +113,24 @@ extension SchoolListViewController: UITableViewDataSource {
         cell.addressLabel.numberOfLines = 0
         cell.boroLabel.text = schoolData[indexPath.row].boro
         cell.accessoryType = .disclosureIndicator
+        cell.selectionStyle = .none
         switch schoolData[indexPath.row].boro {
         case "M":
-            cell.backgroundColor = .lightGray
+            cell.boroLabel.textColor = UIColor.gray
+            cell.schoolNameLabel.textColor = UIColor.gray
         case "X":
-            cell.backgroundColor = .systemOrange
+            cell.boroLabel.textColor = .systemOrange
+            cell.schoolNameLabel.textColor = .systemOrange
         case "K":
-            cell.backgroundColor = .black
-            cell.schoolNameLabel.textColor =  UIColor.white
-            cell.addressLabel.textColor = UIColor.white
-            cell.boroLabel.textColor = UIColor.white
+            cell.boroLabel.textColor = UIColor.black
+            cell.schoolNameLabel.textColor = UIColor.black
         case "Q":
-            cell.backgroundColor = .systemCyan
+            cell.boroLabel.textColor = UIColor.systemBlue
+            cell.schoolNameLabel.textColor = UIColor.systemBlue
     
         default:
-            cell.backgroundColor = .systemBackground
+            cell.boroLabel.textColor = .systemGreen
+            cell.schoolNameLabel.textColor = .systemGreen
         }
 
         return cell
@@ -133,6 +139,7 @@ extension SchoolListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return schoolData.count
+        //return schoolDataSearchResults.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
@@ -142,9 +149,9 @@ extension SchoolListViewController: UITableViewDataSource {
 extension SchoolListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var modifiedTestData: SchoolScore?
-        let notAvailable = SchoolScore(dbn: "0", num_of_sat_test_takers: "Not Available",                                              sat_critical_reading_avg_score: "Not Available",
-                                       sat_math_avg_score: "Not Available",
-                                       sat_writing_avg_score: "Not Available")
+        let notAvailable = SchoolScore(dbn: "0", num_of_sat_test_takers: "Not Available",                                              sat_critical_reading_avg_score: "0",
+                                       sat_math_avg_score: "0",
+                                       sat_writing_avg_score: "0")
         
         for i in satData {
             if i.dbn == schoolData[indexPath.row].dbn {

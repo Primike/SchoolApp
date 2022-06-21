@@ -7,6 +7,7 @@
 
 //alert on api failure retry
 //apicall
+//viewwilltransitionto
 
 import Foundation
 
@@ -33,7 +34,16 @@ class SchoolServiceAPI {
             }
             
             do {
-                let results = try JSONDecoder().decode([School].self, from: data)
+                var results = try JSONDecoder().decode([School].self, from: data)
+                print(results.count)
+                for i in 0..<results.count {
+                    if let index = results[i].location.firstIndex(of: "(") {
+                        results[i].location = String(results[i].location[..<index])
+                    } else {
+                        continue
+                    }
+
+                }
                 completion(.success(results))
             } catch {
                 completion(.failure(APIError.failedTogetData))

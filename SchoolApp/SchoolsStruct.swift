@@ -13,12 +13,14 @@ struct Schools: Decodable {
 }
 
 struct School: Decodable {
-    var dbn: String
-    var school_name: String
-    var overview_paragraph: String
+    let dbn: String
+    let school_name: String
+    let boro: String
+    let overview_paragraph: String
     var location: String
-    var website: String
-    var boro: String
+    let website: String
+    let phone_number: String
+    let interest1: String
 }
 
 //struct Response: Decodable {
