@@ -54,7 +54,7 @@ class SchoolListHeaderView: UIView {
         schoolHeader.translatesAutoresizingMaskIntoConstraints = false
         schoolHeader.font = UIFont(name:"TrebuchetMS-Bold", size: 40.0 )
         schoolHeader.textAlignment = .left
-        schoolHeader.text = "Schools"
+        schoolHeader.text = "NYC Schools"
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.text = x
@@ -94,7 +94,7 @@ class SchoolListHeaderView: UIView {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            imageView.leadingAnchor.constraint(equalTo: headerStackView.trailingAnchor, constant: 50),
+            imageView.leadingAnchor.constraint(equalTo: headerStackView.trailingAnchor, constant: 80),
             imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2)
         ])
