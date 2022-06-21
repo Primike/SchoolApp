@@ -89,15 +89,14 @@ class SchoolListHeaderView: UIView {
             headerStackView.topAnchor.constraint(equalTo: header.topAnchor, constant: 20),
             headerStackView.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20),
             headerStackView.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -20),
-        ])
-        
-        NSLayoutConstraint.activate([
+            
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             imageView.leadingAnchor.constraint(equalTo: headerStackView.trailingAnchor, constant: 80),
             imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2)
         ])
+        
     }
     
     override var intrinsicContentSize: CGSize {

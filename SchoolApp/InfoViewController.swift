@@ -58,7 +58,7 @@ class InfoViewController: UIViewController {
         backgroundColor()
     }
     
-    @objc func linkButtonTapped(_ sender: UITapGestureRecognizer) {
+    @objc func linkButtonTapped(sender: UIButton) {
         print("website link tapped")
         UIApplication.shared.open(URL(string: school.website)! as URL, options: [:], completionHandler: nil)
     }
@@ -68,19 +68,9 @@ class InfoViewController: UIViewController {
         stackView.backgroundColor = UIColor(patternImage: UIImage(named: "starbackground") ?? UIImage())
         
         link.translatesAutoresizingMaskIntoConstraints = false
-        link.configuration = .filled()
         link.setTitle("School Website", for: [])
-        link.titleLabel?.sizeToFit()
-        link.titleLabel?.text = "School Website"
-//        link.addTarget(self, action: #selector(linkButtonTapped), for: .primaryActionTriggered)
-        link.isUserInteractionEnabled = true
-        let linkClickGesture = UITapGestureRecognizer(target: self, action: #selector(linkButtonTapped(_:)))
-        link.addGestureRecognizer(linkClickGesture)
-        link.titleLabel?.addGestureRecognizer(linkClickGesture)
-        link.accessibilityLabel = "website link"
-        link.layer.cornerRadius = 15
-        link.backgroundColor = UIColor.blue
-        link.clipsToBounds = true
+        link.addTarget(self, action: #selector(linkButtonTapped), for: .primaryActionTriggered)
+        link.configuration = .filled()
         
         boroLabel.translatesAutoresizingMaskIntoConstraints = false
         boroLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 60.0)
@@ -143,7 +133,7 @@ class InfoViewController: UIViewController {
     func layout() {
         
         topStackView.addSubview(link)
-//        topStackView.addSubview(boroLabel)
+        topStackView.addSubview(boroLabel)
         infoStackView.addSubview(topStackView)
         infoStackView.addSubview(schoolName)
         infoStackView.addSubview(schoolLocation)
@@ -173,27 +163,30 @@ class InfoViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            topStackView.topAnchor.constraint(equalTo: stackView.topAnchor),
-            topStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            link.topAnchor.constraint(equalTo: topStackView.topAnchor),
-            link.leftAnchor.constraint(equalTo: topStackView.leftAnchor, constant: 35),
-//            boroLabel.rightAnchor.constraint(equalTo: topStackView.rightAnchor, constant: -30),
-            
-            infoStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
+            infoStackView.topAnchor.constraint(equalTo: stackView.topAnchor),
             infoStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            infoStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
-            schoolName.topAnchor.constraint(equalTo: link.bottomAnchor, constant: 10),
+            topStackView.topAnchor.constraint(equalTo: infoStackView.topAnchor),
+            topStackView.widthAnchor.constraint(equalTo: infoStackView.widthAnchor, multiplier: 0.85),
+            topStackView.centerXAnchor.constraint(equalTo: infoStackView.centerXAnchor),
+            topStackView.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.15),
+            link.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
+            link.centerYAnchor.constraint(equalTo: topStackView.centerYAnchor),
+            boroLabel.rightAnchor.constraint(equalTo: topStackView.rightAnchor),
+            boroLabel.centerYAnchor.constraint(equalTo: topStackView.centerYAnchor),
+            
+            
+            schoolName.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 10),
             schoolName.widthAnchor.constraint(equalTo: infoStackView.widthAnchor, multiplier: 0.7),
-            schoolName.leftAnchor.constraint(equalTo: infoStackView.leftAnchor, constant: 35),
+            schoolName.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
             schoolLocation.topAnchor.constraint(equalTo: schoolName.bottomAnchor, constant: 10),
             schoolLocation.widthAnchor.constraint(equalTo: infoStackView.widthAnchor, multiplier: 0.7),
-            schoolLocation.leftAnchor.constraint(equalTo: infoStackView.leftAnchor, constant: 35),
+            schoolLocation.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
             schoolPhone.topAnchor.constraint(equalTo: schoolLocation.bottomAnchor, constant: 10),
-            schoolPhone.leftAnchor.constraint(equalTo: infoStackView.leftAnchor, constant: 35),
+            schoolPhone.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
             schoolImage.topAnchor.constraint(equalTo: schoolPhone.bottomAnchor),
             schoolImage.rightAnchor.constraint(equalTo: infoStackView.rightAnchor),
-            schoolImage.widthAnchor.constraint(equalTo: infoStackView.widthAnchor, multiplier: 0.45),
+            schoolImage.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.45),
             schoolImage.heightAnchor.constraint(equalToConstant: 170),
             
             

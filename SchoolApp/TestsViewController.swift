@@ -181,14 +181,13 @@ class TestsViewController: UIViewController {
         
         satInfoStackView.addSubview(satLabel)
         satInfoStackView.addSubview(satTestTakers)
-//        satInfoStackView.addSubview(presentButton)
+        satInfoStackView.addSubview(presentButton)
         satMathStackView.addSubview(satMathLabel)
         satMathStackView.addSubview(satMathScore)
         satWritingStackView.addSubview(satWritingLabel)
         satWritingStackView.addSubview(satWritingScore)
         satReadingStackView.addSubview(satReadingLabel)
         satReadingStackView.addSubview(satReadingScore)
-        satReadingStackView.addSubview(presentButton)
 
         
         let margins = view.layoutMarginsGuide
@@ -225,11 +224,14 @@ class TestsViewController: UIViewController {
             satLabel.topAnchor.constraint(equalTo: satInfoStackView.topAnchor),
             satLabel.centerXAnchor.constraint(equalTo: satInfoStackView.centerXAnchor),
             satLabel.widthAnchor.constraint(equalTo: satInfoStackView.widthAnchor),
+            satLabel.heightAnchor.constraint(equalTo: satInfoStackView.heightAnchor, multiplier: 0.25),
             satTestTakers.topAnchor.constraint(equalTo: satLabel.bottomAnchor),
             satTestTakers.centerXAnchor.constraint(equalTo: satInfoStackView.centerXAnchor),
             satTestTakers.widthAnchor.constraint(equalTo: satInfoStackView.widthAnchor),
-//            presentButton.topAnchor.constraint(equalTo: satTestTakers.bottomAnchor, constant: 15),
-//            presentButton.centerXAnchor.constraint(equalTo: satInfoStackView.centerXAnchor),
+            satTestTakers.heightAnchor.constraint(equalTo: satInfoStackView.heightAnchor, multiplier: 0.25),
+            presentButton.topAnchor.constraint(equalTo: satTestTakers.bottomAnchor, constant: 15),
+            presentButton.leftAnchor.constraint(equalTo: satInfoStackView.leftAnchor),
+            
             
 //            satMathSubView.topAnchor.constraint(equalTo: satMainView.bottomAnchor),
             satMathSubView.widthAnchor.constraint(equalTo: stackView.widthAnchor),

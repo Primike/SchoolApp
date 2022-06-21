@@ -52,7 +52,7 @@ class TabBarViewController: UITabBarController {
 
         let summaryNC = UINavigationController(rootViewController: summaryVC)
         let satScoresNC = UINavigationController(rootViewController: satScoresVC)
-        let moreNC = UINavigationController(rootViewController: moreVC)
+//        let moreNC = UINavigationController(rootViewController: moreVC)
 
         summaryNC.navigationBar.barTintColor = .white
         //the next four lines could be put into a method that just calls one line that passes the correct navigation bar.
@@ -64,7 +64,7 @@ class TabBarViewController: UITabBarController {
         
         hideNavigationBarLine(summaryNC.navigationBar)
         
-        let tabBarList = [summaryNC, satScoresNC, moreNC]
+        let tabBarList = [summaryNC, satScoresNC]
 
         viewControllers = tabBarList
     }
