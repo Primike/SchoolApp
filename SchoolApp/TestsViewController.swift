@@ -35,15 +35,17 @@ class TestsViewController: UIViewController {
     let satReadingLabel = UILabel()
     let satReadingScore = UILabel()
     
-    let presentButton = UIButton(type: .system)
+    let graphButton = UIButton()
     
     var school: School
     var tests: SchoolScore
+    let color: UIColor
     let testNames = ["SAT MATH", "SAT WRITING", "SAT CRITICAL READING"]
     
-    init(school: School, tests: SchoolScore) {
+    init(school: School, tests: SchoolScore, color: UIColor) {
         self.school = school
         self.tests = tests
+        self.color = color
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,7 +62,9 @@ class TestsViewController: UIViewController {
     func style() {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "schoolbackground") ?? UIImage())
+//        scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "starbackground") ?? UIImage())
+        scrollView.backgroundColor = .systemBackground
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 30
@@ -69,15 +73,18 @@ class TestsViewController: UIViewController {
         
         
         satMainView.translatesAutoresizingMaskIntoConstraints = false
-        satMainView.backgroundColor = UIColor.systemBlue
-        satMainView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        satMainView.layer.cornerRadius = 30
+        satMainView.backgroundColor = color
         
         satHeaderStackView.translatesAutoresizingMaskIntoConstraints = false
         satHeaderStackView.axis = .horizontal
 
         satImage.translatesAutoresizingMaskIntoConstraints = false
         satImage.contentMode = .scaleAspectFit
+//        satImage.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+//        satImage.layer.cornerRadius = 20
+//        satImage.layer.masksToBounds = false
+//        satImage.layer.cornerRadius = satImage.bounds.width / 2
+
         
         satInfoStackView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -92,32 +99,31 @@ class TestsViewController: UIViewController {
         satTestTakers.textColor = .white
         satTestTakers.numberOfLines = 0
         
-        presentButton.translatesAutoresizingMaskIntoConstraints = false
-        presentButton.setTitle("Show Scores Graph", for: [])
-        presentButton.addTarget(self, action: #selector(presentButtonTapped), for: .primaryActionTriggered)
-        presentButton.backgroundColor = UIColor.black
-        presentButton.setTitleColor(.white, for: .normal)
-        
+        graphButton.translatesAutoresizingMaskIntoConstraints = false
+        graphButton.setTitle("Show Scores Graph", for: [])
+        graphButton.addTarget(self, action: #selector(presentButtonTapped), for: .primaryActionTriggered)
+        graphButton.configuration = .filled()
+        graphButton.tintColor = .white
+        graphButton.setTitleColor(.black, for: .normal)
+
         
         
         
         satMathSubView.translatesAutoresizingMaskIntoConstraints = false
         
         satMathStackView.translatesAutoresizingMaskIntoConstraints = false
-        satMathStackView.backgroundColor = UIColor.systemGreen
+        satMathStackView.backgroundColor = color
         satMathStackView.layer.cornerRadius = 25
-        satMathStackView.layer.borderWidth = 4
-        satMathStackView.layer.borderColor = UIColor.black.cgColor
         
         satMathLabel.translatesAutoresizingMaskIntoConstraints = false
         satMathLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satMathLabel.text = testNames[0]
-        satMathLabel.textColor = .black
+        satMathLabel.textColor = .white
         
         satMathScore.translatesAutoresizingMaskIntoConstraints = false
         satMathScore.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satMathScore.text = "\(tests.sat_math_avg_score)/800"
-        satMathScore.textColor = .black
+        satMathScore.textColor = .white
 
         
         
@@ -125,40 +131,36 @@ class TestsViewController: UIViewController {
         satWritingSubView.translatesAutoresizingMaskIntoConstraints = false
         
         satWritingStackView.translatesAutoresizingMaskIntoConstraints = false
-        satWritingStackView.backgroundColor = UIColor.systemRed
+        satWritingStackView.backgroundColor = color
         satWritingStackView.layer.cornerRadius = 25
-        satWritingStackView.layer.borderWidth = 4
-        satWritingStackView.layer.borderColor = UIColor.black.cgColor
 
         satWritingLabel.translatesAutoresizingMaskIntoConstraints = false
         satWritingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satWritingLabel.text = testNames[1]
-        satWritingLabel.textColor = .black
+        satWritingLabel.textColor = .white
         
         satWritingScore.translatesAutoresizingMaskIntoConstraints = false
         satWritingScore.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satWritingScore.text = "\(tests.sat_writing_avg_score)/800"
-        satWritingScore.textColor = .black
+        satWritingScore.textColor = .white
         
         
         
         satReadingSubView.translatesAutoresizingMaskIntoConstraints = false
         
         satReadingStackView.translatesAutoresizingMaskIntoConstraints = false
-        satReadingStackView.backgroundColor = UIColor.systemCyan
+        satReadingStackView.backgroundColor = color
         satReadingStackView.layer.cornerRadius = 25
-        satReadingStackView.layer.borderWidth = 4
-        satReadingStackView.layer.borderColor = UIColor.black.cgColor
 
         satReadingLabel.translatesAutoresizingMaskIntoConstraints = false
         satReadingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satReadingLabel.text = testNames[2]
-        satReadingLabel.textColor = .black
+        satReadingLabel.textColor = .white
         
         satReadingScore.translatesAutoresizingMaskIntoConstraints = false
         satReadingScore.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satReadingScore.text = "\(tests.sat_critical_reading_avg_score)/800"
-        satReadingScore.textColor = .black
+        satReadingScore.textColor = .white
         
     }
     
@@ -181,7 +183,7 @@ class TestsViewController: UIViewController {
         
         satInfoStackView.addSubview(satLabel)
         satInfoStackView.addSubview(satTestTakers)
-        satInfoStackView.addSubview(presentButton)
+        satInfoStackView.addSubview(graphButton)
         satMathStackView.addSubview(satMathLabel)
         satMathStackView.addSubview(satMathScore)
         satWritingStackView.addSubview(satWritingLabel)
@@ -229,8 +231,8 @@ class TestsViewController: UIViewController {
             satTestTakers.centerXAnchor.constraint(equalTo: satInfoStackView.centerXAnchor),
             satTestTakers.widthAnchor.constraint(equalTo: satInfoStackView.widthAnchor),
             satTestTakers.heightAnchor.constraint(equalTo: satInfoStackView.heightAnchor, multiplier: 0.25),
-            presentButton.topAnchor.constraint(equalTo: satTestTakers.bottomAnchor, constant: 15),
-            presentButton.leftAnchor.constraint(equalTo: satInfoStackView.leftAnchor),
+            graphButton.topAnchor.constraint(equalTo: satTestTakers.bottomAnchor, constant: 15),
+            graphButton.leftAnchor.constraint(equalTo: satInfoStackView.leftAnchor),
             
             
 //            satMathSubView.topAnchor.constraint(equalTo: satMainView.bottomAnchor),
@@ -271,14 +273,12 @@ class TestsViewController: UIViewController {
             
         ])
     }
-
 }
 
 
 extension TestsViewController {
     @objc func presentButtonTapped(sender: UIButton) {
-        print("QWEQWE")
-        navigationController?.present(TestGraphViewController(school: school, tests: tests), animated: true, completion: nil)
+        navigationController?.present(TestGraphViewController(school: school, tests: tests, color: color), animated: true, completion: nil)
     }
 }
 

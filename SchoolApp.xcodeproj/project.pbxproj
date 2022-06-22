@@ -11,8 +11,6 @@
 		B83017B2284932D900303EEE /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B1284932D900303EEE /* DataManipulation.swift */; };
 		B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B5284933C700303EEE /* SchoolsStruct.swift */; };
 		B830A697285B8D4800D94610 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B830A696285B8D4800D94610 /* MoreViewController.swift */; };
-		B830A69C2860CA1300D94610 /* SatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B830A69B2860CA1300D94610 /* SatHeaderView.swift */; };
-		B830A69E2860CA2700D94610 /* SatScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B830A69D2860CA2700D94610 /* SatScoreView.swift */; };
 		B848D3CE28565F9B00FE01C9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3CD28565F9B00FE01C9 /* File.swift */; };
 		B848D3D02856637A00FE01C9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3CF2856637A00FE01C9 /* TabBarViewController.swift */; };
 		B848D3D2285905C100FE01C9 /* SchoolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3D1285905C100FE01C9 /* SchoolsViewModel.swift */; };
@@ -21,6 +19,7 @@
 		B880A2BE284ED2310071E43D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BD284ED2310071E43D /* InfoViewController.swift */; };
 		B880A2C0284ED4090071E43D /* TestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BF284ED4090071E43D /* TestsViewController.swift */; };
 		B880A2C3284F7F680071E43D /* TestGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2C2284F7F680071E43D /* TestGraphViewController.swift */; };
+		B8BEDFDB286359FE0001ED95 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BEDFDA286359FE0001ED95 /* LoadingView.swift */; };
 		B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */; };
 		B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E8173C2846A45F0052C1AE /* AppDelegate.swift */; };
 		B8E817412846A45F0052C1AE /* SchoolListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolListViewController.swift */; };
@@ -52,8 +51,6 @@
 		B83017B1284932D900303EEE /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		B83017B5284933C700303EEE /* SchoolsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsStruct.swift; sourceTree = "<group>"; };
 		B830A696285B8D4800D94610 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
-		B830A69B2860CA1300D94610 /* SatHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SatHeaderView.swift; sourceTree = "<group>"; };
-		B830A69D2860CA2700D94610 /* SatScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SatScoreView.swift; sourceTree = "<group>"; };
 		B848D3CD28565F9B00FE01C9 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		B848D3CF2856637A00FE01C9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B848D3D1285905C100FE01C9 /* SchoolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsViewModel.swift; sourceTree = "<group>"; };
@@ -62,6 +59,7 @@
 		B880A2BD284ED2310071E43D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		B880A2BF284ED4090071E43D /* TestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsViewController.swift; sourceTree = "<group>"; };
 		B880A2C2284F7F680071E43D /* TestGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGraphViewController.swift; sourceTree = "<group>"; };
+		B8BEDFDA286359FE0001ED95 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
 		B8E817392846A45F0052C1AE /* SchoolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E8173C2846A45F0052C1AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,8 +104,7 @@
 				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
 				B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */,
 				B8FB23A528492BE900FC4817 /* SchoolListHeaderView.swift */,
-				B830A69B2860CA1300D94610 /* SatHeaderView.swift */,
-				B830A69D2860CA2700D94610 /* SatScoreView.swift */,
+				B8BEDFDA286359FE0001ED95 /* LoadingView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -326,15 +323,14 @@
 				B87473B4284904B200821AC9 /* APICalls.swift in Sources */,
 				B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */,
 				B83017B2284932D900303EEE /* DataManipulation.swift in Sources */,
-				B830A69E2860CA2700D94610 /* SatScoreView.swift in Sources */,
 				B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */,
 				B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */,
-				B830A69C2860CA1300D94610 /* SatHeaderView.swift in Sources */,
 				9E2A0CBC286287E600F96284 /* SearchViewController.swift in Sources */,
 				B880A2C3284F7F680071E43D /* TestGraphViewController.swift in Sources */,
 				B848D3D2285905C100FE01C9 /* SchoolsViewModel.swift in Sources */,
 				B848D3D02856637A00FE01C9 /* TabBarViewController.swift in Sources */,
 				B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */,
+				B8BEDFDB286359FE0001ED95 /* LoadingView.swift in Sources */,
 				B880A2BE284ED2310071E43D /* InfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

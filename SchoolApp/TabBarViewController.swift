@@ -12,6 +12,7 @@ class TabBarViewController: UITabBarController {
 
     var school: School
     var tests: SchoolScore
+    let color: UIColor
     var testScores = [Int]()
     
     init(school: School, tests: SchoolScore) {
@@ -26,7 +27,19 @@ class TabBarViewController: UITabBarController {
         if tests.sat_critical_reading_avg_score != "Not Available" {
             testScores.append(Int(tests.sat_critical_reading_avg_score)!)
         }
-        print(testScores)
+
+        switch school.boro {
+        case "M":
+            color = UIColor.systemBlue
+        case "X":
+            color = .systemOrange
+        case "K":
+            color = UIColor.black
+        case "Q":
+            color = UIColor.systemPurple
+        default:
+            color = .systemGreen
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,8 +55,8 @@ class TabBarViewController: UITabBarController {
     }
     
     private func setupViews() {
-        let summaryVC = InfoViewController(school: school, tests: tests)
-        let satScoresVC = TestsViewController(school: school, tests: tests)
+        let summaryVC = InfoViewController(school: school, tests: tests, color: color)
+        let satScoresVC = TestsViewController(school: school, tests: tests, color: color)
         let moreVC = ViewController()
 
         summaryVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Summary", tag: 0)

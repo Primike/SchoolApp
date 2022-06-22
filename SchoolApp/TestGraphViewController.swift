@@ -33,12 +33,14 @@ class TestGraphViewController: UIViewController {
     
     var school: School
     var tests: SchoolScore
+    let color: UIColor
     var graph = [Float]()
     let testNames = ["SAT MATH", "SAT WRITING", "SAT CRITICAL READING"]
     
-    init(school: School, tests: SchoolScore) {
+    init(school: School, tests: SchoolScore, color: UIColor) {
         self.school = school
         self.tests = tests
+        self.color = color
         
         let score1 = Int(tests.sat_math_avg_score)!
         graph.append(Float(Double(score1)/Double(800)))
@@ -63,8 +65,8 @@ class TestGraphViewController: UIViewController {
     }
     
     func style() {
-        
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background") ?? UIImage())
+//        view.backgroundColor = UIColor(patternImage: UIImage(named: "starbackground") ?? UIImage())
+        view.backgroundColor = .white
         
         viewStackView.translatesAutoresizingMaskIntoConstraints = false
         viewStackView.axis = .vertical
@@ -81,35 +83,35 @@ class TestGraphViewController: UIViewController {
         label800.text = "800-"
         label800.textAlignment = .center
         label800.adjustsFontSizeToFitWidth = true
-        label800.textColor = .white
+        label800.textColor = .black
         
         label600.translatesAutoresizingMaskIntoConstraints = false
         label600.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         label600.text = "600-"
         label600.textAlignment = .center
         label600.adjustsFontSizeToFitWidth = true
-        label600.textColor = .white
+        label600.textColor = .black
         
         label400.translatesAutoresizingMaskIntoConstraints = false
         label400.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         label400.text = "400-"
         label400.textAlignment = .center
         label400.adjustsFontSizeToFitWidth = true
-        label400.textColor = .white
+        label400.textColor = .black
 
         label200.translatesAutoresizingMaskIntoConstraints = false
         label200.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         label200.text = "200-"
         label200.textAlignment = .center
         label200.adjustsFontSizeToFitWidth = true
-        label200.textColor = .white
+        label200.textColor = .black
 
         label0.translatesAutoresizingMaskIntoConstraints = false
         label0.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         label0.text = "0-"
         label0.textAlignment = .center
         label0.adjustsFontSizeToFitWidth = true
-        label0.textColor = .white
+        label0.textColor = .black
 
         
         graphStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,21 +121,21 @@ class TestGraphViewController: UIViewController {
         graphStackView.backgroundColor = .systemBackground
     
         mathBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        mathBarLabel.backgroundColor = UIColor.systemBlue
+        mathBarLabel.backgroundColor = color
         mathBarLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         mathBarLabel.text = tests.sat_math_avg_score
         mathBarLabel.textAlignment = .center
         mathBarLabel.textColor = .white
         
         writingBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        writingBarLabel.backgroundColor = UIColor.systemBlue
+        writingBarLabel.backgroundColor = color
         writingBarLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         writingBarLabel.text = tests.sat_writing_avg_score
         writingBarLabel.textAlignment = .center
         writingBarLabel.textColor = .white
         
         readingBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        readingBarLabel.backgroundColor = UIColor.systemBlue
+        readingBarLabel.backgroundColor = color
         readingBarLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         readingBarLabel.text = tests.sat_critical_reading_avg_score
         readingBarLabel.textAlignment = .center
@@ -157,7 +159,7 @@ class TestGraphViewController: UIViewController {
         mathLabel.textAlignment = .center
         mathLabel.adjustsFontSizeToFitWidth = true
         mathLabel.numberOfLines = 0
-        mathLabel.textColor = .white
+        mathLabel.textColor = .black
 
         writingLabel.translatesAutoresizingMaskIntoConstraints = false
         writingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
@@ -165,7 +167,7 @@ class TestGraphViewController: UIViewController {
         writingLabel.textAlignment = .center
         writingLabel.adjustsFontSizeToFitWidth = true
         writingLabel.numberOfLines = 0
-        writingLabel.textColor = .white
+        writingLabel.textColor = .black
 
         readingLabel.translatesAutoresizingMaskIntoConstraints = false
         readingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
@@ -173,7 +175,7 @@ class TestGraphViewController: UIViewController {
         readingLabel.textAlignment = .center
         readingLabel.adjustsFontSizeToFitWidth = true
         readingLabel.numberOfLines = 0
-        readingLabel.textColor = .white
+        readingLabel.textColor = .black
 
     }
     

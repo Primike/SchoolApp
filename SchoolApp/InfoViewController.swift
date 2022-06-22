@@ -22,16 +22,17 @@ class InfoViewController: UIViewController {
     let schoolDescription = UILabel()
 
     let stackView = UIStackView()
-    let schoolImage = UIImageView(image: UIImage(systemName: "house.circle.fill"))
+    let schoolImage = UIImageView(image: UIImage(systemName: "book.circle"))
     let scrollView = UIScrollView()
     let subview = UIView()
 
     
     var school: School
     var tests: SchoolScore
+    let color: UIColor
     var testScores = [Int]()
     
-    init(school: School, tests: SchoolScore) {
+    init(school: School, tests: SchoolScore, color: UIColor) {
         self.school = school
         self.tests = tests
         if tests.sat_math_avg_score != "Not Available" {
@@ -43,6 +44,7 @@ class InfoViewController: UIViewController {
         if tests.sat_critical_reading_avg_score != "Not Available" {
             testScores.append(Int(tests.sat_critical_reading_avg_score)!)
         }
+        self.color = color
         print(testScores)
         super.init(nibName: nil, bundle: nil)
     }
@@ -55,28 +57,25 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
         style()
         layout()
-        backgroundColor()
-    }
-    
-    @objc func linkButtonTapped(sender: UIButton) {
-        print("website link tapped")
-        UIApplication.shared.open(URL(string: school.website)! as URL, options: [:], completionHandler: nil)
     }
     
     func style() {
         
-        stackView.backgroundColor = UIColor(patternImage: UIImage(named: "starbackground") ?? UIImage())
+//        stackView.backgroundColor = UIColor(patternImage: UIImage(named: "starbackground") ?? UIImage())
+        view.backgroundColor = UIColor.systemBackground
         
         link.translatesAutoresizingMaskIntoConstraints = false
         link.setTitle("School Website", for: [])
         link.addTarget(self, action: #selector(linkButtonTapped), for: .primaryActionTriggered)
         link.configuration = .filled()
+        link.tintColor = color
         
         boroLabel.translatesAutoresizingMaskIntoConstraints = false
         boroLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 60.0)
         boroLabel.text = "M"
         boroLabel.adjustsFontSizeToFitWidth = true
-        
+        boroLabel.textColor = color
+
         topStackView.translatesAutoresizingMaskIntoConstraints = false
         topStackView.axis = .horizontal
         
@@ -104,6 +103,7 @@ class InfoViewController: UIViewController {
         
         schoolImage.translatesAutoresizingMaskIntoConstraints = false
         schoolImage.contentMode = .scaleAspectFit
+        schoolImage.tintColor = color
         
         about.translatesAutoresizingMaskIntoConstraints = false
         about.font = UIFont(name:"HelveticaNeue-Bold", size: 35.0)
@@ -112,16 +112,16 @@ class InfoViewController: UIViewController {
         about.textColor = .white
         
         schoolDescription.translatesAutoresizingMaskIntoConstraints = false
-        schoolDescription.font = UIFont(name:"HelveticaNeue", size: 15.0)
+        schoolDescription.font = UIFont(name:"HelveticaNeue", size: 18.0)
         schoolDescription.adjustsFontSizeToFitWidth = true
         schoolDescription.text = school.overview_paragraph
         schoolDescription.numberOfLines = 0
         schoolDescription.textAlignment = .left
         schoolDescription.textColor = .white
         
-        subview.backgroundColor = UIColor.systemBlue
         subview.layer.cornerRadius = 50
         subview.layer.maskedCorners = [.layerMinXMinYCorner]
+        subview.backgroundColor = color
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -192,7 +192,7 @@ class InfoViewController: UIViewController {
             
             subview.topAnchor.constraint(equalTo: schoolImage.bottomAnchor, constant: 10),
             subview.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            subview.heightAnchor.constraint(equalToConstant: 400),
+            subview.heightAnchor.constraint(equalToConstant: 500),
             
             
             about.topAnchor.constraint(equalTo: subview.topAnchor, constant: 20),
@@ -203,25 +203,22 @@ class InfoViewController: UIViewController {
                 
         ])
     }
-    
-    func backgroundColor() {
-        switch school.boro {
-        case "M":
-            boroLabel.textColor = .systemGray
-        case "X":
-            boroLabel.textColor = .systemOrange
-        case "K":
-            boroLabel.textColor = .black
-        case "Q":
-            boroLabel.textColor = UIColor.blue
-        default:
-            boroLabel.textColor = .systemGreen
-        }
-    }
 }
 
 extension InfoViewController {
-
+    @objc func linkButtonTapped(sender: UIButton) {
+        guard let url = URL(string: "https://\(school.website)") else {
+            print("Invalid Url")
+            return
+        }
+        UIApplication.shared.open(url) { success in
+            if success {
+                print("opened)")
+            } else {
+                print("failed")
+            }
+        }
+    }
 }
 
 

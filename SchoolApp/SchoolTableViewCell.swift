@@ -12,6 +12,7 @@ class SchoolTableViewCell: UITableViewCell {
     var schoolNameLabel = UILabel()
     var addressLabel = UILabel()
     var boroLabel = UILabel()
+    let satLabel = UILabel()
     var stackView = UIStackView()
     var cellStackView = UIStackView()
 
@@ -39,12 +40,21 @@ extension SchoolTableViewCell {
         schoolNameLabel.textAlignment = .left
         schoolNameLabel.text = "schoolName"
         schoolNameLabel.adjustsFontSizeToFitWidth = true
+        schoolNameLabel.numberOfLines = 0
 
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
         addressLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         addressLabel.textAlignment = .left
         addressLabel.text = "address"
         addressLabel.adjustsFontSizeToFitWidth = true
+        addressLabel.numberOfLines = 0
+        
+        satLabel.translatesAutoresizingMaskIntoConstraints = false
+        satLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        satLabel.textAlignment = .left
+        satLabel.text = "sat scores available!"
+        satLabel.adjustsFontSizeToFitWidth = true
+        satLabel.numberOfLines = 0
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -65,6 +75,7 @@ extension SchoolTableViewCell {
     private func layout() {
         stackView.addSubview(schoolNameLabel)
         stackView.addSubview(addressLabel)
+//        stackView.addSubview(satLabel)
         
         cellStackView.addSubview(stackView)
         cellStackView.addSubview(boroLabel)
@@ -85,6 +96,9 @@ extension SchoolTableViewCell {
             
             addressLabel.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor),
             addressLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            
+//            satLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor),
+//            satLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             
             boroLabel.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),
         ])
