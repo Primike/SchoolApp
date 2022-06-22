@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E2A0CBC286287E600F96284 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2A0CBB286287E600F96284 /* SearchViewController.swift */; };
 		B83017B2284932D900303EEE /* DataManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B1284932D900303EEE /* DataManipulation.swift */; };
 		B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B5284933C700303EEE /* SchoolsStruct.swift */; };
 		B830A697285B8D4800D94610 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B830A696285B8D4800D94610 /* MoreViewController.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E2A0CBB286287E600F96284 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B83017B1284932D900303EEE /* DataManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManipulation.swift; sourceTree = "<group>"; };
 		B83017B5284933C700303EEE /* SchoolsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsStruct.swift; sourceTree = "<group>"; };
 		B830A696285B8D4800D94610 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				B880A2BF284ED4090071E43D /* TestsViewController.swift */,
 				B848D3CF2856637A00FE01C9 /* TabBarViewController.swift */,
 				B830A696285B8D4800D94610 /* MoreViewController.swift */,
+				9E2A0CBB286287E600F96284 /* SearchViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */,
 				B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */,
 				B830A69C2860CA1300D94610 /* SatHeaderView.swift in Sources */,
+				9E2A0CBC286287E600F96284 /* SearchViewController.swift in Sources */,
 				B880A2C3284F7F680071E43D /* TestGraphViewController.swift in Sources */,
 				B848D3D2285905C100FE01C9 /* SchoolsViewModel.swift in Sources */,
 				B848D3D02856637A00FE01C9 /* TabBarViewController.swift in Sources */,

@@ -11,11 +11,13 @@ class SchoolListViewController: UIViewController {
         
     var satData = [SchoolScore]()
     var schoolData = [School]()
-     
+    
     var schoolDataSearchResults = [School]()
+    var isSearched = false
     
     var group = DispatchGroup()
     var tableView = UITableView()
+    let searchBar = UISearchBar()
     var activityIndicator = UIActivityIndicatorView(style: .large)
     var completedAPICount = 0
     
@@ -79,6 +81,12 @@ extension SchoolListViewController {
     func style() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = "Search Schools"
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        navigationItem.titleView = searchBar
     }
     
     func layout() {
@@ -93,6 +101,7 @@ extension SchoolListViewController {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         
         let header = SchoolListHeaderView(frame: .zero)
         var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -107,39 +116,71 @@ extension SchoolListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SchoolTableViewCell()
-        cell.schoolNameLabel.text = schoolData[indexPath.row].school_name
-        cell.schoolNameLabel.numberOfLines = 0
-        cell.addressLabel.text = schoolData[indexPath.row].location
-        cell.addressLabel.numberOfLines = 0
-        cell.boroLabel.text = schoolData[indexPath.row].boro
-        cell.accessoryType = .disclosureIndicator
-        cell.selectionStyle = .none
-        switch schoolData[indexPath.row].boro {
-        case "M":
-            cell.boroLabel.textColor = UIColor.gray
-            cell.schoolNameLabel.textColor = UIColor.gray
-        case "X":
-            cell.boroLabel.textColor = .systemOrange
-            cell.schoolNameLabel.textColor = .systemOrange
-        case "K":
-            cell.boroLabel.textColor = UIColor.black
-            cell.schoolNameLabel.textColor = UIColor.black
-        case "Q":
-            cell.boroLabel.textColor = UIColor.systemBlue
-            cell.schoolNameLabel.textColor = UIColor.systemBlue
-    
-        default:
-            cell.boroLabel.textColor = .systemGreen
-            cell.schoolNameLabel.textColor = .systemGreen
-        }
 
-        return cell
+        if isSearched == false {
+            cell.schoolNameLabel.text = schoolData[indexPath.row].school_name
+            cell.schoolNameLabel.numberOfLines = 0
+            cell.addressLabel.text = schoolData[indexPath.row].location
+            cell.addressLabel.numberOfLines = 0
+            cell.boroLabel.text = schoolData[indexPath.row].boro
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
+            switch schoolData[indexPath.row].boro {
+            case "M":
+                cell.boroLabel.textColor = UIColor.gray
+                cell.schoolNameLabel.textColor = UIColor.gray
+            case "X":
+                cell.boroLabel.textColor = .systemOrange
+                cell.schoolNameLabel.textColor = .systemOrange
+            case "K":
+                cell.boroLabel.textColor = UIColor.black
+                cell.schoolNameLabel.textColor = UIColor.black
+            case "Q":
+                cell.boroLabel.textColor = UIColor.systemBlue
+                cell.schoolNameLabel.textColor = UIColor.systemBlue
+        
+            default:
+                cell.boroLabel.textColor = .systemGreen
+                cell.schoolNameLabel.textColor = .systemGreen
+            }
+            return cell
+        } else {
+            cell.schoolNameLabel.text = schoolDataSearchResults[indexPath.row].school_name
+            cell.schoolNameLabel.numberOfLines = 0
+            cell.addressLabel.text = schoolDataSearchResults[indexPath.row].location
+            cell.addressLabel.numberOfLines = 0
+            cell.boroLabel.text = schoolDataSearchResults[indexPath.row].boro
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
+            switch schoolDataSearchResults[indexPath.row].boro {
+            case "M":
+                cell.boroLabel.textColor = UIColor.gray
+                cell.schoolNameLabel.textColor = UIColor.gray
+            case "X":
+                cell.boroLabel.textColor = .systemOrange
+                cell.schoolNameLabel.textColor = .systemOrange
+            case "K":
+                cell.boroLabel.textColor = UIColor.black
+                cell.schoolNameLabel.textColor = UIColor.black
+            case "Q":
+                cell.boroLabel.textColor = UIColor.systemBlue
+                cell.schoolNameLabel.textColor = UIColor.systemBlue
+        
+            default:
+                cell.boroLabel.textColor = .systemGreen
+                cell.schoolNameLabel.textColor = .systemGreen
+            }
+            return cell
+        }
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schoolData.count
-        //return schoolDataSearchResults.count
+        if  isSearched == true {
+            return schoolDataSearchResults.count
+        } else {
+            return schoolData.count
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
@@ -163,3 +204,15 @@ extension SchoolListViewController: UITableViewDelegate {
         navigationController?.title = schoolData[indexPath.row].school_name
     }
 }
+
+extension SchoolListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText != "" {
+            schoolDataSearchResults =
+            schoolData.filter({$0.lowercased().uppercased().prefix(searchText.count) == searchText.lowercased().uppercased()})
+        }
+        isSearched = true
+        tableView.reloadData()
+    }
+}
+        

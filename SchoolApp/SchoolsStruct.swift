@@ -21,6 +21,13 @@ struct School: Decodable {
     let website: String
     let phone_number: String
     let interest1: String
+    
+    func lowercased() -> String {
+        return school_name.lowercased()
+    }
+    func uppercased() -> String {
+        return school_name.uppercased() 
+    }
 }
 
 //struct Response: Decodable {
