@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 
 class SchoolTableViewCell: UITableViewCell {
-    var schoolNameLabel = UILabel()
-    var addressLabel = UILabel()
-    var boroLabel = UILabel()
-    let satLabel = UILabel()
-    var stackView = UIStackView()
-    var cellStackView = UIStackView()
+    let schoolName = UILabel()
+    let schoolAddress = UILabel()
+    let schoolBoro = UILabel()
+    let schoolInfoStackView = UIStackView()
+    let cellStackView = UIStackView()
 
     static let reuseID = "SchoolCell"
 
@@ -32,55 +31,54 @@ class SchoolTableViewCell: UITableViewCell {
 extension SchoolTableViewCell {
     private func setup() {
         self.layer.borderWidth = 7
-        self.layer.cornerCurve = CALayerCornerCurve(rawValue: "large")
         self.layer.borderColor = UIColor.systemFill.cgColor
+        self.layer.cornerRadius = 30
+        self.layer.masksToBounds = true
+        self.accessoryType = .disclosureIndicator
+        self.selectionStyle = .none
         
-        schoolNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
-        schoolNameLabel.textAlignment = .left
-        schoolNameLabel.text = "schoolName"
-        schoolNameLabel.adjustsFontSizeToFitWidth = true
-        schoolNameLabel.numberOfLines = 0
-
-        addressLabel.translatesAutoresizingMaskIntoConstraints = false
-        addressLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        addressLabel.textAlignment = .left
-        addressLabel.text = "address"
-        addressLabel.adjustsFontSizeToFitWidth = true
-        addressLabel.numberOfLines = 0
-        
-        satLabel.translatesAutoresizingMaskIntoConstraints = false
-        satLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        satLabel.textAlignment = .left
-        satLabel.text = "sat scores available!"
-        satLabel.adjustsFontSizeToFitWidth = true
-        satLabel.numberOfLines = 0
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        
-        boroLabel.translatesAutoresizingMaskIntoConstraints = false
-        boroLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        boroLabel.text = ""
-        boroLabel.adjustsFontSizeToFitWidth = true
-        boroLabel.textAlignment = .left
-
         
         cellStackView.translatesAutoresizingMaskIntoConstraints = false
         cellStackView.axis = .horizontal
         cellStackView.alignment = .fill
+        
+        
+        schoolInfoStackView.translatesAutoresizingMaskIntoConstraints = false
+        schoolInfoStackView.axis = .vertical
+        schoolInfoStackView.alignment = .fill
+        
+        schoolName.translatesAutoresizingMaskIntoConstraints = false
+        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
+        schoolName.textAlignment = .left
+        schoolName.text = "School Name"
+        schoolName.adjustsFontSizeToFitWidth = true
+        schoolName.numberOfLines = 0
+
+        schoolAddress.translatesAutoresizingMaskIntoConstraints = false
+        schoolAddress.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        schoolAddress.textAlignment = .left
+        schoolAddress.text = "School Address"
+        schoolAddress.adjustsFontSizeToFitWidth = true
+        schoolAddress.numberOfLines = 0
+        
+        
+        schoolBoro.translatesAutoresizingMaskIntoConstraints = false
+        schoolBoro.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        schoolBoro.text = "?"
+        schoolBoro.adjustsFontSizeToFitWidth = true
+        schoolBoro.textAlignment = .left
+
     }
 
     private func layout() {
-        stackView.addSubview(schoolNameLabel)
-        stackView.addSubview(addressLabel)
-//        stackView.addSubview(satLabel)
+        self.addSubview(cellStackView)
+
+        cellStackView.addSubview(schoolInfoStackView)
+        cellStackView.addSubview(schoolBoro)
         
-        cellStackView.addSubview(stackView)
-        cellStackView.addSubview(boroLabel)
+        schoolInfoStackView.addSubview(schoolName)
+        schoolInfoStackView.addSubview(schoolAddress)
         
-        contentView.addSubview(cellStackView)
 
         NSLayoutConstraint.activate([
             cellStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
@@ -88,19 +86,16 @@ extension SchoolTableViewCell {
             cellStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             cellStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            stackView.leftAnchor.constraint(equalTo: cellStackView.leftAnchor),
-            stackView.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.80),
+            schoolInfoStackView.leftAnchor.constraint(equalTo: cellStackView.leftAnchor),
+            schoolInfoStackView.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.80),
             
-            schoolNameLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
-            schoolNameLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            schoolName.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
+            schoolName.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
             
-            addressLabel.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor),
-            addressLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            schoolAddress.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
+            schoolAddress.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
             
-//            satLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor),
-//            satLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
-            boroLabel.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),
+            schoolBoro.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),
         ])
     }
 }

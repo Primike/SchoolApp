@@ -9,69 +9,69 @@ import UIKit
 
 class SchoolListViewController: UIViewController {
         
-    var satData = [SchoolScore]()
-    var schoolData = [School]()
+    let schoolsListHeader = SchoolsListHeaderView(frame: .zero)
+
+    let schoolsTableView = UITableView()
+    let schoolsSearchBar = UISearchBar()
+    let dispatchGroup = DispatchGroup()
     
-    var schoolDataSearchResults = [School]()
-    var isSearched = false
-    
-    var group = DispatchGroup()
-    let header = SchoolListHeaderView(frame: .zero)
-    let loadingView = LoadingView()
-    var tableView = UITableView()
-    let searchBar = UISearchBar()
-    var completedAPICount = 0
+    var schoolsSATData = [SchoolScores]()
+    var schoolsData = [School]()
+    var schoolsSearchResults = [School]()
+    var searchBarUsed = false
+    var completedAPIFetches = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        view.addSubview(loadingView)
-//        loadingView.translatesAutoresizingMaskIntoConstraints = false
-//        loadingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        loadingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//        loadingView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-//        loadingView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-
-        getData()
+        getSchoolsData()
         
-        group.notify(queue: .main, execute: {
-            if self.completedAPICount == 2 {
-                self.loadingView.stopActivityIndicator()
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.color = .systemBlue
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        dispatchGroup.notify(queue: .main, execute: {
+            if self.completedAPIFetches == 2 {
                 self.view.backgroundColor = .white
                 self.style()
                 self.layout()
                 self.setup()
+                activityIndicator.stopAnimating()
             }
         })
     }
     
-
-    func getData() {
-        group.enter()
-        SchoolServiceAPI.shared.getSchoolData { result in
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    func getSchoolsData() {
+        dispatchGroup.enter()
+        SchoolServiceAPI.shared.getSchoolsData { result in
             defer {
-                self.group.leave()
+                self.dispatchGroup.leave()
             }
+            
             switch result {
             case .success(let schools):
-                self.schoolData = schools
-                self.schoolDataSearchResults = self.schoolData
-                self.completedAPICount += 1
-                print(schools[0].website)
+                self.schoolsData = schools
+                self.schoolsSearchResults = self.schoolsData
+                self.completedAPIFetches += 1
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
 
-        group.enter()
+        dispatchGroup.enter()
         SchoolServiceAPI.shared.getTestData { result in
             defer {
-                self.group.leave()
+                self.dispatchGroup.leave()
             }
+            
             switch result {
             case .success(let scores):
-                self.satData = scores
-                self.completedAPICount += 1
+                self.schoolsSATData = scores
+                self.completedAPIFetches += 1
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -79,113 +79,88 @@ class SchoolListViewController: UIViewController {
     }
 }
 
-
-
 extension SchoolListViewController {
     
     func style() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
+        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
         
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = "Search Schools"
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        navigationItem.titleView = searchBar
+        navigationItem.titleView = schoolsSearchBar
+        schoolsSearchBar.searchBarStyle = UISearchBar.Style.default
+        schoolsSearchBar.placeholder = "Search Schools"
+        schoolsSearchBar.sizeToFit()
+        schoolsSearchBar.isTranslucent = false
     }
     
     func layout() {
+        view.addSubview(schoolsTableView)
+
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            schoolsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     func setup() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        searchBar.delegate = self
+        schoolsTableView.delegate = self
+        schoolsTableView.dataSource = self
+        schoolsSearchBar.delegate = self
         
-        var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        var size = schoolsListHeader.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         size.width = UIScreen.main.bounds.width
-        header.frame.size = size
-        tableView.tableHeaderView = header
+        schoolsListHeader.frame.size = size
+        schoolsTableView.tableHeaderView = schoolsListHeader
     }
     
 }
 
 extension SchoolListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = SchoolTableViewCell()
-
-        if isSearched == false {
-            cell.schoolNameLabel.text = schoolData[indexPath.row].school_name
-            cell.addressLabel.text = schoolData[indexPath.row].location
-            cell.boroLabel.text = schoolData[indexPath.row].boro
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .none
-            cell.layer.cornerRadius = 8
-            cell.layer.masksToBounds = true
-            switch schoolData[indexPath.row].boro {
-            case "M":
-                cell.boroLabel.textColor = UIColor.systemBlue
-                cell.schoolNameLabel.textColor = UIColor.systemBlue
-            case "X":
-                cell.boroLabel.textColor = .systemOrange
-                cell.schoolNameLabel.textColor = .systemOrange
-            case "K":
-                cell.boroLabel.textColor = UIColor.black
-                cell.schoolNameLabel.textColor = UIColor.black
-            case "Q":
-                cell.boroLabel.textColor = UIColor.systemPurple
-                cell.schoolNameLabel.textColor = UIColor.systemPurple
-        
-            default:
-                cell.boroLabel.textColor = .systemGreen
-                cell.schoolNameLabel.textColor = .systemGreen
-            }
-            return cell
+        if searchBarUsed == true {
+            return setupCell(data: schoolsSearchResults, indexPath: indexPath)
         } else {
-            cell.schoolNameLabel.text = schoolDataSearchResults[indexPath.row].school_name
-            cell.schoolNameLabel.numberOfLines = 0
-            cell.addressLabel.text = schoolDataSearchResults[indexPath.row].location
-            cell.addressLabel.numberOfLines = 0
-            cell.boroLabel.text = schoolDataSearchResults[indexPath.row].boro
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .none
-            switch schoolDataSearchResults[indexPath.row].boro {
-            case "M":
-                cell.boroLabel.textColor = UIColor.systemBlue
-                cell.schoolNameLabel.textColor = UIColor.systemBlue
-            case "X":
-                cell.boroLabel.textColor = .systemOrange
-                cell.schoolNameLabel.textColor = .systemOrange
-            case "K":
-                cell.boroLabel.textColor = UIColor.black
-                cell.schoolNameLabel.textColor = UIColor.black
-            case "Q":
-                cell.boroLabel.textColor = UIColor.systemPurple
-                cell.schoolNameLabel.textColor = UIColor.systemPurple
+            return setupCell(data: schoolsSearchResults, indexPath: indexPath)
+        }
+    }
+    
+    func setupCell(data: [School], indexPath: IndexPath) -> UITableViewCell {
+        let schoolCell = SchoolTableViewCell()
+        let schoolColor = getColor(school: schoolsSearchResults[indexPath.row])
         
-            default:
-                cell.boroLabel.textColor = .systemGreen
-                cell.schoolNameLabel.textColor = .systemGreen
-            }
-            return cell
+        schoolCell.schoolName.text = data[indexPath.row].school_name
+        schoolCell.schoolAddress.text = data[indexPath.row].location
+        schoolCell.schoolBoro.text = data[indexPath.row].boro
+        schoolCell.schoolBoro.textColor = schoolColor
+        schoolCell.schoolName.textColor = schoolColor
+        
+        return schoolCell
+    }
+    
+    func getColor(school: School) -> UIColor {
+        switch school.boro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.black
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
         }
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if  isSearched == true {
-            return schoolDataSearchResults.count
+        if  searchBarUsed == true {
+            return schoolsSearchResults.count
         } else {
-            return schoolData.count
+            return schoolsData.count
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
     }
@@ -193,33 +168,33 @@ extension SchoolListViewController: UITableViewDataSource {
 
 extension SchoolListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var modifiedTestData: SchoolScore?
-        let notAvailable = SchoolScore(dbn: "0", num_of_sat_test_takers: "Not Available",                                              sat_critical_reading_avg_score: "0",
+        var schoolSATScores: SchoolScores?
+        let scoresNotAvailable = SchoolScores(dbn: "0", num_of_sat_test_takers: "Not Available",                                              sat_critical_reading_avg_score: "0",
                                        sat_math_avg_score: "0",
                                        sat_writing_avg_score: "0")
         
-        for i in satData {
-            if i.dbn == schoolDataSearchResults[indexPath.row].dbn {
-                modifiedTestData = i
+        for data in schoolsSATData {
+            if data.dbn == schoolsSearchResults[indexPath.row].dbn {
+                schoolSATScores = data
                 break
             }
         }
-        navigationController?.pushViewController(TabBarViewController(school: schoolDataSearchResults[indexPath.row], tests: modifiedTestData ?? notAvailable), animated: true)
-        navigationController?.title = schoolDataSearchResults[indexPath.row].school_name
+        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsSearchResults[indexPath.row], scores: schoolSATScores ?? scoresNotAvailable, schoolColor: getColor(school: schoolsSearchResults[indexPath.row])), animated: true)
     }
 }
 
+//\\\\\\\\\\\\\\\\\\\\\\\\
 extension SchoolListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {
-            schoolDataSearchResults =
-            schoolData.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
-            isSearched = true
-            tableView.reloadData()
+            schoolsSearchResults =
+            schoolsData.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+            searchBarUsed = true
+            schoolsTableView.reloadData()
         } else {
-            isSearched = false
-            tableView.reloadData()
+            searchBarUsed = false
+            schoolsTableView.reloadData()
         }
     }
 }
-        
+    

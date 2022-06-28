@@ -8,7 +8,7 @@
 import UIKit
 let appColor: UIColor = .systemFill
 
- 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -18,10 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         
-        //specifing that SLVC is a navigation controller
-        let navigationController = UINavigationController(rootViewController: SchoolListViewController())
-        window?.rootViewController = navigationController
+        let schoolsNavigationController = UINavigationController(rootViewController: SchoolListViewController())
+        window?.rootViewController = schoolsNavigationController
         return true
     }
 }
-

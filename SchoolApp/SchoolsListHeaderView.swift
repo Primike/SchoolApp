@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SchoolListHeaderView: UIView {
+class SchoolsListHeaderView: UIView {
     @IBOutlet var header: UIView!
     let typeLabel = UILabel()
 
@@ -39,7 +39,7 @@ class SchoolListHeaderView: UIView {
     private func xibInit() {
         //style
         //prepare the bundle.
-        let bundle = Bundle(for: SchoolListHeaderView.self)
+        let bundle = Bundle(for: SchoolsListHeaderView.self)
         //load the Xib
         bundle.loadNibNamed("SchoolListHeader", owner: self, options: nil)
         //add the contentView to the stack

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SchoolScore: Decodable {
+struct SchoolScores: Decodable {
     var dbn: String
     var num_of_sat_test_takers: String
     var sat_critical_reading_avg_score: String
