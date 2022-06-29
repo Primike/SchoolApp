@@ -49,6 +49,7 @@ class SchoolScoresViewController: UIViewController {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor
+        print(scores)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -99,12 +100,14 @@ class SchoolScoresViewController: UIViewController {
         scoresLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 32.0)
         scoresLabel.text = "SAT Scores"
         scoresLabel.textColor = .white
+        scoresLabel.adjustsFontSizeToFitWidth = true
         
         testTakersLabel.translatesAutoresizingMaskIntoConstraints = false
         testTakersLabel.font = UIFont(name:"HelveticaNeue", size: 20.0)
         testTakersLabel.text = "Number of test takers: \(schoolScores.num_of_sat_test_takers)"
         testTakersLabel.textColor = .white
         testTakersLabel.numberOfLines = 0
+        testTakersLabel.adjustsFontSizeToFitWidth = true
         
         graphButton.translatesAutoresizingMaskIntoConstraints = false
         graphButton.setTitle("Show Scores Graph", for: [])
@@ -126,13 +129,15 @@ class SchoolScoresViewController: UIViewController {
         satMathLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satMathLabel.text = testNames[0]
         satMathLabel.textColor = .white
+        satMathLabel.adjustsFontSizeToFitWidth = true
         
         satMathScore.translatesAutoresizingMaskIntoConstraints = false
         satMathScore.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satMathScore.text = "\(schoolScores.sat_math_avg_score)/800"
         satMathScore.textColor = .white
+        satMathScore.adjustsFontSizeToFitWidth = true
 
-        
+
         
         
         satWritingSubView.translatesAutoresizingMaskIntoConstraints = false
@@ -145,12 +150,14 @@ class SchoolScoresViewController: UIViewController {
         satWritingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satWritingLabel.text = testNames[1]
         satWritingLabel.textColor = .white
+        satWritingLabel.adjustsFontSizeToFitWidth = true
+
         
         satWritingScore.translatesAutoresizingMaskIntoConstraints = false
         satWritingScore.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satWritingScore.text = "\(schoolScores.sat_writing_avg_score)/800"
         satWritingScore.textColor = .white
-        
+        satWritingScore.adjustsFontSizeToFitWidth = true
         
         
         satReadingSubView.translatesAutoresizingMaskIntoConstraints = false
@@ -163,12 +170,15 @@ class SchoolScoresViewController: UIViewController {
         satReadingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satReadingLabel.text = testNames[2]
         satReadingLabel.textColor = .white
+        satReadingLabel.adjustsFontSizeToFitWidth = true
+
         
         satReadingScore.translatesAutoresizingMaskIntoConstraints = false
         satReadingScore.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         satReadingScore.text = "\(schoolScores.sat_critical_reading_avg_score)/800"
         satReadingScore.textColor = .white
-        
+        satReadingScore.adjustsFontSizeToFitWidth = true
+
     }
     
     func layout() {

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class SchoolTableViewCell: UITableViewCell {
+    
     let schoolName = UILabel()
     let schoolAddress = UILabel()
     let schoolBoro = UILabel()

@@ -185,7 +185,7 @@ class SchoolInfoViewController: UIViewController {
             
             aboutSubview.topAnchor.constraint(equalTo: schoolImage.bottomAnchor, constant: 10),
             aboutSubview.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            aboutSubview.heightAnchor.constraint(equalToConstant: 500),
+            aboutSubview.heightAnchor.constraint(equalToConstant: 600),
             
             
             aboutLabel.topAnchor.constraint(equalTo: aboutSubview.topAnchor, constant: 20),

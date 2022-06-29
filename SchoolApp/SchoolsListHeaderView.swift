@@ -12,9 +12,9 @@ class SchoolsListHeaderView: UIView {
     @IBOutlet var header: UIView!
     let typeLabel = UILabel()
 
-    let labelStackView = UIStackView()
+    let infoStackView = UIStackView()
     let headerStackView = UIStackView()
-    let nycSchoolsLabel = UILabel()
+    let schoolName = UILabel()
     let dateLabel = UILabel()
 
     let date = Date()
@@ -24,7 +24,6 @@ class SchoolsListHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //handle initialization here
         xibInit()
         setup()
         layout()
@@ -32,17 +31,12 @@ class SchoolsListHeaderView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
-         //handle initialization here
          xibInit()
      }
 
     private func xibInit() {
-        //style
-        //prepare the bundle.
         let bundle = Bundle(for: SchoolsListHeaderView.self)
-        //load the Xib
         bundle.loadNibNamed("SchoolListHeader", owner: self, options: nil)
-        //add the contentView to the stack
     }
 
     func setup() {
@@ -55,12 +49,12 @@ class SchoolsListHeaderView: UIView {
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         headerStackView.axis = .horizontal
 
-        nycSchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        nycSchoolsLabel.font = UIFont(name:"TrebuchetMS-Bold", size: 40.0 )
-        nycSchoolsLabel.adjustsFontSizeToFitWidth = true
-        nycSchoolsLabel.textAlignment = .left
-        nycSchoolsLabel.text = "NYC Schools App"
-        nycSchoolsLabel.numberOfLines = 0
+        schoolName.translatesAutoresizingMaskIntoConstraints = false
+        schoolName.font = UIFont(name:"TrebuchetMS-Bold", size: 40.0 )
+        schoolName.adjustsFontSizeToFitWidth = true
+        schoolName.textAlignment = .left
+        schoolName.text = "NYC Schools App"
+        schoolName.numberOfLines = 0
 
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.font = UIFont(name:"TrebuchetMS", size: 12.0 )
@@ -71,8 +65,8 @@ class SchoolsListHeaderView: UIView {
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
 
-        labelStackView.translatesAutoresizingMaskIntoConstraints = false
-        labelStackView.axis = .vertical
+        infoStackView.translatesAutoresizingMaskIntoConstraints = false
+        infoStackView.axis = .vertical
     }
 
     func layout() {
@@ -80,9 +74,9 @@ class SchoolsListHeaderView: UIView {
 
         header.addSubview(headerStackView)
 
-        labelStackView.addSubview(nycSchoolsLabel)
-        labelStackView.addSubview(dateLabel)
-        headerStackView.addSubview(labelStackView)
+        infoStackView.addSubview(schoolName)
+        infoStackView.addSubview(dateLabel)
+        headerStackView.addSubview(infoStackView)
         headerStackView.addSubview(imageView)
 
         //stack view
@@ -93,26 +87,26 @@ class SchoolsListHeaderView: UIView {
             headerStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 
 
-            labelStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.6),
-            labelStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
-            labelStackView.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
-            labelStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
-            labelStackView.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
+            infoStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.6),
+            infoStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
+            infoStackView.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
+            infoStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
+            infoStackView.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
 
-            nycSchoolsLabel.widthAnchor.constraint(equalTo: labelStackView.widthAnchor),
-            nycSchoolsLabel.topAnchor.constraint(equalTo: labelStackView.topAnchor, constant: 10),
-            nycSchoolsLabel.leftAnchor.constraint(equalTo: labelStackView.leftAnchor),
-            nycSchoolsLabel.heightAnchor.constraint(equalTo: labelStackView.heightAnchor, multiplier: 0.4),
+            schoolName.widthAnchor.constraint(equalTo: infoStackView.widthAnchor),
+            schoolName.topAnchor.constraint(equalTo: infoStackView.topAnchor, constant: 10),
+            schoolName.leftAnchor.constraint(equalTo: infoStackView.leftAnchor),
+            schoolName.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.4),
 
-            dateLabel.topAnchor.constraint(equalTo: nycSchoolsLabel.bottomAnchor),
-            dateLabel.widthAnchor.constraint(equalTo: labelStackView.widthAnchor),
-            dateLabel.leftAnchor.constraint(equalTo: labelStackView.leftAnchor),
-            dateLabel.heightAnchor.constraint(equalTo: labelStackView.heightAnchor, multiplier: 0.3),
+            dateLabel.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
+            dateLabel.widthAnchor.constraint(equalTo: infoStackView.widthAnchor),
+            dateLabel.leftAnchor.constraint(equalTo: infoStackView.leftAnchor),
+            dateLabel.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.3),
 
             imageView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
-            imageView.topAnchor.constraint(equalTo: labelStackView.topAnchor),
-            imageView.widthAnchor.constraint(equalTo: labelStackView.widthAnchor, multiplier: 0.5),
-            imageView.heightAnchor.constraint(equalTo: labelStackView.heightAnchor, multiplier: 1),
+            imageView.topAnchor.constraint(equalTo: infoStackView.topAnchor),
+            imageView.widthAnchor.constraint(equalTo: infoStackView.widthAnchor, multiplier: 0.5),
+            imageView.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 1),
 
 //            self.heightAnchor.constraint(equalToConstant: 130),
 

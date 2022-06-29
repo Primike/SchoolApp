@@ -111,7 +111,6 @@
 		B804315B28523198004C9BAF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B87473B3284904B200821AC9 /* APICalls.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -150,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E8173C2846A45F0052C1AE /* AppDelegate.swift */,
+				B87473B3284904B200821AC9 /* APICalls.swift */,
 				B804315A28523188004C9BAF /* Models */,
 				B804315B28523198004C9BAF /* ViewModels */,
 				B804315928523181004C9BAF /* Views */,

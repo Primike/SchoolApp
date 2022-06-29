@@ -29,7 +29,3 @@ struct School: Decodable {
         return school_name.uppercased() 
     }
 }
-
-//struct Response: Decodable {
-//    var users : [School]
-//}

@@ -35,7 +35,6 @@ class SchoolServiceAPI {
             
             do {
                 var results = try JSONDecoder().decode([School].self, from: data)
-                print(results.count)
                 for i in 0..<results.count {
                     if let index = results[i].location.firstIndex(of: "(") {
                         results[i].location = String(results[i].location[..<index])
@@ -72,72 +71,3 @@ class SchoolServiceAPI {
         task.resume()
     }
 }
-
-
-//func getTestData(){
-//
-//    let task = URLSession.shared.dataTask(with: URL(string: "https://data.cityofnewyork.us/resource/f9bf-2cp4.json")!) { data, response, error in
-//
-//        if let data = data {
-//            if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                as? [[String: Any]]) != nil {
-//                do {
-//                    self.schoolsSATData = try JSONDecoder().decode([SchoolScore].self, from: data)
-//                } catch {
-//                    print("ERROR")
-//                }
-//            }
-//        }
-//    }
-//    task.resume()
-//}
-
-
-//
-//
-//extension SchoolListViewController {
-//    func fetchSchoolAPI() {
-//
-//        var request = URLRequest(url: URL(string: "https://data.cityofnewyork.us/resource/s3k6-pzi2.json")!)
-//
-//        request.httpMethod = "GET"
-//
-//        URLSession.shared.dataTask(with: request) { data, resp, error in
-//            if error != nil {
-//                print(error?.localizedDescription ?? "Error")
-//            } else {
-//                print("Success")
-//            }
-//
-//            if let data = data {
-//                if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                    as? [[String: Any]]) != nil {
-//                    self.schoolData = try! JSONDecoder().decode([School].self, from: data)
-//                }
-//            }
-//            //leave DG
-//        }.resume()
-//    }
-//    func fetchSchoolTestAPI() {
-//
-//        var request = URLRequest(url: URL(string: "https://data.cityofnewyork.us/resource/f9bf-2cp4.json")!)
-//
-//        request.httpMethod = "GET"
-//
-//        URLSession.shared.dataTask(with: request) { data, resp, error in
-//            if error != nil {
-//                print(error?.localizedDescription ?? "Error")
-//            } else {
-//                print("Success")
-//            }
-//
-//            if let data = data {
-//                if (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                    as? [[String: Any]]) != nil {
-//                    self.testData = try! JSONDecoder().decode([SchoolScore].self, from: data)
-//                }
-//            }
-//        }.resume()
-//    }
-//}
-//

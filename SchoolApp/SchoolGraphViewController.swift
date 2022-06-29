@@ -23,9 +23,9 @@ class SchoolGraphViewController: UIViewController {
     let label0 = UILabel()
     
     let graphStackView = UIStackView()
-    let mathBarLabel = UILabel()
-    let writingBarLabel = UILabel()
-    let readingBarLabel = UILabel()
+    let mathBar = UILabel()
+    let writingBar = UILabel()
+    let readingBar = UILabel()
     
     let subjectsStackView = UIStackView()
     let mathLabel = UILabel()
@@ -129,26 +129,26 @@ class SchoolGraphViewController: UIViewController {
         graphStackView.axis = .horizontal
         graphStackView.backgroundColor = .systemBackground
     
-        mathBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        mathBarLabel.backgroundColor = schoolColor
-        mathBarLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        mathBarLabel.text = schoolScores.sat_math_avg_score
-        mathBarLabel.textAlignment = .center
-        mathBarLabel.textColor = .white
+        mathBar.translatesAutoresizingMaskIntoConstraints = false
+        mathBar.backgroundColor = schoolColor
+        mathBar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        mathBar.text = schoolScores.sat_math_avg_score
+        mathBar.textAlignment = .center
+        mathBar.textColor = .white
         
-        writingBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        writingBarLabel.backgroundColor = schoolColor
-        writingBarLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        writingBarLabel.text = schoolScores.sat_writing_avg_score
-        writingBarLabel.textAlignment = .center
-        writingBarLabel.textColor = .white
+        writingBar.translatesAutoresizingMaskIntoConstraints = false
+        writingBar.backgroundColor = schoolColor
+        writingBar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        writingBar.text = schoolScores.sat_writing_avg_score
+        writingBar.textAlignment = .center
+        writingBar.textColor = .white
         
-        readingBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        readingBarLabel.backgroundColor = schoolColor
-        readingBarLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        readingBarLabel.text = schoolScores.sat_critical_reading_avg_score
-        readingBarLabel.textAlignment = .center
-        readingBarLabel.textColor = .white
+        readingBar.translatesAutoresizingMaskIntoConstraints = false
+        readingBar.backgroundColor = schoolColor
+        readingBar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        readingBar.text = schoolScores.sat_critical_reading_avg_score
+        readingBar.textAlignment = .center
+        readingBar.textColor = .white
     
         
         
@@ -198,9 +198,9 @@ class SchoolGraphViewController: UIViewController {
         valuesStackView.addSubview(label200)
         valuesStackView.addSubview(label0)
 
-        graphStackView.addSubview(mathBarLabel)
-        graphStackView.addSubview(writingBarLabel)
-        graphStackView.addSubview(readingBarLabel)
+        graphStackView.addSubview(mathBar)
+        graphStackView.addSubview(writingBar)
+        graphStackView.addSubview(readingBar)
         
         subjectsStackView.addSubview(mathLabel)
         subjectsStackView.addSubview(writingLabel)
@@ -251,20 +251,20 @@ class SchoolGraphViewController: UIViewController {
             graphStackView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.9),
             graphStackView.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
             
-            mathBarLabel.leftAnchor.constraint(equalTo: graphStackView.leftAnchor, constant: 20),
-            mathBarLabel.bottomAnchor.constraint(equalTo: graphStackView.bottomAnchor),
-            mathBarLabel.heightAnchor.constraint(equalTo: graphStackView.heightAnchor, multiplier: CGFloat(graphHeightValues[0])),
-            mathBarLabel.widthAnchor.constraint(equalTo: graphStackView.widthAnchor, multiplier: 0.25),
+            mathBar.leftAnchor.constraint(equalTo: graphStackView.leftAnchor, constant: 20),
+            mathBar.bottomAnchor.constraint(equalTo: graphStackView.bottomAnchor),
+            mathBar.heightAnchor.constraint(equalTo: graphStackView.heightAnchor, multiplier: CGFloat(graphHeightValues[0])),
+            mathBar.widthAnchor.constraint(equalTo: graphStackView.widthAnchor, multiplier: 0.25),
             
-            writingBarLabel.centerXAnchor.constraint(equalTo: graphStackView.centerXAnchor),
-            writingBarLabel.bottomAnchor.constraint(equalTo: graphStackView.bottomAnchor),
-            writingBarLabel.heightAnchor.constraint(equalTo: graphStackView.heightAnchor, multiplier: CGFloat(graphHeightValues[1])),
-            writingBarLabel.widthAnchor.constraint(equalTo: graphStackView.widthAnchor, multiplier: 0.25),
+            writingBar.centerXAnchor.constraint(equalTo: graphStackView.centerXAnchor),
+            writingBar.bottomAnchor.constraint(equalTo: graphStackView.bottomAnchor),
+            writingBar.heightAnchor.constraint(equalTo: graphStackView.heightAnchor, multiplier: CGFloat(graphHeightValues[1])),
+            writingBar.widthAnchor.constraint(equalTo: graphStackView.widthAnchor, multiplier: 0.25),
             
-            readingBarLabel.rightAnchor.constraint(equalTo: graphStackView.rightAnchor, constant: -20),
-            readingBarLabel.bottomAnchor.constraint(equalTo: graphStackView.bottomAnchor),
-            readingBarLabel.heightAnchor.constraint(equalTo: graphStackView.heightAnchor, multiplier: CGFloat(graphHeightValues[2])),
-            readingBarLabel.widthAnchor.constraint(equalTo: graphStackView.widthAnchor, multiplier: 0.25),
+            readingBar.rightAnchor.constraint(equalTo: graphStackView.rightAnchor, constant: -20),
+            readingBar.bottomAnchor.constraint(equalTo: graphStackView.bottomAnchor),
+            readingBar.heightAnchor.constraint(equalTo: graphStackView.heightAnchor, multiplier: CGFloat(graphHeightValues[2])),
+            readingBar.widthAnchor.constraint(equalTo: graphStackView.widthAnchor, multiplier: 0.25),
             
             
             
@@ -274,20 +274,20 @@ class SchoolGraphViewController: UIViewController {
             subjectsStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
             subjectsStackView.leftAnchor.constraint(equalTo: screenStackView.leftAnchor),
             
-            mathLabel.leftAnchor.constraint(equalTo: mathBarLabel.leftAnchor),
+            mathLabel.leftAnchor.constraint(equalTo: mathBar.leftAnchor),
             mathLabel.topAnchor.constraint(equalTo: graphStackView.bottomAnchor),
             mathLabel.heightAnchor.constraint(equalTo: subjectsStackView.heightAnchor),
-            mathLabel.widthAnchor.constraint(equalTo: mathBarLabel.widthAnchor),
+            mathLabel.widthAnchor.constraint(equalTo: mathBar.widthAnchor),
 
-            writingLabel.leftAnchor.constraint(equalTo: writingBarLabel.leftAnchor),
+            writingLabel.leftAnchor.constraint(equalTo: writingBar.leftAnchor),
             writingLabel.topAnchor.constraint(equalTo: graphStackView.bottomAnchor),
             writingLabel.heightAnchor.constraint(equalTo: subjectsStackView.heightAnchor),
-            writingLabel.widthAnchor.constraint(equalTo: writingBarLabel.widthAnchor),
+            writingLabel.widthAnchor.constraint(equalTo: writingBar.widthAnchor),
 
-            readingLabel.leftAnchor.constraint(equalTo: readingBarLabel.leftAnchor),
+            readingLabel.leftAnchor.constraint(equalTo: readingBar.leftAnchor),
             readingLabel.topAnchor.constraint(equalTo: graphStackView.bottomAnchor),
             readingLabel.heightAnchor.constraint(equalTo: subjectsStackView.heightAnchor),
-            readingLabel.widthAnchor.constraint(equalTo: readingBarLabel.widthAnchor),
+            readingLabel.widthAnchor.constraint(equalTo: readingBar.widthAnchor),
         ])
     }
 }
