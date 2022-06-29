@@ -49,9 +49,7 @@ class SchoolGraphViewController: UIViewController {
         graphHeightValues.append(Float(Double(score2)/Double(800)))
         let score3 = Int(scores.sat_critical_reading_avg_score)!
         graphHeightValues.append(Float(Double(score3)/Double(800)))
-        
-        print(graphHeightValues)
-        
+                
         super.init(nibName: nil, bundle: nil)
     }
     

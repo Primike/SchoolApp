@@ -49,7 +49,7 @@ class SchoolScoresViewController: UIViewController {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor
-        print(scores)
+
         super.init(nibName: nil, bundle: nil)
     }
     

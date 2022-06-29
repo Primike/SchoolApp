@@ -156,11 +156,18 @@ extension SchoolListViewController: UITableViewDelegate {
 extension SchoolListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {
+//            schoolsSearchResults =
+//            schoolsData.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+            let array = [" ", ",", ".", "-", "(", ")", ":", "/", "&"]
+            
             schoolsSearchResults =
-            schoolsData.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+            schoolsData.filter { school in
+                return school.mergedText!.lowercased().contains(searchText.lowercased().replacingOccurrences(of: " ", with: ""))
+            }
+
             searchBarUsed = true
         } else {
-            schoolsSearchResults = schoolsData  
+            schoolsSearchResults = schoolsData
             searchBarUsed = false
         }
         schoolsTableView.reloadData()

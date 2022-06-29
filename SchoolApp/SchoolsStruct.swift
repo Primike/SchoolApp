@@ -21,6 +21,7 @@ struct School: Decodable {
     let website: String
     let phone_number: String
     let interest1: String
+    var mergedText: String?
     
     func lowercased() -> String {
         return school_name.lowercased()
