@@ -7,14 +7,8 @@
 
 import UIKit
 
-class SchoolsListViewController: UIViewController, RequestDelegate {
-    func didUpdate(with state: ViewState) {
-        print("QWE")
-    }
-    
-        
-    let viewModel: SchoolsListViewModel
-    
+class SchoolsListViewController: UIViewController {
+
     let schoolsListHeader = SchoolsListHeaderView(frame: .zero)
 
     let schoolsTableView = UITableView()
@@ -27,22 +21,24 @@ class SchoolsListViewController: UIViewController, RequestDelegate {
     var searchBarUsed = false
     var completedAPIFetches = 0
     
+    
+    
+    let viewModel: SchoolsListViewModel
+    
     required init(viewModel: SchoolsListViewModel) {
         self.viewModel = viewModel
-        super.init()
+        super.init(nibName: nil, bundle: nil)
         self.viewModel.delegate = self
-
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         getSchoolsData()
-        let activityIndicator = viewModel.activityIndicator
+        viewModel.loadData()
         
+        let activityIndicator = viewModel.activityIndicator
         view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -57,8 +53,42 @@ class SchoolsListViewController: UIViewController, RequestDelegate {
             }
         })
     }
+}
+
+extension SchoolsListViewController: RequestDelegate {
+    func didUpdate(with state: ViewState) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            switch state {
+            case .idle:
+                break
+            case .loading:
+                print("loadingzz")
+            case .success:
+                print("successzz")
+                self.schoolsTableView.reloadData()
+            case .error(let error):
+                self.showAlert(error: error.localizedDescription)
+            }
+        }
+    }
+}
+
+
+extension SchoolsListViewController {
     
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    func showAlert(error: String) {
+        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Quit", style: .destructive, handler: { _ in
+            exit(0)
+        }))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+            self.getSchoolsData()
+        }))
+        
+        present(alert, animated: true)
+    }
+    
     func getSchoolsData() {
         dispatchGroup.enter()
         SchoolServiceAPI.shared.getSchoolsData { result in
@@ -92,20 +122,8 @@ class SchoolsListViewController: UIViewController, RequestDelegate {
             }
         }
     }
-    
-    func showAlert(error: String) {
-        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Quit", style: .destructive, handler: { _ in
-            exit(0)
-        }))
-        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-            self.viewDidLoad()
-        }))
-        
-        present(alert, animated: true)
-    }
-}
 
+}
 extension SchoolsListViewController {
     
     func style() {

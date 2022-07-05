@@ -54,7 +54,6 @@ class SchoolServiceAPI {
                     results[i].mergedText = mergedText
                     
                 }
-                print(results[0].mergedText!)
 
                 completion(.success(results))
             } catch {

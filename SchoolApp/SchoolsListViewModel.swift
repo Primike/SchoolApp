@@ -13,6 +13,7 @@ class SchoolsListViewModel {
     weak var delegate: RequestDelegate?
     var state: ViewState {
         didSet {
+            print("UPdated with \(state)")
             self.delegate?.didUpdate(with: state)
         }
     }
@@ -35,6 +36,29 @@ class SchoolsListViewModel {
 
 extension SchoolsListViewModel {
     func loadData() {
+        self.state = .loading
+        SchoolServiceAPI.shared.getSchoolsData { result in
+            switch result {
+            case .success(let schools):
+                self.schoolsData = schools
+//                self.completedAPIFetches += 1
+                self.state = .success
+            case .failure(let error):
+                self.state = .error(error)
+                print(error.localizedDescription)
+            }
+        }
         
+        SchoolServiceAPI.shared.getTestData { result in
+            switch result {
+            case .success(let scores):
+                self.schoolsSATData = scores
+                self.state = .success
+//                self.completedAPIFetches += 1
+            case .failure(let error):
+                self.state = .error(error)
+                print(error.localizedDescription)
+            }
+        }
     }
 }
