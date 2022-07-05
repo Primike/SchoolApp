@@ -7,8 +7,14 @@
 
 import UIKit
 
-class SchoolListViewController: UIViewController {
+class SchoolsListViewController: UIViewController, RequestDelegate {
+    func didUpdate(with state: ViewState) {
+        print("QWE")
+    }
+    
         
+    let viewModel: SchoolsListViewModel
+    
     let schoolsListHeader = SchoolsListHeaderView(frame: .zero)
 
     let schoolsTableView = UITableView()
@@ -21,14 +27,22 @@ class SchoolListViewController: UIViewController {
     var searchBarUsed = false
     var completedAPIFetches = 0
     
+    required init(viewModel: SchoolsListViewModel) {
+        self.viewModel = viewModel
+        super.init()
+        self.viewModel.delegate = self
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+
         getSchoolsData()
+        let activityIndicator = viewModel.activityIndicator
         
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.startAnimating()
-        activityIndicator.color = .systemBlue
         view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -58,6 +72,7 @@ class SchoolListViewController: UIViewController {
                 self.schoolsSearchResults = self.schoolsData
                 self.completedAPIFetches += 1
             case .failure(let error):
+                self.showAlert(error: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
@@ -77,9 +92,21 @@ class SchoolListViewController: UIViewController {
             }
         }
     }
+    
+    func showAlert(error: String) {
+        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Quit", style: .destructive, handler: { _ in
+            exit(0)
+        }))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+            self.viewDidLoad()
+        }))
+        
+        present(alert, animated: true)
+    }
 }
 
-extension SchoolListViewController {
+extension SchoolsListViewController {
     
     func style() {
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +141,7 @@ extension SchoolListViewController {
     }
 }
 
-extension SchoolListViewController: UITableViewDataSource {
+extension SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if searchBarUsed == true {
             return setupCell(data: schoolsSearchResults, indexPath: indexPath)
@@ -136,7 +163,7 @@ extension SchoolListViewController: UITableViewDataSource {
     }
 }
 
-extension SchoolListViewController: UITableViewDelegate {
+extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var schoolSATScores: SchoolScores?
         let scoresNotAvailable = SchoolScores(dbn: "0", num_of_sat_test_takers: "Not Available",                                              sat_critical_reading_avg_score: "0",
@@ -153,16 +180,22 @@ extension SchoolListViewController: UITableViewDelegate {
     }
 }
 
-extension SchoolListViewController: UISearchBarDelegate {
+extension SchoolsListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var search = searchText
+
         if searchText != "" {
 //            schoolsSearchResults =
 //            schoolsData.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
-            let array = [" ", ",", ".", "-", "(", ")", ":", "/", "&"]
-            
+            let array = [" ", ",", ".", "-", "(", ")", ":", "/"]
+            for i in array {
+                search = search.replacingOccurrences(of: i, with: "")
+            }
+            search = search.replacingOccurrences(of: "&", with: "and")
+
             schoolsSearchResults =
             schoolsData.filter { school in
-                return school.mergedText!.lowercased().contains(searchText.lowercased().replacingOccurrences(of: " ", with: ""))
+                return school.mergedText!.lowercased().contains(search.lowercased())
             }
 
             searchBarUsed = true
@@ -177,7 +210,7 @@ extension SchoolListViewController: UISearchBarDelegate {
 
 
 //\\\\\\\\\\\\\\\\\\\\\\\\
-extension SchoolListViewController {
+extension SchoolsListViewController {
     func setupCell(data: [School], indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         let schoolColor = getColor(school: schoolsSearchResults[indexPath.row])
@@ -206,3 +239,4 @@ extension SchoolListViewController {
         }
     }
 }
+

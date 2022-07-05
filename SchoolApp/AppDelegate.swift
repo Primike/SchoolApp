@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         
-        let schoolsNavigationController = UINavigationController(rootViewController: SchoolListViewController())
+        let viewModel = SchoolsListViewModel()
+        let schoolsNavigationController = UINavigationController(rootViewController: SchoolsListViewController(viewModel: viewModel))
         window?.rootViewController = schoolsNavigationController
         return true
     }

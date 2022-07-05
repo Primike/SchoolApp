@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B803EAC1286DF99300E7A26B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803EAC0286DF99300E7A26B /* HomeViewController.swift */; };
+		B803EAC3286E1A4700E7A26B /* SchoolsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */; };
 		B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B5284933C700303EEE /* SchoolsStruct.swift */; };
 		B848D3D02856637A00FE01C9 /* SchoolTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */; };
 		B87473B4284904B200821AC9 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87473B3284904B200821AC9 /* APICalls.swift */; };
@@ -16,8 +18,11 @@
 		B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */; };
 		B8BEDFDB286359FE0001ED95 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BEDFDA286359FE0001ED95 /* LoadingView.swift */; };
 		B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */; };
+		B8E1121828747692009C66B6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1121728747692009C66B6 /* Reachability.swift */; };
+		B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E11219287476C1009C66B6 /* CustomError.swift */; };
+		B8E1121C28747A72009C66B6 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1121B28747A72009C66B6 /* ViewState.swift */; };
 		B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E8173C2846A45F0052C1AE /* AppDelegate.swift */; };
-		B8E817412846A45F0052C1AE /* SchoolListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolListViewController.swift */; };
+		B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */; };
 		B8E817462846A4600052C1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E817452846A4600052C1AE /* Assets.xcassets */; };
 		B8E817492846A4600052C1AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E817472846A4600052C1AE /* LaunchScreen.storyboard */; };
 		B8FB23A428492BD800FC4817 /* SchoolListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */; };
@@ -42,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B803EAC0286DF99300E7A26B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListViewModel.swift; sourceTree = "<group>"; };
 		B83017B5284933C700303EEE /* SchoolsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsStruct.swift; sourceTree = "<group>"; };
 		B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTabBarViewController.swift; sourceTree = "<group>"; };
 		B87473B3284904B200821AC9 /* APICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
@@ -51,9 +58,12 @@
 		B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolGraphViewController.swift; sourceTree = "<group>"; };
 		B8BEDFDA286359FE0001ED95 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
+		B8E1121728747692009C66B6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		B8E11219287476C1009C66B6 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		B8E1121B28747A72009C66B6 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		B8E817392846A45F0052C1AE /* SchoolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E8173C2846A45F0052C1AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B8E817402846A45F0052C1AE /* SchoolListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolListViewController.swift; sourceTree = "<group>"; };
+		B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListViewController.swift; sourceTree = "<group>"; };
 		B8E817452846A4600052C1AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8E817482846A4600052C1AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8E8174A2846A4600052C1AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +121,7 @@
 		B804315B28523198004C9BAF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -118,11 +129,12 @@
 		B804315C2852319F004C9BAF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B8E817402846A45F0052C1AE /* SchoolListViewController.swift */,
+				B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */,
 				B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */,
 				B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */,
 				B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */,
 				B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */,
+				B803EAC0286DF99300E7A26B /* HomeViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -150,11 +162,14 @@
 			children = (
 				B8E8173C2846A45F0052C1AE /* AppDelegate.swift */,
 				B87473B3284904B200821AC9 /* APICalls.swift */,
+				B8E1121728747692009C66B6 /* Reachability.swift */,
+				B8E11219287476C1009C66B6 /* CustomError.swift */,
 				B804315A28523188004C9BAF /* Models */,
 				B804315B28523198004C9BAF /* ViewModels */,
 				B804315928523181004C9BAF /* Views */,
 				B804315C2852319F004C9BAF /* ViewControllers */,
 				B8E8176D2846AACE0052C1AE /* Files */,
+				B8E1121B28747A72009C66B6 /* ViewState.swift */,
 			);
 			path = SchoolApp;
 			sourceTree = "<group>";
@@ -301,16 +316,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8FB23A628492BE900FC4817 /* SchoolsListHeaderView.swift in Sources */,
-				B8E817412846A45F0052C1AE /* SchoolListViewController.swift in Sources */,
+				B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */,
+				B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */,
 				B880A2C0284ED4090071E43D /* SchoolScoresViewController.swift in Sources */,
 				B87473B4284904B200821AC9 /* APICalls.swift in Sources */,
 				B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */,
 				B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */,
+				B803EAC3286E1A4700E7A26B /* SchoolsListViewModel.swift in Sources */,
 				B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */,
+				B8E1121828747692009C66B6 /* Reachability.swift in Sources */,
 				B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */,
 				B848D3D02856637A00FE01C9 /* SchoolTabBarViewController.swift in Sources */,
 				B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */,
 				B8BEDFDB286359FE0001ED95 /* LoadingView.swift in Sources */,
+				B803EAC1286DF99300E7A26B /* HomeViewController.swift in Sources */,
+				B8E1121C28747A72009C66B6 /* ViewState.swift in Sources */,
 				B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

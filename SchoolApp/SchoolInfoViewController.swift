@@ -102,7 +102,7 @@ class SchoolInfoViewController: UIViewController {
         
         
         
-        
+        aboutSubview.translatesAutoresizingMaskIntoConstraints = false
         aboutSubview.layer.cornerRadius = 50
         aboutSubview.layer.maskedCorners = [.layerMinXMinYCorner]
         aboutSubview.backgroundColor = schoolColor
