@@ -137,7 +137,15 @@ class SchoolScoresViewController: UIViewController {
         satMathScore.textColor = .white
         satMathScore.adjustsFontSizeToFitWidth = true
 
-
+        var scoresLabels: UILabel {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+            label.text = testNames[0]
+            label.textColor = .white
+            label.adjustsFontSizeToFitWidth = true
+            return label
+        }
         
         
         satWritingSubView.translatesAutoresizingMaskIntoConstraints = false

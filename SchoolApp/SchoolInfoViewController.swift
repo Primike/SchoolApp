@@ -138,26 +138,26 @@ class SchoolInfoViewController: UIViewController {
         schoolInfoStackView.addSubview(schoolPhone)
         schoolInfoStackView.addSubview(schoolImage)
     
-        
         aboutSubview.addSubview(aboutLabel)
         aboutSubview.addSubview(schoolDescription)
         
         
         NSLayoutConstraint.activate([
 
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             
-            screenStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            screenStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             screenStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             schoolInfoStackView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
             schoolInfoStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
+//            schoolInfoStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.6),
             
             buttonBoroStackView.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
             buttonBoroStackView.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.85),
@@ -183,7 +183,7 @@ class SchoolInfoViewController: UIViewController {
             schoolImage.heightAnchor.constraint(equalToConstant: 170),
             
             
-            aboutSubview.topAnchor.constraint(equalTo: schoolImage.bottomAnchor, constant: 10),
+            aboutSubview.topAnchor.constraint(equalTo: schoolImage.bottomAnchor),
             aboutSubview.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             aboutSubview.heightAnchor.constraint(equalToConstant: 600),
             

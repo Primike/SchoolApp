@@ -166,12 +166,12 @@
 				B87473B3284904B200821AC9 /* APICalls.swift */,
 				B8E1121728747692009C66B6 /* Reachability.swift */,
 				B8E11219287476C1009C66B6 /* CustomError.swift */,
+				B8E1121B28747A72009C66B6 /* ViewState.swift */,
 				B804315A28523188004C9BAF /* Models */,
 				B804315B28523198004C9BAF /* ViewModels */,
 				B804315928523181004C9BAF /* Views */,
 				B804315C2852319F004C9BAF /* ViewControllers */,
 				B8E8176D2846AACE0052C1AE /* Files */,
-				B8E1121B28747A72009C66B6 /* ViewState.swift */,
 			);
 			path = SchoolApp;
 			sourceTree = "<group>";
