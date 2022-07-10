@@ -16,6 +16,7 @@ class SchoolInfoViewController: UIViewController {
     let buttonBoroStackView = UIStackView()
     let schoolWebsiteButton = UIButton()
     let schoolBoro = UILabel()
+    let addSchoolButton = UIButton()
 
     let schoolInfoStackView = UIStackView()
     let schoolName = UILabel()
@@ -28,14 +29,22 @@ class SchoolInfoViewController: UIViewController {
     let aboutLabel = UILabel()
     let schoolDescription = UILabel()
 
-
+    let defaults = UserDefaults.standard
+    var addButtonImage: String
     let school: School
     let schoolColor: UIColor
     
     init(school: School, schoolColor: UIColor) {
         self.school = school
         self.schoolColor = schoolColor
+                
+        let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
         
+        if savedArray.contains(school.dbn) {
+            addButtonImage = "checkmark"
+        } else {
+            addButtonImage = "plus.circle"
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -77,7 +86,12 @@ class SchoolInfoViewController: UIViewController {
         schoolBoro.adjustsFontSizeToFitWidth = true
         schoolBoro.textColor = schoolColor
         
-        
+        addSchoolButton.translatesAutoresizingMaskIntoConstraints = false
+        addSchoolButton.addTarget(self, action: #selector(addSchool), for: .primaryActionTriggered)
+        addSchoolButton.tintColor = schoolColor
+        addSchoolButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
+
         schoolName.translatesAutoresizingMaskIntoConstraints = false
         schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
         schoolName.text = school.school_name
@@ -130,7 +144,7 @@ class SchoolInfoViewController: UIViewController {
         screenStackView.addArrangedSubview(aboutSubview)
         
         buttonBoroStackView.addSubview(schoolWebsiteButton)
-        buttonBoroStackView.addSubview(schoolBoro)
+        buttonBoroStackView.addSubview(addSchoolButton)
         
         schoolInfoStackView.addSubview(buttonBoroStackView)
         schoolInfoStackView.addSubview(schoolName)
@@ -157,7 +171,6 @@ class SchoolInfoViewController: UIViewController {
             
             schoolInfoStackView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
             schoolInfoStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
-//            schoolInfoStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.6),
             
             buttonBoroStackView.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
             buttonBoroStackView.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.85),
@@ -165,8 +178,8 @@ class SchoolInfoViewController: UIViewController {
             buttonBoroStackView.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.15),
             schoolWebsiteButton.leftAnchor.constraint(equalTo: buttonBoroStackView.leftAnchor),
             schoolWebsiteButton.centerYAnchor.constraint(equalTo: buttonBoroStackView.centerYAnchor),
-            schoolBoro.rightAnchor.constraint(equalTo: buttonBoroStackView.rightAnchor),
-            schoolBoro.centerYAnchor.constraint(equalTo: buttonBoroStackView.centerYAnchor),
+            addSchoolButton.rightAnchor.constraint(equalTo: buttonBoroStackView.rightAnchor),
+            addSchoolButton.centerYAnchor.constraint(equalTo: buttonBoroStackView.centerYAnchor),
             
             
             schoolName.topAnchor.constraint(equalTo: buttonBoroStackView.bottomAnchor, constant: 10),
@@ -208,6 +221,24 @@ extension SchoolInfoViewController {
             if success {
             } else {
             }
+        }
+    }
+    
+    @objc func addSchool(sender: UIButton) {
+        var savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
+
+        if addButtonImage == "plus.circle" {
+            addButtonImage = "checkmark"
+            addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
+            
+            savedArray.append(school.dbn)
+            defaults.set(savedArray, forKey: "array")
+            
+        } else {
+            addButtonImage = "plus.circle"
+            addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
+            
+            defaults.set(savedArray.filter { $0 != school.dbn }, forKey: "array")
         }
     }
 }

@@ -13,25 +13,29 @@ class SchoolsListViewController: UIViewController {
 
     let schoolsTableView = UITableView()
     let schoolsSearchBar = UISearchBar()
-    //schoolsViewModel
-    let viewModel: SchoolsListViewModel
+    let schoolsViewModel: SchoolsListViewModel
     
     required init(viewModel: SchoolsListViewModel) {
-        self.viewModel = viewModel
+        self.schoolsViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.delegate = self
+        self.schoolsViewModel.delegate = self
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadData()
         
-        let activityIndicator = viewModel.activityIndicator
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.color = .systemBlue
         view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        schoolsViewModel.loadData()
+
         
     }
 }
@@ -46,12 +50,11 @@ extension SchoolsListViewController: RequestDelegate {
             case .loading:
                 print("loadingzz")
             case .success:
-                print("successzz")
+//                print("successzz")
                 self.schoolsTableView.reloadData()
                 self.style()
                 self.layout()
                 self.setup()
-                self.viewModel.activityIndicator.stopAnimating()
             case .error(let error):
                 self.showAlert(error: error.localizedDescription)
             }
@@ -61,11 +64,11 @@ extension SchoolsListViewController: RequestDelegate {
     
     func showAlert(error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Quit", style: .destructive, handler: { _ in
-            exit(0)
+        alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
+//            exit(0)
         }))
         alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-            self.viewModel.loadData()
+            self.schoolsViewModel.loadData()
         }))
         
         present(alert, animated: true)
@@ -74,6 +77,8 @@ extension SchoolsListViewController: RequestDelegate {
 extension SchoolsListViewController {
     
     func style() {
+        view.backgroundColor = .white
+        
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         navigationItem.titleView = schoolsSearchBar
@@ -109,18 +114,13 @@ extension SchoolsListViewController {
 extension SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: viewModel.getInfo(for: indexPath))
+        schoolCell.configure(info: schoolsViewModel.getInfo(for: indexPath))
 
         return schoolCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //////jijijijiji
-        if  viewModel.searchBarUsed == true {
-            return viewModel.schoolsSearchResults.count
-        } else {
-            return viewModel.schoolsData.count
-        }
+        return schoolsViewModel.schoolsSearchResults.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,16 +132,16 @@ extension SchoolsListViewController: UITableViewDataSource {
 
 extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.rowSelectSearch(indexPath: indexPath)
+        schoolsViewModel.rowSelectSearch(indexPath: indexPath)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: viewModel.schoolsSearchResults[indexPath.row], scores: viewModel.schoolSATScores ?? viewModel.scoresNotAvailable, schoolColor: viewModel.getColor(school: viewModel.schoolsSearchResults[indexPath.row])), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsViewModel.schoolsSearchResults[indexPath.row], scores: schoolsViewModel.schoolSATScores ?? schoolsViewModel.scoresNotAvailable, schoolColor: schoolsViewModel.getColor(school: schoolsViewModel.schoolsSearchResults[indexPath.row])), animated: true)
     }
 }
 
 extension SchoolsListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        viewModel.textChanged(searchText: searchText)
+        schoolsViewModel.textChanged(searchText: searchText)
         schoolsTableView.reloadData()
     }
 }

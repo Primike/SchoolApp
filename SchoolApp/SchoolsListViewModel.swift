@@ -13,7 +13,7 @@ class SchoolsListViewModel {
     weak var delegate: RequestDelegate?
     var state: ViewState {
         didSet {
-            print("Updated with \(state)")
+//            print("Updated with \(state)")
             self.delegate?.didUpdate(with: state)
         }
     }
@@ -21,7 +21,6 @@ class SchoolsListViewModel {
     var schoolsSATData = [SchoolScores]()
     var schoolsData = [School]()
     var schoolsSearchResults = [School]()
-    var searchBarUsed = false
     
     init() {
         self.state = .idle
@@ -51,11 +50,8 @@ class SchoolsListViewModel {
             schoolsData.filter { school in
                 return school.mergedText!.lowercased().contains(search.lowercased())
             }
-
-            searchBarUsed = true
         } else {
             schoolsSearchResults = schoolsData
-            searchBarUsed = false
         }
     }
     //move 
@@ -116,13 +112,5 @@ extension SchoolsListViewModel {
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    var activityIndicator: UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.startAnimating()
-        activityIndicator.color = .systemBlue
-        return activityIndicator
     }
 }
