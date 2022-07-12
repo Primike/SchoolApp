@@ -8,7 +8,7 @@
 import Foundation
 
 enum CustomError {
-    case noConnection, noData
+    case noConnection, noSchoolData, noSATData
 }
 
 extension CustomError: LocalizedError {
@@ -16,8 +16,10 @@ extension CustomError: LocalizedError {
         switch self {
         case .noConnection:
             return "No Internet Connection"
-        case .noData:
-            return "No Available Data"
+        case .noSchoolData:
+            return "No Schools Data"
+        case .noSATData:
+            return "No SAT Data"
         }
     }
 }

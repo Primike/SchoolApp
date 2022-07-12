@@ -30,7 +30,7 @@ class SchoolServiceAPI {
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
             guard let data = data, error == nil else {
-                completion(.failure(CustomError.noData))
+                completion(.failure(CustomError.noSchoolData))
                 return
             }
             
@@ -57,7 +57,7 @@ class SchoolServiceAPI {
 
                 completion(.success(results))
             } catch {
-                completion(.failure(CustomError.noData))
+                completion(.failure(CustomError.noSchoolData))
             }
         }
         task.resume()
@@ -75,7 +75,7 @@ class SchoolServiceAPI {
                 
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
             guard let data = data, error == nil else {
-                completion(.failure(CustomError.noData))
+                completion(.failure(CustomError.noSATData))
                 return
             }
             
@@ -83,7 +83,7 @@ class SchoolServiceAPI {
                 let results = try JSONDecoder().decode([SchoolScores].self, from: data)
                 completion(.success(results))
             } catch {
-                completion(.failure(CustomError.noData))
+                completion(.failure(CustomError.noSATData))
             }
         }
         task.resume()

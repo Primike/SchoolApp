@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//business academy
 class SchoolGraphViewController: UIViewController {
 
     let screenStackView = UIStackView()
@@ -43,11 +44,11 @@ class SchoolGraphViewController: UIViewController {
         self.schoolScores = scores
         self.schoolColor = schoolColor
         
-        let score1 = Int(scores.sat_math_avg_score)!
+        let score1 = Int(scores.sat_math_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score1)/Double(800)))
-        let score2 = Int(scores.sat_writing_avg_score)!
+        let score2 = Int(scores.sat_writing_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score2)/Double(800)))
-        let score3 = Int(scores.sat_critical_reading_avg_score)!
+        let score3 = Int(scores.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score3)/Double(800)))
                 
         super.init(nibName: nil, bundle: nil)

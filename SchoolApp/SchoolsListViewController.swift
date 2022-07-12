@@ -17,8 +17,8 @@ class SchoolsListViewController: UIViewController {
     
     required init(viewModel: SchoolsListViewModel) {
         self.schoolsViewModel = viewModel
+        print(schoolsViewModel.schoolsData.count)
         super.init(nibName: nil, bundle: nil)
-        self.schoolsViewModel.delegate = self
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -26,54 +26,12 @@ class SchoolsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.startAnimating()
-        activityIndicator.color = .systemBlue
-        view.addSubview(activityIndicator)
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        schoolsViewModel.loadData()
-
-        
+        style()
+        layout()
+        setup()
     }
 }
 
-extension SchoolsListViewController: RequestDelegate {
-    func didUpdate(with state: ViewState) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            switch state {
-            case .idle:
-                break
-            case .loading:
-                print("loadingzz")
-            case .success:
-//                print("successzz")
-                self.schoolsTableView.reloadData()
-                self.style()
-                self.layout()
-                self.setup()
-            case .error(let error):
-                self.showAlert(error: error.localizedDescription)
-            }
-        }
-    }
-    
-    
-    func showAlert(error: String) {
-        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
-//            exit(0)
-        }))
-        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-            self.schoolsViewModel.loadData()
-        }))
-        
-        present(alert, animated: true)
-    }
-}
 extension SchoolsListViewController {
     
     func style() {

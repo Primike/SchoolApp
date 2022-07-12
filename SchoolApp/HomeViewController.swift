@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     let schoolsListButton = UIButton()
     let topSchoolsButton = UIButton()
     let myschoolsButton = UIButton()
-    let viewModel = SchoolsListViewModel()
+    let viewModel: HomeViewModel
     let titleStackView = UIStackView()
     let appTitle = UILabel()
     let divider = UILabel()
@@ -24,11 +24,19 @@ class HomeViewController: UIViewController {
     let welcomeLabel = UILabel()
     let divider2 = UILabel()
 
+    required init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
-        style()
-        layout()
-        
+        viewModel.loadData()
         super.viewDidLoad()
     }
     
@@ -57,39 +65,39 @@ class HomeViewController: UIViewController {
         appTitle.textAlignment = .center
         
         divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.backgroundColor = .white
+        divider.backgroundColor = .black
         
         
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
-        schoolsListButton.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        schoolsListButton.tintColor = .white
-        schoolsListButton.backgroundColor = .white
-        schoolsListButton.setTitleColor(.black, for: .normal)
+        schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
+        schoolsListButton.backgroundColor = .black
+        schoolsListButton.setTitleColor(.white, for: .normal)
         schoolsListButton.setTitle("NYC Schools List", for: .normal)
         schoolsListButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
         schoolsListButton.titleLabel!.adjustsFontSizeToFitWidth = true
         schoolsListButton.layer.cornerRadius = 10
+        schoolsListButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         topSchoolsButton.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsButton.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        topSchoolsButton.tintColor = .white
-        topSchoolsButton.backgroundColor = .white
-        topSchoolsButton.setTitleColor(.black, for: .normal)
+        topSchoolsButton.addTarget(self, action: #selector(top10SchoolsTapped), for: .primaryActionTriggered)
+        topSchoolsButton.backgroundColor = .black
+        topSchoolsButton.setTitleColor(.white, for: .normal)
         topSchoolsButton.setTitle("Top 10 SAT Schools", for: .normal)
         topSchoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
         topSchoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
         topSchoolsButton.layer.cornerRadius = 10
+        topSchoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         myschoolsButton.translatesAutoresizingMaskIntoConstraints = false
-        myschoolsButton.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        myschoolsButton.tintColor = .white
-        myschoolsButton.backgroundColor = .white
-        myschoolsButton.setTitleColor(.black, for: .normal)
+        myschoolsButton.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
+        myschoolsButton.backgroundColor = .black
+        myschoolsButton.setTitleColor(.white, for: .normal)
         myschoolsButton.setTitle("My Schools", for: .normal)
         myschoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
         myschoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
         myschoolsButton.layer.cornerRadius = 10
+        myschoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.layer.cornerRadius = 70
@@ -193,20 +201,54 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController {
-    @objc func graphButtonTapped(sender: UIButton) {
+extension HomeViewController: RequestDelegate {
+    func didUpdate(with state: ViewState) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            switch state {
+            case .idle:
+                break
+            case .loading:
+                let activityIndicator = UIActivityIndicatorView(style: .large)
+                activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+                activityIndicator.startAnimating()
+                activityIndicator.color = .systemBlue
+                self.view.addSubview(activityIndicator)
+                activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            case .success:
+                self.style()
+                self.layout()
+            case .error(let error):
+                self.showAlert(error: error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func showAlert(error: String) {
+        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
+//            exit(0)
+        }))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+            self.viewModel.loadData()
+        }))
         
-//        let defaults = UserDefaults.standard
-//        if let stringOne = defaults.array(forKey: DefaultsKeys.two){
-//            print(stringOne, "ASDSADASD") // Some String Value
-//        }
-        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel()), animated: true)
+        present(alert, animated: true)
     }
 }
-
-
-struct DefaultsKeys {
-    static let one = [String]()
-    static let two = "QWE"
+extension HomeViewController {
+    @objc func nycSchoolsListTapped(sender: UIButton) {
+        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schoolsSATData: viewModel.schoolsSATData, schoolsData: viewModel.schoolsData, schoolSearchResults: viewModel.schoolsSearchResults)), animated: true)
+    }
+    
+    @objc func top10SchoolsTapped(sender: UIButton) {
+        navigationController?.pushViewController(Top10SchoolsListViewController(viewModel: Top10SchoolsListViewModel(schoolsSATData: viewModel.top10SchoolsScores, schoolsData: viewModel.top10Schools)), animated: true)
+    }
+    
+    @objc func mySchoolsTapped(sender: UIButton) {
+        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: viewModel.schoolsSATData, schoolsData: viewModel.schoolsData)), animated: true)
+    }
 }
 

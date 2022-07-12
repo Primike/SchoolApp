@@ -10,20 +10,15 @@ import UIKit
 
 
 class SchoolsListViewModel {
-    weak var delegate: RequestDelegate?
-    var state: ViewState {
-        didSet {
-//            print("Updated with \(state)")
-            self.delegate?.didUpdate(with: state)
-        }
-    }
     
     var schoolsSATData = [SchoolScores]()
     var schoolsData = [School]()
     var schoolsSearchResults = [School]()
     
-    init() {
-        self.state = .idle
+    init(schoolsSATData: [SchoolScores], schoolsData: [School], schoolSearchResults: [School]) {
+        self.schoolsSATData = schoolsSATData
+        self.schoolsData = schoolsData
+        self.schoolsSearchResults = schoolSearchResults
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
@@ -54,6 +49,7 @@ class SchoolsListViewModel {
             schoolsSearchResults = schoolsData
         }
     }
+    
     //move 
     func getColor(school: School) -> UIColor {
         switch school.boro {
@@ -64,7 +60,7 @@ class SchoolsListViewModel {
         case "K":
             return UIColor.black
         case "Q":
-            return UIColor.systemPurple 
+            return UIColor.systemPurple
         default:
             return .systemGreen
         }
@@ -85,32 +81,3 @@ class SchoolsListViewModel {
     }
 }
 
-extension SchoolsListViewModel {
-    func loadData() {
-        self.state = .loading
-        SchoolServiceAPI.shared.getSchoolsData { result in
-            switch result {
-            case .success(let schools):
-                self.schoolsData = schools
-                self.schoolsSearchResults = self.schoolsData
-//                self.completedAPIFetches += 1
-                self.state = .success
-            case .failure(let error):
-                self.state = .error(error)
-                print(error.localizedDescription)
-            }
-        }
-        
-        SchoolServiceAPI.shared.getTestData { result in
-            switch result {
-            case .success(let scores):
-                self.schoolsSATData = scores
-                self.state = .success
-//                self.completedAPIFetches += 1
-            case .failure(let error):
-                self.state = .error(error)
-                print(error.localizedDescription)
-            }
-        }
-    }
-}
