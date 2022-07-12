@@ -64,18 +64,17 @@ class SchoolInfoViewController: UIViewController {
         
         screenStackView.translatesAutoresizingMaskIntoConstraints = false
         screenStackView.axis = .vertical
-        screenStackView.spacing = 3
         
         
         schoolInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         schoolInfoStackView.axis = .vertical
-        schoolInfoStackView.spacing = 5
         
         topButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
         topButtonsStackView.axis = .horizontal
         
         schoolWebsiteButton.translatesAutoresizingMaskIntoConstraints = false
         schoolWebsiteButton.setTitle("School Website", for: [])
+        schoolWebsiteButton.titleLabel?.adjustsFontSizeToFitWidth = true
         schoolWebsiteButton.addTarget(self, action: #selector(websiteButtonTapped), for: .primaryActionTriggered)
         schoolWebsiteButton.configuration = .filled()
         schoolWebsiteButton.tintColor = schoolColor
@@ -88,14 +87,14 @@ class SchoolInfoViewController: UIViewController {
 
         
         schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
+        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         schoolName.adjustsFontSizeToFitWidth = true
         schoolName.text = school.school_name
         schoolName.numberOfLines = 0
         schoolName.textAlignment = .left
         
         schoolLocation.translatesAutoresizingMaskIntoConstraints = false
-        schoolLocation.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+        schoolLocation.font = UIFont(name:"HelveticaNeue", size: 100.0)
         schoolLocation.adjustsFontSizeToFitWidth = true
         schoolLocation.text = school.location
         schoolLocation.numberOfLines = 0
@@ -103,7 +102,7 @@ class SchoolInfoViewController: UIViewController {
         
         schoolPhone.translatesAutoresizingMaskIntoConstraints = false
         schoolPhone.adjustsFontSizeToFitWidth = true
-        schoolPhone.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+        schoolPhone.font = UIFont(name:"HelveticaNeue", size: 100.0)
         schoolPhone.text = school.phone_number
         schoolPhone.numberOfLines = 0
         schoolPhone.textAlignment = .left
@@ -120,14 +119,15 @@ class SchoolInfoViewController: UIViewController {
         aboutSubview.backgroundColor = schoolColor
         
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
-        aboutLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 35.0)
+        aboutLabel.font = UIFont(name:"HelveticaNeue-Bold", size:100.0)
         aboutLabel.text = "About:"
         aboutLabel.adjustsFontSizeToFitWidth = true
         aboutLabel.textAlignment = .center
         aboutLabel.textColor = .white
+        aboutLabel.baselineAdjustment = .alignCenters
         
         schoolDescription.translatesAutoresizingMaskIntoConstraints = false
-        schoolDescription.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        schoolDescription.font = UIFont(name:"HelveticaNeue", size: 100.0)
         schoolDescription.adjustsFontSizeToFitWidth = true
         schoolDescription.text = school.overview_paragraph
         schoolDescription.numberOfLines = 0
@@ -154,7 +154,6 @@ class SchoolInfoViewController: UIViewController {
         aboutSubview.addSubview(aboutLabel)
         aboutSubview.addSubview(schoolDescription)
         
-        
         NSLayoutConstraint.activate([
 
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
@@ -167,45 +166,56 @@ class SchoolInfoViewController: UIViewController {
             screenStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            screenStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1.1),
             
             schoolInfoStackView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
             schoolInfoStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             schoolInfoStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.5),
             
             topButtonsStackView.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
-            topButtonsStackView.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.85),
+            topButtonsStackView.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.9),
             topButtonsStackView.centerXAnchor.constraint(equalTo: schoolInfoStackView.centerXAnchor),
-            topButtonsStackView.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.15),
+            topButtonsStackView.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.2),
             schoolWebsiteButton.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
             schoolWebsiteButton.centerYAnchor.constraint(equalTo: topButtonsStackView.centerYAnchor),
+            schoolWebsiteButton.widthAnchor.constraint(equalTo: topButtonsStackView.widthAnchor, multiplier: 0.5),
             addSchoolButton.rightAnchor.constraint(equalTo: topButtonsStackView.rightAnchor),
             addSchoolButton.centerYAnchor.constraint(equalTo: topButtonsStackView.centerYAnchor),
+            addSchoolButton.heightAnchor.constraint(equalTo: topButtonsStackView.heightAnchor),
+            addSchoolButton.widthAnchor.constraint(equalTo: topButtonsStackView.heightAnchor),
             
             
-            schoolName.topAnchor.constraint(equalTo: topButtonsStackView.bottomAnchor, constant: 10),
-            schoolName.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.7),
+            schoolName.topAnchor.constraint(equalTo: topButtonsStackView.bottomAnchor),
+            schoolName.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.8),
             schoolName.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
-            schoolLocation.topAnchor.constraint(equalTo: schoolName.bottomAnchor, constant: 10),
-            schoolLocation.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.7),
+            schoolName.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.3),
+            schoolLocation.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
+            schoolLocation.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.8),
             schoolLocation.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
-            schoolPhone.topAnchor.constraint(equalTo: schoolLocation.bottomAnchor, constant: 10),
+            schoolLocation.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.05),
+            schoolPhone.topAnchor.constraint(equalTo: schoolLocation.bottomAnchor),
             schoolPhone.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
+            schoolPhone.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.5),
+            schoolPhone.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.05),
             schoolImage.topAnchor.constraint(equalTo: schoolPhone.bottomAnchor),
-            schoolImage.rightAnchor.constraint(equalTo: schoolInfoStackView.rightAnchor),
-            schoolImage.widthAnchor.constraint(equalTo: topButtonsStackView.widthAnchor, multiplier: 0.45),
-            schoolImage.heightAnchor.constraint(equalToConstant: 170),
+            schoolImage.rightAnchor.constraint(equalTo: addSchoolButton.rightAnchor),
+            schoolImage.widthAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.4),
+            schoolImage.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.4),
             
             
-            aboutSubview.topAnchor.constraint(equalTo: schoolImage.bottomAnchor),
-            aboutSubview.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            aboutSubview.heightAnchor.constraint(equalToConstant: 600),
-            
-            
-            aboutLabel.topAnchor.constraint(equalTo: aboutSubview.topAnchor, constant: 20),
-            aboutLabel.leftAnchor.constraint(equalTo: aboutSubview.leftAnchor, constant: 30),
-            schoolDescription.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 25),
+            aboutSubview.topAnchor.constraint(equalTo: schoolInfoStackView.bottomAnchor),
+            aboutSubview.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
+            aboutSubview.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.5),
+
+
+            aboutLabel.topAnchor.constraint(equalTo: aboutSubview.topAnchor, constant: 10),
+            aboutLabel.leftAnchor.constraint(equalTo: schoolPhone.leftAnchor),
+            aboutLabel.heightAnchor.constraint(equalTo: aboutSubview.heightAnchor, multiplier: 0.15),
+            aboutLabel.widthAnchor.constraint(equalTo: aboutSubview.widthAnchor, multiplier: 0.25),
+            schoolDescription.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor),
             schoolDescription.widthAnchor.constraint(equalTo: aboutSubview.widthAnchor, multiplier: 0.9),
             schoolDescription.centerXAnchor.constraint(equalTo: aboutSubview.centerXAnchor),
+            schoolDescription.heightAnchor.constraint(equalTo: aboutSubview.heightAnchor, multiplier: 0.75)
                 
         ])
     }

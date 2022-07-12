@@ -31,9 +31,9 @@ class SchoolTableViewCell: UITableViewCell {
 
 extension SchoolTableViewCell {
     private func setup() {
-        self.layer.borderWidth = 7
+        self.layer.borderWidth = 5
         self.layer.borderColor = UIColor.systemFill.cgColor
-        self.layer.cornerRadius = 30
+        self.layer.cornerRadius = 20
         self.layer.masksToBounds = true
         self.accessoryType = .disclosureIndicator
         self.selectionStyle = .none
@@ -41,27 +41,25 @@ extension SchoolTableViewCell {
         
         cellStackView.translatesAutoresizingMaskIntoConstraints = false
         cellStackView.axis = .horizontal
-        cellStackView.alignment = .fill
         
         schoolInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         schoolInfoStackView.axis = .vertical
-        schoolInfoStackView.alignment = .fill
         
         schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
+        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         schoolName.textAlignment = .left
         schoolName.adjustsFontSizeToFitWidth = true
         schoolName.numberOfLines = 0
 
         schoolAddress.translatesAutoresizingMaskIntoConstraints = false
-        schoolAddress.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        schoolAddress.font = UIFont(name:"HelveticaNeue", size: 15.0)
         schoolAddress.textAlignment = .left
         schoolAddress.adjustsFontSizeToFitWidth = true
         schoolAddress.numberOfLines = 0
         
         
         schoolBoro.translatesAutoresizingMaskIntoConstraints = false
-        schoolBoro.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        schoolBoro.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         schoolBoro.adjustsFontSizeToFitWidth = true
         schoolBoro.textAlignment = .right
 
@@ -102,14 +100,14 @@ extension SchoolTableViewCell {
 
         NSLayoutConstraint.activate([
             cellStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
-            cellStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
+            cellStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1),
             cellStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             cellStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
             schoolInfoStackView.leftAnchor.constraint(equalTo: cellStackView.leftAnchor),
             schoolInfoStackView.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.8),
             schoolInfoStackView.topAnchor.constraint(equalTo: cellStackView.topAnchor),
-            schoolInfoStackView.heightAnchor.constraint(equalTo: cellStackView.heightAnchor, multiplier: 0.7),
+            schoolInfoStackView.heightAnchor.constraint(equalTo: cellStackView.heightAnchor),
             
             schoolName.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
             schoolName.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
@@ -118,7 +116,7 @@ extension SchoolTableViewCell {
             
             schoolAddress.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
             schoolAddress.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
-            schoolAddress.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.3),
+            schoolAddress.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.4),
             schoolAddress.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
             
             schoolBoro.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),

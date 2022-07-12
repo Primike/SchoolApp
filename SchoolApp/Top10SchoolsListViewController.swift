@@ -53,6 +53,7 @@ extension Top10SchoolsListViewController {
     func setup() {
         schoolsTableView.delegate = self
         schoolsTableView.dataSource = self
+
     }
 }
 
@@ -60,7 +61,8 @@ extension Top10SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: viewModel.getInfo(for: indexPath))
-        schoolCell.schoolBoro.text = "\(indexPath.row + 1)"
+        schoolCell.schoolBoro.text = "#\(indexPath.row + 1)"
+        schoolCell.schoolBoro.textColor = .black
         return schoolCell
     }
     
@@ -70,6 +72,11 @@ extension Top10SchoolsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
+//        if indexPath.section == 0 {
+//            return UITableView.automaticDimension
+//        } else {
+//            return 100
+//        }
     }
 }
 
