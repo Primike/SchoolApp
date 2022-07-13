@@ -27,7 +27,7 @@
 		B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */; };
 		B89D3CF0287EF209002300D1 /* SchoolsCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CEF287EF209002300D1 /* SchoolsCalculatorViewController.swift */; };
 		B89D3CF2287F18F8002300D1 /* SchoolsCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */; };
-		B8BEDFDB286359FE0001ED95 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BEDFDA286359FE0001ED95 /* LoadingView.swift */; };
+		B89D3CF4287F3CA6002300D1 /* CalculatedSchoolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CF3287F3CA6002300D1 /* CalculatedSchoolsViewController.swift */; };
 		B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */; };
 		B8E1121828747692009C66B6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1121728747692009C66B6 /* Reachability.swift */; };
 		B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E11219287476C1009C66B6 /* CustomError.swift */; };
@@ -79,7 +79,7 @@
 		B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolGraphViewController.swift; sourceTree = "<group>"; };
 		B89D3CEF287EF209002300D1 /* SchoolsCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsCalculatorViewController.swift; sourceTree = "<group>"; };
 		B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsCalculatorViewModel.swift; sourceTree = "<group>"; };
-		B8BEDFDA286359FE0001ED95 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		B89D3CF3287F3CA6002300D1 /* CalculatedSchoolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedSchoolsViewController.swift; sourceTree = "<group>"; };
 		B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
 		B8E1121728747692009C66B6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B8E11219287476C1009C66B6 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -126,9 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
-				B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */,
-				B8FB23A528492BE900FC4817 /* SchoolsListHeaderView.swift */,
-				B8BEDFDA286359FE0001ED95 /* LoadingView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -145,8 +142,8 @@
 		B804315B28523198004C9BAF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
 				B801DEE9287B281400EA2090 /* HomeViewModel.swift */,
+				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
 				B801DEED287BB4BF00EA2090 /* Top10SchoolsListViewModel.swift */,
 				B801DEF1287D9F6300EA2090 /* MySchoolsViewModel.swift */,
 				B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */,
@@ -158,14 +155,11 @@
 			isa = PBXGroup;
 			children = (
 				B803EAC0286DF99300E7A26B /* HomeViewController.swift */,
-				B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */,
-				B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */,
-				B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */,
-				B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */,
-				B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */,
-				B801DEEB287BA97B00EA2090 /* Top10SchoolsListViewController.swift */,
-				B801DEF3287DA31400EA2090 /* MySchoolsViewController.swift */,
-				B89D3CEF287EF209002300D1 /* SchoolsCalculatorViewController.swift */,
+				B89D3CF5287F516A002300D1 /* SchoolsList */,
+				B89D3CF7287F51F6002300D1 /* Top10Schools */,
+				B89D3CF8287F520B002300D1 /* IndividualSchoolView */,
+				B89D3CF9287F5260002300D1 /* MySavedSchools */,
+				B89D3CFA287F5281002300D1 /* SchoolCalculator */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -179,6 +173,60 @@
 				B876AF0E287720CA00718041 /* SchoolListCoordinator.swift */,
 			);
 			name = Coordinators;
+			sourceTree = "<group>";
+		};
+		B89D3CF5287F516A002300D1 /* SchoolsList */ = {
+			isa = PBXGroup;
+			children = (
+				B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */,
+				B89D3CF6287F51BD002300D1 /* Views */,
+			);
+			name = SchoolsList;
+			sourceTree = "<group>";
+		};
+		B89D3CF6287F51BD002300D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */,
+				B8FB23A528492BE900FC4817 /* SchoolsListHeaderView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B89D3CF7287F51F6002300D1 /* Top10Schools */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEEB287BA97B00EA2090 /* Top10SchoolsListViewController.swift */,
+			);
+			name = Top10Schools;
+			sourceTree = "<group>";
+		};
+		B89D3CF8287F520B002300D1 /* IndividualSchoolView */ = {
+			isa = PBXGroup;
+			children = (
+				B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */,
+				B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */,
+				B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */,
+				B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */,
+			);
+			name = IndividualSchoolView;
+			sourceTree = "<group>";
+		};
+		B89D3CF9287F5260002300D1 /* MySavedSchools */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEF3287DA31400EA2090 /* MySchoolsViewController.swift */,
+			);
+			name = MySavedSchools;
+			sourceTree = "<group>";
+		};
+		B89D3CFA287F5281002300D1 /* SchoolCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				B89D3CEF287EF209002300D1 /* SchoolsCalculatorViewController.swift */,
+				B89D3CF3287F3CA6002300D1 /* CalculatedSchoolsViewController.swift */,
+			);
+			name = SchoolCalculator;
 			sourceTree = "<group>";
 		};
 		B8E817302846A45F0052C1AE = {
@@ -381,10 +429,10 @@
 				B801DEEC287BA97B00EA2090 /* Top10SchoolsListViewController.swift in Sources */,
 				B876AF0F287720CA00718041 /* SchoolListCoordinator.swift in Sources */,
 				B89D3CF0287EF209002300D1 /* SchoolsCalculatorViewController.swift in Sources */,
-				B8BEDFDB286359FE0001ED95 /* LoadingView.swift in Sources */,
 				B876AF09287712BF00718041 /* AppCoordinator.swift in Sources */,
 				B803EAC1286DF99300E7A26B /* HomeViewController.swift in Sources */,
 				B801DEEE287BB4BF00EA2090 /* Top10SchoolsListViewModel.swift in Sources */,
+				B89D3CF4287F3CA6002300D1 /* CalculatedSchoolsViewController.swift in Sources */,
 				B801DEF4287DA31400EA2090 /* MySchoolsViewController.swift in Sources */,
 				B8E1121C28747A72009C66B6 /* ViewState.swift in Sources */,
 				B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */,

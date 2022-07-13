@@ -14,21 +14,44 @@ class SchoolsCalculatorViewController: UIViewController {
     let satReadingScore = UITextField()
     let errorLabel = UILabel()
     let calculatorButton = UIButton(type: .system)
+    let schoolData: [School]
+    let schoolSATData: [SchoolScores]
+    
+    required init(schoolData: [School], schoolSATData: [SchoolScores]) {
+        self.schoolData = schoolData
+        self.schoolSATData = schoolSATData
+        super.init(nibName: nil, bundle: nil)
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         style()
         layout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.satMathScore.text = ""
+        self.satReadingScore.text = ""
+        self.satWritingScore.text = ""
+
+    }
 }
 
 extension SchoolsCalculatorViewController {
     func style() {
+        view.backgroundColor = .white
+        
         satMathScore.translatesAutoresizingMaskIntoConstraints = false
         satMathScore.placeholder = "Math Score"
         satMathScore.textAlignment = .center
         satMathScore.layer.borderWidth = 1
         satMathScore.layer.cornerRadius = 4.0
-        satMathScore.keyboardType = .numberPad
+//        satMathScore.keyboardType = .numberPad
         satMathScore.delegate = self
         
         satWritingScore.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +59,7 @@ extension SchoolsCalculatorViewController {
         satWritingScore.textAlignment = .center
         satWritingScore.layer.borderWidth = 1
         satWritingScore.layer.cornerRadius = 4.0
-        satWritingScore.keyboardType = .numberPad
+//        satWritingScore.keyboardType = .numberPad
         satWritingScore.delegate = self
         
         satReadingScore.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +67,7 @@ extension SchoolsCalculatorViewController {
         satReadingScore.textAlignment = .center
         satReadingScore.layer.borderWidth = 1
         satReadingScore.layer.cornerRadius = 4.0
-        satReadingScore.keyboardType = .numberPad
+//        satReadingScore.keyboardType = .numberPad
         satReadingScore.delegate = self
         
         
@@ -91,7 +114,9 @@ extension SchoolsCalculatorViewController {
         }
         
         if Int(satMathScore.text!) != nil && Int(satMathScore.text!) != nil && Int(satMathScore.text!) != nil  {
-
+            let x = Int(satMathScore.text!)! + Int(satMathScore.text!)! + Int(satMathScore.text!)!
+            print("Sum \(x)")
+            navigationController?.pushViewController(CalculatedSchoolsViewController(viewModel: SchoolsCalculatorViewModel(schoolsSATData: schoolSATData, schoolsData: schoolData, myTotalScore: x)), animated: true)
         } else {
             errorHandler(message: "Enter A Numerical Value")
         }

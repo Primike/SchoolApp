@@ -62,6 +62,7 @@ extension HomeViewModel {
         for i in 0..<schoolsSATData.count {
             if schoolsSATData[i].sat_critical_reading_avg_score.isInt && schoolsSATData[i].sat_math_avg_score.isInt && schoolsSATData[i].sat_writing_avg_score.isInt {
             } else {
+                //look at sss
                 schoolsSATData[i] = SchoolScores(dbn: "0", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
                                       sat_math_avg_score: "0",
                                       sat_writing_avg_score: "0")

@@ -248,7 +248,8 @@ extension HomeViewController {
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: viewModel.schoolsSATData, schoolsData: viewModel.schoolsData)), animated: true)
+//        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: viewModel.schoolsSATData, schoolsData: viewModel.schoolsData)), animated: true)
+        navigationController?.pushViewController(SchoolsCalculatorViewController(schoolData: viewModel.schoolsData, schoolSATData: viewModel.schoolsSATData), animated: true)
     }
 }
 
