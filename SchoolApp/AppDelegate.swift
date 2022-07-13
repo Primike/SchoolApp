@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let schoolsNavigationController = UINavigationController(rootViewController: SchoolsListViewController(viewModel: viewModel))
         let viewModel = HomeViewModel()
         let navigationController = UINavigationController(rootViewController: HomeViewController(viewModel: viewModel))
-        window?.rootViewController = navigationController
+        window?.rootViewController = SchoolsCalculatorViewController()
         return true
     }
 }
