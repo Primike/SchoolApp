@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//when no satdata app crashes
 class SchoolsCalculatorViewModel {
     var schoolsSATData = [SchoolScores]()
     var schoolsData = [School]()

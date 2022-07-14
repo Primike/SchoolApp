@@ -5,8 +5,6 @@
 //  Created by Prince Avecillas on 6/2/22.
 //
 
-//alert on api failure retry
-//apicall
 //viewwilltransitionto
 
 import Foundation
@@ -16,10 +14,9 @@ struct SchoolServiceURLs {
     static let scoresDataUrl = "https://data.cityofnewyork.us/resource/f9bf-2cp4.json"
 }
 
-
 class SchoolServiceAPI {
-    static let shared = SchoolServiceAPI()
-    
+        static let shared = SchoolServiceAPI()
+
     func getSchoolsData(completion: @escaping (Result<[School], Error>) -> Void) {
         
         guard Reachability.isConnectedToNetwork(),
@@ -90,3 +87,10 @@ class SchoolServiceAPI {
     }
 }
 
+
+//    let isDemo: Bool = true
+//        if(isDemo){
+//            //load local json
+//        }else{
+//            //api
+//        }

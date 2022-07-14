@@ -9,26 +9,22 @@ import Foundation
 import UIKit
 
 class HomeViewController: UIViewController {
-    let topView = UIView()
-    let buttonsSubView = UIView()
-    let wallpaper = UIImageView(image: UIImage(named: "schoolwallpaper"))
+    let homeTopView = HomeTopView()
+    let homeBottomView = HomeBottomView()
+    
     let buttonsStackView = UIStackView()
     let schoolsListButton = UIButton()
     let topSchoolsButton = UIButton()
     let myschoolsButton = UIButton()
+    
     let viewModel: HomeViewModel
-    let titleStackView = UIStackView()
-    let appTitle = UILabel()
-    let divider = UILabel()
-    let bottomView = UIView()
-    let welcomeLabel = UILabel()
-    let divider2 = UILabel()
+    
+
 
     required init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.delegate = self
-        
     }
     
     required init?(coder: NSCoder) {
@@ -42,32 +38,17 @@ class HomeViewController: UIViewController {
     
     func style() {
 
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        wallpaper.translatesAutoresizingMaskIntoConstraints = false
+        homeTopView.translatesAutoresizingMaskIntoConstraints = false
         
-        buttonsSubView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsSubView.layer.cornerRadius = 70
-        buttonsSubView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        buttonsSubView.backgroundColor = UIColor.systemRed
+        homeBottomView.translatesAutoresizingMaskIntoConstraints = false
+        homeBottomView.layer.cornerRadius = 70
+        homeBottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        homeBottomView.backgroundColor = UIColor.systemRed
+        
+        
         
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonsStackView.axis = .vertical
-        
-        
-        titleStackView.translatesAutoresizingMaskIntoConstraints = false
-        titleStackView.axis = .vertical
-        
-        appTitle.translatesAutoresizingMaskIntoConstraints = false
-        appTitle.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        appTitle.text = "Schools App"
-        appTitle.textColor = .white
-        appTitle.adjustsFontSizeToFitWidth = true
-        appTitle.textAlignment = .center
-        
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.backgroundColor = .black
-        
-        
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
@@ -98,79 +79,37 @@ class HomeViewController: UIViewController {
         myschoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
         myschoolsButton.layer.cornerRadius = 10
         myschoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.layer.cornerRadius = 70
-        bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        bottomView.backgroundColor = UIColor.white
-        
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
-        welcomeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        welcomeLabel.text = "Welcome"
-        welcomeLabel.textColor = .systemRed
-        welcomeLabel.adjustsFontSizeToFitWidth = true
-        welcomeLabel.textAlignment = .center
-        
-        divider2.translatesAutoresizingMaskIntoConstraints = false
-        divider2.backgroundColor = .systemRed
-        
     }
     
     func layout() {
-        topView.addSubview(wallpaper)
         
-        titleStackView.addSubview(appTitle)
-        titleStackView.addSubview(divider)
+        view.addSubview(homeTopView)
+        view.addSubview(homeBottomView)
         
+        homeBottomView.addSubview(buttonsStackView)
+
         buttonsStackView.addSubview(schoolsListButton)
         buttonsStackView.addSubview(topSchoolsButton)
         buttonsStackView.addSubview(myschoolsButton)
         
-        buttonsSubView.addSubview(titleStackView)
-        buttonsSubView.addSubview(buttonsStackView)
-        
-        bottomView.addSubview(welcomeLabel)
-        bottomView.addSubview(divider2)
-        
-        view.addSubview(topView)
-        view.addSubview(buttonsSubView)
-        view.addSubview(bottomView)
-        
         
         NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            topView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
-            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            homeTopView.topAnchor.constraint(equalTo: view.topAnchor),
+            homeTopView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            homeTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
+            homeTopView.leftAnchor.constraint(equalTo: view.leftAnchor),
             
-            wallpaper.topAnchor.constraint(equalTo: topView.topAnchor),
-            wallpaper.widthAnchor.constraint(equalTo: topView.widthAnchor),
-            wallpaper.heightAnchor.constraint(equalTo: topView.heightAnchor),
-            wallpaper.leftAnchor.constraint(equalTo: topView.leftAnchor),
-            
-            buttonsSubView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            buttonsSubView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            buttonsSubView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            buttonsSubView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            homeBottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            homeBottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            homeBottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            homeBottomView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
             
             
-            titleStackView.topAnchor.constraint(equalTo: buttonsSubView.topAnchor),
-            titleStackView.widthAnchor.constraint(equalTo: buttonsSubView.widthAnchor, multiplier: 0.8),
-            titleStackView.heightAnchor.constraint(equalTo: buttonsSubView.heightAnchor, multiplier: 0.2),
-            titleStackView.centerXAnchor.constraint(equalTo: buttonsSubView.centerXAnchor),
             
-            appTitle.centerYAnchor.constraint(equalTo: titleStackView.centerYAnchor),
-            appTitle.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
-            
-            divider.topAnchor.constraint(equalTo: appTitle.bottomAnchor, constant: 10),
-            divider.widthAnchor.constraint(equalTo: titleStackView.widthAnchor),
-            divider.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 5),
-            
-            buttonsStackView.heightAnchor.constraint(equalTo: buttonsSubView.heightAnchor, multiplier: 0.4),
-            buttonsStackView.widthAnchor.constraint(equalTo: buttonsSubView.widthAnchor, multiplier: 0.7),
-            buttonsStackView.centerXAnchor.constraint(equalTo: buttonsSubView.centerXAnchor),
-            buttonsStackView.centerYAnchor.constraint(equalTo: buttonsSubView.centerYAnchor),
+            buttonsStackView.heightAnchor.constraint(equalTo: homeBottomView.heightAnchor, multiplier: 0.4),
+            buttonsStackView.widthAnchor.constraint(equalTo: homeBottomView.widthAnchor, multiplier: 0.7),
+            buttonsStackView.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
+            buttonsStackView.centerYAnchor.constraint(equalTo: homeBottomView.centerYAnchor),
             
             schoolsListButton.topAnchor.constraint(equalTo: buttonsStackView.topAnchor),
             schoolsListButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor),
@@ -183,19 +122,6 @@ class HomeViewController: UIViewController {
             myschoolsButton.bottomAnchor.constraint(equalTo: buttonsStackView.bottomAnchor),
             myschoolsButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor),
             myschoolsButton.heightAnchor.constraint(equalTo: buttonsStackView.heightAnchor, multiplier: 0.25),
-            
-            bottomView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomView.heightAnchor.constraint(equalTo: buttonsSubView.heightAnchor, multiplier: 0.2),
-            
-            welcomeLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            welcomeLabel.heightAnchor.constraint(equalTo: bottomView.heightAnchor, multiplier: 0.5),
-            welcomeLabel.topAnchor.constraint(equalTo: bottomView.topAnchor),
-            
-            divider2.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
-            divider2.heightAnchor.constraint(equalToConstant: 5),
-            divider2.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            divider2.widthAnchor.constraint(equalTo: bottomView.widthAnchor, multiplier: 0.8),
             
         ])
     }

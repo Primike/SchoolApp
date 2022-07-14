@@ -7,11 +7,6 @@
 
 import Foundation
 
-//struct Schools: Decodable {
-//    let status: String
-//    let data: [School]
-//}
-
 struct School: Decodable {
     let dbn: String
     let school_name: String

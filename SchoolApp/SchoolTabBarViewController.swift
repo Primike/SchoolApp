@@ -12,8 +12,8 @@ class SchoolTabBarViewController: UITabBarController {
 
     var school: School
     var schoolScores: SchoolScores
-    let schoolColor: UIColor
     var scoresNotAvailable = [Int]()
+    let schoolColor: UIColor
     
     init(school: School, scores: SchoolScores, schoolColor: UIColor) {
         self.school = school
@@ -26,7 +26,6 @@ class SchoolTabBarViewController: UITabBarController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +44,6 @@ class SchoolTabBarViewController: UITabBarController {
         let schoolInfoNC = UINavigationController(rootViewController: schoolInfoVC)
         let satScoresNC = UINavigationController(rootViewController: satScoresVC)
         
-                
         let tabBarList = [schoolInfoNC, satScoresNC]
 
         viewControllers = tabBarList

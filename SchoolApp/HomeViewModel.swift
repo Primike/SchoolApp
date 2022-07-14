@@ -12,7 +12,6 @@ class HomeViewModel {
     weak var delegate: RequestDelegate?
     var state: ViewState {
         didSet {
-//            print("Updated with \(state)")
             self.delegate?.didUpdate(with: state)
         }
     }

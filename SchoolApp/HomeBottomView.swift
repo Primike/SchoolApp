@@ -1,0 +1,103 @@
+//
+//  HomeBottomView.swift
+//  SchoolApp
+//
+//  Created by Prince Avecillas on 7/14/22.
+//
+
+import Foundation
+import UIKit
+
+class HomeBottomView: UIView {
+    
+    let titleStackView = UIStackView()
+    let appTitle = UILabel()
+    let divider = UILabel()
+    
+    let bottomView = UIView()
+    let welcomeLabel = UILabel()
+    let divider2 = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        style()
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func style() {
+        titleStackView.translatesAutoresizingMaskIntoConstraints = false
+        titleStackView.axis = .vertical
+        
+        appTitle.translatesAutoresizingMaskIntoConstraints = false
+        appTitle.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        appTitle.text = "Schools App"
+        appTitle.textColor = .white
+        appTitle.adjustsFontSizeToFitWidth = true
+        appTitle.textAlignment = .center
+        
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.backgroundColor = .black
+        
+        
+        
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.layer.cornerRadius = 70
+        bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        bottomView.backgroundColor = UIColor.white
+        
+        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        welcomeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        welcomeLabel.text = "Welcome"
+        welcomeLabel.textColor = .systemRed
+        welcomeLabel.adjustsFontSizeToFitWidth = true
+        welcomeLabel.textAlignment = .center
+        
+        divider2.translatesAutoresizingMaskIntoConstraints = false
+        divider2.backgroundColor = .systemRed
+    }
+    
+    func layout() {
+        titleStackView.addSubview(appTitle)
+        titleStackView.addSubview(divider)
+        
+        bottomView.addSubview(welcomeLabel)
+        bottomView.addSubview(divider2)
+        
+        self.addSubview(titleStackView)
+        self.addSubview(bottomView)
+        
+        NSLayoutConstraint.activate([
+            titleStackView.topAnchor.constraint(equalTo: self.topAnchor),
+            titleStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            titleStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            titleStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            appTitle.centerYAnchor.constraint(equalTo: titleStackView.centerYAnchor),
+            appTitle.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
+            
+            divider.topAnchor.constraint(equalTo: appTitle.bottomAnchor, constant: 10),
+            divider.widthAnchor.constraint(equalTo: titleStackView.widthAnchor),
+            divider.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
+            divider.heightAnchor.constraint(equalToConstant: 5),
+            
+            
+            
+            bottomView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            bottomView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            bottomView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            
+            welcomeLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            welcomeLabel.heightAnchor.constraint(equalTo: bottomView.heightAnchor, multiplier: 0.5),
+            welcomeLabel.topAnchor.constraint(equalTo: bottomView.topAnchor),
+            
+            divider2.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
+            divider2.heightAnchor.constraint(equalToConstant: 5),
+            divider2.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            divider2.widthAnchor.constraint(equalTo: bottomView.widthAnchor, multiplier: 0.8),
+        ])
+    }
+}

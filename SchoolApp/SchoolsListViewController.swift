@@ -13,6 +13,7 @@ class SchoolsListViewController: UIViewController {
 
     let schoolsTableView = UITableView()
     let schoolsSearchBar = UISearchBar()
+    
     let schoolsViewModel: SchoolsListViewModel
     
     required init(viewModel: SchoolsListViewModel) {

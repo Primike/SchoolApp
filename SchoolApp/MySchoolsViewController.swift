@@ -9,30 +9,32 @@ import Foundation
 import UIKit
 
 class MySchoolsViewController: UIViewController {
+    
     let schoolsTableView = UITableView()
+    
     let viewModel: MySchoolsViewModel
     
     required init(viewModel: MySchoolsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         style()
         layout()
         setup()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.mySchools()
         schoolsTableView.reloadData()
-
     }
 }
 
@@ -42,7 +44,6 @@ extension MySchoolsViewController {
         view.backgroundColor = .white
         
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
-    
     }
     
     func layout() {
