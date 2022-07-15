@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+
     let homeTopView = HomeTopView()
     let homeBottomView = HomeBottomView()
     
@@ -135,14 +138,14 @@ extension HomeViewController: RequestDelegate {
             case .idle:
                 break
             case .loading:
-                let activityIndicator = UIActivityIndicatorView(style: .large)
-                activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-                activityIndicator.startAnimating()
-                activityIndicator.color = .systemBlue
-                self.view.addSubview(activityIndicator)
-                activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-                activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+                self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+                self.activityIndicator.startAnimating()
+                self.activityIndicator.color = .systemBlue
+                self.view.addSubview(self.activityIndicator)
+                self.activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                self.activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
             case .success:
+                self.activityIndicator.stopAnimating()
                 self.style()
                 self.layout()
             case .error(let error):
@@ -166,7 +169,7 @@ extension HomeViewController: RequestDelegate {
 }
 extension HomeViewController {
     @objc func nycSchoolsListTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schoolsSATData: viewModel.schoolsSATData, schoolsData: viewModel.schoolsData, schoolSearchResults: viewModel.schoolsSearchResults)), animated: true)
+        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schoolsData: viewModel.schoolsData, schoolsSATData: viewModel.schoolsSATData)), animated: true)
     }
     
     @objc func top10SchoolsTapped(sender: UIButton) {

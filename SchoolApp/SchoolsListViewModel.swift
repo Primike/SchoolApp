@@ -15,10 +15,16 @@ class SchoolsListViewModel {
     var schoolsData = [School]()
     var schoolsSearchResults = [School]()
     
-    init(schoolsSATData: [SchoolScores], schoolsData: [School], schoolSearchResults: [School]) {
+    var schoolSATScores: SchoolScores?
+    let scoresNotAvailable = SchoolScores(dbn: "None", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
+                                   sat_math_avg_score: "0",
+                                   sat_writing_avg_score: "0")
+    
+    
+    init(schoolsData: [School], schoolsSATData: [SchoolScores]) {
         self.schoolsSATData = schoolsSATData
         self.schoolsData = schoolsData
-        self.schoolsSearchResults = schoolSearchResults
+        self.schoolsSearchResults = schoolsData
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
@@ -49,27 +55,6 @@ class SchoolsListViewModel {
             schoolsSearchResults = schoolsData
         }
     }
-    
-    //move 
-    func getColor(school: School) -> UIColor {
-        switch school.boro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.black
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
-    
-    var schoolSATScores: SchoolScores?
-    let scoresNotAvailable = SchoolScores(dbn: "0", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
-                                   sat_math_avg_score: "0",
-                                   sat_writing_avg_score: "0")
     
     func rowSelectSearch(indexPath: IndexPath) {
         for data in schoolsSATData {

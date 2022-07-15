@@ -22,17 +22,16 @@ class HomeViewModel {
     
     var schoolsSATData = [SchoolScores]()
     var schoolsData = [School]()
-    var schoolsSearchResults = [School]()
     var top10SchoolsScores = [SchoolScores]()
     var top10Schools = [School]()
     
+    //fix incase schools come first maybe call getschooldata in gettestdata .success
     func loadData() {
         self.state = .loading
         SchoolServiceAPI.shared.getSchoolsData { result in
             switch result {
             case .success(let schools):
                 self.schoolsData = schools
-                self.schoolsSearchResults = self.schoolsData
                 self.getTopSchools()
                 self.state = .success
             case .failure(let error):
@@ -59,17 +58,16 @@ extension HomeViewModel {
     func getTopSchoolsScores() {
                 
         for i in 0..<schoolsSATData.count {
-            if schoolsSATData[i].sat_critical_reading_avg_score.isInt && schoolsSATData[i].sat_math_avg_score.isInt && schoolsSATData[i].sat_writing_avg_score.isInt {
+            if Int(schoolsSATData[i].sat_critical_reading_avg_score) != nil && Int(schoolsSATData[i].sat_math_avg_score) != nil && Int(schoolsSATData[i].sat_writing_avg_score) != nil {
             } else {
-                //look at sss
-                schoolsSATData[i] = SchoolScores(dbn: "0", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
+                schoolsSATData[i] = SchoolScores(dbn: schoolsSATData[i].dbn, num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
                                       sat_math_avg_score: "0",
                                       sat_writing_avg_score: "0")
             }
         }
-        let y = schoolsSATData.sorted(by: { Int($0.sat_critical_reading_avg_score)! + Int($0.sat_math_avg_score)! + Int($0.sat_writing_avg_score)! > Int($1.sat_critical_reading_avg_score)! + Int($1.sat_math_avg_score)! + Int($1.sat_writing_avg_score)!})
+        let sortedSATData = schoolsSATData.sorted(by: { Int($0.sat_critical_reading_avg_score)! + Int($0.sat_math_avg_score)! + Int($0.sat_writing_avg_score)! > Int($1.sat_critical_reading_avg_score)! + Int($1.sat_math_avg_score)! + Int($1.sat_writing_avg_score)!})
         
-        top10SchoolsScores = Array(y[0...9])
+        top10SchoolsScores = Array(sortedSATData[0...9])
         
     }
     
@@ -83,10 +81,4 @@ extension HomeViewModel {
         }
     }
     
-}
-
-extension String {
-    var isInt: Bool {
-        return Int(self) != nil
-    }
 }

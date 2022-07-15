@@ -56,12 +56,26 @@ extension CalculatedSchoolsViewController {
         schoolsTableView.dataSource = self
 
     }
+    func getColor(school: School) -> UIColor {
+        switch school.boro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.black
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
+        }
+    }
 }
 
 extension CalculatedSchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: viewModel.getInfo(for: indexPath))
+        schoolCell.configure(info: viewModel.getInfo(for: indexPath), color: getColor(school: viewModel.schoolsData[indexPath.row]))
         schoolCell.schoolBoro.text = "#\(indexPath.row + 1)"
         schoolCell.schoolBoro.textColor = .black
         return schoolCell

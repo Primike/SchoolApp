@@ -15,7 +15,8 @@ struct SchoolServiceURLs {
 }
 
 class SchoolServiceAPI {
-        static let shared = SchoolServiceAPI()
+    
+    static let shared = SchoolServiceAPI()
 
     func getSchoolsData(completion: @escaping (Result<[School], Error>) -> Void) {
         
@@ -39,8 +40,8 @@ class SchoolServiceAPI {
                     } else {
                         continue
                     }
-
                 }
+                
                 for i in 0..<results.count {
                     var mergedText = results[i].school_name + results[i].location
                     let array = [" ", ",", ".", "-", "(", ")", ":", "/"]
@@ -49,7 +50,6 @@ class SchoolServiceAPI {
                     }
                     mergedText = mergedText.replacingOccurrences(of: "&", with: "and")
                     results[i].mergedText = mergedText
-                    
                 }
 
                 completion(.success(results))
@@ -59,8 +59,6 @@ class SchoolServiceAPI {
         }
         task.resume()
     }
-    
-    
 
     func getTestData(completion: @escaping (Result<[SchoolScores], Error>) -> Void) {
         

@@ -65,12 +65,12 @@ extension SchoolTableViewCell {
 
     }
     
-    func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String)) {
+    func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String), color: UIColor) {
         self.schoolName.text = info.schoolName
         self.schoolAddress.text = info.schoolAddress
         self.schoolBoro.text = info.schoolBoro
-        self.schoolBoro.textColor = getColor(schoolBoro: info.schoolBoro)
-        self.schoolName.textColor = getColor(schoolBoro: info.schoolBoro)
+        self.schoolBoro.textColor = color
+        self.schoolName.textColor = color
     }
     
     func getColor(schoolBoro: String) -> UIColor {
