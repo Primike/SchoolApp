@@ -9,67 +9,34 @@ import Foundation
 import UIKit
 
 class MySchoolsViewModel {
-    var schoolsSATData = [SchoolScores]()
-    var schoolsData = [School]()
+    
+    var schools = [School]()
+    var schoolsScores = [SchoolScores]()
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
-        self.schoolsSATData = schoolsSATData
-        self.schoolsData = schoolsData
+        self.schoolsScores = schoolsSATData
+        self.schools = schoolsData
         mySchools()
     }
     
     func mySchools() {
-        var x = [School]()
+        var mySchools = [School]()
         
         let defaults = UserDefaults.standard
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
 
         for i in savedArray {
-            if let z = schoolsData.first(where: {$0.dbn == i}) {
-                x.append(z)
+            if let school = schools.first(where: {$0.dbn == i}) {
+                mySchools.append(school)
             }
         }
         
-        self.schoolsData = x
+        self.schools = mySchools
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        
-        if schoolsData.count > 0 {
-            let school = schoolsData[indexPath.row]
+            let school = schools[indexPath.row]
             return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
-        } else {
-            return (schoolName: "Loading", schoolAddress: "Loading", schoolBoro: "Loading")
-        }
-    }
-    
-    var schoolSATScores: SchoolScores?
-    let scoresNotAvailable = SchoolScores(dbn: "0", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
-                                   sat_math_avg_score: "0",
-                                   sat_writing_avg_score: "0")
-    
-    func rowSelectSearch(indexPath: IndexPath) {
-        for data in schoolsSATData {
-            if data.dbn == schoolsData[indexPath.row].dbn {
-                schoolSATScores = data
-                break
-            }
-        }
-    }
-    
-    func getColor(school: School) -> UIColor {
-        switch school.boro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.black
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
     }
 }
 

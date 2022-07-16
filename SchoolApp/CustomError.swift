@@ -17,9 +17,9 @@ extension CustomError: LocalizedError {
         case .noConnection:
             return "No Internet Connection"
         case .noSchoolData:
-            return "No Schools Data"
+            return "Schools Data Unavailable"
         case .noSATData:
-            return "No SAT Data"
+            return "SAT Data Unavailable"
         }
     }
 }

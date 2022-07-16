@@ -12,10 +12,11 @@ class MySchoolsViewController: UIViewController {
     
     let schoolsTableView = UITableView()
     
-    let viewModel: MySchoolsViewModel
+    let mySchoolsViewModel: MySchoolsViewModel
     
     required init(viewModel: MySchoolsViewModel) {
-        self.viewModel = viewModel
+        self.mySchoolsViewModel = viewModel
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,12 +34,9 @@ class MySchoolsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.mySchools()
+        mySchoolsViewModel.mySchools()
         schoolsTableView.reloadData()
     }
-}
-
-extension MySchoolsViewController {
     
     func style() {
         view.backgroundColor = .white
@@ -61,32 +59,18 @@ extension MySchoolsViewController {
         schoolsTableView.delegate = self
         schoolsTableView.dataSource = self
     }
-    func getColor(school: School) -> UIColor {
-        switch school.boro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.black
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
 }
 
 extension MySchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: viewModel.getInfo(for: indexPath), color: getColor(school: viewModel.schoolsData[indexPath.row]))
+        schoolCell.configure(info: mySchoolsViewModel.getInfo(for: indexPath))
         schoolCell.schoolBoro.text = "\(indexPath.row + 1)"
         return schoolCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.schoolsData.count
+        return mySchoolsViewModel.schools.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -99,6 +83,6 @@ extension MySchoolsViewController: UITableViewDataSource {
 extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: viewModel.schoolsData[indexPath.row], scores: viewModel.schoolsSATData[indexPath.row] , schoolColor: viewModel.getColor(school: viewModel.schoolsData[indexPath.row])), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: mySchoolsViewModel.schools[indexPath.row], scores: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
     }
 }

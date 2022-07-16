@@ -75,7 +75,7 @@ extension CalculatedSchoolsViewController {
 extension CalculatedSchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: viewModel.getInfo(for: indexPath), color: getColor(school: viewModel.schoolsData[indexPath.row]))
+        schoolCell.configure(info: viewModel.getInfo(for: indexPath))
         schoolCell.schoolBoro.text = "#\(indexPath.row + 1)"
         schoolCell.schoolBoro.textColor = .black
         return schoolCell
@@ -95,7 +95,7 @@ extension CalculatedSchoolsViewController: UITableViewDataSource {
 extension CalculatedSchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: viewModel.schoolsData[indexPath.row], scores: viewModel.schoolsSATData[indexPath.row] , schoolColor: viewModel.getColor(school: viewModel.schoolsData[indexPath.row])), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: viewModel.schoolsData[indexPath.row], scores: viewModel.schoolsSATData[indexPath.row]), animated: true)
     }
 }
 

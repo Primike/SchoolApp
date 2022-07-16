@@ -68,27 +68,12 @@ class SchoolsListViewController: UIViewController {
         schoolsListHeader.frame.size = size
         schoolsTableView.tableHeaderView = schoolsListHeader
     }
-    
-    func getColor(school: School) -> UIColor {
-        switch school.boro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.black
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
 }
 
 extension SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: schoolsListViewModel.getInfo(for: indexPath), color: getColor(school: schoolsListViewModel.schoolsSearchResults[indexPath.row]))
+        schoolCell.configure(info: schoolsListViewModel.getInfo(for: indexPath))
 
         return schoolCell
     }
@@ -108,7 +93,7 @@ extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsListViewModel.rowSelectSearch(indexPath: indexPath)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsListViewModel.schoolsSearchResults[indexPath.row], scores: schoolsListViewModel.schoolSATScores ?? schoolsListViewModel.scoresNotAvailable, schoolColor: getColor(school: schoolsListViewModel.schoolsSearchResults[indexPath.row])), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsListViewModel.schoolsSearchResults[indexPath.row], scores: schoolsListViewModel.schoolScores ?? schoolsListViewModel.scoresNotAvailable), animated: true)
     }
 }
 

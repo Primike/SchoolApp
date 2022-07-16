@@ -20,14 +20,12 @@ class HomeViewController: UIViewController {
     let topSchoolsButton = UIButton()
     let myschoolsButton = UIButton()
     
-    let viewModel: HomeViewModel
-    
-
+    let homeViewModel: HomeViewModel
 
     required init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
+        self.homeViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.delegate = self
+        self.homeViewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +33,7 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        viewModel.loadData()
+        homeViewModel.getSchools()
         super.viewDidLoad()
     }
     
@@ -67,7 +65,7 @@ class HomeViewController: UIViewController {
         topSchoolsButton.addTarget(self, action: #selector(top10SchoolsTapped), for: .primaryActionTriggered)
         topSchoolsButton.backgroundColor = .black
         topSchoolsButton.setTitleColor(.white, for: .normal)
-        topSchoolsButton.setTitle("Top 10 SAT Schools", for: .normal)
+        topSchoolsButton.setTitle("Top SAT Schools", for: .normal)
         topSchoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
         topSchoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
         topSchoolsButton.layer.cornerRadius = 10
@@ -149,7 +147,10 @@ extension HomeViewController: RequestDelegate {
                 self.style()
                 self.layout()
             case .error(let error):
-                self.showAlert(error: error.localizedDescription)
+                if error.localizedDescription == "SAT Data Unavailable" {
+                    self.homeViewModel.state = .success
+                }
+                self.showAlert(error: error.localizedDescription)                
             }
         }
     }
@@ -160,25 +161,32 @@ extension HomeViewController: RequestDelegate {
         alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
 //            exit(0)
         }))
-        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-            self.viewModel.loadData()
-        }))
+        if error == "SAT Data Unavailable" {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.homeViewModel.getSchoolScores()
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.homeViewModel.getSchools()
+            }))
+        }
+
         
         present(alert, animated: true)
     }
 }
 extension HomeViewController {
     @objc func nycSchoolsListTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schoolsData: viewModel.schoolsData, schoolsSATData: viewModel.schoolsSATData)), animated: true)
+        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
     @objc func top10SchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(Top10SchoolsListViewController(viewModel: Top10SchoolsListViewModel(schoolsSATData: viewModel.top10SchoolsScores, schoolsData: viewModel.top10Schools)), animated: true)
+        navigationController?.pushViewController(Top10SchoolsListViewController(viewModel: Top10SchoolsListViewModel(schoolsSATData: homeViewModel.top10SchoolsScores, schoolsData: homeViewModel.top10Schools)), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
-//        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: viewModel.schoolsSATData, schoolsData: viewModel.schoolsData)), animated: true)
-        navigationController?.pushViewController(SchoolsCalculatorViewController(schoolData: viewModel.schoolsData, schoolSATData: viewModel.schoolsSATData), animated: true)
+        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+//        navigationController?.pushViewController(SchoolsCalculatorViewController(schoolData: homeViewModel.schools, schoolSATData: homeViewModel.schoolsScores), animated: true)
     }
 }
 

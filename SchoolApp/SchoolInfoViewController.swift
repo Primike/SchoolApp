@@ -135,7 +135,6 @@ class SchoolInfoViewController: UIViewController {
 extension SchoolInfoViewController {
     @objc func websiteButtonTapped(sender: UIButton) {
         guard let url = URL(string: "https://\(school.website)") else {
-            print("Invalid Url")
             return
         }
         UIApplication.shared.open(url) { success in

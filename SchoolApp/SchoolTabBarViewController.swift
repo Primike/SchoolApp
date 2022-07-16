@@ -12,13 +12,11 @@ class SchoolTabBarViewController: UITabBarController {
 
     var school: School
     var schoolScores: SchoolScores
-    var scoresNotAvailable = [Int]()
-    let schoolColor: UIColor
+    var schoolColor = UIColor.systemBlue
     
-    init(school: School, scores: SchoolScores, schoolColor: UIColor) {
+    init(school: School, scores: SchoolScores) {
         self.school = school
         self.schoolScores = scores
-        self.schoolColor = schoolColor
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,6 +27,7 @@ class SchoolTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.schoolColor = self.getColor(school: school)
         setupViews()
         setupTabBar()
     }
@@ -53,6 +52,21 @@ class SchoolTabBarViewController: UITabBarController {
         tabBar.tintColor = .black
         tabBar.isTranslucent = false
         tabBar.backgroundColor = .white
+    }
+    
+    func getColor(school: School) -> UIColor {
+        switch school.boro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.black
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
+        }
     }
 }
 

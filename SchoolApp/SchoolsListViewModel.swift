@@ -11,30 +11,25 @@ import UIKit
 
 class SchoolsListViewModel {
     
-    var schoolsSATData = [SchoolScores]()
-    var schoolsData = [School]()
+    var schools = [School]()
+    var schoolsScores = [SchoolScores]()
     var schoolsSearchResults = [School]()
     
-    var schoolSATScores: SchoolScores?
+    var schoolScores: SchoolScores?
     let scoresNotAvailable = SchoolScores(dbn: "None", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
                                    sat_math_avg_score: "0",
                                    sat_writing_avg_score: "0")
     
     
-    init(schoolsData: [School], schoolsSATData: [SchoolScores]) {
-        self.schoolsSATData = schoolsSATData
-        self.schoolsData = schoolsData
-        self.schoolsSearchResults = schoolsData
+    init(schools: [School], schoolsScores: [SchoolScores]) {
+        self.schoolsScores = schoolsScores
+        self.schools = schools
+        self.schoolsSearchResults = schools
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        
-        if schoolsSearchResults.count > 0 {
-            let school = schoolsSearchResults[indexPath.row]
-            return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
-        } else {
-            return (schoolName: "Loading", schoolAddress: "Loading", schoolBoro: "Loading")
-        }
+        let school = schoolsSearchResults[indexPath.row]
+        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
     }
     
     func textChanged(searchText: String) {
@@ -48,20 +43,17 @@ class SchoolsListViewModel {
             search = search.replacingOccurrences(of: "&", with: "and")
 
             schoolsSearchResults =
-            schoolsData.filter { school in
+            schools.filter { school in
                 return school.mergedText!.lowercased().contains(search.lowercased())
             }
         } else {
-            schoolsSearchResults = schoolsData
+            schoolsSearchResults = schools
         }
     }
     
     func rowSelectSearch(indexPath: IndexPath) {
-        for data in schoolsSATData {
-            if data.dbn == schoolsSearchResults[indexPath.row].dbn {
-                schoolSATScores = data
-                break
-            }
+        if let scores = schoolsScores.first(where: {$0.dbn == schoolsSearchResults[indexPath.row].dbn}) {
+            schoolScores = scores
         }
     }
 }

@@ -27,10 +27,8 @@ class SchoolTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension SchoolTableViewCell {
-    private func setup() {
+    
+    func setup() {
         self.layer.borderWidth = 5
         self.layer.borderColor = UIColor.systemFill.cgColor
         self.layer.cornerRadius = 20
@@ -65,12 +63,12 @@ extension SchoolTableViewCell {
 
     }
     
-    func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String), color: UIColor) {
+    func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String)) {
         self.schoolName.text = info.schoolName
         self.schoolAddress.text = info.schoolAddress
         self.schoolBoro.text = info.schoolBoro
-        self.schoolBoro.textColor = color
-        self.schoolName.textColor = color
+        self.schoolBoro.textColor = getColor(schoolBoro: info.schoolBoro)
+        self.schoolName.textColor = getColor(schoolBoro: info.schoolBoro)
     }
     
     func getColor(schoolBoro: String) -> UIColor {
@@ -78,17 +76,17 @@ extension SchoolTableViewCell {
         case "M":
             return UIColor.systemBlue
         case "X":
-            return UIColor.systemOrange
+            return .systemOrange
         case "K":
             return UIColor.black
         case "Q":
             return UIColor.systemPurple
         default:
-            return UIColor.systemGreen
+            return .systemGreen
         }
     }
 
-    private func layout() {
+    func layout() {
         self.addSubview(cellStackView)
 
         cellStackView.addSubview(schoolInfoStackView)
