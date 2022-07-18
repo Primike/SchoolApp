@@ -51,7 +51,13 @@ class SchoolServiceAPI {
                     mergedText = mergedText.replacingOccurrences(of: "&", with: "and")
                     results[i].mergedText = mergedText
                 }
-
+                
+                for i in 0..<results.count {
+                    if results[i].latitude == nil || results[i].longitude == nil{
+                        results[i].latitude = "0"
+                        results[i].longitude = "0"
+                    }
+                }
                 completion(.success(results))
             } catch {
                 completion(.failure(CustomError.noSchoolData))

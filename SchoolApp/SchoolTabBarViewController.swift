@@ -36,14 +36,17 @@ class SchoolTabBarViewController: UITabBarController {
         
         let schoolInfoVC = SchoolInfoViewController(school: school, schoolColor: schoolColor)
         let satScoresVC = SchoolScoresViewController(school: school, scores: schoolScores, schoolColor: schoolColor)
+        let schoolMapVC = SchoolMapViewController(latitude: school.latitude!, longitude: school.longitude!, schoolName: school.school_name)
 
         schoolInfoVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Summary", tag: 0)
         satScoresVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "SAT Scores", tag: 1)
+        schoolMapVC.setTabBarImage(imageSFName: "checkmark", title: "Map", tag: 2)
 
         let schoolInfoNC = UINavigationController(rootViewController: schoolInfoVC)
         let satScoresNC = UINavigationController(rootViewController: satScoresVC)
+        let schoolMapNC = UINavigationController(rootViewController: schoolMapVC)
         
-        let tabBarList = [schoolInfoNC, satScoresNC]
+        let tabBarList = [schoolInfoNC, satScoresNC, schoolMapNC]
 
         viewControllers = tabBarList
     }
