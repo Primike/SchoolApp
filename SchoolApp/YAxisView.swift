@@ -30,35 +30,35 @@ class YAxisView: UIView {
     func style() {
         label800.translatesAutoresizingMaskIntoConstraints = false
         label800.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label800.text = "800-"
+        label800.text = "800 - "
         label800.textAlignment = .center
         label800.adjustsFontSizeToFitWidth = true
         label800.textColor = .black
         
         label600.translatesAutoresizingMaskIntoConstraints = false
         label600.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label600.text = "600-"
+        label600.text = "600 - "
         label600.textAlignment = .center
         label600.adjustsFontSizeToFitWidth = true
         label600.textColor = .black
         
         label400.translatesAutoresizingMaskIntoConstraints = false
         label400.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label400.text = "400-"
+        label400.text = "400 - "
         label400.textAlignment = .center
         label400.adjustsFontSizeToFitWidth = true
         label400.textColor = .black
 
         label200.translatesAutoresizingMaskIntoConstraints = false
         label200.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label200.text = "200-"
+        label200.text = "200 - "
         label200.textAlignment = .center
         label200.adjustsFontSizeToFitWidth = true
         label200.textColor = .black
 
         label0.translatesAutoresizingMaskIntoConstraints = false
         label0.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label0.text = "0-"
+        label0.text = "0 - "
         label0.textAlignment = .center
         label0.adjustsFontSizeToFitWidth = true
         label0.textColor = .black

@@ -215,7 +215,7 @@ extension HomeViewController {
     }
     
     @objc func calculatorTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolsCalculatorViewController(schoolData: homeViewModel.schools, schoolSATData: homeViewModel.schoolsScores), animated: true)
+        navigationController?.pushViewController(SchoolsCalculatorViewController(viewModel: SchoolsCalculatorViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
 }
 

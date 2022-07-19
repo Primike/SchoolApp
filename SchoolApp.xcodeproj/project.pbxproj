@@ -40,6 +40,7 @@
 		B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */; };
 		B880A2C0284ED4090071E43D /* SchoolScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */; };
 		B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */; };
+		B880AE28288726F500FB1F28 /* SchoolsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */; };
 		B89D3CF0287EF209002300D1 /* SchoolsCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CEF287EF209002300D1 /* SchoolsCalculatorViewController.swift */; };
 		B89D3CF2287F18F8002300D1 /* SchoolsCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */; };
 		B89D3CF4287F3CA6002300D1 /* CalculatedSchoolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CF3287F3CA6002300D1 /* CalculatedSchoolsViewController.swift */; };
@@ -52,8 +53,6 @@
 		B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */; };
 		B8E817462846A4600052C1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E817452846A4600052C1AE /* Assets.xcassets */; };
 		B8E817492846A4600052C1AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E817472846A4600052C1AE /* LaunchScreen.storyboard */; };
-		B8FB23A428492BD800FC4817 /* SchoolListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */; };
-		B8FB23A628492BE900FC4817 /* SchoolsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB23A528492BE900FC4817 /* SchoolsListHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +106,7 @@
 		B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfoViewController.swift; sourceTree = "<group>"; };
 		B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScoresViewController.swift; sourceTree = "<group>"; };
 		B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolGraphViewController.swift; sourceTree = "<group>"; };
+		B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListHeaderView.swift; sourceTree = "<group>"; };
 		B89D3CEF287EF209002300D1 /* SchoolsCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsCalculatorViewController.swift; sourceTree = "<group>"; };
 		B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsCalculatorViewModel.swift; sourceTree = "<group>"; };
 		B89D3CF3287F3CA6002300D1 /* CalculatedSchoolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedSchoolsViewController.swift; sourceTree = "<group>"; };
@@ -123,8 +123,6 @@
 		B8E8174A2846A4600052C1AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8E8174F2846A4600052C1AE /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E817592846A4600052C1AE /* SchoolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolListHeader.xib; sourceTree = "<group>"; };
-		B8FB23A528492BE900FC4817 /* SchoolsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +174,8 @@
 				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
 				B801DEED287BB4BF00EA2090 /* Top10SchoolsListViewModel.swift */,
 				B801DEF1287D9F6300EA2090 /* MySchoolsViewModel.swift */,
-				B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */,
 				9EC01278288509230082E7D9 /* NearbySchoolsViewModel.swift */,
+				B89D3CF1287F18F8002300D1 /* SchoolsCalculatorViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -308,8 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
-				B8FB23A328492BD800FC4817 /* SchoolListHeader.xib */,
-				B8FB23A528492BE900FC4817 /* SchoolsListHeaderView.swift */,
+				B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -514,7 +511,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8736669288061390076632F /* SchoolsAPIJsonData.json in Resources */,
-				B8FB23A428492BD800FC4817 /* SchoolListHeader.xib in Resources */,
 				B8E817492846A4600052C1AE /* LaunchScreen.storyboard in Resources */,
 				B8E817462846A4600052C1AE /* Assets.xcassets in Resources */,
 				B873666B288061500076632F /* SatAPIJsonData.json in Resources */,
@@ -542,7 +538,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8FB23A628492BE900FC4817 /* SchoolsListHeaderView.swift in Sources */,
 				B8736680288075AD0076632F /* YAxisView.swift in Sources */,
 				B89D3CF2287F18F8002300D1 /* SchoolsCalculatorViewModel.swift in Sources */,
 				9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */,
@@ -583,6 +578,7 @@
 				B89D3CF4287F3CA6002300D1 /* CalculatedSchoolsViewController.swift in Sources */,
 				B801DEF4287DA31400EA2090 /* MySchoolsViewController.swift in Sources */,
 				B8E1121C28747A72009C66B6 /* ViewState.swift in Sources */,
+				B880AE28288726F500FB1F28 /* SchoolsListHeaderView.swift in Sources */,
 				B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

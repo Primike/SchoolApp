@@ -10,78 +10,62 @@ import UIKit
 
 //when no satdata app crashes
 class SchoolsCalculatorViewModel {
-    var schoolsSATData = [SchoolScores]()
-    var schoolsData = [School]()
-    var myTotalScore: Int
+    var schoolsSATData: [SchoolScores]
+    var schoolsData: [School]
+    var calculatedSchools = [School]()
+    var calculatedSchoolsScores = [SchoolScores]()
+    var myTotalScore = 0
     
-    init(schoolsSATData: [SchoolScores], schoolsData: [School], myTotalScore: Int) {
+    init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsSATData = schoolsSATData
         self.schoolsData = schoolsData
-        self.myTotalScore = myTotalScore
         
-        print(myTotalScore)
-        calculateSATList()
-        getCalculatedSchools()
     }
     
     func calculateSATList() {
-        var x = [SchoolScores]()
+        var array = [SchoolScores]()
+        var scoresCopy = schoolsSATData
         
         for _ in 0..<10 {
             var closest = 10000
             var index = 0
-            for j in 0..<schoolsSATData.count {
-                let difference = abs(Int(schoolsSATData[j].sat_math_avg_score)! +  Int(schoolsSATData[j].sat_writing_avg_score)! + Int(schoolsSATData[j].sat_critical_reading_avg_score)! - myTotalScore)
-                if difference < closest && schoolsSATData[j].dbn != "0" {
+            for j in 0..<scoresCopy.count {
+                let difference = abs(Int(scoresCopy[j].sat_math_avg_score)! +  Int(scoresCopy[j].sat_writing_avg_score)! + Int(scoresCopy[j].sat_critical_reading_avg_score)! - myTotalScore)
+                if difference < closest && scoresCopy[j].dbn != "0" {
                     closest = difference
                     index = j
                 }
             }
             
-            x.append(schoolsSATData[index])
-            schoolsSATData.remove(at: index)
+            array.append(scoresCopy[index])
+            scoresCopy.remove(at: index)
         }
-        schoolsSATData = x
+        calculatedSchoolsScores = array
 
     }
     
     func getCalculatedSchools() {
-        var x = [School]()
+        var array = [School]()
         
-        for i in schoolsSATData {
+        for i in calculatedSchoolsScores {
             for j in 0..<schoolsData.count {
                 if i.dbn == schoolsData[j].dbn {
-                    x.append(schoolsData[j])
+                    array.append(schoolsData[j])
                     break
                 }
             }
         }
         
-        schoolsData = x
+        calculatedSchools = array
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
         
-        if schoolsData.count > 0 {
-            let school = schoolsData[indexPath.row]
+        if calculatedSchools.count > 0 {
+            let school = calculatedSchools[indexPath.row]
             return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
         } else {
             return (schoolName: "Loading", schoolAddress: "Loading", schoolBoro: "Loading")
-        }
-    }
-    
-    func getColor(school: School) -> UIColor {
-        switch school.boro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.black
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//clinton school showing scores even though it should be 0
 class MySchoolsViewModel {
     
     var schools = [School]()

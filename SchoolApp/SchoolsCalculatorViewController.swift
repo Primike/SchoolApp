@@ -9,17 +9,18 @@ import Foundation
 import UIKit
 
 class SchoolsCalculatorViewController: UIViewController {
+    let topView = UIView()
     let satMathScore = UITextField()
     let satWritingScore = UITextField()
     let satReadingScore = UITextField()
     let errorLabel = UILabel()
     let calculatorButton = UIButton(type: .system)
-    let schoolData: [School]
-    let schoolSATData: [SchoolScores]
+    let schoolsTableView = UITableView()
+
+    let schoolsCalculatorViewModel: SchoolsCalculatorViewModel
     
-    required init(schoolData: [School], schoolSATData: [SchoolScores]) {
-        self.schoolData = schoolData
-        self.schoolSATData = schoolSATData
+    required init(viewModel: SchoolsCalculatorViewModel) {
+        self.schoolsCalculatorViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -30,6 +31,7 @@ class SchoolsCalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         style()
+        setup()
         layout()
     }
     
@@ -46,6 +48,10 @@ extension SchoolsCalculatorViewController {
     func style() {
         view.backgroundColor = .white
         
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        
+        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
+
         satMathScore.translatesAutoresizingMaskIntoConstraints = false
         satMathScore.placeholder = "Math Score"
         satMathScore.textAlignment = .center
@@ -89,12 +95,20 @@ extension SchoolsCalculatorViewController {
         errorLabel.isHidden = true
     }
     
+    func setup() {
+        schoolsTableView.delegate = self
+        schoolsTableView.dataSource = self
+    }
+    
     func layout() {
-        view.addSubview(satMathScore)
-        view.addSubview(satWritingScore)
-        view.addSubview(satReadingScore)
-        view.addSubview(errorLabel)
-        view.addSubview(calculatorButton)
+        view.addSubview(topView)
+        topView.addSubview(satMathScore)
+        topView.addSubview(satWritingScore)
+        topView.addSubview(satReadingScore)
+        topView.addSubview(errorLabel)
+        topView.addSubview(calculatorButton)
+        
+        view.addSubview(schoolsTableView)
         
         NSLayoutConstraint.activate([
             satMathScore.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -102,9 +116,21 @@ extension SchoolsCalculatorViewController {
             satReadingScore.topAnchor.constraint(equalTo: satWritingScore.bottomAnchor),
             errorLabel.topAnchor.constraint(equalTo: satReadingScore.bottomAnchor),
             calculatorButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor),
+            
+            topView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            topView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            
+            schoolsTableView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
         ])
     }
-    
+}
+
+extension SchoolsCalculatorViewController {
     @objc func calculatorButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
@@ -113,18 +139,30 @@ extension SchoolsCalculatorViewController {
             return
         }
         
+        if Double(satMathScore.text!) == nil || Double(satReadingScore.text!) == nil || Double(satWritingScore.text!) == nil {
+            errorHandler(message: "Please enter a numerical value")
+            return
+        }
+        
+        if Double(satMathScore.text!)! < 200 || Double(satMathScore.text!)! > 800 || Double(satReadingScore.text!)! < 200 || Double(satReadingScore.text!)! > 800 || Double(satWritingScore.text!)! < 200 || Double(satWritingScore.text!)! > 800 {
+            errorHandler(message: "Please type in values between 200 and 800")
+            return
+        }
         if Int(satMathScore.text!) != nil && Int(satMathScore.text!) != nil && Int(satMathScore.text!) != nil  {
             let x = Int(satMathScore.text!)! + Int(satMathScore.text!)! + Int(satMathScore.text!)!
-            print("Sum \(x)")
-            navigationController?.pushViewController(CalculatedSchoolsViewController(viewModel: SchoolsCalculatorViewModel(schoolsSATData: schoolSATData, schoolsData: schoolData, myTotalScore: x)), animated: true)
-        } else {
-            errorHandler(message: "Enter A Numerical Value")
+
+            schoolsCalculatorViewModel.myTotalScore = x
+            schoolsCalculatorViewModel.calculateSATList()
+            schoolsCalculatorViewModel.getCalculatedSchools()
+            print(schoolsCalculatorViewModel.myTotalScore, schoolsCalculatorViewModel.calculatedSchools.count)
+            schoolsTableView.reloadData()
+            
         }
 
         func errorHandler(message: String){
              errorLabel.isHidden = false
              errorLabel.text = message
-         }
+        }
     }
 }
 
@@ -139,11 +177,33 @@ extension SchoolsCalculatorViewController: UITextFieldDelegate {
     
     //callback to see what's in the text field
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-            return true
+        return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-
+        errorLabel.isHidden = true
     }
+}
 
+extension SchoolsCalculatorViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let schoolCell = SchoolTableViewCell()
+        schoolCell.configure(info: schoolsCalculatorViewModel.getInfo(for: indexPath))
+        schoolCell.schoolBoro.text = "#\(indexPath.row + 1)"
+        schoolCell.schoolBoro.textColor = .black
+        return schoolCell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        schoolsCalculatorViewModel.calculatedSchools.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        170
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsCalculatorViewModel.calculatedSchools[indexPath.row], scores: schoolsCalculatorViewModel.calculatedSchoolsScores[indexPath.row]), animated: true)
+    }
+    
 }

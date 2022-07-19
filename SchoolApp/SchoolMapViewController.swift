@@ -17,11 +17,14 @@ class SchoolMapViewController: UIViewController {
     let latitude: String
     let longitude: String
     let schoolName: String
+    let schoolColor: UIColor
+    let titleLabel = UILabel()
 
-    init(latitude: String, longitude: String, schoolName: String) {
+    init(latitude: String, longitude: String, schoolName: String, schoolColor: UIColor) {
         self.latitude = latitude
         self.longitude = longitude
         self.schoolName = schoolName
+        self.schoolColor = schoolColor
         
         super.init(nibName: nil, bundle: nil)
 
@@ -40,18 +43,31 @@ class SchoolMapViewController: UIViewController {
     }
     
     func style() {
-//        title = schoolName
         view.backgroundColor = .white
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        titleLabel.text = "\(schoolName) Map"
+        titleLabel.textColor = schoolColor
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .center
+        
         map.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {
+        view.addSubview(titleLabel)
         view.addSubview(map)
         
         NSLayoutConstraint.activate([
-            map.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            map.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             map.widthAnchor.constraint(equalTo: view.widthAnchor),
-            map.heightAnchor.constraint(equalTo: view.heightAnchor),
+            map.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
             
             
         ])

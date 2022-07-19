@@ -9,7 +9,6 @@ import UIKit
 
 class SchoolsListViewController: UIViewController {
 
-    //replace this view
     let schoolsListHeader = SchoolsListHeaderView(frame: .zero)
 
     let schoolsTableView = UITableView()

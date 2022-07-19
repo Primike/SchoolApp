@@ -73,7 +73,7 @@ class SchoolScoresBottomView: UIView {
         satWritingStackView.layer.cornerRadius = 25
 
         satWritingLabel.translatesAutoresizingMaskIntoConstraints = false
-        satWritingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        satWritingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         satWritingLabel.text = testNames[1]
         satWritingLabel.textColor = .white
         satWritingLabel.adjustsFontSizeToFitWidth = true
@@ -81,7 +81,7 @@ class SchoolScoresBottomView: UIView {
 
         
         satWritingScore.translatesAutoresizingMaskIntoConstraints = false
-        satWritingScore.font = UIFont(name:"HelveticaNeue-Bold", size: 28.0)
+        satWritingScore.font = UIFont(name:"HelveticaNeue", size: 100.0)
         satWritingScore.text = "\(schoolScores.sat_writing_avg_score)/800"
         satWritingScore.textColor = .white
         satWritingScore.adjustsFontSizeToFitWidth = true
@@ -94,7 +94,7 @@ class SchoolScoresBottomView: UIView {
         satReadingStackView.layer.cornerRadius = 25
 
         satReadingLabel.translatesAutoresizingMaskIntoConstraints = false
-        satReadingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        satReadingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         satReadingLabel.text = testNames[2]
         satReadingLabel.textColor = .white
         satReadingLabel.adjustsFontSizeToFitWidth = true
@@ -102,7 +102,7 @@ class SchoolScoresBottomView: UIView {
 
         
         satReadingScore.translatesAutoresizingMaskIntoConstraints = false
-        satReadingScore.font = UIFont(name:"HelveticaNeue-Bold", size: 28.0)
+        satReadingScore.font = UIFont(name:"HelveticaNeue", size: 100.0)
         satReadingScore.text = "\(schoolScores.sat_critical_reading_avg_score)/800"
         satReadingScore.textColor = .white
         satReadingScore.adjustsFontSizeToFitWidth = true
@@ -143,9 +143,9 @@ class SchoolScoresBottomView: UIView {
             satMathScore.widthAnchor.constraint(equalTo: satMathStackView.widthAnchor, multiplier: 0.8),
             satMathScore.heightAnchor.constraint(equalTo: satMathStackView.heightAnchor, multiplier: 0.3),
 
+            satWritingSubView.topAnchor.constraint(equalTo: satMathSubView.bottomAnchor),
             satWritingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satWritingSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-            satWritingSubView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             satWritingStackView.heightAnchor.constraint(equalTo: satWritingSubView.heightAnchor, multiplier: 0.8),
             satWritingStackView.widthAnchor.constraint(equalTo: satWritingSubView.widthAnchor, multiplier: 0.8),
             satWritingStackView.centerXAnchor.constraint(equalTo: satWritingSubView.centerXAnchor),
@@ -153,12 +153,15 @@ class SchoolScoresBottomView: UIView {
             satWritingLabel.topAnchor.constraint(equalTo: satWritingStackView.topAnchor),
             satWritingLabel.centerXAnchor.constraint(equalTo: satWritingStackView.centerXAnchor),
             satWritingLabel.widthAnchor.constraint(equalTo: satWritingStackView.widthAnchor, multiplier: 0.9),
+            satWritingLabel.heightAnchor.constraint(equalTo: satWritingStackView.heightAnchor, multiplier: 0.4),
             satWritingScore.topAnchor.constraint(equalTo: satWritingLabel.bottomAnchor),
             satWritingScore.centerXAnchor.constraint(equalTo: satWritingStackView.centerXAnchor),
+            satWritingScore.widthAnchor.constraint(equalTo: satWritingStackView.widthAnchor, multiplier: 0.8),
+            satWritingScore.heightAnchor.constraint(equalTo: satWritingStackView.heightAnchor, multiplier: 0.3),
 
+            satReadingSubView.topAnchor.constraint(equalTo: satWritingSubView.bottomAnchor),
             satReadingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satReadingSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-            satReadingSubView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             satReadingStackView.heightAnchor.constraint(equalTo: satReadingSubView.heightAnchor, multiplier: 0.8),
             satReadingStackView.widthAnchor.constraint(equalTo: satReadingSubView.widthAnchor, multiplier: 0.8),
             satReadingStackView.centerXAnchor.constraint(equalTo: satReadingSubView.centerXAnchor),
@@ -166,8 +169,11 @@ class SchoolScoresBottomView: UIView {
             satReadingLabel.topAnchor.constraint(equalTo: satReadingStackView.topAnchor),
             satReadingLabel.centerXAnchor.constraint(equalTo: satReadingStackView.centerXAnchor),
             satReadingLabel.widthAnchor.constraint(equalTo: satReadingStackView.widthAnchor, multiplier: 0.9),
+            satReadingLabel.heightAnchor.constraint(equalTo: satReadingStackView.heightAnchor, multiplier: 0.4),
             satReadingScore.topAnchor.constraint(equalTo: satReadingLabel.bottomAnchor),
             satReadingScore.centerXAnchor.constraint(equalTo: satReadingStackView.centerXAnchor),
+            satReadingScore.widthAnchor.constraint(equalTo: satReadingStackView.widthAnchor, multiplier: 0.8),
+            satReadingScore.heightAnchor.constraint(equalTo: satReadingStackView.heightAnchor, multiplier: 0.3),
         ])
     }
 }
