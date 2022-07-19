@@ -14,6 +14,11 @@ class HomeBottomView: UIView {
     let appTitle = UILabel()
     let divider = UILabel()
     
+    let schoolsListButtonView = UIView()
+    let topSchoolsButtonView = UIView()
+    let mySchoolsButtonView = UIView()
+    let extraButtonsView = UIView()
+    
     let bottomView = UIView()
     let welcomeLabel = UILabel()
     let divider2 = UILabel()
@@ -42,7 +47,10 @@ class HomeBottomView: UIView {
         divider.translatesAutoresizingMaskIntoConstraints = false
         divider.backgroundColor = .black
         
-        
+        schoolsListButtonView.translatesAutoresizingMaskIntoConstraints = false
+        topSchoolsButtonView.translatesAutoresizingMaskIntoConstraints = false
+        mySchoolsButtonView.translatesAutoresizingMaskIntoConstraints = false
+        extraButtonsView.translatesAutoresizingMaskIntoConstraints = false
         
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.layer.cornerRadius = 70
@@ -68,6 +76,10 @@ class HomeBottomView: UIView {
         bottomView.addSubview(divider2)
         
         self.addSubview(titleStackView)
+        self.addSubview(schoolsListButtonView)
+        self.addSubview(topSchoolsButtonView)
+        self.addSubview(mySchoolsButtonView)
+        self.addSubview(extraButtonsView)
         self.addSubview(bottomView)
         
         NSLayoutConstraint.activate([
@@ -84,7 +96,25 @@ class HomeBottomView: UIView {
             divider.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
             divider.heightAnchor.constraint(equalToConstant: 5),
             
+            schoolsListButtonView.topAnchor.constraint(equalTo: titleStackView.bottomAnchor),
+            schoolsListButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            schoolsListButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            schoolsListButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
+            topSchoolsButtonView.topAnchor.constraint(equalTo: schoolsListButtonView.bottomAnchor),
+            topSchoolsButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            topSchoolsButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            topSchoolsButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            mySchoolsButtonView.topAnchor.constraint(equalTo: topSchoolsButtonView.bottomAnchor),
+            mySchoolsButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            mySchoolsButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            mySchoolsButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            extraButtonsView.topAnchor.constraint(equalTo: mySchoolsButtonView.bottomAnchor),
+            extraButtonsView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            extraButtonsView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            extraButtonsView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             bottomView.widthAnchor.constraint(equalTo: self.widthAnchor),
             bottomView.bottomAnchor.constraint(equalTo: self.bottomAnchor),

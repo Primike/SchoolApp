@@ -15,10 +15,11 @@ class HomeViewController: UIViewController {
     let homeTopView = HomeTopView()
     let homeBottomView = HomeBottomView()
     
-    let buttonsStackView = UIStackView()
     let schoolsListButton = UIButton()
     let topSchoolsButton = UIButton()
     let myschoolsButton = UIButton()
+    let nearbySchoolsButton = UIButton()
+    let calculatorButton = UIButton()
     
     let homeViewModel: HomeViewModel
 
@@ -45,11 +46,6 @@ class HomeViewController: UIViewController {
         homeBottomView.layer.cornerRadius = 70
         homeBottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         homeBottomView.backgroundColor = UIColor.systemRed
-        
-        
-        
-        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsStackView.axis = .vertical
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
@@ -80,6 +76,26 @@ class HomeViewController: UIViewController {
         myschoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
         myschoolsButton.layer.cornerRadius = 10
         myschoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        nearbySchoolsButton.translatesAutoresizingMaskIntoConstraints = false
+        nearbySchoolsButton.addTarget(self, action: #selector(nearbySchoolsTapped), for: .primaryActionTriggered)
+        nearbySchoolsButton.backgroundColor = .black
+        nearbySchoolsButton.setTitleColor(.white, for: .normal)
+        nearbySchoolsButton.setTitle("Nearby Schools", for: .normal)
+        nearbySchoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 16.0)
+        nearbySchoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        nearbySchoolsButton.layer.cornerRadius = 10
+        nearbySchoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        calculatorButton.translatesAutoresizingMaskIntoConstraints = false
+        calculatorButton.addTarget(self, action: #selector(calculatorTapped), for: .primaryActionTriggered)
+        calculatorButton.backgroundColor = .black
+        calculatorButton.setTitleColor(.white, for: .normal)
+        calculatorButton.setTitle("Search By SAT Score", for: .normal)
+        calculatorButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 16.0)
+        calculatorButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        calculatorButton.layer.cornerRadius = 10
+        calculatorButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     func layout() {
@@ -87,11 +103,11 @@ class HomeViewController: UIViewController {
         view.addSubview(homeTopView)
         view.addSubview(homeBottomView)
         
-        homeBottomView.addSubview(buttonsStackView)
-
-        buttonsStackView.addSubview(schoolsListButton)
-        buttonsStackView.addSubview(topSchoolsButton)
-        buttonsStackView.addSubview(myschoolsButton)
+        homeBottomView.schoolsListButtonView.addSubview(schoolsListButton)
+        homeBottomView.topSchoolsButtonView.addSubview(topSchoolsButton)
+        homeBottomView.mySchoolsButtonView.addSubview(myschoolsButton)
+        homeBottomView.extraButtonsView.addSubview(nearbySchoolsButton)
+        homeBottomView.extraButtonsView.addSubview(calculatorButton)
         
         
         NSLayoutConstraint.activate([
@@ -105,24 +121,30 @@ class HomeViewController: UIViewController {
             homeBottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
             homeBottomView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
             
+            schoolsListButton.widthAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.widthAnchor),
+            schoolsListButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
+            schoolsListButton.centerYAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.centerYAnchor),
+            schoolsListButton.heightAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.heightAnchor, multiplier: 0.8),
             
+            topSchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.widthAnchor),
+            topSchoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
+            topSchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.centerYAnchor),
+            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.heightAnchor, multiplier: 0.8),
             
-            buttonsStackView.heightAnchor.constraint(equalTo: homeBottomView.heightAnchor, multiplier: 0.4),
-            buttonsStackView.widthAnchor.constraint(equalTo: homeBottomView.widthAnchor, multiplier: 0.7),
-            buttonsStackView.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
-            buttonsStackView.centerYAnchor.constraint(equalTo: homeBottomView.centerYAnchor),
+            myschoolsButton.widthAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.widthAnchor),
+            myschoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
+            myschoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.centerYAnchor),
+            myschoolsButton.heightAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.heightAnchor, multiplier: 0.8),
             
-            schoolsListButton.topAnchor.constraint(equalTo: buttonsStackView.topAnchor),
-            schoolsListButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor),
-            schoolsListButton.heightAnchor.constraint(equalTo: buttonsStackView.heightAnchor, multiplier: 0.25),
+            nearbySchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.extraButtonsView.widthAnchor, multiplier: 0.48),
+            nearbySchoolsButton.leftAnchor.constraint(equalTo: homeBottomView.extraButtonsView.leftAnchor),
+            nearbySchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.extraButtonsView.heightAnchor, multiplier: 0.6),
+            nearbySchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.extraButtonsView.centerYAnchor),
             
-            topSchoolsButton.centerYAnchor.constraint(equalTo: buttonsStackView.centerYAnchor),
-            topSchoolsButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor),
-            topSchoolsButton.heightAnchor.constraint(equalTo: buttonsStackView.heightAnchor, multiplier: 0.25),
-            
-            myschoolsButton.bottomAnchor.constraint(equalTo: buttonsStackView.bottomAnchor),
-            myschoolsButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor),
-            myschoolsButton.heightAnchor.constraint(equalTo: buttonsStackView.heightAnchor, multiplier: 0.25),
+            calculatorButton.widthAnchor.constraint(equalTo: homeBottomView.extraButtonsView.widthAnchor, multiplier: 0.48),
+            calculatorButton.rightAnchor.constraint(equalTo: homeBottomView.extraButtonsView.rightAnchor),
+            calculatorButton.heightAnchor.constraint(equalTo: homeBottomView.extraButtonsView.heightAnchor, multiplier: 0.6),
+            calculatorButton.centerYAnchor.constraint(equalTo: homeBottomView.extraButtonsView.centerYAnchor),
             
         ])
     }
@@ -185,9 +207,15 @@ extension HomeViewController {
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
-//        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+        navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+    }
+    
+    @objc func nearbySchoolsTapped(sender: UIButton) {
         navigationController?.pushViewController(NearbySchoolsViewController(viewModel: NearbySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
-//        navigationController?.pushViewController(SchoolsCalculatorViewController(schoolData: homeViewModel.schools, schoolSATData: homeViewModel.schoolsScores), animated: true)
+    }
+    
+    @objc func calculatorTapped(sender: UIButton) {
+        navigationController?.pushViewController(SchoolsCalculatorViewController(schoolData: homeViewModel.schools, schoolSATData: homeViewModel.schoolsScores), animated: true)
     }
 }
 
