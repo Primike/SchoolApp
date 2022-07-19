@@ -11,6 +11,7 @@ import UIKit
 class Top10SchoolsListViewController: UIViewController {
     
     let schoolsTableView = UITableView()
+    let top10SchoolsHeaderView = Top10SchoolsHeaderView()
     
     let top10SchoolsViewModel: Top10SchoolsListViewModel
     
@@ -35,14 +36,24 @@ class Top10SchoolsListViewController: UIViewController {
     func style() {
         view.backgroundColor = .white
         
+        top10SchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        top10SchoolsHeaderView.layer.cornerRadius = 35
+        top10SchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        top10SchoolsHeaderView.backgroundColor = UIColor.systemBlue
+        
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {
+        view.addSubview(top10SchoolsHeaderView)
         view.addSubview(schoolsTableView)
 
         NSLayoutConstraint.activate([
-            schoolsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            top10SchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            top10SchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            top10SchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
+            
+            schoolsTableView.topAnchor.constraint(equalTo: top10SchoolsHeaderView.bottomAnchor),
             schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

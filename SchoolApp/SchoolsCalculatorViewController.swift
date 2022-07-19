@@ -49,7 +49,10 @@ extension SchoolsCalculatorViewController {
         view.backgroundColor = .white
         
         topView.translatesAutoresizingMaskIntoConstraints = false
-        
+        topView.layer.cornerRadius = 35
+        topView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        topView.backgroundColor = .systemBlue
+
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
 
         satMathScore.translatesAutoresizingMaskIntoConstraints = false

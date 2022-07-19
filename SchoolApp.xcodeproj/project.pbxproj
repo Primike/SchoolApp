@@ -53,6 +53,7 @@
 		B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */; };
 		B8E817462846A4600052C1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E817452846A4600052C1AE /* Assets.xcassets */; };
 		B8E817492846A4600052C1AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E817472846A4600052C1AE /* LaunchScreen.storyboard */; };
+		B8F5E4CB28873898009C4F54 /* Top10SchoolsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F5E4CA28873898009C4F54 /* Top10SchoolsHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		B8E8174A2846A4600052C1AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8E8174F2846A4600052C1AE /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E817592846A4600052C1AE /* SchoolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F5E4CA28873898009C4F54 /* Top10SchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top10SchoolsHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				B801DEEB287BA97B00EA2090 /* Top10SchoolsListViewController.swift */,
+				B8F5E4C928873888009C4F54 /* Views */,
 			);
 			name = Top10Schools;
 			sourceTree = "<group>";
@@ -404,6 +407,14 @@
 				B8E1121D2874AF99009C66B6 /* File.swift */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		B8F5E4C928873888009C4F54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8F5E4CA28873898009C4F54 /* Top10SchoolsHeaderView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -538,6 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F5E4CB28873898009C4F54 /* Top10SchoolsHeaderView.swift in Sources */,
 				B8736680288075AD0076632F /* YAxisView.swift in Sources */,
 				B89D3CF2287F18F8002300D1 /* SchoolsCalculatorViewModel.swift in Sources */,
 				9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */,

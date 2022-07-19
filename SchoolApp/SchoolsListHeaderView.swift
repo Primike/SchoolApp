@@ -49,12 +49,12 @@ class SchoolsListHeaderView: UIView {
 
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.font = UIFont(name:"TrebuchetMS", size: 12.0 )
-        dateLabel.text = "Data Last Fetched: \(todaysDate)"
+        dateLabel.text = "Last Updated September 10, 2018"
         dateLabel.numberOfLines = 0
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.tintColor = .black
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
 
         infoStackView.translatesAutoresizingMaskIntoConstraints = false
         infoStackView.axis = .vertical
@@ -68,7 +68,6 @@ class SchoolsListHeaderView: UIView {
         headerStackView.addSubview(infoStackView)
         headerStackView.addSubview(imageView)
 
-        //stack view
         NSLayoutConstraint.activate([
             headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
@@ -80,12 +79,11 @@ class SchoolsListHeaderView: UIView {
             infoStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             infoStackView.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
             infoStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
-            infoStackView.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
 
             schoolName.widthAnchor.constraint(equalTo: infoStackView.widthAnchor),
-            schoolName.topAnchor.constraint(equalTo: infoStackView.topAnchor, constant: 10),
+            schoolName.topAnchor.constraint(equalTo: infoStackView.topAnchor),
             schoolName.leftAnchor.constraint(equalTo: infoStackView.leftAnchor),
-            schoolName.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.4),
+            schoolName.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.5),
 
             dateLabel.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
             dateLabel.widthAnchor.constraint(equalTo: infoStackView.widthAnchor),
@@ -94,8 +92,8 @@ class SchoolsListHeaderView: UIView {
 
             imageView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
             imageView.topAnchor.constraint(equalTo: infoStackView.topAnchor),
-            imageView.widthAnchor.constraint(equalTo: infoStackView.widthAnchor, multiplier: 0.5),
-            imageView.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 1),
+            imageView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
+            imageView.heightAnchor.constraint(equalTo: infoStackView.heightAnchor),
         ])
 
     }
