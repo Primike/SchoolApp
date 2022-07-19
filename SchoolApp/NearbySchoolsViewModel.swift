@@ -13,6 +13,7 @@ import CoreLocation
 class NearbySchoolsViewModel {
     var schools = [School]()
     var schoolsScores = [SchoolScores]()
+    var nearbySchools = [School]()
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsScores = schoolsSATData
@@ -26,7 +27,6 @@ class NearbySchoolsViewModel {
     }
     
     func getNearbySchools(latitude: Double, longitude: Double) {
-        var x = [School]()
 
         for _ in 0..<10 {
             var closest = Double(10000)
@@ -38,10 +38,10 @@ class NearbySchoolsViewModel {
                     index = j
                 }
             }
-            x.append(schools[index])
+            print(schools[index].location)
+            nearbySchools.append(schools[index])
             
             schools.remove(at: index)
         }
-        schools = x
     }
 }

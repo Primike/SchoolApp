@@ -63,18 +63,20 @@ class NearbySchoolsViewController: UIViewController {
                 }
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)), animated: true)
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
                 self!.nearbySchoolsViewModel.getNearbySchools(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                self!.setupMap()
                 
             }
         }
-        print(nearbySchoolsViewModel.schools.count)
-        for i in nearbySchoolsViewModel.schools {
+    }
+    
+    func setupMap() {
+        print(nearbySchoolsViewModel.nearbySchools.count)
+        for i in nearbySchoolsViewModel.nearbySchools {
             addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
         }
     }
-    
-
     
     func addMapPin(latitude: String, longitude: String, label: String) {
         let pin = MKPointAnnotation()
