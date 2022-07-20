@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//button making duplicates
 class TopSchoolsListViewModel {
     
     var schools = [School]()
@@ -32,7 +33,7 @@ class TopSchoolsListViewModel {
                 
         
         for i in 0..<sortedScores.count {
-            if topSchoolsScores.count != 10 {
+            if topSchoolsScores.count != self.number {
                 if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
                     topSchoolsScores.append(sortedScores[i])
                     topSchools.append(school)

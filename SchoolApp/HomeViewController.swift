@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
         schoolsListButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         topSchoolsButton.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsButton.addTarget(self, action: #selector(top10SchoolsTapped), for: .primaryActionTriggered)
+        topSchoolsButton.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
         topSchoolsButton.backgroundColor = .black
         topSchoolsButton.setTitleColor(.white, for: .normal)
         topSchoolsButton.setTitle("Top SAT Schools", for: .normal)
@@ -202,8 +202,8 @@ extension HomeViewController {
         navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
-    @objc func top10SchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(TopSchoolsListViewController(viewModel: TopSchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+    @objc func topSchoolsTapped(sender: UIButton) {
+        navigationController?.pushViewController(TopSchoolsListViewController(viewModel: TopSchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.filteredSchoolScores)), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
