@@ -90,6 +90,9 @@ class NearbySchoolsViewController: UIViewController {
 
 extension NearbySchoolsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("QWE")
+        print(view.annotation!.title!!)
+        let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
+        
+        navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
     }
 }

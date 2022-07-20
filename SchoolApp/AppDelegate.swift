@@ -6,8 +6,6 @@
 //
 
 import UIKit
-let appColor: UIColor = .systemFill
-
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

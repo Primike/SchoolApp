@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-class Top10SchoolsListViewController: UIViewController {
+class TopSchoolsListViewController: UIViewController {
     
     let schoolsTableView = UITableView()
-    let top10SchoolsHeaderView = Top10SchoolsHeaderView()
+    let topSchoolsHeaderView = TopSchoolsHeaderView()
     
-    let top10SchoolsViewModel: Top10SchoolsListViewModel
+    let topSchoolsViewModel: TopSchoolsListViewModel
     
-    required init(viewModel: Top10SchoolsListViewModel) {
-        self.top10SchoolsViewModel = viewModel
-        
+    required init(viewModel: TopSchoolsListViewModel) {
+        self.topSchoolsViewModel = viewModel
+        self.topSchoolsViewModel.getTopSchools()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,29 +31,30 @@ class Top10SchoolsListViewController: UIViewController {
         style()
         layout()
         setup()
+        
     }
     
     func style() {
         view.backgroundColor = .white
         
-        top10SchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        top10SchoolsHeaderView.layer.cornerRadius = 35
-        top10SchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        top10SchoolsHeaderView.backgroundColor = UIColor.systemBlue
+        topSchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        topSchoolsHeaderView.layer.cornerRadius = 35
+        topSchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        topSchoolsHeaderView.backgroundColor = UIColor.systemBlue
         
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {
-        view.addSubview(top10SchoolsHeaderView)
+        view.addSubview(topSchoolsHeaderView)
         view.addSubview(schoolsTableView)
 
         NSLayoutConstraint.activate([
-            top10SchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            top10SchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            top10SchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
+            topSchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topSchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            topSchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
             
-            schoolsTableView.topAnchor.constraint(equalTo: top10SchoolsHeaderView.bottomAnchor),
+            schoolsTableView.topAnchor.constraint(equalTo: topSchoolsHeaderView.bottomAnchor),
             schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -66,17 +67,17 @@ class Top10SchoolsListViewController: UIViewController {
     }
 }
 
-extension Top10SchoolsListViewController: UITableViewDataSource {
+extension TopSchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: top10SchoolsViewModel.getInfo(for: indexPath))
+        schoolCell.configure(info: topSchoolsViewModel.getInfo(for: indexPath))
         schoolCell.schoolBoro.text = "Rank #\(indexPath.row + 1)"
         schoolCell.schoolBoro.textColor = .black
         return schoolCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return top10SchoolsViewModel.schools.count
+        return topSchoolsViewModel.topSchools.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -86,9 +87,9 @@ extension Top10SchoolsListViewController: UITableViewDataSource {
 
 
 
-extension Top10SchoolsListViewController: UITableViewDelegate {
+extension TopSchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: top10SchoolsViewModel.schools[indexPath.row], scores: top10SchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: topSchoolsViewModel.topSchools[indexPath.row], scores: topSchoolsViewModel.topSchoolsScores[indexPath.row]), animated: true)
     }
 }

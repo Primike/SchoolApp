@@ -38,10 +38,17 @@ class NearbySchoolsViewModel {
                     index = j
                 }
             }
-            print(schools[index].location)
             nearbySchools.append(schools[index])
             
             schools.remove(at: index)
         }
+    }
+    
+    func findSchool(name: String) -> Int {
+        return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
+    }
+    
+    func findSchoolScores(index: Int) -> SchoolScores {
+        return schoolsScores.first(where: {$0.dbn == nearbySchools[index].dbn}) ?? SchoolScores(dbn: nearbySchools[index].dbn, num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0", sat_math_avg_score: "0", sat_writing_avg_score: "0")
     }
 }

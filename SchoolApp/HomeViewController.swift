@@ -203,7 +203,7 @@ extension HomeViewController {
     }
     
     @objc func top10SchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(Top10SchoolsListViewController(viewModel: Top10SchoolsListViewModel(schoolsSATData: homeViewModel.top10SchoolsScores, schoolsData: homeViewModel.top10Schools)), animated: true)
+        navigationController?.pushViewController(TopSchoolsListViewController(viewModel: TopSchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {

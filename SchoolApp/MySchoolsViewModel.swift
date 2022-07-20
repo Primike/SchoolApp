@@ -22,6 +22,7 @@ class MySchoolsViewModel {
     
     func mySchools() {
         var mySchools = [School]()
+        var mySchoolsScores = [SchoolScores]()
         
         let defaults = UserDefaults.standard
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
@@ -32,7 +33,13 @@ class MySchoolsViewModel {
             }
         }
         
+        for i in mySchools {
+            if let scores = schoolsScores.first(where: {$0.dbn == i.dbn}) {
+                mySchoolsScores.append(scores)
+            }
+        }
         self.schools = mySchools
+        self.schoolsScores = mySchoolsScores
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {

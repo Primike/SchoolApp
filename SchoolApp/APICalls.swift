@@ -37,8 +37,6 @@ class SchoolServiceAPI {
                 for i in 0..<results.count {
                     if let index = results[i].location.firstIndex(of: "(") {
                         results[i].location = String(results[i].location[..<index])
-                    } else {
-                        continue
                     }
                 }
                 
@@ -81,7 +79,15 @@ class SchoolServiceAPI {
             }
             
             do {
-                let results = try JSONDecoder().decode([SchoolScores].self, from: data)
+                var results = try JSONDecoder().decode([SchoolScores].self, from: data)
+                
+                for i in 0..<results.count {
+                    if Int(results[i].sat_critical_reading_avg_score) != nil && Int(results[i].sat_math_avg_score) != nil && Int(results[i].sat_writing_avg_score) != nil {
+                    } else {
+                        results[i] = SchoolScores()
+                    }
+                }
+                
                 completion(.success(results))
             } catch {
                 completion(.failure(CustomError.noSATData))
