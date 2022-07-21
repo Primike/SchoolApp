@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TopSchoolsListViewController: UIViewController {
+class TopSchoolsViewController: UIViewController {
     
     let schoolsTableView = UITableView()
     let numberOfSchools = UITextField()
@@ -119,7 +119,7 @@ class TopSchoolsListViewController: UIViewController {
     }
 }
 
-extension TopSchoolsListViewController: UITextFieldDelegate {
+extension TopSchoolsViewController: UITextFieldDelegate {
     //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         numberOfSchools.endEditing(true)
@@ -137,7 +137,7 @@ extension TopSchoolsListViewController: UITextFieldDelegate {
     }
 }
 
-extension TopSchoolsListViewController {
+extension TopSchoolsViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
@@ -155,12 +155,12 @@ extension TopSchoolsListViewController {
             errorHandler(message: "Please Type In Values Between 0 And \(topSchoolsViewModel.schoolsScores.count)")
             return
         }
+        
         if Int(numberOfSchools.text!) != nil {
             
             topSchoolsViewModel.number = Int(numberOfSchools.text!)!
             topSchoolsViewModel.getTopSchools()
             schoolsTableView.reloadData()
-            
         }
 
         func errorHandler(message: String){
@@ -170,7 +170,7 @@ extension TopSchoolsListViewController {
     }
 }
 
-extension TopSchoolsListViewController: UITableViewDataSource {
+extension TopSchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: topSchoolsViewModel.getInfo(for: indexPath))
@@ -190,7 +190,7 @@ extension TopSchoolsListViewController: UITableViewDataSource {
 
 
 
-extension TopSchoolsListViewController: UITableViewDelegate {
+extension TopSchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         navigationController?.pushViewController(SchoolTabBarViewController(school: topSchoolsViewModel.topSchools[indexPath.row], scores: topSchoolsViewModel.topSchoolsScores[indexPath.row]), animated: true)
