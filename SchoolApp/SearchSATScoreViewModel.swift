@@ -8,23 +8,22 @@
 import Foundation
 import UIKit
 
-//when no satdata app crashes
-class SchoolsCalculatorViewModel {
-    var schoolsSATData: [SchoolScores]
-    var schoolsData: [School]
+class SearchSATScoreViewModel {
+    var schools: [School]
+    var schoolsScores: [SchoolScores]
     var calculatedSchools = [School]()
     var calculatedSchoolsScores = [SchoolScores]()
     var myTotalScore = 0
     
-    init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
-        self.schoolsSATData = schoolsSATData
-        self.schoolsData = schoolsData
+    init(schools: [School], schoolScores: [SchoolScores]) {
+        self.schools = schools
+        self.schoolsScores = schoolScores
         
     }
     
     func calculateSATList() {
         var array = [SchoolScores]()
-        var scoresCopy = schoolsSATData
+        var scoresCopy = schoolsScores
         
         for _ in 0..<10 {
             var closest = 10000
@@ -48,9 +47,9 @@ class SchoolsCalculatorViewModel {
         var array = [School]()
         
         for i in calculatedSchoolsScores {
-            for j in 0..<schoolsData.count {
-                if i.dbn == schoolsData[j].dbn {
-                    array.append(schoolsData[j])
+            for j in 0..<schools.count {
+                if i.dbn == schools[j].dbn {
+                    array.append(schools[j])
                     break
                 }
             }

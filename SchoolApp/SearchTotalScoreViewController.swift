@@ -1,26 +1,26 @@
 //
-//  Top10SchoolsListViewController.swift
+//  SearchSATScoreViewController.swift
 //  SchoolApp
 //
-//  Created by Prince Avecillas on 7/10/22.
+//  Created by Prince Avecillas on 7/21/22.
 //
 
 import Foundation
 import UIKit
 
-class TopSchoolsViewController: UIViewController {
+class SearchTotalScoreViewController: UIViewController {
     
     let schoolsTableView = UITableView()
-    let numberOfSchools = UITextField()
+    let totalScore = UITextField()
     let errorLabel = UILabel()
     let enterButton = UIButton()
     
     let topSchoolsHeaderView = TopSchoolsHeaderView()
     
-    let topSchoolsViewModel: TopSchoolsViewModel
+    let searchSATScoreViewModel: SearchSATScoreViewModel
     
-    required init(viewModel: TopSchoolsViewModel) {
-        self.topSchoolsViewModel = viewModel
+    required init(viewModel: SearchSATScoreViewModel) {
+        self.searchSATScoreViewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -45,15 +45,15 @@ class TopSchoolsViewController: UIViewController {
         topSchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         topSchoolsHeaderView.backgroundColor = UIColor.systemBlue
         
-        numberOfSchools.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchools.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        numberOfSchools.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        numberOfSchools.adjustsFontSizeToFitWidth = true
-        numberOfSchools.textAlignment = .center
-        numberOfSchools.layer.borderWidth = 3
-        numberOfSchools.layer.cornerRadius = 7.0
-        numberOfSchools.textColor = .white
-        numberOfSchools.delegate = self
+        totalScore.translatesAutoresizingMaskIntoConstraints = false
+        totalScore.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        totalScore.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        totalScore.adjustsFontSizeToFitWidth = true
+        totalScore.textAlignment = .center
+        totalScore.layer.borderWidth = 3
+        totalScore.layer.cornerRadius = 7.0
+        totalScore.textColor = .white
+        totalScore.delegate = self
         
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         errorLabel.textAlignment = .center
@@ -81,7 +81,7 @@ class TopSchoolsViewController: UIViewController {
         view.addSubview(topSchoolsHeaderView)
         view.addSubview(schoolsTableView)
         
-        topSchoolsHeaderView.filterStackView.addSubview(numberOfSchools)
+        topSchoolsHeaderView.filterStackView.addSubview(totalScore)
         topSchoolsHeaderView.filterStackView.addSubview(errorLabel)
         topSchoolsHeaderView.filterStackView.addSubview(enterButton)
 
@@ -95,12 +95,12 @@ class TopSchoolsViewController: UIViewController {
             schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            numberOfSchools.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
-            numberOfSchools.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
-            numberOfSchools.heightAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.heightAnchor, multiplier: 0.3),
-            numberOfSchools.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+            totalScore.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
+            totalScore.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
+            totalScore.heightAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.heightAnchor, multiplier: 0.3),
+            totalScore.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
             
-            errorLabel.topAnchor.constraint(equalTo: numberOfSchools.bottomAnchor),
+            errorLabel.topAnchor.constraint(equalTo: totalScore.bottomAnchor),
             errorLabel.heightAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.heightAnchor, multiplier: 0.2),
             errorLabel.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
             errorLabel.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
@@ -119,10 +119,10 @@ class TopSchoolsViewController: UIViewController {
     }
 }
 
-extension TopSchoolsViewController: UITextFieldDelegate {
+extension SearchTotalScoreViewController: UITextFieldDelegate {
     //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        numberOfSchools.endEditing(true)
+        totalScore.endEditing(true)
         errorLabel.isHidden = true
         return true
     }
@@ -137,29 +137,30 @@ extension TopSchoolsViewController: UITextFieldDelegate {
     }
 }
 
-extension TopSchoolsViewController {
+extension SearchTotalScoreViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
-        if numberOfSchools.text!.isEmpty {
-            errorHandler(message: "Missing SAT Section")
+        if totalScore.text!.isEmpty {
+            errorHandler(message: "Insert A Value")
             return
         }
         
-        if Int(numberOfSchools.text!) == nil {
+        if Int(totalScore.text!) == nil {
             errorHandler(message: "Please Enter An Integer Value")
             return
         }
         
-        if Int(numberOfSchools.text!)! < 0 || Int(numberOfSchools.text!)! > topSchoolsViewModel.schoolsScores.count {
-            errorHandler(message: "Please Type In Values Between 0 And \(topSchoolsViewModel.schoolsScores.count)")
+        if Int(totalScore.text!)! < 600 || Int(totalScore.text!)! > 2400 {
+            errorHandler(message: "Please Type In Values Between 600 And 2400")
             return
         }
         
-        if Int(numberOfSchools.text!) != nil {
+        if Int(totalScore.text!) != nil {
             
-            topSchoolsViewModel.number = Int(numberOfSchools.text!)!
-            topSchoolsViewModel.getTopSchools()
+            searchSATScoreViewModel.myTotalScore = Int(totalScore.text!)!
+            searchSATScoreViewModel.calculateSATList()
+            searchSATScoreViewModel.getCalculatedSchools()
             schoolsTableView.reloadData()
         }
 
@@ -170,17 +171,17 @@ extension TopSchoolsViewController {
     }
 }
 
-extension TopSchoolsViewController: UITableViewDataSource {
+extension SearchTotalScoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: topSchoolsViewModel.getInfo(for: indexPath))
+        schoolCell.configure(info: searchSATScoreViewModel.getInfo(for: indexPath))
         schoolCell.schoolBoro.text = "Rank #\(indexPath.row + 1)"
         schoolCell.schoolBoro.textColor = .black
         return schoolCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return topSchoolsViewModel.topSchools.count
+        return searchSATScoreViewModel.calculatedSchools.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -190,9 +191,9 @@ extension TopSchoolsViewController: UITableViewDataSource {
 
 
 
-extension TopSchoolsViewController: UITableViewDelegate {
+extension SearchTotalScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: topSchoolsViewModel.topSchools[indexPath.row], scores: topSchoolsViewModel.topSchoolsScores[indexPath.row]), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: searchSATScoreViewModel.calculatedSchools[indexPath.row], scores: searchSATScoreViewModel.calculatedSchoolsScores[indexPath.row]), animated: true)
     }
 }

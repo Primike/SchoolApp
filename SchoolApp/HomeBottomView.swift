@@ -60,12 +60,12 @@ class HomeBottomView: UIView {
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
         welcomeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         welcomeLabel.text = "Welcome"
-        welcomeLabel.textColor = .systemRed
+        welcomeLabel.textColor = .systemBlue
         welcomeLabel.adjustsFontSizeToFitWidth = true
         welcomeLabel.textAlignment = .center
         
         divider2.translatesAutoresizingMaskIntoConstraints = false
-        divider2.backgroundColor = .systemRed
+        divider2.backgroundColor = .systemBlue
     }
     
     func layout() {

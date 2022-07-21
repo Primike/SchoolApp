@@ -79,7 +79,7 @@ extension MySchoolsViewController: UITableViewDataSource {
 }
 
 
-
+//crahsed for some reason
 extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

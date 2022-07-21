@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
         homeBottomView.translatesAutoresizingMaskIntoConstraints = false
         homeBottomView.layer.cornerRadius = 70
         homeBottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        homeBottomView.backgroundColor = UIColor.systemRed
+        homeBottomView.backgroundColor = UIColor.systemBlue
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
@@ -193,7 +193,6 @@ extension HomeViewController: RequestDelegate {
             }))
         }
 
-        
         present(alert, animated: true)
     }
 }
@@ -203,7 +202,7 @@ extension HomeViewController {
     }
     
     @objc func topSchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(TopSchoolsListViewController(viewModel: TopSchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.filteredSchoolScores)), animated: true)
+        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.filteredSchoolScores)), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
@@ -215,7 +214,7 @@ extension HomeViewController {
     }
     
     @objc func calculatorTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolsCalculatorViewController(viewModel: SchoolsCalculatorViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoreViewModel(schools: homeViewModel.schools, schoolScores: homeViewModel.schoolsScores)), animated: true)
     }
 }
 

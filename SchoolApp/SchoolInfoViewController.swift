@@ -130,6 +130,14 @@ class SchoolInfoViewController: UIViewController {
                 
         ])
     }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Added To My Schools!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+        }))
+
+        present(alert, animated: true)
+    }
 }
 
 extension SchoolInfoViewController {
@@ -153,6 +161,8 @@ extension SchoolInfoViewController {
             
             savedArray.append(school.dbn)
             defaults.set(savedArray, forKey: "array")
+            
+            self.showAlert()
             
         } else {
             addButtonImage = "plus.circle"

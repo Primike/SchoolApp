@@ -36,6 +36,8 @@ class MySchoolsViewModel {
         for i in mySchools {
             if let scores = schoolsScores.first(where: {$0.dbn == i.dbn}) {
                 mySchoolsScores.append(scores)
+            } else {
+                mySchoolsScores.append(SchoolScores())
             }
         }
         self.schools = mySchools

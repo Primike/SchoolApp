@@ -94,5 +94,6 @@ extension NearbySchoolsViewController: MKMapViewDelegate {
         let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
         
         navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+        
     }
 }

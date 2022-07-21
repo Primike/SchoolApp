@@ -17,9 +17,9 @@ class SchoolsCalculatorViewController: UIViewController {
     let calculatorButton = UIButton(type: .system)
     let schoolsTableView = UITableView()
 
-    let schoolsCalculatorViewModel: SchoolsCalculatorViewModel
+    let schoolsCalculatorViewModel: SearchSATScoreViewModel
     
-    required init(viewModel: SchoolsCalculatorViewModel) {
+    required init(viewModel: SearchSATScoreViewModel) {
         self.schoolsCalculatorViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
@@ -60,7 +60,6 @@ extension SchoolsCalculatorViewController {
         satMathScore.textAlignment = .center
         satMathScore.layer.borderWidth = 1
         satMathScore.layer.cornerRadius = 4.0
-//        satMathScore.keyboardType = .numberPad
         satMathScore.delegate = self
         
         satWritingScore.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +67,6 @@ extension SchoolsCalculatorViewController {
         satWritingScore.textAlignment = .center
         satWritingScore.layer.borderWidth = 1
         satWritingScore.layer.cornerRadius = 4.0
-//        satWritingScore.keyboardType = .numberPad
         satWritingScore.delegate = self
         
         satReadingScore.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +74,6 @@ extension SchoolsCalculatorViewController {
         satReadingScore.textAlignment = .center
         satReadingScore.layer.borderWidth = 1
         satReadingScore.layer.cornerRadius = 4.0
-//        satReadingScore.keyboardType = .numberPad
         satReadingScore.delegate = self
         
         
@@ -142,15 +139,16 @@ extension SchoolsCalculatorViewController {
             return
         }
         
-        if Double(satMathScore.text!) == nil || Double(satReadingScore.text!) == nil || Double(satWritingScore.text!) == nil {
-            errorHandler(message: "Please enter a numerical value")
+        if Int(satMathScore.text!) == nil || Int(satReadingScore.text!) == nil || Int(satWritingScore.text!) == nil {
+            errorHandler(message: "Please Enter An Integer Value")
             return
         }
         
-        if Double(satMathScore.text!)! < 200 || Double(satMathScore.text!)! > 800 || Double(satReadingScore.text!)! < 200 || Double(satReadingScore.text!)! > 800 || Double(satWritingScore.text!)! < 200 || Double(satWritingScore.text!)! > 800 {
-            errorHandler(message: "Please type in values between 200 and 800")
+        if Int(satMathScore.text!)! < 200 || Int(satMathScore.text!)! > 800 || Int(satReadingScore.text!)! < 200 || Int(satReadingScore.text!)! > 800 || Int(satWritingScore.text!)! < 200 || Int(satWritingScore.text!)! > 800 {
+            errorHandler(message: "Please Type In Values Between 200 And 800")
             return
         }
+        
         if Int(satMathScore.text!) != nil && Int(satMathScore.text!) != nil && Int(satMathScore.text!) != nil  {
             let x = Int(satMathScore.text!)! + Int(satMathScore.text!)! + Int(satMathScore.text!)!
 

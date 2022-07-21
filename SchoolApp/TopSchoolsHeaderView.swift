@@ -34,10 +34,10 @@ class TopSchoolsHeaderView: UIView {
         headerStackView.axis = .horizontal
 
         topSchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsLabel.font = UIFont(name:"TrebuchetMS-Bold", size: 100.0 )
+        topSchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         topSchoolsLabel.adjustsFontSizeToFitWidth = true
         topSchoolsLabel.textAlignment = .center
-        topSchoolsLabel.text = "Top Schools By SAT Scores"
+        topSchoolsLabel.text = "Top Schools By Total SAT Score"
         topSchoolsLabel.textColor = .white
         topSchoolsLabel.numberOfLines = 0
         
@@ -45,7 +45,7 @@ class TopSchoolsHeaderView: UIView {
         filterStackView.axis = .vertical
 
         topLabel.translatesAutoresizingMaskIntoConstraints = false
-        topLabel.font = UIFont(name:"TrebuchetMS-Bold", size: 100.0 )
+        topLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         topLabel.adjustsFontSizeToFitWidth = true
         topLabel.textAlignment = .center
         topLabel.text = "  Top  "
@@ -53,7 +53,7 @@ class TopSchoolsHeaderView: UIView {
         topLabel.numberOfLines = 0
         
         schoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolsLabel.font = UIFont(name:"TrebuchetMS-Bold", size: 100.0 )
+        schoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         schoolsLabel.adjustsFontSizeToFitWidth = true
         schoolsLabel.textAlignment = .center
         schoolsLabel.text = "Schools"
@@ -87,12 +87,12 @@ class TopSchoolsHeaderView: UIView {
             filterStackView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
             
             topLabel.topAnchor.constraint(equalTo: filterStackView.topAnchor),
-            topLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.2),
+            topLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
             topLabel.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.3),
             topLabel.leftAnchor.constraint(equalTo: filterStackView.leftAnchor),
             
             schoolsLabel.topAnchor.constraint(equalTo: filterStackView.topAnchor),
-            schoolsLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.2),
+            schoolsLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
             schoolsLabel.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.3),
             schoolsLabel.rightAnchor.constraint(equalTo: filterStackView.rightAnchor)
 

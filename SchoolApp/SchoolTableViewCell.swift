@@ -78,7 +78,7 @@ class SchoolTableViewCell: UITableViewCell {
         case "X":
             return .systemOrange
         case "K":
-            return UIColor.black
+            return UIColor.systemRed
         case "Q":
             return UIColor.systemPurple
         default:
