@@ -1,5 +1,5 @@
 //
-//  SearchSATScoreViewController.swift
+//  SearchReadingScoreViewController.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 7/21/22.
@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class SearchTotalScoreViewController: UIViewController {
+class SearchReadingScoreViewController: UIViewController {
     
     let schoolsTableView = UITableView()
-    let totalScoreText = UITextField()
+    let readingScoreText = UITextField()
     let schoolNumberText = UITextField()
     let errorLabel = UILabel()
     let enterButton = UIButton()
@@ -46,15 +46,17 @@ class SearchTotalScoreViewController: UIViewController {
         searchSATScoresHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         searchSATScoresHeaderView.backgroundColor = UIColor.systemBlue
         
-        totalScoreText.translatesAutoresizingMaskIntoConstraints = false
-        totalScoreText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        totalScoreText.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        totalScoreText.adjustsFontSizeToFitWidth = true
-        totalScoreText.textAlignment = .center
-        totalScoreText.layer.borderWidth = 3
-        totalScoreText.layer.cornerRadius = 7.0
-        totalScoreText.textColor = .white
-        totalScoreText.delegate = self
+        searchSATScoresHeaderView.topSchoolsLabel.text = "Search Schools By Critical Reading Score"
+        
+        readingScoreText.translatesAutoresizingMaskIntoConstraints = false
+        readingScoreText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        readingScoreText.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        readingScoreText.adjustsFontSizeToFitWidth = true
+        readingScoreText.textAlignment = .center
+        readingScoreText.layer.borderWidth = 3
+        readingScoreText.layer.cornerRadius = 7.0
+        readingScoreText.textColor = .white
+        readingScoreText.delegate = self
         
         schoolNumberText.translatesAutoresizingMaskIntoConstraints = false
         schoolNumberText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
@@ -92,7 +94,7 @@ class SearchTotalScoreViewController: UIViewController {
         view.addSubview(searchSATScoresHeaderView)
         view.addSubview(schoolsTableView)
         
-        searchSATScoresHeaderView.scoreStackView.addSubview(totalScoreText)
+        searchSATScoresHeaderView.scoreStackView.addSubview(readingScoreText)
         searchSATScoresHeaderView.numberStackView.addSubview(schoolNumberText)
         searchSATScoresHeaderView.filterStackView.addSubview(errorLabel)
         searchSATScoresHeaderView.filterStackView.addSubview(enterButton)
@@ -107,17 +109,17 @@ class SearchTotalScoreViewController: UIViewController {
             schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            totalScoreText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.topAnchor),
-            totalScoreText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.widthAnchor, multiplier: 0.45),
-            totalScoreText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.heightAnchor),
-            totalScoreText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.rightAnchor),
+            readingScoreText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.topAnchor),
+            readingScoreText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.widthAnchor, multiplier: 0.45),
+            readingScoreText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.heightAnchor),
+            readingScoreText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.rightAnchor),
             
             schoolNumberText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.topAnchor),
             schoolNumberText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.widthAnchor, multiplier: 0.45),
             schoolNumberText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.heightAnchor),
             schoolNumberText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.rightAnchor),
             
-            errorLabel.topAnchor.constraint(equalTo: totalScoreText.bottomAnchor),
+            errorLabel.topAnchor.constraint(equalTo: readingScoreText.bottomAnchor),
             errorLabel.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.heightAnchor, multiplier: 0.2),
             errorLabel.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
             errorLabel.centerXAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.centerXAnchor),
@@ -136,11 +138,10 @@ class SearchTotalScoreViewController: UIViewController {
     }
 }
 
-//check if need to add other text to endeditin
-extension SearchTotalScoreViewController: UITextFieldDelegate {
+extension SearchReadingScoreViewController: UITextFieldDelegate {
     //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        totalScoreText.endEditing(true)
+        readingScoreText.endEditing(true)
         errorLabel.isHidden = true
         return true
     }
@@ -155,29 +156,29 @@ extension SearchTotalScoreViewController: UITextFieldDelegate {
     }
 }
 
-extension SearchTotalScoreViewController {
+extension SearchReadingScoreViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
-        if totalScoreText.text!.isEmpty {
+        if readingScoreText.text!.isEmpty {
             errorHandler(message: "Insert A Value")
             return
         }
         
-        if Int(totalScoreText.text!) == nil {
+        if Int(readingScoreText.text!) == nil {
             errorHandler(message: "Please Enter An Integer Value")
             return
         }
         
-        if Int(totalScoreText.text!)! < 600 || Int(totalScoreText.text!)! > 2400 {
-            errorHandler(message: "Please Type In Values Between 600 And 2400")
+        if Int(readingScoreText.text!)! < 200 || Int(readingScoreText.text!)! > 800 {
+            errorHandler(message: "Please Type In Values Between 200 And 800")
             return
         }
         
-        if Int(totalScoreText.text!) != nil {
-            searchSATScoreViewModel.myTotalScore = Int(totalScoreText.text!)!
+        if Int(readingScoreText.text!) != nil {
+            searchSATScoreViewModel.myTotalScore = Int(readingScoreText.text!)!
             searchSATScoreViewModel.number = Int(schoolNumberText.text!) ?? 10
-            searchSATScoreViewModel.searchTotalScores()
+            searchSATScoreViewModel.searchReadingScores()
             searchSATScoreViewModel.getSearchedSchools()
             schoolsTableView.reloadData()
         }
@@ -189,7 +190,7 @@ extension SearchTotalScoreViewController {
     }
 }
 
-extension SearchTotalScoreViewController: UITableViewDataSource {
+extension SearchReadingScoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: searchSATScoreViewModel.getInfo(for: indexPath))
@@ -209,9 +210,10 @@ extension SearchTotalScoreViewController: UITableViewDataSource {
 
 
 
-extension SearchTotalScoreViewController: UITableViewDelegate {
+extension SearchReadingScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         navigationController?.pushViewController(SchoolTabBarViewController(school: searchSATScoreViewModel.calculatedSchools[indexPath.row], scores: searchSATScoreViewModel.calculatedSchoolsScores[indexPath.row]), animated: true)
     }
 }
+

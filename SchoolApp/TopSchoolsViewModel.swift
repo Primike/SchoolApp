@@ -19,6 +19,7 @@ class TopSchoolsViewModel {
     init(schools: [School], schoolsScores: [SchoolScores]) {
         self.schools = schools
         
+        //put this in gettopschool maybe
         let sortedScores = schoolsScores.sorted(by: { Int($0.sat_critical_reading_avg_score)! + Int($0.sat_math_avg_score)! + Int($0.sat_writing_avg_score)! > Int($1.sat_critical_reading_avg_score)! + Int($1.sat_math_avg_score)! + Int($1.sat_writing_avg_score)!})
         
         self.schoolsScores = sortedScores

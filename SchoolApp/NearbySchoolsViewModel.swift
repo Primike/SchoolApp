@@ -14,11 +14,12 @@ class NearbySchoolsViewModel {
     var schools = [School]()
     var schoolsScores = [SchoolScores]()
     var nearbySchools = [School]()
+    var latitude = 0.0
+    var longitude = 0.0
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsScores = schoolsSATData
         self.schools = schoolsData
-        
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
@@ -26,7 +27,7 @@ class NearbySchoolsViewModel {
             return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
     }
     
-    func getNearbySchools(latitude: Double, longitude: Double) {
+    func getNearbySchools() {
 
         for _ in 0..<10 {
             var closest = Double(10000)

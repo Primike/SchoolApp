@@ -142,7 +142,9 @@ extension TopSchoolsViewController {
         errorLabel.isHidden = true
 
         if numberOfSchools.text!.isEmpty {
-            errorHandler(message: "Missing SAT Section")
+            topSchoolsViewModel.number = 10
+            topSchoolsViewModel.getTopSchools()
+            schoolsTableView.reloadData()
             return
         }
         
@@ -157,7 +159,6 @@ extension TopSchoolsViewController {
         }
         
         if Int(numberOfSchools.text!) != nil {
-            
             topSchoolsViewModel.number = Int(numberOfSchools.text!)!
             topSchoolsViewModel.getTopSchools()
             schoolsTableView.reloadData()

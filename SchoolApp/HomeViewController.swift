@@ -214,7 +214,7 @@ extension HomeViewController {
     }
     
     @objc func calculatorTapped(sender: UIButton) {
-        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoreViewModel(schools: homeViewModel.schools, schoolScores: homeViewModel.schoolsScores)), animated: true)
+        navigationController?.pushViewController(SearchScoresTabBarViewController(viewModel: SearchScoresViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
 }
 

@@ -13,8 +13,15 @@ import CoreLocation
 class NearbySchoolsViewController: UIViewController {
     
     let map = MKMapView()
+    let latitudeText = UITextField()
+    let longitudeText = UITextField()
+    let errorLabel = UILabel()
+    let enterButton = UIButton()
+
     let nearbySchoolsViewModel: NearbySchoolsViewModel
     var nearbySchools = [School]()
+    
+    let nearbySchoolsHeaderView = NearbySchoolsHeaderView()
     
     init(viewModel: NearbySchoolsViewModel) {
         self.nearbySchoolsViewModel = viewModel
@@ -36,20 +43,92 @@ class NearbySchoolsViewController: UIViewController {
     
 
     func style() {
-        title = "NEARBY SCHOOLS"
         view.backgroundColor = .white
         map.translatesAutoresizingMaskIntoConstraints = false
+        
+        nearbySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        nearbySchoolsHeaderView.layer.cornerRadius = 30
+        nearbySchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        nearbySchoolsHeaderView.backgroundColor = UIColor.systemBlue
+        
+        latitudeText.translatesAutoresizingMaskIntoConstraints = false
+        latitudeText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        latitudeText.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        latitudeText.adjustsFontSizeToFitWidth = true
+        latitudeText.textAlignment = .center
+        latitudeText.layer.borderWidth = 3
+        latitudeText.layer.cornerRadius = 7.0
+        latitudeText.textColor = .white
+        latitudeText.delegate = self
+        
+        longitudeText.translatesAutoresizingMaskIntoConstraints = false
+        longitudeText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        longitudeText.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        longitudeText.adjustsFontSizeToFitWidth = true
+        longitudeText.textAlignment = .center
+        longitudeText.layer.borderWidth = 3
+        longitudeText.layer.cornerRadius = 7.0
+        longitudeText.textColor = .white
+        longitudeText.delegate = self
+        
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.textAlignment = .center
+        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        errorLabel.adjustsFontSizeToFitWidth = true
+        errorLabel.numberOfLines = 0
+        errorLabel.textColor = .systemRed
+        errorLabel.text = "Error Label"
+        errorLabel.isHidden = true
+        
+        enterButton.translatesAutoresizingMaskIntoConstraints = false
+        enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
+        enterButton.backgroundColor = .black
+        enterButton.setTitleColor(.white, for: .normal)
+        enterButton.setTitle("Search", for: .normal)
+        enterButton.titleLabel!.font = UIFont(name:"HelveticaNeue-bold", size: 20.0)
+        enterButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        enterButton.layer.cornerRadius = 10
+        enterButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     func layout() {
+        view.addSubview(nearbySchoolsHeaderView)
         view.addSubview(map)
         
+        nearbySchoolsHeaderView.latitudeStackView.addSubview(latitudeText)
+        nearbySchoolsHeaderView.longitudeStackView.addSubview(longitudeText)
+        nearbySchoolsHeaderView.coordinatesStackView.addSubview(enterButton)
+        nearbySchoolsHeaderView.headerStackView.addSubview(errorLabel)
+        
         NSLayoutConstraint.activate([
-            map.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            map.widthAnchor.constraint(equalTo: view.widthAnchor),
-            map.heightAnchor.constraint(equalTo: view.heightAnchor),
+            nearbySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nearbySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            nearbySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             
+            map.topAnchor.constraint(equalTo: nearbySchoolsHeaderView.bottomAnchor),
+            map.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            map.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
+            latitudeText.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.centerYAnchor),
+            latitudeText.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.widthAnchor, multiplier: 0.45),
+            latitudeText.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.heightAnchor, multiplier: 0.5),
+            latitudeText.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.rightAnchor),
+            
+            longitudeText.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.centerYAnchor),
+            longitudeText.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.widthAnchor, multiplier: 0.45),
+            longitudeText.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.heightAnchor, multiplier: 0.5),
+            longitudeText.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.rightAnchor),
+            
+            enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.centerYAnchor),
+            enterButton.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.rightAnchor),
+            enterButton.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.heightAnchor, multiplier: 0.6),
+            enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.widthAnchor, multiplier: 0.25),
+            
+            errorLabel.topAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.bottomAnchor),
+            errorLabel.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.2),
+            errorLabel.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.headerStackView.widthAnchor, multiplier: 0.7),
+            errorLabel.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.headerStackView.centerXAnchor),
         ])
     }
 
@@ -64,7 +143,10 @@ class NearbySchoolsViewController: UIViewController {
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
                 strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
-                self!.nearbySchoolsViewModel.getNearbySchools(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                
+                self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
+                self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
+                self!.nearbySchoolsViewModel.getNearbySchools()
                 self!.setupMap()
                 
             }
@@ -95,5 +177,62 @@ extension NearbySchoolsViewController: MKMapViewDelegate {
         
         navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
         
+    }
+}
+
+extension NearbySchoolsViewController: UITextFieldDelegate {
+    //the user hits return, so we should end editing and return true
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        latitudeText.endEditing(true)
+        errorLabel.isHidden = true
+        return true
+    }
+    
+    //callback to see what's in the text field
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        errorLabel.isHidden = true
+    }
+}
+
+extension NearbySchoolsViewController {
+    @objc func enterButtonTapped(sender: UIButton) {
+        errorLabel.isHidden = true
+
+        if latitudeText.text!.isEmpty || longitudeText.text!.isEmpty{
+            errorHandler(message: "Insert A Value")
+            return
+        }
+        
+        if Double(latitudeText.text!) == nil || Double(longitudeText.text!) == nil{
+            errorHandler(message: "Please Enter A Numerical Value")
+            return
+        }
+        
+        if Double(latitudeText.text!)! < -90 || Double(latitudeText.text!)! > 90 {
+            errorHandler(message: "Latitude Values Range Between -90 And 90")
+            return
+        }
+        
+        if Double(longitudeText.text!)! < -180 || Double(longitudeText.text!)! > 180 {
+            errorHandler(message: "Longitude Values Range Between -180 And 180")
+            return
+        }
+        
+        if Double(latitudeText.text!) != nil && Double(latitudeText.text!) != nil{
+            self.nearbySchoolsViewModel.latitude = Double(latitudeText.text!)!
+            self.nearbySchoolsViewModel.longitude = Double(longitudeText.text!)!
+            self.nearbySchoolsViewModel.getNearbySchools()
+            self.map.reloadInputViews()
+            self.setupMap()
+        }
+
+        func errorHandler(message: String){
+             errorLabel.isHidden = false
+             errorLabel.text = message
+        }
     }
 }

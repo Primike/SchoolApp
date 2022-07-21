@@ -17,9 +17,9 @@ class SchoolsCalculatorViewController: UIViewController {
     let calculatorButton = UIButton(type: .system)
     let schoolsTableView = UITableView()
 
-    let schoolsCalculatorViewModel: SearchSATScoreViewModel
+    let schoolsCalculatorViewModel: SearchScoresViewModel
     
-    required init(viewModel: SearchSATScoreViewModel) {
+    required init(viewModel: SearchScoresViewModel) {
         self.schoolsCalculatorViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
@@ -153,8 +153,8 @@ extension SchoolsCalculatorViewController {
             let x = Int(satMathScore.text!)! + Int(satMathScore.text!)! + Int(satMathScore.text!)!
 
             schoolsCalculatorViewModel.myTotalScore = x
-            schoolsCalculatorViewModel.calculateSATList()
-            schoolsCalculatorViewModel.getCalculatedSchools()
+            schoolsCalculatorViewModel.searchTotalScores()
+            schoolsCalculatorViewModel.getSearchedSchools()
             print(schoolsCalculatorViewModel.myTotalScore, schoolsCalculatorViewModel.calculatedSchools.count)
             schoolsTableView.reloadData()
             

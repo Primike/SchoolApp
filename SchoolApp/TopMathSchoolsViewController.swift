@@ -144,10 +144,13 @@ extension TopMathSchoolsViewController {
         errorLabel.isHidden = true
 
         if numberOfSchools.text!.isEmpty {
-            errorHandler(message: "Missing SAT Section")
+            topSchoolsViewModel.number = 10
+            topSchoolsViewModel.getTopMathSchools()
+            schoolsTableView.reloadData()
             return
         }
         
+        //maybe add a cleartable
         if Int(numberOfSchools.text!) == nil {
             errorHandler(message: "Please Enter An Integer Value")
             return
