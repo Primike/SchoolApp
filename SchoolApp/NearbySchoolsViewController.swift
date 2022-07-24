@@ -15,11 +15,11 @@ class NearbySchoolsViewController: UIViewController {
     let map = MKMapView()
     let latitudeText = UITextField()
     let longitudeText = UITextField()
-    let errorLabel = UILabel()
     let enterButton = UIButton()
 
     let nearbySchoolsViewModel: NearbySchoolsViewModel
     var nearbySchools = [School]()
+    var annotations = [MKPointAnnotation]()
     
     let nearbySchoolsHeaderView = NearbySchoolsHeaderView()
     
@@ -71,15 +71,6 @@ class NearbySchoolsViewController: UIViewController {
         longitudeText.textColor = .white
         longitudeText.delegate = self
         
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.textAlignment = .center
-        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.numberOfLines = 0
-        errorLabel.textColor = .systemRed
-        errorLabel.text = "Error Label"
-        errorLabel.isHidden = true
-        
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
         enterButton.backgroundColor = .black
@@ -98,7 +89,6 @@ class NearbySchoolsViewController: UIViewController {
         nearbySchoolsHeaderView.latitudeStackView.addSubview(latitudeText)
         nearbySchoolsHeaderView.longitudeStackView.addSubview(longitudeText)
         nearbySchoolsHeaderView.coordinatesStackView.addSubview(enterButton)
-        nearbySchoolsHeaderView.headerStackView.addSubview(errorLabel)
         
         NSLayoutConstraint.activate([
             nearbySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -124,11 +114,7 @@ class NearbySchoolsViewController: UIViewController {
             enterButton.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.rightAnchor),
             enterButton.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.heightAnchor, multiplier: 0.6),
             enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.widthAnchor, multiplier: 0.25),
-            
-            errorLabel.topAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.bottomAnchor),
-            errorLabel.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.2),
-            errorLabel.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.headerStackView.widthAnchor, multiplier: 0.7),
-            errorLabel.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.headerStackView.centerXAnchor),
+        
         ])
     }
 
@@ -154,10 +140,10 @@ class NearbySchoolsViewController: UIViewController {
     }
     
     func setupMap() {
-        print(nearbySchoolsViewModel.nearbySchools.count)
         for i in nearbySchoolsViewModel.nearbySchools {
             addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
         }
+        map.addAnnotations(annotations)
     }
     
     func addMapPin(latitude: String, longitude: String, label: String) {
@@ -165,42 +151,14 @@ class NearbySchoolsViewController: UIViewController {
         pin.coordinate.longitude = Double(longitude)!
         pin.coordinate.latitude = Double(latitude)!
         pin.title = label
-        map.addAnnotation(pin)
-    }
-}
-
-
-extension NearbySchoolsViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(view.annotation!.title!!)
-        let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
-        
-    }
-}
-
-extension NearbySchoolsViewController: UITextFieldDelegate {
-    //the user hits return, so we should end editing and return true
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        latitudeText.endEditing(true)
-        errorLabel.isHidden = true
-        return true
-    }
-    
-    //callback to see what's in the text field
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        errorLabel.isHidden = true
+        annotations.append(pin)
     }
 }
 
 extension NearbySchoolsViewController {
     @objc func enterButtonTapped(sender: UIButton) {
-        errorLabel.isHidden = true
+        nearbySchoolsHeaderView.errorLabel.isHidden = true
 
         if latitudeText.text!.isEmpty || longitudeText.text!.isEmpty{
             errorHandler(message: "Insert A Value")
@@ -226,13 +184,44 @@ extension NearbySchoolsViewController {
             self.nearbySchoolsViewModel.latitude = Double(latitudeText.text!)!
             self.nearbySchoolsViewModel.longitude = Double(longitudeText.text!)!
             self.nearbySchoolsViewModel.getNearbySchools()
-            self.map.reloadInputViews()
+            self.map.removeAnnotations(annotations)
+            self.annotations = []
             self.setupMap()
+            for i in nearbySchoolsViewModel.nearbySchools {
+                print(i.school_name)
+            }
         }
 
         func errorHandler(message: String){
-             errorLabel.isHidden = false
-             errorLabel.text = message
+            nearbySchoolsHeaderView.errorLabel.isHidden = false
+            nearbySchoolsHeaderView.errorLabel.text = message
         }
+    }
+}
+
+extension NearbySchoolsViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
+        
+        navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+        
+    }
+}
+
+extension NearbySchoolsViewController: UITextFieldDelegate {
+    //the user hits return, so we should end editing and return true
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        latitudeText.endEditing(true)
+        nearbySchoolsHeaderView.errorLabel.isHidden = true
+        return true
+    }
+    
+    //callback to see what's in the text field
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        nearbySchoolsHeaderView.errorLabel.isHidden = true
     }
 }

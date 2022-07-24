@@ -17,6 +17,8 @@ class NearbySchoolsHeaderView: UIView {
     let latitude = UILabel()
     let longitudeStackView = UIStackView()
     let longitude = UILabel()
+    let errorLabel = UILabel()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,6 +66,15 @@ class NearbySchoolsHeaderView: UIView {
         longitude.text = "Longitude"
         longitude.textColor = .white
         longitude.numberOfLines = 0
+        
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.textAlignment = .center
+        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        errorLabel.adjustsFontSizeToFitWidth = true
+        errorLabel.numberOfLines = 0
+        errorLabel.textColor = .systemRed
+        errorLabel.text = "Error Label"
+        errorLabel.isHidden = true
 
     }
     
@@ -71,6 +82,7 @@ class NearbySchoolsHeaderView: UIView {
         self.addSubview(headerStackView)
         headerStackView.addSubview(coordinatesLabel)
         headerStackView.addSubview(coordinatesStackView)
+        headerStackView.addSubview(errorLabel)
         
         coordinatesStackView.addSubview(latitudeStackView)
         coordinatesStackView.addSubview(longitudeStackView)
@@ -113,6 +125,11 @@ class NearbySchoolsHeaderView: UIView {
             longitude.widthAnchor.constraint(equalTo: longitudeStackView.widthAnchor, multiplier: 0.45),
             longitude.leftAnchor.constraint(equalTo: longitudeStackView.leftAnchor),
             longitude.topAnchor.constraint(equalTo: longitudeStackView.topAnchor),
+            
+            errorLabel.topAnchor.constraint(equalTo: coordinatesStackView.bottomAnchor),
+            errorLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.2),
+            errorLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.7),
+            errorLabel.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
     
         ])
     }

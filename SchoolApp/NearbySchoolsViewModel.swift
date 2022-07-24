@@ -28,20 +28,22 @@ class NearbySchoolsViewModel {
     }
     
     func getNearbySchools() {
-
+        var array = schools
+        nearbySchools = []
+        
         for _ in 0..<10 {
             var closest = Double(10000)
             var index = 0
-            for j in 0..<schools.count {
-                let difference = abs(latitude - Double(schools[j].latitude!)!) + abs(longitude - Double(schools[j].longitude!)!)
+            for j in 0..<array.count {
+                let difference = abs(latitude - Double(array[j].latitude!)!) + abs(longitude - Double(array[j].longitude!)!)
                 if difference < closest {
                     closest = difference
                     index = j
                 }
             }
-            nearbySchools.append(schools[index])
+            nearbySchools.append(array[index])
             
-            schools.remove(at: index)
+            array.remove(at: index)
         }
     }
     
