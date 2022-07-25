@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
-		9EA40B302884F782000DE8A0 /* NearbySchoolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA40B2F2884F782000DE8A0 /* NearbySchoolsViewController.swift */; };
+		9EA40B302884F782000DE8A0 /* CoordinateSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA40B2F2884F782000DE8A0 /* CoordinateSearchViewController.swift */; };
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* NearbySchoolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* NearbySchoolsViewModel.swift */; };
 		B801DEEA287B281400EA2090 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B801DEE9287B281400EA2090 /* HomeViewModel.swift */; };
@@ -25,6 +25,9 @@
 		B82F179A2889996E00AA42F1 /* SearchScoresTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F17992889996E00AA42F1 /* SearchScoresTabBarViewController.swift */; };
 		B82F179C28899B1C00AA42F1 /* SearchTotalScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F179B28899B1C00AA42F1 /* SearchTotalScoreViewController.swift */; };
 		B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83017B5284933C700303EEE /* SchoolsStruct.swift */; };
+		B841D463288E02670058E959 /* MapTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B841D462288E02670058E959 /* MapTabBarViewController.swift */; };
+		B841D466288E05110058E959 /* RadiusSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B841D465288E05110058E959 /* RadiusSearchViewController.swift */; };
+		B841D468288E08550058E959 /* RadiusSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */; };
 		B848D3D02856637A00FE01C9 /* SchoolTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */; };
 		B8736662288055B60076632F /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8736661288055B60076632F /* HomeTopView.swift */; };
 		B8736664288057480076632F /* HomeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8736663288057480076632F /* HomeBottomView.swift */; };
@@ -85,7 +88,7 @@
 
 /* Begin PBXFileReference section */
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
-		9EA40B2F2884F782000DE8A0 /* NearbySchoolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbySchoolsViewController.swift; sourceTree = "<group>"; };
+		9EA40B2F2884F782000DE8A0 /* CoordinateSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateSearchViewController.swift; sourceTree = "<group>"; };
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* NearbySchoolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbySchoolsViewModel.swift; sourceTree = "<group>"; };
 		B801DEE9287B281400EA2090 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -102,6 +105,9 @@
 		B82F17992889996E00AA42F1 /* SearchScoresTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScoresTabBarViewController.swift; sourceTree = "<group>"; };
 		B82F179B28899B1C00AA42F1 /* SearchTotalScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTotalScoreViewController.swift; sourceTree = "<group>"; };
 		B83017B5284933C700303EEE /* SchoolsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsStruct.swift; sourceTree = "<group>"; };
+		B841D462288E02670058E959 /* MapTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabBarViewController.swift; sourceTree = "<group>"; };
+		B841D465288E05110058E959 /* RadiusSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSearchViewController.swift; sourceTree = "<group>"; };
+		B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSearchHeaderView.swift; sourceTree = "<group>"; };
 		B848D3CF2856637A00FE01C9 /* SchoolTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTabBarViewController.swift; sourceTree = "<group>"; };
 		B8736661288055B60076632F /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = "<group>"; };
 		B8736663288057480076632F /* HomeBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomView.swift; sourceTree = "<group>"; };
@@ -295,7 +301,8 @@
 		B82F178E28898DE300AA42F1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9EA40B2F2884F782000DE8A0 /* NearbySchoolsViewController.swift */,
+				B841D462288E02670058E959 /* MapTabBarViewController.swift */,
+				B841D464288E04EB0058E959 /* TabBarControllers */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -367,6 +374,15 @@
 				B8E650AB2889B7570027716E /* SearchWritingScoreViewController.swift */,
 			);
 			name = TabViewControllers;
+			sourceTree = "<group>";
+		};
+		B841D464288E04EB0058E959 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9EA40B2F2884F782000DE8A0 /* CoordinateSearchViewController.swift */,
+				B841D465288E05110058E959 /* RadiusSearchViewController.swift */,
+			);
+			name = TabBarControllers;
 			sourceTree = "<group>";
 		};
 		B87366672880611B0076632F /* DemoData */ = {
@@ -545,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E650B02889C39E0027716E /* NearbySchoolsHeaderView.swift */,
+				B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -756,6 +773,8 @@
 				B87473B4284904B200821AC9 /* APICalls.swift in Sources */,
 				B83017B6284933C700303EEE /* SchoolsStruct.swift in Sources */,
 				B8736672288065BE0076632F /* SchoolInfoTopView.swift in Sources */,
+				B841D466288E05110058E959 /* RadiusSearchViewController.swift in Sources */,
+				B841D468288E08550058E959 /* RadiusSearchHeaderView.swift in Sources */,
 				B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */,
 				B82F177B28897A1500AA42F1 /* TopMathSchoolsViewController.swift in Sources */,
 				9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */,
@@ -766,7 +785,7 @@
 				B873667928806F3A0076632F /* SchoolScoresBottomView.swift in Sources */,
 				B82F177D28897DF200AA42F1 /* TopReadingSchoolsViewController.swift in Sources */,
 				B803EAC3286E1A4700E7A26B /* SchoolsListViewModel.swift in Sources */,
-				9EA40B302884F782000DE8A0 /* NearbySchoolsViewController.swift in Sources */,
+				9EA40B302884F782000DE8A0 /* CoordinateSearchViewController.swift in Sources */,
 				B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */,
 				B8736682288075BB0076632F /* GraphBarsView.swift in Sources */,
 				B8E1121828747692009C66B6 /* Reachability.swift in Sources */,
@@ -782,6 +801,7 @@
 				B876AF0F287720CA00718041 /* SchoolListCoordinator.swift in Sources */,
 				B8736662288055B60076632F /* HomeTopView.swift in Sources */,
 				B87366742880697F0076632F /* SchoolInfoBottomView.swift in Sources */,
+				B841D463288E02670058E959 /* MapTabBarViewController.swift in Sources */,
 				B8E650AA2889B74A0027716E /* SearchReadingScoreViewController.swift in Sources */,
 				B89D3CF0287EF209002300D1 /* SchoolsCalculatorViewController.swift in Sources */,
 				B876AF09287712BF00718041 /* AppCoordinator.swift in Sources */,

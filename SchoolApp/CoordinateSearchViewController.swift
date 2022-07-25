@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class NearbySchoolsViewController: UIViewController {
+class CoordinateSearchViewController: UIViewController {
     
     let map = MKMapView()
     let latitudeText = UITextField()
@@ -156,7 +156,7 @@ class NearbySchoolsViewController: UIViewController {
     }
 }
 
-extension NearbySchoolsViewController {
+extension CoordinateSearchViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         nearbySchoolsHeaderView.errorLabel.isHidden = true
 
@@ -199,7 +199,7 @@ extension NearbySchoolsViewController {
     }
 }
 
-extension NearbySchoolsViewController: MKMapViewDelegate {
+extension CoordinateSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
         
@@ -208,7 +208,7 @@ extension NearbySchoolsViewController: MKMapViewDelegate {
     }
 }
 
-extension NearbySchoolsViewController: UITextFieldDelegate {
+extension CoordinateSearchViewController: UITextFieldDelegate {
     //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         latitudeText.endEditing(true)

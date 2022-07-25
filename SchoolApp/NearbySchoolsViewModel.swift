@@ -16,6 +16,7 @@ class NearbySchoolsViewModel {
     var nearbySchools = [School]()
     var latitude = 0.0
     var longitude = 0.0
+    var miles = 5.0
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsScores = schoolsSATData
@@ -44,6 +45,20 @@ class NearbySchoolsViewModel {
             nearbySchools.append(array[index])
             
             array.remove(at: index)
+        }
+    }
+    
+    func getSchoolsByMiles() {
+        nearbySchools = []
+        
+        for i in schools {
+            let loc = CLLocation(latitude: Double(i.latitude!)!, longitude: Double(i.longitude!)!)
+            let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
+            
+            if distance < Double(miles * 1609.34) {
+                print(distance)
+                nearbySchools.append(i)
+            }
         }
     }
     
