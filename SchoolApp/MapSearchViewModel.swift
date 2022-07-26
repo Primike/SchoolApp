@@ -10,13 +10,14 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class NearbySchoolsViewModel {
+class MapSearchViewModel {
     var schools = [School]()
     var schoolsScores = [SchoolScores]()
     var nearbySchools = [School]()
     var latitude = 0.0
     var longitude = 0.0
     var miles = 5.0
+    var number = 10
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsScores = schoolsSATData
@@ -31,8 +32,8 @@ class NearbySchoolsViewModel {
     func getNearbySchools() {
         var array = schools
         nearbySchools = []
-        
-        for _ in 0..<10 {
+
+        for _ in 0..<number {
             var closest = Double(10000)
             var index = 0
             for j in 0..<array.count {
@@ -46,6 +47,7 @@ class NearbySchoolsViewModel {
             
             array.remove(at: index)
         }
+        print(nearbySchools.count)
     }
     
     func getSchoolsByMiles() {

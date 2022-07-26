@@ -17,13 +17,13 @@ class CoordinateSearchViewController: UIViewController {
     let longitudeText = UITextField()
     let enterButton = UIButton()
 
-    let nearbySchoolsViewModel: NearbySchoolsViewModel
+    let nearbySchoolsViewModel: MapSearchViewModel
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
     
-    let nearbySchoolsHeaderView = NearbySchoolsHeaderView()
+    let nearbySchoolsHeaderView = CoordinateSearchHeaderView()
     
-    init(viewModel: NearbySchoolsViewModel) {
+    init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 

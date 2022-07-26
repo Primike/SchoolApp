@@ -1,8 +1,8 @@
 //
-//  RadiusSearchViewController.swift
+//  NearestSchoolsViewController.swift
 //  SchoolApp
 //
-//  Created by Prince Avecillas on 7/24/22.
+//  Created by Prince Avecillas on 7/25/22.
 //
 
 import Foundation
@@ -10,17 +10,16 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class RadiusSearchViewController: UIViewController {
+class NearbySchoolsViewController: UIViewController {
     
     let map = MKMapView()
-    let milesText = UITextField()
+    let schoolsNumber = UITextField()
     let enterButton = UIButton()
 
     let nearbySchoolsViewModel: MapSearchViewModel
-    var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
     
-    let radiusSearchHeaderView = RadiusSearchHeaderView()
+    let nearbySchoolsHeaderView = NearbySchoolsHeaderView()
     
     init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
@@ -45,20 +44,20 @@ class RadiusSearchViewController: UIViewController {
         view.backgroundColor = .white
         map.translatesAutoresizingMaskIntoConstraints = false
         
-        radiusSearchHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        radiusSearchHeaderView.layer.cornerRadius = 30
-        radiusSearchHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        radiusSearchHeaderView.backgroundColor = UIColor.systemBlue
+        nearbySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        nearbySchoolsHeaderView.layer.cornerRadius = 30
+        nearbySchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        nearbySchoolsHeaderView.backgroundColor = UIColor.systemBlue
         
-        milesText.translatesAutoresizingMaskIntoConstraints = false
-        milesText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        milesText.font = UIFont(name:"HelveticaNeue", size: 40.0)
-        milesText.adjustsFontSizeToFitWidth = true
-        milesText.textAlignment = .center
-        milesText.layer.borderWidth = 3
-        milesText.layer.cornerRadius = 7.0
-        milesText.textColor = .white
-        milesText.delegate = self
+        schoolsNumber.translatesAutoresizingMaskIntoConstraints = false
+        schoolsNumber.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        schoolsNumber.font = UIFont(name:"HelveticaNeue", size: 40.0)
+        schoolsNumber.adjustsFontSizeToFitWidth = true
+        schoolsNumber.textAlignment = .center
+        schoolsNumber.layer.borderWidth = 3
+        schoolsNumber.layer.cornerRadius = 7.0
+        schoolsNumber.textColor = .white
+        schoolsNumber.delegate = self
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
@@ -72,31 +71,31 @@ class RadiusSearchViewController: UIViewController {
     }
     
     func layout() {
-        view.addSubview(radiusSearchHeaderView)
+        view.addSubview(nearbySchoolsHeaderView)
         view.addSubview(map)
         
-        radiusSearchHeaderView.inputStackView.addSubview(milesText)
-        radiusSearchHeaderView.buttonStackView.addSubview(enterButton)
+        nearbySchoolsHeaderView.inputStackView.addSubview(schoolsNumber)
+        nearbySchoolsHeaderView.buttonStackView.addSubview(enterButton)
         
         NSLayoutConstraint.activate([
-            radiusSearchHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            radiusSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            radiusSearchHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            nearbySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nearbySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            nearbySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             
-            map.topAnchor.constraint(equalTo: radiusSearchHeaderView.bottomAnchor),
+            map.topAnchor.constraint(equalTo: nearbySchoolsHeaderView.bottomAnchor),
             map.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             map.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            milesText.heightAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.heightAnchor, multiplier: 0.7),
-            milesText.widthAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.widthAnchor, multiplier: 0.3),
-            milesText.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerXAnchor),
-            milesText.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerYAnchor),
+            schoolsNumber.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.heightAnchor, multiplier: 0.7),
+            schoolsNumber.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.widthAnchor, multiplier: 0.3),
+            schoolsNumber.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.centerXAnchor),
+            schoolsNumber.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.centerYAnchor),
             
-            enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),
-            enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
-            enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor, multiplier: 0.8),
+            enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerYAnchor),
+            enterButton.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerXAnchor),
+            enterButton.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
+            enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.widthAnchor, multiplier: 0.8),
         
         ])
     }
@@ -115,7 +114,7 @@ class RadiusSearchViewController: UIViewController {
                 
                 self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
-                self!.nearbySchoolsViewModel.getSchoolsByMiles()
+                self!.nearbySchoolsViewModel.getNearbySchools()
                 self!.setupMap()
                 
             }
@@ -140,43 +139,42 @@ class RadiusSearchViewController: UIViewController {
     }
 }
 
-extension RadiusSearchViewController {
+extension NearbySchoolsViewController {
     @objc func enterButtonTapped(sender: UIButton) {
-        radiusSearchHeaderView.errorLabel.isHidden = true
+        nearbySchoolsHeaderView.errorLabel.isHidden = true
 
-        if milesText.text!.isEmpty{
-            //fix this
+        if schoolsNumber.text!.isEmpty{
             return
         }
         
-        if Double(milesText.text!) == nil{
-            errorHandler(message: "Please Enter A Numerical Value")
+        if Int(schoolsNumber.text!) == nil{
+            errorHandler(message: "Please Enter An Integer Value")
             return
         }
         
-        if Double(milesText.text!)! > 50 {
-            errorHandler(message: "Please Type In A Value Less Than 50")
+        if Int(schoolsNumber.text!)! > nearbySchoolsViewModel.schools.count {
+            errorHandler(message: "Please Type In A Value Less Than \(nearbySchoolsViewModel.schools.count)")
             return
         }
         
-        if Double(milesText.text!) != nil{
+        if Int(schoolsNumber.text!) != nil{
 
-            self.nearbySchoolsViewModel.miles = Double(milesText.text!)!
-            self.nearbySchoolsViewModel.getSchoolsByMiles()
+            self.nearbySchoolsViewModel.number = Int(schoolsNumber.text!)!
+            self.nearbySchoolsViewModel.getNearbySchools()
             self.map.removeAnnotations(annotations)
             self.annotations = []
             self.setup()
-
+            
         }
 
         func errorHandler(message: String){
-            radiusSearchHeaderView.errorLabel.isHidden = false
-            radiusSearchHeaderView.errorLabel.text = message
+            nearbySchoolsHeaderView.errorLabel.isHidden = false
+            nearbySchoolsHeaderView.errorLabel.text = message
         }
     }
 }
 
-extension RadiusSearchViewController: MKMapViewDelegate {
+extension NearbySchoolsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title != "CURRENT LOCATION" {
             let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
@@ -186,11 +184,11 @@ extension RadiusSearchViewController: MKMapViewDelegate {
     }
 }
 
-extension RadiusSearchViewController: UITextFieldDelegate {
+extension NearbySchoolsViewController: UITextFieldDelegate {
     //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        milesText.endEditing(true)
-        radiusSearchHeaderView.errorLabel.isHidden = true
+        schoolsNumber.endEditing(true)
+        nearbySchoolsHeaderView.errorLabel.isHidden = true
         return true
     }
     
@@ -200,6 +198,7 @@ extension RadiusSearchViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        radiusSearchHeaderView.errorLabel.isHidden = true
+        nearbySchoolsHeaderView.errorLabel.isHidden = true
     }
 }
+

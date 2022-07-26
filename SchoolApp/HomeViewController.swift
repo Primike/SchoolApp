@@ -210,7 +210,7 @@ extension HomeViewController {
     }
     
     @objc func nearbySchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(MapTabBarViewController(viewModel: NearbySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+        navigationController?.pushViewController(MapTabBarViewController(viewModel: MapSearchViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
     
     @objc func calculatorTapped(sender: UIButton) {
