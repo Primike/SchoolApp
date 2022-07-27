@@ -39,7 +39,7 @@ class SearchScoresHeaderView: UIView {
         topSchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         topSchoolsLabel.adjustsFontSizeToFitWidth = true
         topSchoolsLabel.textAlignment = .center
-        topSchoolsLabel.text = "Search Schools By Total SAT Score"
+        topSchoolsLabel.text = "Search Schools By SAT Score"
         topSchoolsLabel.textColor = .white
         topSchoolsLabel.numberOfLines = 0
         

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//maybe a shader for image
 class HomeTopView: UIView {
     let wallpaper = UIImageView(image: UIImage(named: "schoolwallpaper"))
 
@@ -32,7 +33,7 @@ class HomeTopView: UIView {
             wallpaper.topAnchor.constraint(equalTo: self.topAnchor),
             wallpaper.widthAnchor.constraint(equalTo: self.widthAnchor),
             wallpaper.heightAnchor.constraint(equalTo: self.heightAnchor),
-            wallpaper.leftAnchor.constraint(equalTo: self.leftAnchor),
+            wallpaper.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
 }

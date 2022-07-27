@@ -13,12 +13,13 @@ import CoreLocation
 
 class SchoolMapViewController: UIViewController {
     
+    let titleLabel = UILabel()
     let map = MKMapView()
+    
     let latitude: String
     let longitude: String
     let schoolName: String
     let schoolColor: UIColor
-    let titleLabel = UILabel()
 
     init(latitude: String, longitude: String, schoolName: String, schoolColor: UIColor) {
         self.latitude = latitude
@@ -36,6 +37,7 @@ class SchoolMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
         setup()
@@ -81,8 +83,9 @@ class SchoolMapViewController: UIViewController {
                 }
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
                 strongSelf.addMapPin(latitude: self!.latitude, longitude: self!.longitude, label: self!.schoolName)
+
+                strongSelf.map.setRegion(MKCoordinateRegion(center: .init(latitude: Double(self!.latitude)!, longitude: Double(self!.longitude)!), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
             }
         }
     }

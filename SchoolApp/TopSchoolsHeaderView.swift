@@ -18,6 +18,7 @@ class TopSchoolsHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setup()
         layout()
     }
@@ -25,8 +26,6 @@ class TopSchoolsHeaderView: UIView {
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
      }
-
-
 
     func setup() {
 
@@ -42,15 +41,13 @@ class TopSchoolsHeaderView: UIView {
         topSchoolsLabel.numberOfLines = 0
         
         filterStackView.translatesAutoresizingMaskIntoConstraints = false
-        filterStackView.axis = .vertical
 
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         topLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         topLabel.adjustsFontSizeToFitWidth = true
         topLabel.textAlignment = .center
-        topLabel.text = "  Top  "
+        topLabel.text = "Top"
         topLabel.textColor = .white
-        topLabel.numberOfLines = 0
         
         schoolsLabel.translatesAutoresizingMaskIntoConstraints = false
         schoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
@@ -58,7 +55,6 @@ class TopSchoolsHeaderView: UIView {
         schoolsLabel.textAlignment = .center
         schoolsLabel.text = "Schools"
         schoolsLabel.textColor = .white
-        schoolsLabel.numberOfLines = 0
     }
 
     func layout() {
@@ -76,26 +72,25 @@ class TopSchoolsHeaderView: UIView {
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             headerStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            topSchoolsLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
-            topSchoolsLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.5),
             topSchoolsLabel.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             topSchoolsLabel.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
+            topSchoolsLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
+            topSchoolsLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.5),
             
-            filterStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
-            filterStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.4),
             filterStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             filterStackView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
+            filterStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.3),
+            filterStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.4),
             
             topLabel.topAnchor.constraint(equalTo: filterStackView.topAnchor),
-            topLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
-            topLabel.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.3),
             topLabel.leftAnchor.constraint(equalTo: filterStackView.leftAnchor),
+            topLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor),
+            topLabel.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.3),
             
             schoolsLabel.topAnchor.constraint(equalTo: filterStackView.topAnchor),
-            schoolsLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
+            schoolsLabel.rightAnchor.constraint(equalTo: filterStackView.rightAnchor),
+            schoolsLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor),
             schoolsLabel.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.3),
-            schoolsLabel.rightAnchor.constraint(equalTo: filterStackView.rightAnchor)
-
         ])
 
     }

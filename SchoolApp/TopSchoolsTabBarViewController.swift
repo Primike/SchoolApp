@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//fix present view for scores
 class TopSchoolsTabBarViewController: UITabBarController {
     
     let topSchoolsViewModel: TopSchoolsViewModel
@@ -37,9 +38,9 @@ class TopSchoolsTabBarViewController: UITabBarController {
         let topWritingSchoolsVC = TopWritingSchoolsViewController(viewModel: TopSchoolsViewModel(schools: topSchoolsViewModel.schools, schoolsScores: topSchoolsViewModel.schoolsScores))
 
         topSchoolsVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Top Schools", tag: 0)
-        topMathSchoolsVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Top Math Schools", tag: 1)
-        topReadingSchoolsVC.setTabBarImage(imageSFName: "book", title: "Top Reading Schools", tag: 2)
-        topWritingSchoolsVC.setTabBarImage(imageSFName: "book", title: "Top Writing Schools", tag: 3)
+        topMathSchoolsVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Math", tag: 1)
+        topReadingSchoolsVC.setTabBarImage(imageSFName: "book", title: "Reading", tag: 2)
+        topWritingSchoolsVC.setTabBarImage(imageSFName: "book", title: "Writing", tag: 3)
 
 
         let topSchoolsNC = UINavigationController(rootViewController: topSchoolsVC)

@@ -500,8 +500,8 @@
 		B89D3CF6287F51BD002300D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
 				B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */,
+				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

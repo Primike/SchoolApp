@@ -65,7 +65,7 @@ extension MySchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: mySchoolsViewModel.getInfo(for: indexPath))
-        schoolCell.schoolBoro.text = "\(indexPath.row + 1)"
+        schoolCell.schoolBoroLabel.text = "\(indexPath.row + 1)"
         return schoolCell
     }
     

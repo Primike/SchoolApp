@@ -12,13 +12,8 @@ class SchoolScoresViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let screenStackView = UIStackView()
-    
     let schoolScoresTopView: SchoolScoresTopView
-    
-    
     let schoolScoresBottomView: SchoolScoresBottomView
-    
-    
     let graphButton = UIButton()
     
     let school: School
@@ -41,6 +36,7 @@ class SchoolScoresViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
     }
@@ -52,11 +48,9 @@ class SchoolScoresViewController: UIViewController {
         screenStackView.translatesAutoresizingMaskIntoConstraints = false
         screenStackView.axis = .vertical
         
-        
         schoolScoresTopView.translatesAutoresizingMaskIntoConstraints = false
         schoolScoresTopView.backgroundColor = schoolColor
         
-    
         graphButton.translatesAutoresizingMaskIntoConstraints = false
         graphButton.setTitle("Scores Graph", for:.normal)
         graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
@@ -79,34 +73,31 @@ class SchoolScoresViewController: UIViewController {
 
         
         NSLayoutConstraint.activate([
-            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             
-            screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             screenStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             screenStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1.1),
-            
-        
+            screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            schoolScoresTopView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
-            schoolScoresTopView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
             schoolScoresTopView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
+            schoolScoresTopView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
+            schoolScoresTopView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
+            schoolScoresTopView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
             
-            graphButton.bottomAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.bottomAnchor),
             graphButton.leftAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.leftAnchor),
-            graphButton.widthAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.widthAnchor),
+            graphButton.bottomAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.bottomAnchor),
             graphButton.heightAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.heightAnchor, multiplier: 0.3),
+            graphButton.widthAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.widthAnchor),
             
-            
-            
-            schoolScoresBottomView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
-            schoolScoresBottomView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.7),
             schoolScoresBottomView.topAnchor.constraint(equalTo: schoolScoresTopView.bottomAnchor),
+            schoolScoresBottomView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.7),
+            schoolScoresBottomView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
         ])
     }
 }

@@ -10,8 +10,8 @@ import UIKit
 
 class SchoolScoresTopView: UIView {
     
-    let schoolName = UILabel()
-    let scoresHeaderStackView = UIStackView()
+    let schoolNameLabel = UILabel()
+    let headerStackView = UIStackView()
     let collegeBoardImage = UIImageView(image: UIImage(named: "satheader"))
     let scoresInfoStackView = UIStackView()
     let scoresLabel = UILabel()
@@ -36,24 +36,19 @@ class SchoolScoresTopView: UIView {
     }
     
     func style() {
-        schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        schoolName.text = school.school_name
-        schoolName.textColor = .white
-        schoolName.textAlignment = .center
-        schoolName.adjustsFontSizeToFitWidth = true
-        schoolName.numberOfLines = 0
-    
+        schoolNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        schoolNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        schoolNameLabel.text = school.school_name
+        schoolNameLabel.textColor = .white
+        schoolNameLabel.textAlignment = .center
+        schoolNameLabel.adjustsFontSizeToFitWidth = true
         
-        
-        scoresHeaderStackView.translatesAutoresizingMaskIntoConstraints = false
-        scoresHeaderStackView.axis = .horizontal
-
+        headerStackView.translatesAutoresizingMaskIntoConstraints = false
+        headerStackView.axis = .horizontal
 
         collegeBoardImage.translatesAutoresizingMaskIntoConstraints = false
         collegeBoardImage.contentMode = .scaleAspectFit
 
-        
         scoresInfoStackView.translatesAutoresizingMaskIntoConstraints = false
 
         scoresLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -71,43 +66,46 @@ class SchoolScoresTopView: UIView {
     }
     
     func layout() {
-        self.addSubview(schoolName)
-        self.addSubview(scoresHeaderStackView)
-        scoresHeaderStackView.addSubview(collegeBoardImage)
-        scoresHeaderStackView.addSubview(scoresInfoStackView)
+        self.addSubview(schoolNameLabel)
+        self.addSubview(headerStackView)
+        
+        headerStackView.addSubview(collegeBoardImage)
+        headerStackView.addSubview(scoresInfoStackView)
+        
         scoresInfoStackView.addSubview(scoresLabel)
         scoresInfoStackView.addSubview(testTakersLabel)
         
         NSLayoutConstraint.activate([
-            schoolName.topAnchor.constraint(equalTo: self.topAnchor),
-            schoolName.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
-            schoolName.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            schoolName.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
+            schoolNameLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            schoolNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
+            schoolNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            schoolNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+
             
+            headerStackView.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor, constant: 5),
+            headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.85),
+            headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            scoresHeaderStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            scoresHeaderStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.85),
-            scoresHeaderStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            scoresHeaderStackView.topAnchor.constraint(equalTo: schoolName.bottomAnchor, constant: 5),
-            
-            collegeBoardImage.centerYAnchor.constraint(equalTo: scoresHeaderStackView.centerYAnchor),
-            collegeBoardImage.heightAnchor.constraint(equalTo: scoresHeaderStackView.heightAnchor, multiplier: 0.9),
-            collegeBoardImage.widthAnchor.constraint(equalTo: scoresHeaderStackView.widthAnchor, multiplier: 0.4),
-            collegeBoardImage.leftAnchor.constraint(equalTo: scoresHeaderStackView.leftAnchor),
-            
-            scoresInfoStackView.rightAnchor.constraint(equalTo: scoresHeaderStackView.rightAnchor),
-            scoresInfoStackView.widthAnchor.constraint(equalTo: scoresHeaderStackView.widthAnchor, multiplier: 0.5),
-            scoresInfoStackView.heightAnchor.constraint(equalTo: scoresHeaderStackView.heightAnchor, multiplier: 0.9),
-            scoresInfoStackView.centerYAnchor.constraint(equalTo: scoresHeaderStackView.centerYAnchor),
+            collegeBoardImage.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
+            collegeBoardImage.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.9),
+            collegeBoardImage.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.4),
+            collegeBoardImage.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
+
+            scoresInfoStackView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
+            scoresInfoStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.9),
+            scoresInfoStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.5),
+            scoresInfoStackView.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
             
             scoresLabel.topAnchor.constraint(equalTo: scoresInfoStackView.topAnchor),
-            scoresLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
-            scoresLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
             scoresLabel.heightAnchor.constraint(equalTo: scoresInfoStackView.heightAnchor, multiplier: 0.3),
+            scoresLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
+            scoresLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
+
             testTakersLabel.topAnchor.constraint(equalTo: scoresLabel.bottomAnchor),
-            testTakersLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
-            testTakersLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
             testTakersLabel.heightAnchor.constraint(equalTo: scoresInfoStackView.heightAnchor, multiplier: 0.3),
+            testTakersLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
+            testTakersLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
 
         ])
     }

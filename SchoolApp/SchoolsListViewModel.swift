@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class SchoolsListViewModel {
     
     var schools = [School]()

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//change sf symbols
 class SchoolTabBarViewController: UITabBarController {
 
     var school: School
@@ -27,6 +28,7 @@ class SchoolTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.schoolColor = self.getColor(school: school)
         setupViews()
         setupTabBar()

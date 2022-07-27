@@ -12,11 +12,9 @@ class SchoolInfoViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let screenStackView = UIStackView()
-
     let schoolInfoTopView: SchoolInfoTopView
     let schoolWebsiteButton = UIButton()
     let addSchoolButton = UIButton()
-
     let schoolInfoBottomView: SchoolInfoBottomView
 
     let defaults = UserDefaults.standard
@@ -47,6 +45,7 @@ class SchoolInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
     }
@@ -94,40 +93,39 @@ class SchoolInfoViewController: UIViewController {
     
 
         NSLayoutConstraint.activate([
-
-            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             
-            screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             screenStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             screenStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1.1),
+            screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             schoolInfoTopView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
             schoolInfoTopView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             schoolInfoTopView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.5),
+            schoolInfoTopView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
             
             schoolWebsiteButton.leftAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.leftAnchor),
             schoolWebsiteButton.centerYAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.centerYAnchor),
             schoolWebsiteButton.widthAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.widthAnchor, multiplier: 0.5),
+            
             addSchoolButton.rightAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.rightAnchor),
-            addSchoolButton.centerYAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.centerYAnchor),
             addSchoolButton.heightAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.heightAnchor),
             addSchoolButton.widthAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.heightAnchor),
+            addSchoolButton.centerYAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.centerYAnchor),
             
             
             schoolInfoTopView.schoolImage.rightAnchor.constraint(equalTo: addSchoolButton.rightAnchor),
 
             
-            
             schoolInfoBottomView.topAnchor.constraint(equalTo: schoolInfoTopView.bottomAnchor),
-            schoolInfoBottomView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             schoolInfoBottomView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.5),
-                
+            schoolInfoBottomView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
         ])
     }
     
@@ -147,7 +145,6 @@ extension SchoolInfoViewController {
         }
         UIApplication.shared.open(url) { success in
             if success {
-            } else {
             }
         }
     }

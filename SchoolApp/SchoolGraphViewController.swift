@@ -11,15 +11,13 @@ import UIKit
 class SchoolGraphViewController: UIViewController {
 
     let screenStackView = UIStackView()
-    
-    let schoolName = UILabel()
-    let topStackView = UIStackView()
     let arrowImage = UIImageView(image: UIImage(systemName: "arrow.down"))
+    let schoolNameLabel = UILabel()
+    let topStackView = UIStackView()
     
     let yAxisView = YAxisView()
     let graphBarsView: GraphBarsView
     let xAxisView = XAxisView()
-
 
     var school: School
     var schoolScores: SchoolScores
@@ -51,14 +49,13 @@ class SchoolGraphViewController: UIViewController {
         screenStackView.translatesAutoresizingMaskIntoConstraints = false
         screenStackView.axis = .vertical
         
-        schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
-        schoolName.text = school.school_name
-        schoolName.textColor = schoolColor
-        schoolName.textAlignment = .center
-        schoolName.adjustsFontSizeToFitWidth = true
-        schoolName.numberOfLines = 0
-        
+        schoolNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        schoolNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        schoolNameLabel.text = school.school_name
+        schoolNameLabel.textColor = schoolColor
+        schoolNameLabel.textAlignment = .center
+        schoolNameLabel.adjustsFontSizeToFitWidth = true
+
         arrowImage.translatesAutoresizingMaskIntoConstraints = false
         arrowImage.contentMode = .scaleAspectFit
         arrowImage.tintColor = .black
@@ -72,7 +69,6 @@ class SchoolGraphViewController: UIViewController {
         graphBarsView.layer.borderWidth = 3
         graphBarsView.layer.borderColor = UIColor.black.cgColor
         graphBarsView.backgroundColor = .systemBackground
-    
         
         xAxisView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -81,7 +77,7 @@ class SchoolGraphViewController: UIViewController {
         view.addSubview(screenStackView)
 
         screenStackView.addSubview(arrowImage)
-        screenStackView.addSubview(schoolName)
+        screenStackView.addSubview(schoolNameLabel)
         screenStackView.addSubview(topStackView)
         screenStackView.addSubview(xAxisView)
         
@@ -96,32 +92,29 @@ class SchoolGraphViewController: UIViewController {
             screenStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             arrowImage.topAnchor.constraint(equalTo: screenStackView.topAnchor),
-            arrowImage.widthAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),
             arrowImage.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),
+            arrowImage.widthAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),
             arrowImage.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
             
-            schoolName.topAnchor.constraint(equalTo: arrowImage.bottomAnchor),
-            schoolName.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
-            schoolName.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.1),
-            schoolName.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
+            schoolNameLabel.topAnchor.constraint(equalTo: arrowImage.bottomAnchor),
+            schoolNameLabel.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.1),
+            schoolNameLabel.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
+            schoolNameLabel.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
             
-            
-            topStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
-            topStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.8),
-            topStackView.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
+            topStackView.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor),
             topStackView.leftAnchor.constraint(equalTo: screenStackView.leftAnchor),
+            topStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.8),
+            topStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             
-            yAxisView.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
             yAxisView.topAnchor.constraint(equalTo: topStackView.topAnchor),
-            yAxisView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.1),
+            yAxisView.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
             yAxisView.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
+            yAxisView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.1),
             
-            graphBarsView.leftAnchor.constraint(equalTo: yAxisView.rightAnchor),
             graphBarsView.topAnchor.constraint(equalTo: topStackView.topAnchor),
-            graphBarsView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.9),
+            graphBarsView.leftAnchor.constraint(equalTo: yAxisView.rightAnchor),
             graphBarsView.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
-            
-
+            graphBarsView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.9),
             
             xAxisView.widthAnchor.constraint(equalTo: graphBarsView.widthAnchor),
             xAxisView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),

@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class SchoolInfoBottomView: UIView {
+    
+    let stackView = UIStackView()
     let aboutLabel = UILabel()
     let schoolDescription = UILabel()
     
@@ -29,13 +31,14 @@ class SchoolInfoBottomView: UIView {
     }
     
     func style() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutLabel.font = UIFont(name:"HelveticaNeue-Bold", size:100.0)
         aboutLabel.text = "About:"
         aboutLabel.adjustsFontSizeToFitWidth = true
-        aboutLabel.textAlignment = .center
+        aboutLabel.textAlignment = .left
         aboutLabel.textColor = .white
-        aboutLabel.baselineAdjustment = .alignCenters
         
         schoolDescription.translatesAutoresizingMaskIntoConstraints = false
         schoolDescription.font = UIFont(name:"HelveticaNeue", size: 100.0)
@@ -47,18 +50,25 @@ class SchoolInfoBottomView: UIView {
     }
     
     func layout() {
-        self.addSubview(aboutLabel)
-        self.addSubview(schoolDescription)
+        self.addSubview(stackView)
+        stackView.addSubview(aboutLabel)
+        stackView.addSubview(schoolDescription)
         
         NSLayoutConstraint.activate([
-            aboutLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            aboutLabel.leftAnchor.constraint(equalTo: schoolDescription.leftAnchor),
-            aboutLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-            aboutLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
+            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            aboutLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
+            aboutLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            aboutLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.15),
+            aboutLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.25),
+            
             schoolDescription.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor),
-            schoolDescription.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
-            schoolDescription.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            schoolDescription.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75)
+            schoolDescription.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            schoolDescription.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.80),
+            schoolDescription.widthAnchor.constraint(equalTo: stackView.widthAnchor),
         ])
     }
 }

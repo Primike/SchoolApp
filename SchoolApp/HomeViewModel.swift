@@ -10,19 +10,19 @@ import Foundation
 class HomeViewModel {
     
     weak var delegate: RequestDelegate?
+    
     var state: ViewState {
         didSet {
             self.delegate?.didUpdate(with: state)
         }
     }
     
+    var schools = [School]()
+    var schoolsScores = [SchoolScores]()
+    
     init() {
         self.state = .idle
     }
-    
-    var schools = [School]()
-    var schoolsScores = [SchoolScores]()
-    var filteredSchoolScores = [SchoolScores]()
     
     func getSchools() {
         self.state = .loading
@@ -42,16 +42,11 @@ class HomeViewModel {
             switch result {
             case .success(let scores):
                 self.schoolsScores = scores
-                self.getFilteredScores()
                 self.state = .success
             case .failure(let error):
                 self.state = .error(error)
             }
         }
-    }
-    
-    func getFilteredScores() {
-        filteredSchoolScores = schoolsScores.filter({$0.sat_critical_reading_avg_score != "0"})
     }
 }
 

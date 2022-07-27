@@ -11,12 +11,11 @@ import UIKit
 class TopWritingSchoolsViewController: UIViewController {
     
     let schoolsTableView = UITableView()
-    let numberOfSchools = UITextField()
+    let numberOfSchoolsText = UITextField()
     let errorLabel = UILabel()
     let enterButton = UIButton()
     
     let topSchoolsHeaderView = TopSchoolsHeaderView()
-    
     let topSchoolsViewModel: TopSchoolsViewModel
     
     required init(viewModel: TopSchoolsViewModel) {
@@ -47,15 +46,15 @@ class TopWritingSchoolsViewController: UIViewController {
         
         topSchoolsHeaderView.topSchoolsLabel.text = "Top Schools By SAT Writing Scores"
         
-        numberOfSchools.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchools.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        numberOfSchools.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        numberOfSchools.adjustsFontSizeToFitWidth = true
-        numberOfSchools.textAlignment = .center
-        numberOfSchools.layer.borderWidth = 3
-        numberOfSchools.layer.cornerRadius = 7.0
-        numberOfSchools.textColor = .white
-        numberOfSchools.delegate = self
+        numberOfSchoolsText.translatesAutoresizingMaskIntoConstraints = false
+        numberOfSchoolsText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        numberOfSchoolsText.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        numberOfSchoolsText.adjustsFontSizeToFitWidth = true
+        numberOfSchoolsText.textAlignment = .center
+        numberOfSchoolsText.layer.borderWidth = 3
+        numberOfSchoolsText.layer.cornerRadius = 7.0
+        numberOfSchoolsText.textColor = .white
+        numberOfSchoolsText.delegate = self
         
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         errorLabel.textAlignment = .center
@@ -83,35 +82,34 @@ class TopWritingSchoolsViewController: UIViewController {
         view.addSubview(topSchoolsHeaderView)
         view.addSubview(schoolsTableView)
         
-        topSchoolsHeaderView.filterStackView.addSubview(numberOfSchools)
-        topSchoolsHeaderView.filterStackView.addSubview(errorLabel)
-        topSchoolsHeaderView.filterStackView.addSubview(enterButton)
+        topSchoolsHeaderView.filterStackView.addSubview(numberOfSchoolsText)
+        topSchoolsHeaderView.addSubview(errorLabel)
+        topSchoolsHeaderView.addSubview(enterButton)
 
         NSLayoutConstraint.activate([
             topSchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topSchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             topSchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18),
             
+            numberOfSchoolsText.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
+            numberOfSchoolsText.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
+            numberOfSchoolsText.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.3),
+            numberOfSchoolsText.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+            
+            errorLabel.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.bottomAnchor),
+            errorLabel.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.2),
+            errorLabel.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
+            errorLabel.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+            
+            enterButton.bottomAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.bottomAnchor),
+            enterButton.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.5),
+            enterButton.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor),
+            enterButton.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+            
             schoolsTableView.topAnchor.constraint(equalTo: topSchoolsHeaderView.bottomAnchor),
             schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            numberOfSchools.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
-            numberOfSchools.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
-            numberOfSchools.heightAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.heightAnchor, multiplier: 0.3),
-            numberOfSchools.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-            
-            errorLabel.topAnchor.constraint(equalTo: numberOfSchools.bottomAnchor),
-            errorLabel.heightAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.heightAnchor, multiplier: 0.2),
-            errorLabel.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
-            errorLabel.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-            
-            enterButton.bottomAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.bottomAnchor),
-            enterButton.heightAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.heightAnchor, multiplier: 0.5),
-            enterButton.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-            
         ])
     }
     
@@ -122,14 +120,12 @@ class TopWritingSchoolsViewController: UIViewController {
 }
 
 extension TopWritingSchoolsViewController: UITextFieldDelegate {
-    //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        numberOfSchools.endEditing(true)
+        numberOfSchoolsText.endEditing(true)
         errorLabel.isHidden = true
         return true
     }
     
-    //callback to see what's in the text field
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
@@ -143,26 +139,26 @@ extension TopWritingSchoolsViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
-        if numberOfSchools.text!.isEmpty {
+        if numberOfSchoolsText.text!.isEmpty {
             topSchoolsViewModel.number = 10
             topSchoolsViewModel.getTopWritingSchools()
             schoolsTableView.reloadData()
             return
         }
         
-        if Int(numberOfSchools.text!) == nil {
+        if Int(numberOfSchoolsText.text!) == nil {
             errorHandler(message: "Please Enter An Integer Value")
             return
         }
         
-        if Int(numberOfSchools.text!)! < 0 || Int(numberOfSchools.text!)! > topSchoolsViewModel.schoolsScores.count {
+        if Int(numberOfSchoolsText.text!)! < 0 || Int(numberOfSchoolsText.text!)! > topSchoolsViewModel.schoolsScores.count {
             errorHandler(message: "Please Type In Values Between 0 And \(topSchoolsViewModel.schoolsScores.count)")
             return
         }
         
-        if Int(numberOfSchools.text!) != nil {
+        if Int(numberOfSchoolsText.text!) != nil {
             
-            topSchoolsViewModel.number = Int(numberOfSchools.text!)!
+            topSchoolsViewModel.number = Int(numberOfSchoolsText.text!)!
             topSchoolsViewModel.getTopWritingSchools()
             schoolsTableView.reloadData()
         }
@@ -178,8 +174,8 @@ extension TopWritingSchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: topSchoolsViewModel.getInfo(for: indexPath))
-        schoolCell.schoolBoro.text = "Rank #\(indexPath.row + 1)"
-        schoolCell.schoolBoro.textColor = .black
+        schoolCell.schoolBoroLabel.text = "Rank #\(indexPath.row + 1)"
+        schoolCell.schoolBoroLabel.textColor = .black
         return schoolCell
     }
     
@@ -197,6 +193,6 @@ extension TopWritingSchoolsViewController: UITableViewDataSource {
 extension TopWritingSchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: topSchoolsViewModel.topSchools[indexPath.row], scores: topSchoolsViewModel.topSchoolsScores[indexPath.row]), animated: true)
+        navigationController?.present(SchoolTabBarViewController(school: topSchoolsViewModel.topSchools[indexPath.row], scores: topSchoolsViewModel.topSchoolsScores[indexPath.row]), animated: true)
     }
 }

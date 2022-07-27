@@ -73,20 +73,24 @@ class YAxisView: UIView {
         
         NSLayoutConstraint.activate([
             label800.topAnchor.constraint(equalTo: self.topAnchor),
-            label800.widthAnchor.constraint(equalTo: self.widthAnchor),
             label800.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
+            label800.widthAnchor.constraint(equalTo: self.widthAnchor),
+            
             label600.topAnchor.constraint(equalTo: label800.bottomAnchor),
-            label600.widthAnchor.constraint(equalTo: self.widthAnchor),
             label600.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
+            label600.widthAnchor.constraint(equalTo: self.widthAnchor),
+            
             label400.topAnchor.constraint(equalTo: label600.bottomAnchor),
-            label400.widthAnchor.constraint(equalTo: self.widthAnchor),
             label400.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
+            label400.widthAnchor.constraint(equalTo: self.widthAnchor),
+            
             label200.bottomAnchor.constraint(equalTo: label0.topAnchor),
-            label200.widthAnchor.constraint(equalTo: self.widthAnchor),
             label200.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
+            label200.widthAnchor.constraint(equalTo: self.widthAnchor),
+            
             label0.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            label0.widthAnchor.constraint(equalTo: self.widthAnchor),
             label0.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
+            label0.widthAnchor.constraint(equalTo: self.widthAnchor),
         ])
     }
 }

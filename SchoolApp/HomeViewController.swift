@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//maybe add a loading screen
 class HomeViewController: UIViewController {
     
     let activityIndicator = UIActivityIndicatorView(style: .large)
@@ -18,8 +19,8 @@ class HomeViewController: UIViewController {
     let schoolsListButton = UIButton()
     let topSchoolsButton = UIButton()
     let myschoolsButton = UIButton()
-    let nearbySchoolsButton = UIButton()
-    let calculatorButton = UIButton()
+    let mapSearchButton = UIButton()
+    let satSearchButton = UIButton()
     
     let homeViewModel: HomeViewModel
 
@@ -49,53 +50,33 @@ class HomeViewController: UIViewController {
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
-        schoolsListButton.backgroundColor = .black
-        schoolsListButton.setTitleColor(.white, for: .normal)
         schoolsListButton.setTitle("NYC Schools List", for: .normal)
-        schoolsListButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
-        schoolsListButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        schoolsListButton.layer.cornerRadius = 10
-        schoolsListButton.titleLabel?.adjustsFontSizeToFitWidth = true
-
+        schoolsListButton.configuration = .filled()
+        schoolsListButton.configuration?.baseBackgroundColor = .black
+        
         topSchoolsButton.translatesAutoresizingMaskIntoConstraints = false
         topSchoolsButton.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
-        topSchoolsButton.backgroundColor = .black
-        topSchoolsButton.setTitleColor(.white, for: .normal)
         topSchoolsButton.setTitle("Top SAT Schools", for: .normal)
-        topSchoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
-        topSchoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        topSchoolsButton.layer.cornerRadius = 10
-        topSchoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        topSchoolsButton.configuration = .filled()
+        topSchoolsButton.configuration?.baseBackgroundColor = .black
         
         myschoolsButton.translatesAutoresizingMaskIntoConstraints = false
         myschoolsButton.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
-        myschoolsButton.backgroundColor = .black
-        myschoolsButton.setTitleColor(.white, for: .normal)
         myschoolsButton.setTitle("My Schools", for: .normal)
-        myschoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 23.0)
-        myschoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        myschoolsButton.layer.cornerRadius = 10
-        myschoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        myschoolsButton.configuration = .filled()
+        myschoolsButton.configuration?.baseBackgroundColor = .black
         
-        nearbySchoolsButton.translatesAutoresizingMaskIntoConstraints = false
-        nearbySchoolsButton.addTarget(self, action: #selector(nearbySchoolsTapped), for: .primaryActionTriggered)
-        nearbySchoolsButton.backgroundColor = .black
-        nearbySchoolsButton.setTitleColor(.white, for: .normal)
-        nearbySchoolsButton.setTitle("Nearby Schools", for: .normal)
-        nearbySchoolsButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        nearbySchoolsButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        nearbySchoolsButton.layer.cornerRadius = 10
-        nearbySchoolsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        mapSearchButton.translatesAutoresizingMaskIntoConstraints = false
+        mapSearchButton.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
+        mapSearchButton.setTitle("Map Search", for: .normal)
+        mapSearchButton.configuration = .filled()
+        mapSearchButton.configuration?.baseBackgroundColor = .black
         
-        calculatorButton.translatesAutoresizingMaskIntoConstraints = false
-        calculatorButton.addTarget(self, action: #selector(calculatorTapped), for: .primaryActionTriggered)
-        calculatorButton.backgroundColor = .black
-        calculatorButton.setTitleColor(.white, for: .normal)
-        calculatorButton.setTitle("Search By SAT Score", for: .normal)
-        calculatorButton.titleLabel!.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        calculatorButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        calculatorButton.layer.cornerRadius = 10
-        calculatorButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        satSearchButton.translatesAutoresizingMaskIntoConstraints = false
+        satSearchButton.addTarget(self, action: #selector(satSearchTapped), for: .primaryActionTriggered)
+        satSearchButton.setTitle("SAT Search", for: .normal)
+        satSearchButton.configuration = .filled()
+        satSearchButton.configuration?.baseBackgroundColor = .black
     }
     
     func layout() {
@@ -106,45 +87,45 @@ class HomeViewController: UIViewController {
         homeBottomView.schoolsListButtonView.addSubview(schoolsListButton)
         homeBottomView.topSchoolsButtonView.addSubview(topSchoolsButton)
         homeBottomView.mySchoolsButtonView.addSubview(myschoolsButton)
-        homeBottomView.extraButtonsView.addSubview(nearbySchoolsButton)
-        homeBottomView.extraButtonsView.addSubview(calculatorButton)
+        homeBottomView.smallButtonsView.addSubview(mapSearchButton)
+        homeBottomView.smallButtonsView.addSubview(satSearchButton)
         
         
         NSLayoutConstraint.activate([
             homeTopView.topAnchor.constraint(equalTo: view.topAnchor),
-            homeTopView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            homeTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             homeTopView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            homeTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
+            homeTopView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
             homeBottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             homeBottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
             homeBottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
             homeBottomView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
             
+            schoolsListButton.heightAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.heightAnchor, multiplier: 0.8),
             schoolsListButton.widthAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.widthAnchor),
             schoolsListButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
             schoolsListButton.centerYAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.centerYAnchor),
-            schoolsListButton.heightAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.heightAnchor, multiplier: 0.8),
             
+            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.heightAnchor, multiplier: 0.8),
             topSchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.widthAnchor),
             topSchoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
             topSchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.centerYAnchor),
-            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.heightAnchor, multiplier: 0.8),
             
+            myschoolsButton.heightAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.heightAnchor, multiplier: 0.8),
             myschoolsButton.widthAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.widthAnchor),
             myschoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
             myschoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.centerYAnchor),
-            myschoolsButton.heightAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.heightAnchor, multiplier: 0.8),
             
-            nearbySchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.extraButtonsView.widthAnchor, multiplier: 0.48),
-            nearbySchoolsButton.leftAnchor.constraint(equalTo: homeBottomView.extraButtonsView.leftAnchor),
-            nearbySchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.extraButtonsView.heightAnchor, multiplier: 0.6),
-            nearbySchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.extraButtonsView.centerYAnchor),
+            mapSearchButton.leftAnchor.constraint(equalTo: homeBottomView.smallButtonsView.leftAnchor),
+            mapSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
+            mapSearchButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
+            mapSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
             
-            calculatorButton.widthAnchor.constraint(equalTo: homeBottomView.extraButtonsView.widthAnchor, multiplier: 0.48),
-            calculatorButton.rightAnchor.constraint(equalTo: homeBottomView.extraButtonsView.rightAnchor),
-            calculatorButton.heightAnchor.constraint(equalTo: homeBottomView.extraButtonsView.heightAnchor, multiplier: 0.6),
-            calculatorButton.centerYAnchor.constraint(equalTo: homeBottomView.extraButtonsView.centerYAnchor),
+            satSearchButton.rightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.rightAnchor),
+            satSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
+            satSearchButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
+            satSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
             
         ])
     }
@@ -172,7 +153,7 @@ extension HomeViewController: RequestDelegate {
                 if error.localizedDescription == "SAT Data Unavailable" {
                     self.homeViewModel.state = .success
                 }
-                self.showAlert(error: error.localizedDescription)                
+                self.showAlert(error: error.localizedDescription)
             }
         }
     }
@@ -202,18 +183,18 @@ extension HomeViewController {
     }
     
     @objc func topSchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.filteredSchoolScores)), animated: true)
+        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
         navigationController?.pushViewController(MySchoolsViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
     
-    @objc func nearbySchoolsTapped(sender: UIButton) {
+    @objc func mapSearchTapped(sender: UIButton) {
         navigationController?.pushViewController(MapTabBarViewController(viewModel: MapSearchViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
     
-    @objc func calculatorTapped(sender: UIButton) {
+    @objc func satSearchTapped(sender: UIButton) {
         navigationController?.pushViewController(SearchScoresTabBarViewController(viewModel: SearchScoresViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
 }

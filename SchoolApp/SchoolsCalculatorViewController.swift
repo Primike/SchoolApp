@@ -190,8 +190,8 @@ extension SchoolsCalculatorViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: schoolsCalculatorViewModel.getInfo(for: indexPath))
-        schoolCell.schoolBoro.text = "#\(indexPath.row + 1)"
-        schoolCell.schoolBoro.textColor = .black
+        schoolCell.schoolBoroLabel.text = "#\(indexPath.row + 1)"
+        schoolCell.schoolBoroLabel.textColor = .black
         return schoolCell
     }
     

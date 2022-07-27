@@ -48,6 +48,7 @@ class SchoolScoresBottomView: UIView {
     
     func style() {
         satMathSubView.translatesAutoresizingMaskIntoConstraints = false
+        
         satMathStackView.translatesAutoresizingMaskIntoConstraints = false
         satMathStackView.backgroundColor = schoolColor
         satMathStackView.layer.cornerRadius = 25
@@ -68,6 +69,7 @@ class SchoolScoresBottomView: UIView {
 
         
         satWritingSubView.translatesAutoresizingMaskIntoConstraints = false
+        
         satWritingStackView.translatesAutoresizingMaskIntoConstraints = false
         satWritingStackView.backgroundColor = schoolColor
         satWritingStackView.layer.cornerRadius = 25
@@ -78,7 +80,6 @@ class SchoolScoresBottomView: UIView {
         satWritingLabel.textColor = .white
         satWritingLabel.adjustsFontSizeToFitWidth = true
         satWritingLabel.textAlignment = .center
-
         
         satWritingScore.translatesAutoresizingMaskIntoConstraints = false
         satWritingScore.font = UIFont(name:"HelveticaNeue", size: 100.0)
@@ -89,6 +90,7 @@ class SchoolScoresBottomView: UIView {
         
         
         satReadingSubView.translatesAutoresizingMaskIntoConstraints = false
+        
         satReadingStackView.translatesAutoresizingMaskIntoConstraints = false
         satReadingStackView.backgroundColor = schoolColor
         satReadingStackView.layer.cornerRadius = 25
@@ -100,7 +102,6 @@ class SchoolScoresBottomView: UIView {
         satReadingLabel.adjustsFontSizeToFitWidth = true
         satReadingLabel.textAlignment = .center
 
-        
         satReadingScore.translatesAutoresizingMaskIntoConstraints = false
         satReadingScore.font = UIFont(name:"HelveticaNeue", size: 100.0)
         satReadingScore.text = "\(schoolScores.sat_critical_reading_avg_score)/800"
@@ -128,52 +129,52 @@ class SchoolScoresBottomView: UIView {
         
         NSLayoutConstraint.activate([
             satMathSubView.topAnchor.constraint(equalTo: self.topAnchor),
-            satMathSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satMathSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
+            satMathSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satMathStackView.heightAnchor.constraint(equalTo: satMathSubView.heightAnchor, multiplier: 0.8),
             satMathStackView.widthAnchor.constraint(equalTo: satMathSubView.widthAnchor, multiplier: 0.8),
             satMathStackView.centerXAnchor.constraint(equalTo: satMathSubView.centerXAnchor),
             satMathStackView.centerYAnchor.constraint(equalTo: satMathSubView.centerYAnchor),
             satMathLabel.topAnchor.constraint(equalTo: satMathStackView.topAnchor),
-            satMathLabel.centerXAnchor.constraint(equalTo: satMathStackView.centerXAnchor),
-            satMathLabel.widthAnchor.constraint(equalTo: satMathStackView.widthAnchor, multiplier: 0.9),
             satMathLabel.heightAnchor.constraint(equalTo: satMathStackView.heightAnchor, multiplier: 0.4),
+            satMathLabel.widthAnchor.constraint(equalTo: satMathStackView.widthAnchor, multiplier: 0.9),
+            satMathLabel.centerXAnchor.constraint(equalTo: satMathStackView.centerXAnchor),
             satMathScore.topAnchor.constraint(equalTo: satMathLabel.bottomAnchor),
-            satMathScore.centerXAnchor.constraint(equalTo: satMathStackView.centerXAnchor),
-            satMathScore.widthAnchor.constraint(equalTo: satMathStackView.widthAnchor, multiplier: 0.8),
             satMathScore.heightAnchor.constraint(equalTo: satMathStackView.heightAnchor, multiplier: 0.3),
+            satMathScore.widthAnchor.constraint(equalTo: satMathStackView.widthAnchor, multiplier: 0.8),
+            satMathScore.centerXAnchor.constraint(equalTo: satMathStackView.centerXAnchor),
 
             satWritingSubView.topAnchor.constraint(equalTo: satMathSubView.bottomAnchor),
-            satWritingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satWritingSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
+            satWritingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satWritingStackView.heightAnchor.constraint(equalTo: satWritingSubView.heightAnchor, multiplier: 0.8),
             satWritingStackView.widthAnchor.constraint(equalTo: satWritingSubView.widthAnchor, multiplier: 0.8),
             satWritingStackView.centerXAnchor.constraint(equalTo: satWritingSubView.centerXAnchor),
             satWritingStackView.centerYAnchor.constraint(equalTo: satWritingSubView.centerYAnchor),
             satWritingLabel.topAnchor.constraint(equalTo: satWritingStackView.topAnchor),
-            satWritingLabel.centerXAnchor.constraint(equalTo: satWritingStackView.centerXAnchor),
-            satWritingLabel.widthAnchor.constraint(equalTo: satWritingStackView.widthAnchor, multiplier: 0.9),
             satWritingLabel.heightAnchor.constraint(equalTo: satWritingStackView.heightAnchor, multiplier: 0.4),
+            satWritingLabel.widthAnchor.constraint(equalTo: satWritingStackView.widthAnchor, multiplier: 0.9),
+            satWritingLabel.centerXAnchor.constraint(equalTo: satWritingStackView.centerXAnchor),
             satWritingScore.topAnchor.constraint(equalTo: satWritingLabel.bottomAnchor),
-            satWritingScore.centerXAnchor.constraint(equalTo: satWritingStackView.centerXAnchor),
-            satWritingScore.widthAnchor.constraint(equalTo: satWritingStackView.widthAnchor, multiplier: 0.8),
             satWritingScore.heightAnchor.constraint(equalTo: satWritingStackView.heightAnchor, multiplier: 0.3),
+            satWritingScore.widthAnchor.constraint(equalTo: satWritingStackView.widthAnchor, multiplier: 0.8),
+            satWritingScore.centerXAnchor.constraint(equalTo: satWritingStackView.centerXAnchor),
 
             satReadingSubView.topAnchor.constraint(equalTo: satWritingSubView.bottomAnchor),
-            satReadingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satReadingSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
+            satReadingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
             satReadingStackView.heightAnchor.constraint(equalTo: satReadingSubView.heightAnchor, multiplier: 0.8),
             satReadingStackView.widthAnchor.constraint(equalTo: satReadingSubView.widthAnchor, multiplier: 0.8),
             satReadingStackView.centerXAnchor.constraint(equalTo: satReadingSubView.centerXAnchor),
             satReadingStackView.centerYAnchor.constraint(equalTo: satReadingSubView.centerYAnchor),
             satReadingLabel.topAnchor.constraint(equalTo: satReadingStackView.topAnchor),
-            satReadingLabel.centerXAnchor.constraint(equalTo: satReadingStackView.centerXAnchor),
-            satReadingLabel.widthAnchor.constraint(equalTo: satReadingStackView.widthAnchor, multiplier: 0.9),
             satReadingLabel.heightAnchor.constraint(equalTo: satReadingStackView.heightAnchor, multiplier: 0.4),
+            satReadingLabel.widthAnchor.constraint(equalTo: satReadingStackView.widthAnchor, multiplier: 0.9),
+            satReadingLabel.centerXAnchor.constraint(equalTo: satReadingStackView.centerXAnchor),
             satReadingScore.topAnchor.constraint(equalTo: satReadingLabel.bottomAnchor),
-            satReadingScore.centerXAnchor.constraint(equalTo: satReadingStackView.centerXAnchor),
-            satReadingScore.widthAnchor.constraint(equalTo: satReadingStackView.widthAnchor, multiplier: 0.8),
             satReadingScore.heightAnchor.constraint(equalTo: satReadingStackView.heightAnchor, multiplier: 0.3),
+            satReadingScore.widthAnchor.constraint(equalTo: satReadingStackView.widthAnchor, multiplier: 0.8),
+            satReadingScore.centerXAnchor.constraint(equalTo: satReadingStackView.centerXAnchor),
         ])
     }
 }

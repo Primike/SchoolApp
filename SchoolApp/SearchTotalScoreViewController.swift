@@ -193,8 +193,8 @@ extension SearchTotalScoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(info: searchSATScoreViewModel.getInfo(for: indexPath))
-        schoolCell.schoolBoro.text = "Rank #\(indexPath.row + 1)"
-        schoolCell.schoolBoro.textColor = .black
+        schoolCell.schoolBoroLabel.text = "Rank #\(indexPath.row + 1)"
+        schoolCell.schoolBoroLabel.textColor = .black
         return schoolCell
     }
     
@@ -212,6 +212,6 @@ extension SearchTotalScoreViewController: UITableViewDataSource {
 extension SearchTotalScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: searchSATScoreViewModel.calculatedSchools[indexPath.row], scores: searchSATScoreViewModel.calculatedSchoolsScores[indexPath.row]), animated: true)
+        navigationController?.present(SchoolTabBarViewController(school: searchSATScoreViewModel.calculatedSchools[indexPath.row], scores: searchSATScoreViewModel.calculatedSchoolsScores[indexPath.row]), animated: true)
     }
 }

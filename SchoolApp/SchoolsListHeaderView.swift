@@ -9,11 +9,10 @@ import Foundation
 import UIKit
 
 class SchoolsListHeaderView: UIView {
-    let typeLabel = UILabel()
 
     let headerStackView = UIStackView()
-    let infoStackView = UIStackView()
-    let schoolName = UILabel()
+    let labelsStackView = UIStackView()
+    let titleLabel = UILabel()
     let dateLabel = UILabel()
 
     let date = Date()
@@ -23,6 +22,7 @@ class SchoolsListHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setup()
         layout()
     }
@@ -35,65 +35,68 @@ class SchoolsListHeaderView: UIView {
 
     func setup() {
         dateFormatter.dateFormat = "MM/dd/YY hh:mm:ss"
-        let todaysDate = dateFormatter.string(from: date)
+        let _ = dateFormatter.string(from: date)
 
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         headerStackView.axis = .horizontal
 
-        schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"TrebuchetMS-Bold", size: 40.0 )
-        schoolName.adjustsFontSizeToFitWidth = true
-        schoolName.textAlignment = .left
-        schoolName.text = "NYC Schools App"
-        schoolName.numberOfLines = 0
+        labelsStackView.translatesAutoresizingMaskIntoConstraints = false
+        labelsStackView.axis = .vertical
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 50.0 )
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .left
+        titleLabel.text = "NYC High School List"
+        titleLabel.textColor = .black
 
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.font = UIFont(name:"TrebuchetMS", size: 12.0 )
+        dateLabel.font = UIFont(name:"HelveticaNeue", size: 20.0 )
+        dateLabel.adjustsFontSizeToFitWidth = true
+        dateLabel.textAlignment = .left
         dateLabel.text = "Last Updated September 10, 2018"
-        dateLabel.numberOfLines = 0
+        dateLabel.textColor = .black
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFill
-
-        infoStackView.translatesAutoresizingMaskIntoConstraints = false
-        infoStackView.axis = .vertical
     }
 
     func layout() {
         self.addSubview(headerStackView)
 
-        infoStackView.addSubview(schoolName)
-        infoStackView.addSubview(dateLabel)
-        headerStackView.addSubview(infoStackView)
+        headerStackView.addSubview(labelsStackView)
         headerStackView.addSubview(imageView)
+        
+        labelsStackView.addSubview(titleLabel)
+        labelsStackView.addSubview(dateLabel)
 
+        
         NSLayoutConstraint.activate([
-            headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
+            headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             headerStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 
+            labelsStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
+            labelsStackView.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
+            labelsStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
+            labelsStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.6),
 
-            infoStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.6),
-            infoStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
-            infoStackView.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
-            infoStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
+            titleLabel.topAnchor.constraint(equalTo: labelsStackView.topAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: labelsStackView.leftAnchor),
+            titleLabel.heightAnchor.constraint(equalTo: labelsStackView.heightAnchor, multiplier: 0.5),
+            titleLabel.widthAnchor.constraint(equalTo: labelsStackView.widthAnchor),
 
-            schoolName.widthAnchor.constraint(equalTo: infoStackView.widthAnchor),
-            schoolName.topAnchor.constraint(equalTo: infoStackView.topAnchor),
-            schoolName.leftAnchor.constraint(equalTo: infoStackView.leftAnchor),
-            schoolName.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.5),
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            dateLabel.leftAnchor.constraint(equalTo: labelsStackView.leftAnchor),
+            dateLabel.heightAnchor.constraint(equalTo: labelsStackView.heightAnchor, multiplier: 0.3),
+            dateLabel.widthAnchor.constraint(equalTo: labelsStackView.widthAnchor),
 
-            dateLabel.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
-            dateLabel.widthAnchor.constraint(equalTo: infoStackView.widthAnchor),
-            dateLabel.leftAnchor.constraint(equalTo: infoStackView.leftAnchor),
-            dateLabel.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.3),
-
+            imageView.topAnchor.constraint(equalTo: labelsStackView.topAnchor),
             imageView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
-            imageView.topAnchor.constraint(equalTo: infoStackView.topAnchor),
-            imageView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
-            imageView.heightAnchor.constraint(equalTo: infoStackView.heightAnchor),
+            imageView.heightAnchor.constraint(equalTo: labelsStackView.heightAnchor),
+            imageView.widthAnchor.constraint(equalTo: labelsStackView.heightAnchor),
         ])
 
     }
