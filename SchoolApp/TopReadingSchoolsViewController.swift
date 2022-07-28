@@ -10,12 +10,12 @@ import UIKit
 
 class TopReadingSchoolsViewController: UIViewController {
     
+    let topSchoolsHeaderView = TopSchoolsHeaderView()
     let schoolsTableView = UITableView()
     let numberOfSchoolsText = UITextField()
     let errorLabel = UILabel()
     let enterButton = UIButton()
     
-    let topSchoolsHeaderView = TopSchoolsHeaderView()
     let topSchoolsViewModel: TopSchoolsViewModel
     
     required init(viewModel: TopSchoolsViewModel) {
@@ -41,13 +41,12 @@ class TopReadingSchoolsViewController: UIViewController {
         
         topSchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
         topSchoolsHeaderView.layer.cornerRadius = 30
-        topSchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        topSchoolsHeaderView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topSchoolsHeaderView.backgroundColor = UIColor.systemRed
         
         topSchoolsHeaderView.topSchoolsLabel.text = "Top Schools By SAT Reading Scores"
         
         numberOfSchoolsText.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchoolsText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         numberOfSchoolsText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         numberOfSchoolsText.adjustsFontSizeToFitWidth = true
         numberOfSchoolsText.textAlignment = .center
@@ -61,19 +60,14 @@ class TopReadingSchoolsViewController: UIViewController {
         errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
         errorLabel.adjustsFontSizeToFitWidth = true
         errorLabel.numberOfLines = 0
-        errorLabel.textColor = .systemRed
-        errorLabel.text = "Error Label"
+        errorLabel.textColor = .red
         errorLabel.isHidden = true
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.backgroundColor = .black
-        enterButton.setTitleColor(.white, for: .normal)
         enterButton.setTitle("Find", for: .normal)
-        enterButton.titleLabel!.font = UIFont(name:"HelveticaNeue-bold", size: 25.0)
-        enterButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        enterButton.layer.cornerRadius = 10
-        enterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        enterButton.configuration = .filled()
+        enterButton.configuration?.baseBackgroundColor = .black
         
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -88,12 +82,12 @@ class TopReadingSchoolsViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             topSchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topSchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.20),
             topSchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            topSchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18),
             
             numberOfSchoolsText.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
-            numberOfSchoolsText.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
             numberOfSchoolsText.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.3),
+            numberOfSchoolsText.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
             numberOfSchoolsText.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
             
             errorLabel.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.bottomAnchor),
@@ -107,8 +101,8 @@ class TopReadingSchoolsViewController: UIViewController {
             enterButton.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
             
             schoolsTableView.topAnchor.constraint(equalTo: topSchoolsHeaderView.bottomAnchor),
-            schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            schoolsTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }

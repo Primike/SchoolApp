@@ -10,17 +10,17 @@ import UIKit
 
 class SearchTotalScoreViewController: UIViewController {
     
+    let searchSATScoresHeaderView = SearchScoresHeaderView()
     let schoolsTableView = UITableView()
     let totalScoreText = UITextField()
     let schoolNumberText = UITextField()
     let errorLabel = UILabel()
     let enterButton = UIButton()
     
-    let searchSATScoresHeaderView = SearchScoresHeaderView()
     
-    let searchSATScoreViewModel: SearchScoresViewModel
+    let searchSATScoreViewModel: SearchSATScoresViewModel
     
-    required init(viewModel: SearchScoresViewModel) {
+    required init(viewModel: SearchSATScoresViewModel) {
         self.searchSATScoreViewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
@@ -42,12 +42,11 @@ class SearchTotalScoreViewController: UIViewController {
         view.backgroundColor = .white
         
         searchSATScoresHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        searchSATScoresHeaderView.layer.cornerRadius = 30
-        searchSATScoresHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        searchSATScoresHeaderView.layer.cornerRadius = 40
+        searchSATScoresHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner]
         searchSATScoresHeaderView.backgroundColor = UIColor.systemBlue
         
         totalScoreText.translatesAutoresizingMaskIntoConstraints = false
-        totalScoreText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         totalScoreText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         totalScoreText.adjustsFontSizeToFitWidth = true
         totalScoreText.textAlignment = .center
@@ -57,7 +56,6 @@ class SearchTotalScoreViewController: UIViewController {
         totalScoreText.delegate = self
         
         schoolNumberText.translatesAutoresizingMaskIntoConstraints = false
-        schoolNumberText.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         schoolNumberText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         schoolNumberText.adjustsFontSizeToFitWidth = true
         schoolNumberText.textAlignment = .center
@@ -71,19 +69,14 @@ class SearchTotalScoreViewController: UIViewController {
         errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
         errorLabel.adjustsFontSizeToFitWidth = true
         errorLabel.numberOfLines = 0
-        errorLabel.textColor = .systemRed
-        errorLabel.text = "Error Label"
+        errorLabel.textColor = .red
         errorLabel.isHidden = true
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.backgroundColor = .black
-        enterButton.setTitleColor(.white, for: .normal)
         enterButton.setTitle("Find", for: .normal)
-        enterButton.titleLabel!.font = UIFont(name:"HelveticaNeue-bold", size: 25.0)
-        enterButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        enterButton.layer.cornerRadius = 10
-        enterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        enterButton.configuration = .filled()
+        enterButton.configuration?.baseBackgroundColor = .black
         
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -99,23 +92,24 @@ class SearchTotalScoreViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             searchSATScoresHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchSATScoresHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.20),
             searchSATScoresHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            searchSATScoresHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18),
+            searchSATScoresHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             schoolsTableView.topAnchor.constraint(equalTo: searchSATScoresHeaderView.bottomAnchor),
-            schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            schoolsTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             totalScoreText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.topAnchor),
-            totalScoreText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.widthAnchor, multiplier: 0.45),
-            totalScoreText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.heightAnchor),
             totalScoreText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.rightAnchor),
+            totalScoreText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.heightAnchor),
+            totalScoreText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.widthAnchor, multiplier: 0.45),
             
             schoolNumberText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.topAnchor),
-            schoolNumberText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.widthAnchor, multiplier: 0.45),
-            schoolNumberText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.heightAnchor),
             schoolNumberText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.rightAnchor),
+            schoolNumberText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.heightAnchor),
+            schoolNumberText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.widthAnchor, multiplier: 0.45),
             
             errorLabel.topAnchor.constraint(equalTo: totalScoreText.bottomAnchor),
             errorLabel.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.heightAnchor, multiplier: 0.2),
@@ -138,14 +132,12 @@ class SearchTotalScoreViewController: UIViewController {
 
 //check if need to add other text to endeditin
 extension SearchTotalScoreViewController: UITextFieldDelegate {
-    //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         totalScoreText.endEditing(true)
         errorLabel.isHidden = true
         return true
     }
     
-    //callback to see what's in the text field
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }

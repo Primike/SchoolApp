@@ -16,10 +16,11 @@ class SearchScoresHeaderView: UIView {
     let scoreStackView = UIStackView()
     let scoreLabel = UILabel()
     let numberStackView = UIStackView()
-    let numberOfSchools = UILabel()
+    let numberOfSchoolsLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setup()
         layout()
     }
@@ -60,13 +61,13 @@ class SearchScoresHeaderView: UIView {
         numberStackView.translatesAutoresizingMaskIntoConstraints = false
         numberStackView.axis = .horizontal
         
-        numberOfSchools.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchools.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        numberOfSchools.adjustsFontSizeToFitWidth = true
-        numberOfSchools.textAlignment = .center
-        numberOfSchools.text = "# Of Schools"
-        numberOfSchools.textColor = .white
-        numberOfSchools.numberOfLines = 0
+        numberOfSchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberOfSchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        numberOfSchoolsLabel.adjustsFontSizeToFitWidth = true
+        numberOfSchoolsLabel.textAlignment = .center
+        numberOfSchoolsLabel.text = "# Of Schools"
+        numberOfSchoolsLabel.textColor = .white
+        numberOfSchoolsLabel.numberOfLines = 0
     }
 
     func layout() {
@@ -79,7 +80,7 @@ class SearchScoresHeaderView: UIView {
         
         scoreStackView.addSubview(scoreLabel)
         
-        numberStackView.addSubview(numberOfSchools)
+        numberStackView.addSubview(numberOfSchoolsLabel)
 
         NSLayoutConstraint.activate([
 
@@ -88,36 +89,35 @@ class SearchScoresHeaderView: UIView {
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             headerStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            topSchoolsLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
-            topSchoolsLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.4),
             topSchoolsLabel.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             topSchoolsLabel.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
+            topSchoolsLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
+            topSchoolsLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.4),
             
-            filterStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
-            filterStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.5),
             filterStackView.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             filterStackView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
+            filterStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor),
+            filterStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.5),
             
-            scoreStackView.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
-            scoreStackView.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.45),
             scoreStackView.topAnchor.constraint(equalTo: filterStackView.topAnchor),
             scoreStackView.leftAnchor.constraint(equalTo: filterStackView.leftAnchor),
+            scoreStackView.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
+            scoreStackView.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.45),
             
-            numberStackView.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
-            numberStackView.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.45),
             numberStackView.topAnchor.constraint(equalTo: filterStackView.topAnchor),
             numberStackView.rightAnchor.constraint(equalTo: filterStackView.rightAnchor),
+            numberStackView.heightAnchor.constraint(equalTo: filterStackView.heightAnchor, multiplier: 0.3),
+            numberStackView.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.45),
             
             scoreLabel.topAnchor.constraint(equalTo: scoreStackView.topAnchor),
+            scoreLabel.leftAnchor.constraint(equalTo: scoreStackView.leftAnchor),
             scoreLabel.heightAnchor.constraint(equalTo: scoreStackView.heightAnchor),
             scoreLabel.widthAnchor.constraint(equalTo: scoreStackView.widthAnchor, multiplier: 0.45),
-            scoreLabel.leftAnchor.constraint(equalTo: scoreStackView.leftAnchor),
             
-            numberOfSchools.topAnchor.constraint(equalTo: numberStackView.topAnchor),
-            numberOfSchools.heightAnchor.constraint(equalTo: numberStackView.heightAnchor),
-            numberOfSchools.widthAnchor.constraint(equalTo: numberStackView.widthAnchor, multiplier: 0.45),
-            numberOfSchools.leftAnchor.constraint(equalTo: numberStackView.leftAnchor)
-
+            numberOfSchoolsLabel.topAnchor.constraint(equalTo: numberStackView.topAnchor),
+            numberOfSchoolsLabel.leftAnchor.constraint(equalTo: numberStackView.leftAnchor),
+            numberOfSchoolsLabel.heightAnchor.constraint(equalTo: numberStackView.heightAnchor),
+            numberOfSchoolsLabel.widthAnchor.constraint(equalTo: numberStackView.widthAnchor, multiplier: 0.45),
         ])
 
     }

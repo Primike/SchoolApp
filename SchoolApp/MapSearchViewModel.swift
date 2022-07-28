@@ -16,8 +16,8 @@ class MapSearchViewModel {
     var nearbySchools = [School]()
     var latitude = 0.0
     var longitude = 0.0
-    var miles = 5.0
-    var number = 10
+    var miles = 1.0
+    var number = 5
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsScores = schoolsSATData
@@ -58,7 +58,6 @@ class MapSearchViewModel {
             let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
             
             if distance < Double(miles * 1609.34) {
-                print(distance)
                 nearbySchools.append(i)
             }
         }

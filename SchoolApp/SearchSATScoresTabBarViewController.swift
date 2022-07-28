@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-class SearchScoresTabBarViewController: UITabBarController {
+class SearchSATScoresTabBarViewController: UITabBarController {
     
-    let searchSATScoreViewModel: SearchScoresViewModel
+    let searchSATScoresViewModel: SearchSATScoresViewModel
     
-    init(viewModel: SearchScoresViewModel) {
-        self.searchSATScoreViewModel = viewModel
+    init(viewModel: SearchSATScoresViewModel) {
+        self.searchSATScoresViewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,10 +31,10 @@ class SearchScoresTabBarViewController: UITabBarController {
     
     private func setupViews() {
         
-        let searchTotalVC = SearchTotalScoreViewController(viewModel: SearchScoresViewModel(schools: searchSATScoreViewModel.schools, schoolsScores: searchSATScoreViewModel.schoolsScores))
-        let searchMathVC = SearchMathScoreViewController(viewModel: SearchScoresViewModel(schools: searchSATScoreViewModel.schools, schoolsScores: searchSATScoreViewModel.schoolsScores))
-        let searchReadingVC = SearchReadingScoreViewController(viewModel: SearchScoresViewModel(schools: searchSATScoreViewModel.schools, schoolsScores: searchSATScoreViewModel.schoolsScores))
-        let searchWritingVC = SearchWritingScoreViewController(viewModel: SearchScoresViewModel(schools: searchSATScoreViewModel.schools, schoolsScores: searchSATScoreViewModel.schoolsScores))
+        let searchTotalVC = SearchTotalScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
+        let searchMathVC = SearchMathScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
+        let searchReadingVC = SearchReadingScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
+        let searchWritingVC = SearchWritingScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
 
         searchTotalVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Top Schools", tag: 0)
         searchMathVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Top Math Schools", tag: 1)

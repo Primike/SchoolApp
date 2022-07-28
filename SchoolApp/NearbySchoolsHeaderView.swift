@@ -21,6 +21,7 @@ class NearbySchoolsHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setup()
         layout()
     }

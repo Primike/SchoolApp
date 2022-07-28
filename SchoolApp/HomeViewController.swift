@@ -191,11 +191,11 @@ extension HomeViewController {
     }
     
     @objc func mapSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(MapTabBarViewController(viewModel: MapSearchViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+        navigationController?.pushViewController(MapSearchTabBarViewController(viewModel: MapSearchViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
     
     @objc func satSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(SearchScoresTabBarViewController(viewModel: SearchScoresViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoresViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
 }
 

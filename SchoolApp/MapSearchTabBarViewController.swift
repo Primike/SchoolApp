@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MapTabBarViewController: UITabBarController {
+class MapSearchTabBarViewController: UITabBarController {
     
     let nearbySchoolsViewModel: MapSearchViewModel
     

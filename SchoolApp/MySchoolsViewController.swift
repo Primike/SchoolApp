@@ -10,6 +10,7 @@ import UIKit
 
 class MySchoolsViewController: UIViewController {
     
+    let mySchoolsHeaderView = MySchoolsHeaderView()
     let schoolsTableView = UITableView()
     
     let mySchoolsViewModel: MySchoolsViewModel
@@ -30,27 +31,37 @@ class MySchoolsViewController: UIViewController {
         style()
         layout()
         setup()
+        mySchoolsEmpty()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mySchoolsViewModel.mySchools()
         schoolsTableView.reloadData()
+        mySchoolsEmpty()
     }
     
     func style() {
         view.backgroundColor = .white
         
+        mySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {
+        view.addSubview(mySchoolsHeaderView)
         view.addSubview(schoolsTableView)
 
         NSLayoutConstraint.activate([
-            schoolsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            schoolsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            schoolsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            mySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            mySchoolsHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            schoolsTableView.topAnchor.constraint(equalTo: mySchoolsHeaderView.bottomAnchor),
+            schoolsTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -58,6 +69,12 @@ class MySchoolsViewController: UIViewController {
     func setup() {
         schoolsTableView.delegate = self
         schoolsTableView.dataSource = self
+    }
+    
+    func mySchoolsEmpty() {
+        if mySchoolsViewModel.schools.count > 0 {
+            mySchoolsHeaderView.mySchoolsLabel.text = "My Schools"
+        }
     }
 }
 
@@ -78,8 +95,6 @@ extension MySchoolsViewController: UITableViewDataSource {
     }
 }
 
-
-//crahsed for some reason
 extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

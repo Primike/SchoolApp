@@ -12,6 +12,7 @@ import CoreLocation
 
 class CoordinateSearchViewController: UIViewController {
     
+    let nearbySchoolsHeaderView = CoordinateSearchHeaderView()
     let map = MKMapView()
     let latitudeText = UITextField()
     let longitudeText = UITextField()
@@ -20,9 +21,7 @@ class CoordinateSearchViewController: UIViewController {
     let nearbySchoolsViewModel: MapSearchViewModel
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
-    
-    let nearbySchoolsHeaderView = CoordinateSearchHeaderView()
-    
+        
     init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +34,7 @@ class CoordinateSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
         setup()
@@ -47,12 +47,9 @@ class CoordinateSearchViewController: UIViewController {
         map.translatesAutoresizingMaskIntoConstraints = false
         
         nearbySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        nearbySchoolsHeaderView.layer.cornerRadius = 30
-        nearbySchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         nearbySchoolsHeaderView.backgroundColor = UIColor.systemBlue
         
         latitudeText.translatesAutoresizingMaskIntoConstraints = false
-        latitudeText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         latitudeText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         latitudeText.adjustsFontSizeToFitWidth = true
         latitudeText.textAlignment = .center
@@ -62,7 +59,6 @@ class CoordinateSearchViewController: UIViewController {
         latitudeText.delegate = self
         
         longitudeText.translatesAutoresizingMaskIntoConstraints = false
-        longitudeText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         longitudeText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         longitudeText.adjustsFontSizeToFitWidth = true
         longitudeText.textAlignment = .center
@@ -73,13 +69,9 @@ class CoordinateSearchViewController: UIViewController {
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.backgroundColor = .black
-        enterButton.setTitleColor(.white, for: .normal)
-        enterButton.setTitle("Search", for: .normal)
-        enterButton.titleLabel!.font = UIFont(name:"HelveticaNeue-bold", size: 20.0)
-        enterButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        enterButton.layer.cornerRadius = 10
-        enterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        enterButton.setTitle("Find", for: .normal)
+        enterButton.configuration = .filled()
+        enterButton.configuration?.baseBackgroundColor = .black
     }
     
     func layout() {
@@ -92,29 +84,29 @@ class CoordinateSearchViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             nearbySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            nearbySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             nearbySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            nearbySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            nearbySchoolsHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             map.topAnchor.constraint(equalTo: nearbySchoolsHeaderView.bottomAnchor),
-            map.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            map.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            latitudeText.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.centerYAnchor),
-            latitudeText.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.widthAnchor, multiplier: 0.45),
-            latitudeText.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.heightAnchor, multiplier: 0.5),
             latitudeText.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.rightAnchor),
-            
-            longitudeText.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.centerYAnchor),
-            longitudeText.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.widthAnchor, multiplier: 0.45),
-            longitudeText.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.heightAnchor, multiplier: 0.5),
+            latitudeText.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.heightAnchor, multiplier: 0.5),
+            latitudeText.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.widthAnchor, multiplier: 0.45),
+            latitudeText.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.latitudeStackView.centerYAnchor),
+
             longitudeText.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.rightAnchor),
+            longitudeText.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.heightAnchor, multiplier: 0.5),
+            longitudeText.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.widthAnchor, multiplier: 0.45),
+            longitudeText.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.longitudeStackView.centerYAnchor),
             
-            enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.centerYAnchor),
             enterButton.rightAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.rightAnchor),
             enterButton.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.heightAnchor, multiplier: 0.6),
             enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.widthAnchor, multiplier: 0.25),
-        
+            enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.coordinatesStackView.centerYAnchor),
         ])
     }
 
@@ -203,20 +195,18 @@ extension CoordinateSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+        navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
         
     }
 }
 
 extension CoordinateSearchViewController: UITextFieldDelegate {
-    //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         latitudeText.endEditing(true)
         nearbySchoolsHeaderView.errorLabel.isHidden = true
         return true
     }
     
-    //callback to see what's in the text field
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }

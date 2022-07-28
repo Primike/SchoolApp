@@ -12,6 +12,7 @@ import CoreLocation
 
 class RadiusSearchViewController: UIViewController {
     
+    let radiusSearchHeaderView = RadiusSearchHeaderView()
     let map = MKMapView()
     let milesText = UITextField()
     let enterButton = UIButton()
@@ -19,9 +20,7 @@ class RadiusSearchViewController: UIViewController {
     let nearbySchoolsViewModel: MapSearchViewModel
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
-    
-    let radiusSearchHeaderView = RadiusSearchHeaderView()
-    
+        
     init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -34,6 +33,7 @@ class RadiusSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
         setup()
@@ -46,12 +46,9 @@ class RadiusSearchViewController: UIViewController {
         map.translatesAutoresizingMaskIntoConstraints = false
         
         radiusSearchHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        radiusSearchHeaderView.layer.cornerRadius = 30
-        radiusSearchHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         radiusSearchHeaderView.backgroundColor = UIColor.systemBlue
         
         milesText.translatesAutoresizingMaskIntoConstraints = false
-        milesText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         milesText.font = UIFont(name:"HelveticaNeue", size: 40.0)
         milesText.adjustsFontSizeToFitWidth = true
         milesText.textAlignment = .center
@@ -62,13 +59,9 @@ class RadiusSearchViewController: UIViewController {
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.backgroundColor = .black
-        enterButton.setTitleColor(.white, for: .normal)
-        enterButton.setTitle("Search", for: .normal)
-        enterButton.titleLabel!.font = UIFont(name:"HelveticaNeue-bold", size: 20.0)
-        enterButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        enterButton.layer.cornerRadius = 10
-        enterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        enterButton.setTitle("Find", for: .normal)
+        enterButton.configuration = .filled()
+        enterButton.configuration?.baseBackgroundColor = .black
     }
     
     func layout() {
@@ -80,12 +73,13 @@ class RadiusSearchViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             radiusSearchHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            radiusSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             radiusSearchHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            radiusSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            radiusSearchHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             map.topAnchor.constraint(equalTo: radiusSearchHeaderView.bottomAnchor),
-            map.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            map.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             milesText.heightAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.heightAnchor, multiplier: 0.7),
@@ -93,11 +87,10 @@ class RadiusSearchViewController: UIViewController {
             milesText.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerXAnchor),
             milesText.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerYAnchor),
             
-            enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),
             enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
             enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor, multiplier: 0.8),
-        
+            enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
+            enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),
         ])
     }
 
@@ -145,7 +138,6 @@ extension RadiusSearchViewController {
         radiusSearchHeaderView.errorLabel.isHidden = true
 
         if milesText.text!.isEmpty{
-            //fix this
             return
         }
         
@@ -181,20 +173,18 @@ extension RadiusSearchViewController: MKMapViewDelegate {
         if view.annotation?.title != "CURRENT LOCATION" {
             let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
             
-            navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+            navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
         }
     }
 }
 
 extension RadiusSearchViewController: UITextFieldDelegate {
-    //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         milesText.endEditing(true)
         radiusSearchHeaderView.errorLabel.isHidden = true
         return true
     }
     
-    //callback to see what's in the text field
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }

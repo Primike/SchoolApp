@@ -12,15 +12,14 @@ import CoreLocation
 
 class NearbySchoolsViewController: UIViewController {
     
+    let nearbySchoolsHeaderView = NearbySchoolsHeaderView()
     let map = MKMapView()
     let schoolsNumber = UITextField()
     let enterButton = UIButton()
 
     let nearbySchoolsViewModel: MapSearchViewModel
     var annotations = [MKPointAnnotation]()
-    
-    let nearbySchoolsHeaderView = NearbySchoolsHeaderView()
-    
+        
     init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -33,6 +32,7 @@ class NearbySchoolsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
         setup()
@@ -45,12 +45,9 @@ class NearbySchoolsViewController: UIViewController {
         map.translatesAutoresizingMaskIntoConstraints = false
         
         nearbySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        nearbySchoolsHeaderView.layer.cornerRadius = 30
-        nearbySchoolsHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         nearbySchoolsHeaderView.backgroundColor = UIColor.systemBlue
         
         schoolsNumber.translatesAutoresizingMaskIntoConstraints = false
-        schoolsNumber.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         schoolsNumber.font = UIFont(name:"HelveticaNeue", size: 40.0)
         schoolsNumber.adjustsFontSizeToFitWidth = true
         schoolsNumber.textAlignment = .center
@@ -61,13 +58,9 @@ class NearbySchoolsViewController: UIViewController {
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.backgroundColor = .black
-        enterButton.setTitleColor(.white, for: .normal)
-        enterButton.setTitle("Search", for: .normal)
-        enterButton.titleLabel!.font = UIFont(name:"HelveticaNeue-bold", size: 20.0)
-        enterButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        enterButton.layer.cornerRadius = 10
-        enterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        enterButton.setTitle("Find", for: .normal)
+        enterButton.configuration = .filled()
+        enterButton.configuration?.baseBackgroundColor = .black
     }
     
     func layout() {
@@ -79,12 +72,13 @@ class NearbySchoolsViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             nearbySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            nearbySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             nearbySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            nearbySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            nearbySchoolsHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             map.topAnchor.constraint(equalTo: nearbySchoolsHeaderView.bottomAnchor),
-            map.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            map.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             schoolsNumber.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.heightAnchor, multiplier: 0.7),
@@ -92,11 +86,10 @@ class NearbySchoolsViewController: UIViewController {
             schoolsNumber.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.centerXAnchor),
             schoolsNumber.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.centerYAnchor),
             
-            enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerYAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerXAnchor),
             enterButton.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
             enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.widthAnchor, multiplier: 0.8),
-        
+            enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerYAnchor),
+            enterButton.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerXAnchor),
         ])
     }
 
@@ -110,7 +103,7 @@ class NearbySchoolsViewController: UIViewController {
                 }
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: true)
                 
                 self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
@@ -179,20 +172,18 @@ extension NearbySchoolsViewController: MKMapViewDelegate {
         if view.annotation?.title != "CURRENT LOCATION" {
             let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
             
-            navigationController?.pushViewController(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+            navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
         }
     }
 }
 
 extension NearbySchoolsViewController: UITextFieldDelegate {
-    //the user hits return, so we should end editing and return true
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         schoolsNumber.endEditing(true)
         nearbySchoolsHeaderView.errorLabel.isHidden = true
         return true
     }
     
-    //callback to see what's in the text field
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }

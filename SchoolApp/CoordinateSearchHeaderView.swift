@@ -14,14 +14,15 @@ class CoordinateSearchHeaderView: UIView {
     let coordinatesLabel = UILabel()
     let coordinatesStackView = UIStackView()
     let latitudeStackView = UIStackView()
-    let latitude = UILabel()
+    let latitudeLabel = UILabel()
     let longitudeStackView = UIStackView()
-    let longitude = UILabel()
+    let longitudeLabel = UILabel()
     let errorLabel = UILabel()
 
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setup()
         layout()
     }
@@ -48,24 +49,24 @@ class CoordinateSearchHeaderView: UIView {
         latitudeStackView.translatesAutoresizingMaskIntoConstraints = false
         latitudeStackView.axis = .horizontal
         
-        latitude.translatesAutoresizingMaskIntoConstraints = false
-        latitude.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        latitude.adjustsFontSizeToFitWidth = true
-        latitude.textAlignment = .center
-        latitude.text = "Latitude"
-        latitude.textColor = .white
-        latitude.numberOfLines = 0
+        latitudeLabel.translatesAutoresizingMaskIntoConstraints = false
+        latitudeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        latitudeLabel.adjustsFontSizeToFitWidth = true
+        latitudeLabel.textAlignment = .center
+        latitudeLabel.text = "Latitude"
+        latitudeLabel.textColor = .white
+        latitudeLabel.numberOfLines = 0
         
         longitudeStackView.translatesAutoresizingMaskIntoConstraints = false
         longitudeStackView.axis = .horizontal
         
-        longitude.translatesAutoresizingMaskIntoConstraints = false
-        longitude.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        longitude.adjustsFontSizeToFitWidth = true
-        longitude.textAlignment = .center
-        longitude.text = "Longitude"
-        longitude.textColor = .white
-        longitude.numberOfLines = 0
+        longitudeLabel.translatesAutoresizingMaskIntoConstraints = false
+        longitudeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        longitudeLabel.adjustsFontSizeToFitWidth = true
+        longitudeLabel.textAlignment = .center
+        longitudeLabel.text = "Longitude"
+        longitudeLabel.textColor = .white
+        longitudeLabel.numberOfLines = 0
         
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         errorLabel.textAlignment = .center
@@ -87,8 +88,8 @@ class CoordinateSearchHeaderView: UIView {
         coordinatesStackView.addSubview(latitudeStackView)
         coordinatesStackView.addSubview(longitudeStackView)
         
-        latitudeStackView.addSubview(latitude)
-        longitudeStackView.addSubview(longitude)
+        latitudeStackView.addSubview(latitudeLabel)
+        longitudeStackView.addSubview(longitudeLabel)
         
         NSLayoutConstraint.activate([
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
@@ -96,41 +97,40 @@ class CoordinateSearchHeaderView: UIView {
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             headerStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
+            coordinatesLabel.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             coordinatesLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.3),
             coordinatesLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor),
             coordinatesLabel.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
-            coordinatesLabel.topAnchor.constraint(equalTo: headerStackView.topAnchor),
             
-            coordinatesStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.5),
             coordinatesStackView.topAnchor.constraint(equalTo: coordinatesLabel.bottomAnchor),
+            coordinatesStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.5),
             coordinatesStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.9),
             coordinatesStackView.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
             
+            latitudeStackView.topAnchor.constraint(equalTo: coordinatesStackView.topAnchor),
+            latitudeStackView.leftAnchor.constraint(equalTo: coordinatesStackView.leftAnchor),
             latitudeStackView.heightAnchor.constraint(equalTo: coordinatesStackView.heightAnchor),
             latitudeStackView.widthAnchor.constraint(equalTo: coordinatesStackView.widthAnchor, multiplier: 0.3),
-            latitudeStackView.leftAnchor.constraint(equalTo: coordinatesStackView.leftAnchor),
-            latitudeStackView.topAnchor.constraint(equalTo: coordinatesStackView.topAnchor),
             
-            latitude.heightAnchor.constraint(equalTo: latitudeStackView.heightAnchor),
-            latitude.widthAnchor.constraint(equalTo: latitudeStackView.widthAnchor, multiplier: 0.45),
-            latitude.leftAnchor.constraint(equalTo: latitudeStackView.leftAnchor),
-            latitude.topAnchor.constraint(equalTo: latitudeStackView.topAnchor),
+            latitudeLabel.topAnchor.constraint(equalTo: latitudeStackView.topAnchor),
+            latitudeLabel.leftAnchor.constraint(equalTo: latitudeStackView.leftAnchor),
+            latitudeLabel.heightAnchor.constraint(equalTo: latitudeStackView.heightAnchor),
+            latitudeLabel.widthAnchor.constraint(equalTo: latitudeStackView.widthAnchor, multiplier: 0.45),
             
+            longitudeStackView.topAnchor.constraint(equalTo: coordinatesStackView.topAnchor),
             longitudeStackView.heightAnchor.constraint(equalTo: coordinatesStackView.heightAnchor),
             longitudeStackView.widthAnchor.constraint(equalTo: coordinatesStackView.widthAnchor, multiplier: 0.3),
-            longitudeStackView.topAnchor.constraint(equalTo: coordinatesStackView.topAnchor),
             longitudeStackView.centerXAnchor.constraint(equalTo: coordinatesStackView.centerXAnchor),
             
-            longitude.heightAnchor.constraint(equalTo: longitudeStackView.heightAnchor),
-            longitude.widthAnchor.constraint(equalTo: longitudeStackView.widthAnchor, multiplier: 0.45),
-            longitude.leftAnchor.constraint(equalTo: longitudeStackView.leftAnchor),
-            longitude.topAnchor.constraint(equalTo: longitudeStackView.topAnchor),
+            longitudeLabel.topAnchor.constraint(equalTo: longitudeStackView.topAnchor),
+            longitudeLabel.leftAnchor.constraint(equalTo: longitudeStackView.leftAnchor),
+            longitudeLabel.heightAnchor.constraint(equalTo: longitudeStackView.heightAnchor),
+            longitudeLabel.widthAnchor.constraint(equalTo: longitudeStackView.widthAnchor, multiplier: 0.45),
             
             errorLabel.topAnchor.constraint(equalTo: coordinatesStackView.bottomAnchor),
             errorLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.2),
             errorLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.7),
             errorLabel.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
-    
         ])
     }
 }

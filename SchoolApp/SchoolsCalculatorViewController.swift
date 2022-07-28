@@ -17,9 +17,9 @@ class SchoolsCalculatorViewController: UIViewController {
     let calculatorButton = UIButton(type: .system)
     let schoolsTableView = UITableView()
 
-    let schoolsCalculatorViewModel: SearchScoresViewModel
+    let schoolsCalculatorViewModel: SearchSATScoresViewModel
     
-    required init(viewModel: SearchScoresViewModel) {
+    required init(viewModel: SearchSATScoresViewModel) {
         self.schoolsCalculatorViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 

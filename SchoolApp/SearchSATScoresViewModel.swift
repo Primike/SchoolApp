@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SearchScoresViewModel {
+class SearchSATScoresViewModel {
     var schools: [School]
     var schoolsScores: [SchoolScores]
     var calculatedSchools = [School]()
