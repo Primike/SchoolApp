@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
         homeBottomView.translatesAutoresizingMaskIntoConstraints = false
         homeBottomView.layer.cornerRadius = 70
         homeBottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        homeBottomView.backgroundColor = UIColor.systemBlue
+//        homeBottomView.backgroundColor = UIColor.systemBlue
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
@@ -94,7 +94,7 @@ class HomeViewController: UIViewController {
         NSLayoutConstraint.activate([
             homeTopView.topAnchor.constraint(equalTo: view.topAnchor),
             homeTopView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            homeTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
+            homeTopView.heightAnchor.constraint(equalTo: view.heightAnchor),
             homeTopView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
             homeBottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -150,7 +150,7 @@ extension HomeViewController: RequestDelegate {
                 self.style()
                 self.layout()
             case .error(let error):
-                if error.localizedDescription == "SAT Data Unavailable" {
+                if error.localizedDescription == "SAT Data Unavailable" || error.localizedDescription == "Local SAT Data Error"{
                     self.homeViewModel.state = .success
                 }
                 self.showAlert(error: error.localizedDescription)
@@ -161,16 +161,40 @@ extension HomeViewController: RequestDelegate {
     
     func showAlert(error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
-//            exit(0)
-        }))
+
         if error == "SAT Data Unavailable" {
             alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
                 self.homeViewModel.getSchoolScores()
             }))
+            alert.addAction(UIAlertAction(title: "Use Local Data", style: .default, handler: { _ in
+                self.homeViewModel.getLocalSchoolScores()
+            }))
+        }
+        else if error == "Local SAT Data Error" {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.homeViewModel.getLocalSchoolScores()
+            }))
+            alert.addAction(UIAlertAction(title: "Retry Online Data", style: .default, handler: { action in
+                self.homeViewModel.getSchoolScores()
+            }))
+            alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
+            }))
+        }
+        else if error == "Local School Data Error" {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.homeViewModel.getLocalSchools()
+            }))
+            alert.addAction(UIAlertAction(title: "Retry Online Data", style: .default, handler: { action in
+                self.homeViewModel.getSchools()
+            }))
+            alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
+            }))
         } else {
             alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
                 self.homeViewModel.getSchools()
+            }))
+            alert.addAction(UIAlertAction(title: "Use Local Data", style: .default, handler: { _ in
+                self.homeViewModel.getLocalSchools()
             }))
         }
 

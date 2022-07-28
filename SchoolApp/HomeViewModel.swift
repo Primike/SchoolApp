@@ -48,5 +48,29 @@ class HomeViewModel {
             }
         }
     }
+    
+    func getLocalSchools() {
+        SchoolServiceAPI.shared.getLocalSchoolsData { result in
+            switch result {
+            case .success(let schools):
+                self.schools = schools
+                self.getSchoolScores()
+            case .failure(let error):
+                self.state = .error(error)
+            }
+        }
+    }
+    
+    func getLocalSchoolScores() {
+        SchoolServiceAPI.shared.getLocalSATData { result in
+            switch result {
+            case .success(let scores):
+                self.schoolsScores = scores
+                self.state = .success
+            case .failure(let error):
+                self.state = .error(error)
+            }
+        }
+    }
 }
 

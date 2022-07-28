@@ -8,7 +8,7 @@
 import Foundation
 
 enum CustomError {
-    case noConnection, noSchoolData, noSATData
+    case noConnection, noSchoolData, noSATData, noLocalSchoolData, noLocalSATData
 }
 
 extension CustomError: LocalizedError {
@@ -20,6 +20,10 @@ extension CustomError: LocalizedError {
             return "Schools Data Unavailable"
         case .noSATData:
             return "SAT Data Unavailable"
+        case .noLocalSchoolData:
+            return "Local School Data Error"
+        case .noLocalSATData:
+            return "Local SAT Data Error"
         }
     }
 }

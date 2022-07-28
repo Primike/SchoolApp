@@ -150,6 +150,7 @@ extension TopSchoolsViewController {
         if Int(numberOfSchoolsText.text!) != nil {
             topSchoolsViewModel.number = Int(numberOfSchoolsText.text!)!
             topSchoolsViewModel.getTopSchools()
+            print(topSchoolsViewModel.topSchoolsScores, topSchoolsViewModel.topSchools)
             schoolsTableView.reloadData()
         }
 

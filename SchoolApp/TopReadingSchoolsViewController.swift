@@ -60,7 +60,7 @@ class TopReadingSchoolsViewController: UIViewController {
         errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
         errorLabel.adjustsFontSizeToFitWidth = true
         errorLabel.numberOfLines = 0
-        errorLabel.textColor = .red
+        errorLabel.textColor = .systemBlue
         errorLabel.isHidden = true
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false

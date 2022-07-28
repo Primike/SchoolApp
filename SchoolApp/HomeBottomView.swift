@@ -44,7 +44,7 @@ class HomeBottomView: UIView {
         appTitle.textAlignment = .center
         
         divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.backgroundColor = .black
+        divider.backgroundColor = .white
         
         schoolsListButtonView.translatesAutoresizingMaskIntoConstraints = false
         topSchoolsButtonView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,12 +59,12 @@ class HomeBottomView: UIView {
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
         welcomeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         welcomeLabel.text = "Welcome"
-        welcomeLabel.textColor = .systemBlue
+        welcomeLabel.textColor = .black
         welcomeLabel.adjustsFontSizeToFitWidth = true
         welcomeLabel.textAlignment = .center
         
         divider2.translatesAutoresizingMaskIntoConstraints = false
-        divider2.backgroundColor = .systemBlue
+        divider2.backgroundColor = .black
     }
     
     func layout() {

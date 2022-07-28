@@ -35,7 +35,7 @@ class TopSchoolsViewModel {
         for i in 0..<sortedScores.count {
             if topSchoolsScores.count != self.number {
                 if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(schoolsScores[i])
+                    topSchoolsScores.append(sortedScores[i])
                     topSchools.append(school)
                 }
             } else {
@@ -53,7 +53,7 @@ class TopSchoolsViewModel {
         for i in 0..<sortedScores.count {
             if topSchoolsScores.count != self.number {
                 if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(schoolsScores[i])
+                    topSchoolsScores.append(sortedScores[i])
                     topSchools.append(school)
                 }
             } else {
@@ -71,7 +71,7 @@ class TopSchoolsViewModel {
         for i in 0..<sortedScores.count {
             if topSchoolsScores.count != self.number {
                 if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(schoolsScores[i])
+                    topSchoolsScores.append(sortedScores[i])
                     topSchools.append(school)
                 }
             } else {
@@ -89,7 +89,7 @@ class TopSchoolsViewModel {
         for i in 0..<sortedScores.count {
             if topSchoolsScores.count != self.number {
                 if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(schoolsScores[i])
+                    topSchoolsScores.append(sortedScores[i])
                     topSchools.append(school)
                 }
             } else {
