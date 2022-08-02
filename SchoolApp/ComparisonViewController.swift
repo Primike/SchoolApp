@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import MapKit
+import CoreLocation
 
 class ComparisonViewController: UIViewController {
     
@@ -14,6 +16,9 @@ class ComparisonViewController: UIViewController {
     var comparisonInfoView: ComparisonInfoView
     let comparisonInfoView2: ComparisonInfoView
     let verticalDivider = UILabel()
+    let comparisonGraphView: ComparisonGraphView
+    let map = MKMapView()
+
     
     var school: School
     var schoolScores: SchoolScores
@@ -29,6 +34,7 @@ class ComparisonViewController: UIViewController {
         
         self.comparisonInfoView = ComparisonInfoView(frame: CGRect(), school: school, schoolColor: .black)
         self.comparisonInfoView2 = ComparisonInfoView(frame: CGRect(), school: school2, schoolColor: .black)
+        self.comparisonGraphView = ComparisonGraphView(frame: CGRect(), scores: scores1, scores2: scores2, schoolColor: schoolColor)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,11 +45,12 @@ class ComparisonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+        style()
         layout()
+        setup()
     }
     
-    func setup() {
+    func style() {
         view.backgroundColor = .white
         
         topStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +61,11 @@ class ComparisonViewController: UIViewController {
         
         verticalDivider.translatesAutoresizingMaskIntoConstraints = false
         verticalDivider.backgroundColor = .black
+        
+        comparisonGraphView.translatesAutoresizingMaskIntoConstraints = false
+
+        map.translatesAutoresizingMaskIntoConstraints = false
+
     }
     
     func layout() {
@@ -61,6 +73,8 @@ class ComparisonViewController: UIViewController {
         topStackView.addSubview(comparisonInfoView)
         topStackView.addSubview(verticalDivider)
         topStackView.addSubview(comparisonInfoView2)
+        view.addSubview(comparisonGraphView)
+        view.addSubview(map)
         
         NSLayoutConstraint.activate([
             
@@ -83,6 +97,40 @@ class ComparisonViewController: UIViewController {
             comparisonInfoView2.rightAnchor.constraint(equalTo: topStackView.rightAnchor),
             comparisonInfoView2.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
             comparisonInfoView2.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.45),
+            
+            comparisonGraphView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
+            comparisonGraphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            comparisonGraphView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            comparisonGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            map.topAnchor.constraint(equalTo: comparisonGraphView.bottomAnchor),
+            map.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            map.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            map.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+    }
+    
+    func setup() {
+        LocationManager.shared.getUserLocation { [weak self] location in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
+                strongSelf.addMapPin(latitude: self!.school.latitude!, longitude: self!.school.longitude!, label: self!.school.school_name)
+                strongSelf.addMapPin(latitude: self!.school2.latitude!, longitude: self!.school2.longitude!, label: self!.school2.school_name)
+
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
+            }
+        }
+    }
+    
+    func addMapPin(latitude: String, longitude: String, label: String) {
+        let pin = MKPointAnnotation()
+        pin.coordinate.longitude = Double(longitude)!
+        pin.coordinate.latitude = Double(latitude)!
+        pin.title = label
+        map.addAnnotation(pin)
     }
 }

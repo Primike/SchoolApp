@@ -10,9 +10,9 @@ import UIKit
 
 class GraphBarsView: UIView {
     
-    let mathBar = UILabel()
-    let writingBar = UILabel()
-    let readingBar = UILabel()
+    let mathBar: BarView
+    let writingBar: BarView
+    let readingBar: BarView
     
     var schoolScores: SchoolScores
     let schoolColor: UIColor
@@ -29,6 +29,10 @@ class GraphBarsView: UIView {
         let score3 = Int(scores.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score3)/Double(800)))
         
+        mathBar = BarView(frame: CGRect(), sectionScore: schoolScores.sat_math_avg_score, schoolColor: schoolColor)
+        writingBar = BarView(frame: CGRect(), sectionScore: schoolScores.sat_writing_avg_score, schoolColor: schoolColor)
+        readingBar = BarView(frame: CGRect(), sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: schoolColor)
+
         super.init(frame: frame)
         style()
         layout()
@@ -40,25 +44,11 @@ class GraphBarsView: UIView {
     
     func style() {
         mathBar.translatesAutoresizingMaskIntoConstraints = false
-        mathBar.backgroundColor = schoolColor
-        mathBar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        mathBar.text = schoolScores.sat_math_avg_score
-        mathBar.textAlignment = .center
-        mathBar.textColor = .white
-        
+
         writingBar.translatesAutoresizingMaskIntoConstraints = false
-        writingBar.backgroundColor = schoolColor
-        writingBar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        writingBar.text = schoolScores.sat_writing_avg_score
-        writingBar.textAlignment = .center
-        writingBar.textColor = .white
+
         
         readingBar.translatesAutoresizingMaskIntoConstraints = false
-        readingBar.backgroundColor = schoolColor
-        readingBar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        readingBar.text = schoolScores.sat_critical_reading_avg_score
-        readingBar.textAlignment = .center
-        readingBar.textColor = .white
     }
     
     func layout() {

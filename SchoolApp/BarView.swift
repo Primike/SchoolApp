@@ -31,8 +31,9 @@ class BarView: UIView {
     func style() {
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.backgroundColor = schoolColor
-        bar.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        bar.font = UIFont(name:"HelveticaNeue", size: 30.0)
         bar.text = sectionScore
+        bar.adjustsFontSizeToFitWidth = true
         bar.textAlignment = .center
         bar.textColor = .white
     }

@@ -54,8 +54,9 @@
 		B87C4B8C289977D10091CD45 /* ComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B8B289977D10091CD45 /* ComparisonViewController.swift */; };
 		B87C4B8E289984F30091CD45 /* ComparisonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B8D289984F30091CD45 /* ComparisonInfoView.swift */; };
 		B87C4B902899950A0091CD45 /* ComparisonGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B8F2899950A0091CD45 /* ComparisonGraphView.swift */; };
-		B87C4B96289999250091CD45 /* GraphBarsComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B95289999250091CD45 /* GraphBarsComparisonView.swift */; };
+		B87C4B96289999250091CD45 /* ComparisonBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B95289999250091CD45 /* ComparisonBarsView.swift */; };
 		B87C4B9828999BEE0091CD45 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B9728999BEE0091CD45 /* BarView.swift */; };
+		B87C4B9A2899A62C0091CD45 /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C4B992899A62C0091CD45 /* LegendView.swift */; };
 		B880A2BA284E61FF0071E43D /* SchoolScoreStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2B9284E61FF0071E43D /* SchoolScoreStruct.swift */; };
 		B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */; };
 		B880A2C0284ED4090071E43D /* SchoolScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */; };
@@ -140,8 +141,9 @@
 		B87C4B8B289977D10091CD45 /* ComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonViewController.swift; sourceTree = "<group>"; };
 		B87C4B8D289984F30091CD45 /* ComparisonInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonInfoView.swift; sourceTree = "<group>"; };
 		B87C4B8F2899950A0091CD45 /* ComparisonGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonGraphView.swift; sourceTree = "<group>"; };
-		B87C4B95289999250091CD45 /* GraphBarsComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBarsComparisonView.swift; sourceTree = "<group>"; };
+		B87C4B95289999250091CD45 /* ComparisonBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonBarsView.swift; sourceTree = "<group>"; };
 		B87C4B9728999BEE0091CD45 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		B87C4B992899A62C0091CD45 /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		B880A2B9284E61FF0071E43D /* SchoolScoreStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScoreStruct.swift; sourceTree = "<group>"; };
 		B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfoViewController.swift; sourceTree = "<group>"; };
 		B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScoresViewController.swift; sourceTree = "<group>"; };
@@ -543,7 +545,8 @@
 		B87C4B94289999050091CD45 /* GraphViews */ = {
 			isa = PBXGroup;
 			children = (
-				B87C4B95289999250091CD45 /* GraphBarsComparisonView.swift */,
+				B87C4B992899A62C0091CD45 /* LegendView.swift */,
+				B87C4B95289999250091CD45 /* ComparisonBarsView.swift */,
 			);
 			name = GraphViews;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				B8736664288057480076632F /* HomeBottomView.swift in Sources */,
 				B873667928806F3A0076632F /* SchoolScoresBottomView.swift in Sources */,
 				B82F177D28897DF200AA42F1 /* TopReadingSchoolsViewController.swift in Sources */,
+				B87C4B9A2899A62C0091CD45 /* LegendView.swift in Sources */,
 				B803EAC3286E1A4700E7A26B /* SchoolsListViewModel.swift in Sources */,
 				9EA40B302884F782000DE8A0 /* CoordinateSearchViewController.swift in Sources */,
 				B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */,
@@ -852,7 +856,7 @@
 				B8E1121828747692009C66B6 /* Reachability.swift in Sources */,
 				B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */,
 				B82F179A2889996E00AA42F1 /* SearchSATScoresTabBarViewController.swift in Sources */,
-				B87C4B96289999250091CD45 /* GraphBarsComparisonView.swift in Sources */,
+				B87C4B96289999250091CD45 /* ComparisonBarsView.swift in Sources */,
 				B82F179C28899B1C00AA42F1 /* SearchTotalScoreViewController.swift in Sources */,
 				B876AF0B287712C800718041 /* Coordinator.swift in Sources */,
 				B87C4B862899630C0091CD45 /* MySchoolsTabBarViewController.swift in Sources */,
