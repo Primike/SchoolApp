@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
+		9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824008289879EB000D4BA0 /* SchoolAppTests.swift */; };
+		9E8240102898C152000D4BA0 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82400F2898C152000D4BA0 /* MathTests.swift */; };
 		9EA40B302884F782000DE8A0 /* CoordinateSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA40B2F2884F782000DE8A0 /* CoordinateSearchViewController.swift */; };
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* MapSearchViewModel.swift */; };
@@ -73,14 +75,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B8E817502846A4600052C1AE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8E817312846A45F0052C1AE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B8E817382846A45F0052C1AE;
-			remoteInfo = SchoolApp;
-		};
-		B8E8175A2846A4600052C1AE /* PBXContainerItemProxy */ = {
+		9E82400A289879EB000D4BA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B8E817312846A45F0052C1AE /* Project object */;
 			proxyType = 1;
@@ -91,6 +86,9 @@
 
 /* Begin PBXFileReference section */
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
+		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
+		9E82400F2898C152000D4BA0 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		9EA40B2F2884F782000DE8A0 /* CoordinateSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateSearchViewController.swift; sourceTree = "<group>"; };
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* MapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewModel.swift; sourceTree = "<group>"; };
@@ -154,27 +152,18 @@
 		B8E817452846A4600052C1AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8E817482846A4600052C1AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8E8174A2846A4600052C1AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8E8174F2846A4600052C1AE /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8E817592846A4600052C1AE /* SchoolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F5E4CA28873898009C4F54 /* TopSchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9E824003289879EB000D4BA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8E817362846A45F0052C1AE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8E8174C2846A4600052C1AE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8E817562846A4600052C1AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -190,6 +179,15 @@
 				B82F179328898E5C00AA42F1 /* ViewControllers */,
 			);
 			name = SchoolMap;
+			sourceTree = "<group>";
+		};
+		9E824007289879EB000D4BA0 /* SchoolAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E824008289879EB000D4BA0 /* SchoolAppTests.swift */,
+				9E82400F2898C152000D4BA0 /* MathTests.swift */,
+			);
+			path = SchoolAppTests;
 			sourceTree = "<group>";
 		};
 		B804315A28523188004C9BAF /* Models */ = {
@@ -587,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E8173B2846A45F0052C1AE /* SchoolApp */,
+				9E824007289879EB000D4BA0 /* SchoolAppTests */,
 				B8E8173A2846A45F0052C1AE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -595,8 +594,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E817392846A45F0052C1AE /* SchoolApp.app */,
-				B8E8174F2846A4600052C1AE /* SchoolAppTests.xctest */,
-				B8E817592846A4600052C1AE /* SchoolAppUITests.xctest */,
+				9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -644,6 +642,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9E824005289879EB000D4BA0 /* SchoolAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E82400C289879EB000D4BA0 /* Build configuration list for PBXNativeTarget "SchoolAppTests" */;
+			buildPhases = (
+				9E824002289879EB000D4BA0 /* Sources */,
+				9E824003289879EB000D4BA0 /* Frameworks */,
+				9E824004289879EB000D4BA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E82400B289879EB000D4BA0 /* PBXTargetDependency */,
+			);
+			name = SchoolAppTests;
+			productName = SchoolAppTests;
+			productReference = 9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B8E817382846A45F0052C1AE /* SchoolApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8E817632846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolApp" */;
@@ -661,42 +677,6 @@
 			productReference = B8E817392846A45F0052C1AE /* SchoolApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B8E8174E2846A4600052C1AE /* SchoolAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B8E817662846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolAppTests" */;
-			buildPhases = (
-				B8E8174B2846A4600052C1AE /* Sources */,
-				B8E8174C2846A4600052C1AE /* Frameworks */,
-				B8E8174D2846A4600052C1AE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B8E817512846A4600052C1AE /* PBXTargetDependency */,
-			);
-			name = SchoolAppTests;
-			productName = SchoolAppTests;
-			productReference = B8E8174F2846A4600052C1AE /* SchoolAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B8E817582846A4600052C1AE /* SchoolAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B8E817692846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolAppUITests" */;
-			buildPhases = (
-				B8E817552846A4600052C1AE /* Sources */,
-				B8E817562846A4600052C1AE /* Frameworks */,
-				B8E817572846A4600052C1AE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B8E8175B2846A4600052C1AE /* PBXTargetDependency */,
-			);
-			name = SchoolAppUITests;
-			productName = SchoolAppUITests;
-			productReference = B8E817592846A4600052C1AE /* SchoolAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -707,16 +687,12 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					9E824005289879EB000D4BA0 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = B8E817382846A45F0052C1AE;
+					};
 					B8E817382846A45F0052C1AE = {
 						CreatedOnToolsVersion = 13.2;
-					};
-					B8E8174E2846A4600052C1AE = {
-						CreatedOnToolsVersion = 13.2;
-						TestTargetID = B8E817382846A45F0052C1AE;
-					};
-					B8E817582846A4600052C1AE = {
-						CreatedOnToolsVersion = 13.2;
-						TestTargetID = B8E817382846A45F0052C1AE;
 					};
 				};
 			};
@@ -734,13 +710,19 @@
 			projectRoot = "";
 			targets = (
 				B8E817382846A45F0052C1AE /* SchoolApp */,
-				B8E8174E2846A4600052C1AE /* SchoolAppTests */,
-				B8E817582846A4600052C1AE /* SchoolAppUITests */,
+				9E824005289879EB000D4BA0 /* SchoolAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9E824004289879EB000D4BA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8E817372846A45F0052C1AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -752,23 +734,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8E8174D2846A4600052C1AE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8E817572846A4600052C1AE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9E824002289879EB000D4BA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */,
+				9E8240102898C152000D4BA0 /* MathTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8E817352846A45F0052C1AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -835,32 +812,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8E8174B2846A4600052C1AE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8E817552846A4600052C1AE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B8E817512846A4600052C1AE /* PBXTargetDependency */ = {
+		9E82400B289879EB000D4BA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B8E817382846A45F0052C1AE /* SchoolApp */;
-			targetProxy = B8E817502846A4600052C1AE /* PBXContainerItemProxy */;
-		};
-		B8E8175B2846A4600052C1AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B8E817382846A45F0052C1AE /* SchoolApp */;
-			targetProxy = B8E8175A2846A4600052C1AE /* PBXContainerItemProxy */;
+			targetProxy = 9E82400A289879EB000D4BA0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -876,6 +834,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9E82400D289879EB000D4BA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MDPY9LF665;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Primike.SchoolAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolApp.app/SchoolApp";
+			};
+			name = Debug;
+		};
+		9E82400E289879EB000D4BA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MDPY9LF665;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Primike.SchoolAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolApp.app/SchoolApp";
+			};
+			name = Release;
+		};
 		B8E817612846A4600052C1AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1046,85 +1040,18 @@
 			};
 			name = Release;
 		};
-		B8E817672846A4600052C1AE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MDPY9LF665;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = primike.SchoolAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolApp.app/SchoolApp";
-			};
-			name = Debug;
-		};
-		B8E817682846A4600052C1AE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MDPY9LF665;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = primike.SchoolAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolApp.app/SchoolApp";
-			};
-			name = Release;
-		};
-		B8E8176A2846A4600052C1AE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MDPY9LF665;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = primike.SchoolAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SchoolApp;
-			};
-			name = Debug;
-		};
-		B8E8176B2846A4600052C1AE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MDPY9LF665;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = primike.SchoolAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SchoolApp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9E82400C289879EB000D4BA0 /* Build configuration list for PBXNativeTarget "SchoolAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E82400D289879EB000D4BA0 /* Debug */,
+				9E82400E289879EB000D4BA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B8E817342846A45F0052C1AE /* Build configuration list for PBXProject "SchoolApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1139,24 +1066,6 @@
 			buildConfigurations = (
 				B8E817642846A4600052C1AE /* Debug */,
 				B8E817652846A4600052C1AE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B8E817662846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B8E817672846A4600052C1AE /* Debug */,
-				B8E817682846A4600052C1AE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B8E817692846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B8E8176A2846A4600052C1AE /* Debug */,
-				B8E8176B2846A4600052C1AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

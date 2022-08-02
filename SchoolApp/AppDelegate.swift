@@ -35,3 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
+
+
+class Math {
+    
+    func add(x: Int, y: Int) -> Int {
+        return x + y
+    }
+}
