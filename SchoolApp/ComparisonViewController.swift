@@ -12,6 +12,8 @@ import CoreLocation
 
 class ComparisonViewController: UIViewController {
     
+    let scrollView = UIScrollView()
+    let screenStackView = UIStackView()
     let topStackView = UIStackView()
     var comparisonInfoView: ComparisonInfoView
     let comparisonInfoView2: ComparisonInfoView
@@ -52,6 +54,9 @@ class ComparisonViewController: UIViewController {
     
     func style() {
         view.backgroundColor = .white
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+
+        screenStackView.translatesAutoresizingMaskIntoConstraints = false
         
         topStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -69,19 +74,35 @@ class ComparisonViewController: UIViewController {
     }
     
     func layout() {
-        view.addSubview(topStackView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(screenStackView)
+
+        screenStackView.addSubview(topStackView)
+        screenStackView.addSubview(comparisonGraphView)
+        screenStackView.addSubview(map)
+        
         topStackView.addSubview(comparisonInfoView)
         topStackView.addSubview(verticalDivider)
         topStackView.addSubview(comparisonInfoView2)
-        view.addSubview(comparisonGraphView)
-        view.addSubview(map)
+
         
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             
-            topStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            topStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
-            topStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            topStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            screenStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            screenStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            screenStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1.5),
+            screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            topStackView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
+            topStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
+            topStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
+            topStackView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
             
             comparisonInfoView.topAnchor.constraint(equalTo: topStackView.topAnchor),
             comparisonInfoView.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
@@ -98,15 +119,16 @@ class ComparisonViewController: UIViewController {
             comparisonInfoView2.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
             comparisonInfoView2.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.45),
             
-            comparisonGraphView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
-            comparisonGraphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
-            comparisonGraphView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            comparisonGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            comparisonGraphView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
+            comparisonGraphView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
+            comparisonGraphView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
+            comparisonGraphView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
+            comparisonGraphView.centerYAnchor.constraint(equalTo: screenStackView.centerYAnchor),
             
-            map.topAnchor.constraint(equalTo: comparisonGraphView.bottomAnchor),
-            map.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
-            map.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            map.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            map.bottomAnchor.constraint(equalTo: screenStackView.bottomAnchor, constant: -10),
+            map.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
+            map.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
+            map.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
         ])
     }
     
