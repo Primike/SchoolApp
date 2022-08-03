@@ -8,11 +8,9 @@
 import Foundation
 import UIKit
 
-//maybe add a loading screen
 class HomeViewController: UIViewController {
     
-    let activityIndicator = UIActivityIndicatorView(style: .large)
-
+    let loadingView = LoadingView()
     let homeTopView = HomeTopView()
     let homeBottomView = HomeBottomView()
     
@@ -27,6 +25,7 @@ class HomeViewController: UIViewController {
     required init(viewModel: HomeViewModel) {
         self.homeViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
         self.homeViewModel.delegate = self
     }
     
@@ -36,17 +35,16 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         homeViewModel.getSchools()
+        
         super.viewDidLoad()
     }
     
     func style() {
-
         homeTopView.translatesAutoresizingMaskIntoConstraints = false
         
         homeBottomView.translatesAutoresizingMaskIntoConstraints = false
         homeBottomView.layer.cornerRadius = 70
         homeBottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-//        homeBottomView.backgroundColor = UIColor.systemBlue
         
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
@@ -80,22 +78,20 @@ class HomeViewController: UIViewController {
     }
     
     func layout() {
-        
         view.addSubview(homeTopView)
         view.addSubview(homeBottomView)
-        
+    
         homeBottomView.schoolsListButtonView.addSubview(schoolsListButton)
         homeBottomView.topSchoolsButtonView.addSubview(topSchoolsButton)
         homeBottomView.mySchoolsButtonView.addSubview(myschoolsButton)
         homeBottomView.smallButtonsView.addSubview(mapSearchButton)
         homeBottomView.smallButtonsView.addSubview(satSearchButton)
         
-        
         NSLayoutConstraint.activate([
             homeTopView.topAnchor.constraint(equalTo: view.topAnchor),
             homeTopView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            homeTopView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            homeTopView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            homeTopView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            homeTopView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             homeBottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             homeBottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -126,7 +122,6 @@ class HomeViewController: UIViewController {
             satSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
             satSearchButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
             satSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
-            
         ])
     }
 }
@@ -139,14 +134,18 @@ extension HomeViewController: RequestDelegate {
             case .idle:
                 break
             case .loading:
-                self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-                self.activityIndicator.startAnimating()
-                self.activityIndicator.color = .systemBlue
-                self.view.addSubview(self.activityIndicator)
-                self.activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-                self.activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+                self.loadingView.translatesAutoresizingMaskIntoConstraints = false
+                self.view.addSubview(self.loadingView)
+                NSLayoutConstraint.activate([
+                    self.loadingView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                    self.loadingView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+                    self.loadingView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+                    self.loadingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                ])
             case .success:
-                self.activityIndicator.stopAnimating()
+                for subview in self.view.subviews {
+                    subview.removeFromSuperview()
+                }
                 self.style()
                 self.layout()
             case .error(let error):
@@ -157,7 +156,6 @@ extension HomeViewController: RequestDelegate {
             }
         }
     }
-    
     
     func showAlert(error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
@@ -201,6 +199,7 @@ extension HomeViewController: RequestDelegate {
         present(alert, animated: true)
     }
 }
+
 extension HomeViewController {
     @objc func nycSchoolsListTapped(sender: UIButton) {
         navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
@@ -211,9 +210,7 @@ extension HomeViewController {
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolComparisonViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
-        
-//        navigationController?.pushViewController(MySchoolsTabBarViewController(), animated: true)
+        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
     
     @objc func mapSearchTapped(sender: UIButton) {

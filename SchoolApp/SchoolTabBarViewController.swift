@@ -75,8 +75,6 @@ class SchoolTabBarViewController: UITabBarController {
     }
 }
 
-
-
 extension UIViewController {
     func setTabBarImage(imageSFName: String, title: String, tag: Int) {
         let configuration = UIImage.SymbolConfiguration(scale: .large)

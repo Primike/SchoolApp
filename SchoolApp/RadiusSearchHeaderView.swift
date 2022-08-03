@@ -31,7 +31,6 @@ class RadiusSearchHeaderView: UIView {
     }
     
     func setup() {
-        
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         headerStackView.axis = .vertical
         

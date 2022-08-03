@@ -26,13 +26,10 @@ class SearchScoresHeaderView: UIView {
     }
 
     required init?(coder aDecoder: NSCoder) {
-         super.init(coder: aDecoder)
-     }
-
-
+        super.init(coder: aDecoder)
+    }
 
     func setup() {
-
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         headerStackView.axis = .horizontal
 
@@ -83,7 +80,6 @@ class SearchScoresHeaderView: UIView {
         numberStackView.addSubview(numberOfSchoolsLabel)
 
         NSLayoutConstraint.activate([
-
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -119,6 +115,5 @@ class SearchScoresHeaderView: UIView {
             numberOfSchoolsLabel.heightAnchor.constraint(equalTo: numberStackView.heightAnchor),
             numberOfSchoolsLabel.widthAnchor.constraint(equalTo: numberStackView.widthAnchor, multiplier: 0.45),
         ])
-
     }
 }

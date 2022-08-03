@@ -182,8 +182,6 @@ extension TopMathSchoolsViewController: UITableViewDataSource {
     }
 }
 
-
-
 extension TopMathSchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

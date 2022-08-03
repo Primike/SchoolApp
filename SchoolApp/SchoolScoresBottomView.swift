@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//make views
 class SchoolScoresBottomView: UIView {
     
     let satMathSubView = UIView()
@@ -25,13 +26,11 @@ class SchoolScoresBottomView: UIView {
     let satReadingLabel = UILabel()
     let satReadingScore = UILabel()
     
-    
     let school: School
     let schoolScores: SchoolScores
     let schoolColor: UIColor
     let testNames = ["SAT MATH", "SAT WRITING", "SAT CRITICAL READING"]
 
-    
     init(frame: CGRect, school: School, schoolScores: SchoolScores, schoolColor: UIColor) {
         self.school = school
         self.schoolColor = schoolColor

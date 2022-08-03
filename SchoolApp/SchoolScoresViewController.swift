@@ -58,7 +58,6 @@ class SchoolScoresViewController: UIViewController {
         graphButton.tintColor = .white
         graphButton.setTitleColor(.black, for: .normal)
                 
-
         schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -71,7 +70,6 @@ class SchoolScoresViewController: UIViewController {
         
         schoolScoresTopView.scoresInfoStackView.addSubview(graphButton)
 
-        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),

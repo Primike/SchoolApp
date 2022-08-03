@@ -71,14 +71,10 @@ class SchoolInfoViewController: UIViewController {
         addSchoolButton.titleLabel!.adjustsFontSizeToFitWidth = true
         addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
 
-        
-        
         schoolInfoBottomView.translatesAutoresizingMaskIntoConstraints = false
         schoolInfoBottomView.layer.cornerRadius = 50
         schoolInfoBottomView.layer.maskedCorners = [.layerMinXMinYCorner]
         schoolInfoBottomView.backgroundColor = schoolColor
-        
-
     }
     
     func layout() {
@@ -90,7 +86,6 @@ class SchoolInfoViewController: UIViewController {
         
         schoolInfoTopView.topButtonsStackView.addSubview(schoolWebsiteButton)
         schoolInfoTopView.topButtonsStackView.addSubview(addSchoolButton)
-    
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -119,10 +114,8 @@ class SchoolInfoViewController: UIViewController {
             addSchoolButton.widthAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.heightAnchor),
             addSchoolButton.centerYAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.centerYAnchor),
             
-            
             schoolInfoTopView.schoolImage.rightAnchor.constraint(equalTo: addSchoolButton.rightAnchor),
 
-            
             schoolInfoBottomView.topAnchor.constraint(equalTo: schoolInfoTopView.bottomAnchor),
             schoolInfoBottomView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.5),
             schoolInfoBottomView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),

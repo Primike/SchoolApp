@@ -198,8 +198,6 @@ extension SearchWritingScoreViewController: UITableViewDataSource {
     }
 }
 
-
-
 extension SearchWritingScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

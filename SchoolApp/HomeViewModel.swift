@@ -38,7 +38,7 @@ class HomeViewModel {
     }
     
     func getSchoolScores() {
-        SchoolServiceAPI.shared.getTestData { result in
+        SchoolServiceAPI.shared.getSATData { result in
             switch result {
             case .success(let scores):
                 self.schoolsScores = scores

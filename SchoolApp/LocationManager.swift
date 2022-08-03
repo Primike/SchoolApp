@@ -32,6 +32,3 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
 }
 
-class MyPointAnnotation : MKPointAnnotation {
-    var pinTintColor: UIColor?
-}

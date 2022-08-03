@@ -30,7 +30,6 @@ class SearchSATScoresTabBarViewController: UITabBarController {
     }
     
     private func setupViews() {
-        
         let searchTotalVC = SearchTotalScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
         let searchMathVC = SearchMathScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
         let searchReadingVC = SearchReadingScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
@@ -40,7 +39,6 @@ class SearchSATScoresTabBarViewController: UITabBarController {
         searchMathVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Top Math Schools", tag: 1)
         searchReadingVC.setTabBarImage(imageSFName: "book", title: "Top Reading Schools", tag: 2)
         searchWritingVC.setTabBarImage(imageSFName: "book", title: "Top Writing Schools", tag: 3)
-
 
         let searchTotalNC = UINavigationController(rootViewController: searchTotalVC)
         let searchMathNC = UINavigationController(rootViewController: searchMathVC)

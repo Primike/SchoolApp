@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//search stuy then manhattan error
 class SchoolsListViewModel {
     
     var schools = [School]()
@@ -15,10 +16,6 @@ class SchoolsListViewModel {
     var schoolsSearchResults = [School]()
     
     var schoolScores: SchoolScores?
-    let scoresNotAvailable = SchoolScores(dbn: "None", num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0",
-                                   sat_math_avg_score: "0",
-                                   sat_writing_avg_score: "0")
-    
     
     init(schools: [School], schoolsScores: [SchoolScores]) {
         self.schoolsScores = schoolsScores

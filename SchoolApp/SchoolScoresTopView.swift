@@ -80,7 +80,6 @@ class SchoolScoresTopView: UIView {
             schoolNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
             schoolNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             schoolNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
             
             headerStackView.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor, constant: 5),
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.85),
@@ -106,7 +105,6 @@ class SchoolScoresTopView: UIView {
             testTakersLabel.heightAnchor.constraint(equalTo: scoresInfoStackView.heightAnchor, multiplier: 0.3),
             testTakersLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
             testTakersLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
-
         ])
     }
 }

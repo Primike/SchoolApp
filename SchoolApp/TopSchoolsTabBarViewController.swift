@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//fix present view for scores
 class TopSchoolsTabBarViewController: UITabBarController {
     
     let topSchoolsViewModel: TopSchoolsViewModel

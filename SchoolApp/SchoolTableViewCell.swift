@@ -37,7 +37,6 @@ class SchoolTableViewCell: UITableViewCell {
         self.accessoryType = .disclosureIndicator
         self.selectionStyle = .none
         
-        
         cellStackView.translatesAutoresizingMaskIntoConstraints = false
         cellStackView.axis = .horizontal
         
@@ -54,7 +53,6 @@ class SchoolTableViewCell: UITableViewCell {
         schoolAddressLabel.font = UIFont(name:"HelveticaNeue", size: 20.0)
         schoolAddressLabel.textAlignment = .left
         schoolAddressLabel.adjustsFontSizeToFitWidth = true
-        
         
         schoolBoroLabel.translatesAutoresizingMaskIntoConstraints = false
         schoolBoroLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
@@ -94,11 +92,10 @@ class SchoolTableViewCell: UITableViewCell {
         
         schoolInfoStackView.addSubview(schoolNameLabel)
         schoolInfoStackView.addSubview(schoolAddressLabel)
-        
 
         NSLayoutConstraint.activate([
-            cellStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             cellStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
+            cellStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             cellStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             cellStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             

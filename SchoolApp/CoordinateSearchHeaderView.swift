@@ -76,7 +76,6 @@ class CoordinateSearchHeaderView: UIView {
         errorLabel.textColor = .systemRed
         errorLabel.text = "Error Label"
         errorLabel.isHidden = true
-
     }
     
     func layout() {

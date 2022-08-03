@@ -36,10 +36,8 @@ class NearbySchoolsViewController: UIViewController {
         style()
         layout()
         setup()
-        
     }
     
-
     func style() {
         view.backgroundColor = .white
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +107,6 @@ class NearbySchoolsViewController: UIViewController {
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
                 self!.nearbySchoolsViewModel.getNearbySchools()
                 self!.setupMap()
-                
             }
         }
     }
@@ -119,7 +116,6 @@ class NearbySchoolsViewController: UIViewController {
             addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
         }
         map.addAnnotations(annotations)
-        
     }
     
     func addMapPin(latitude: String, longitude: String, label: String) {
@@ -157,7 +153,6 @@ extension NearbySchoolsViewController {
             self.map.removeAnnotations(annotations)
             self.annotations = []
             self.setup()
-            
         }
 
         func errorHandler(message: String){

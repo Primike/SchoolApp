@@ -17,7 +17,6 @@ class SearchTotalScoreViewController: UIViewController {
     let errorLabel = UILabel()
     let enterButton = UIButton()
     
-    
     let searchSATScoreViewModel: SearchSATScoresViewModel
     
     required init(viewModel: SearchSATScoresViewModel) {
@@ -120,7 +119,6 @@ class SearchTotalScoreViewController: UIViewController {
             enterButton.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.heightAnchor, multiplier: 0.5),
             enterButton.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.widthAnchor),
             enterButton.centerXAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.centerXAnchor),
-            
         ])
     }
     
@@ -198,8 +196,6 @@ extension SearchTotalScoreViewController: UITableViewDataSource {
         return 170
     }
 }
-
-
 
 extension SearchTotalScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

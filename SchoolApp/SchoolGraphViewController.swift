@@ -23,7 +23,6 @@ class SchoolGraphViewController: UIViewController {
     var schoolScores: SchoolScores
     let schoolColor: UIColor
 
-    
     init(school: School, scores: SchoolScores, schoolColor: UIColor) {
         self.school = school
         self.schoolScores = scores
@@ -39,6 +38,7 @@ class SchoolGraphViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         style()
         layout()
     }
@@ -83,7 +83,6 @@ class SchoolGraphViewController: UIViewController {
         
         topStackView.addSubview(yAxisView)
         topStackView.addSubview(graphBarsView)
-        
         
         NSLayoutConstraint.activate([
             screenStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),

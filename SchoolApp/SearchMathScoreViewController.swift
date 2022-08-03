@@ -198,8 +198,6 @@ extension SearchMathScoreViewController: UITableViewDataSource {
     }
 }
 
-
-
 extension SearchMathScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

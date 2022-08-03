@@ -11,7 +11,7 @@ import UIKit
 class HomeBottomView: UIView {
     
     let titleView = UIView()
-    let appTitle = UILabel()
+    let appTitleLabel = UILabel()
     let divider = UILabel()
     
     let schoolsListButtonView = UIView()
@@ -25,6 +25,7 @@ class HomeBottomView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         style()
         layout()
     }
@@ -36,12 +37,12 @@ class HomeBottomView: UIView {
     func style() {
         titleView.translatesAutoresizingMaskIntoConstraints = false
         
-        appTitle.translatesAutoresizingMaskIntoConstraints = false
-        appTitle.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        appTitle.text = "Schools App"
-        appTitle.textColor = .white
-        appTitle.adjustsFontSizeToFitWidth = true
-        appTitle.textAlignment = .center
+        appTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        appTitleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        appTitleLabel.text = "Schools App"
+        appTitleLabel.textColor = .white
+        appTitleLabel.adjustsFontSizeToFitWidth = true
+        appTitleLabel.textAlignment = .center
         
         divider.translatesAutoresizingMaskIntoConstraints = false
         divider.backgroundColor = .white
@@ -68,12 +69,6 @@ class HomeBottomView: UIView {
     }
     
     func layout() {
-        titleView.addSubview(appTitle)
-        titleView.addSubview(divider)
-        
-        bottomView.addSubview(welcomeLabel)
-        bottomView.addSubview(divider2)
-        
         self.addSubview(titleView)
         self.addSubview(schoolsListButtonView)
         self.addSubview(topSchoolsButtonView)
@@ -81,20 +76,26 @@ class HomeBottomView: UIView {
         self.addSubview(smallButtonsView)
         self.addSubview(bottomView)
         
+        titleView.addSubview(appTitleLabel)
+        titleView.addSubview(divider)
+        
+        bottomView.addSubview(welcomeLabel)
+        bottomView.addSubview(divider2)
+        
         NSLayoutConstraint.activate([
             titleView.topAnchor.constraint(equalTo: self.topAnchor),
-            titleView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             titleView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            titleView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             titleView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            appTitle.topAnchor.constraint(equalTo: titleView.topAnchor),
-            appTitle.widthAnchor.constraint(equalTo: titleView.widthAnchor, multiplier: 0.9),
-            appTitle.heightAnchor.constraint(equalTo: titleView.heightAnchor, multiplier: 0.7),
-            appTitle.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            appTitleLabel.topAnchor.constraint(equalTo: titleView.topAnchor),
+            appTitleLabel.heightAnchor.constraint(equalTo: titleView.heightAnchor, multiplier: 0.7),
+            appTitleLabel.widthAnchor.constraint(equalTo: titleView.widthAnchor, multiplier: 0.9),
+            appTitleLabel.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             
-            divider.topAnchor.constraint(equalTo: appTitle.bottomAnchor),
-            divider.widthAnchor.constraint(equalTo: titleView.widthAnchor),
+            divider.topAnchor.constraint(equalTo: appTitleLabel.bottomAnchor),
             divider.heightAnchor.constraint(equalToConstant: 5),
+            divider.widthAnchor.constraint(equalTo: titleView.widthAnchor),
             divider.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             
             schoolsListButtonView.topAnchor.constraint(equalTo: titleView.bottomAnchor),

@@ -37,9 +37,7 @@ class RadiusSearchViewController: UIViewController {
         style()
         layout()
         setup()
-        
     }
-    
 
     func style() {
         view.backgroundColor = .white
@@ -110,7 +108,6 @@ class RadiusSearchViewController: UIViewController {
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
                 self!.nearbySchoolsViewModel.getSchoolsByMiles()
                 self!.setupMap()
-                
             }
         }
     }
@@ -120,7 +117,6 @@ class RadiusSearchViewController: UIViewController {
             addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
         }
         map.addAnnotations(annotations)
-        
     }
     
     func addMapPin(latitude: String, longitude: String, label: String) {
@@ -158,7 +154,6 @@ extension RadiusSearchViewController {
             self.map.removeAnnotations(annotations)
             self.annotations = []
             self.setup()
-
         }
 
         func errorHandler(message: String){

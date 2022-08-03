@@ -31,8 +31,6 @@ class SchoolsListHeaderView: UIView {
          super.init(coder: aDecoder)
      }
 
-
-
     func setup() {
         dateFormatter.dateFormat = "MM/dd/YY hh:mm:ss"
         let _ = dateFormatter.string(from: date)
@@ -98,6 +96,5 @@ class SchoolsListHeaderView: UIView {
             imageView.heightAnchor.constraint(equalTo: labelsStackView.heightAnchor),
             imageView.widthAnchor.constraint(equalTo: labelsStackView.heightAnchor),
         ])
-
     }
 }

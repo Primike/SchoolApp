@@ -17,8 +17,8 @@ class YAxisView: UIView {
     let label0 = UILabel()
     
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
+        
         style()
         layout()
     }

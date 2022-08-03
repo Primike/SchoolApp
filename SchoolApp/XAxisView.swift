@@ -17,8 +17,8 @@ class XAxisView: UIView {
     let subjectNames = ["SAT MATH", "SAT WRITING", "SAT CRITICAL READING"]
 
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
+        
         style()
         layout()
     }

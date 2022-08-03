@@ -35,11 +35,9 @@ class MapSearchTabBarViewController: UITabBarController {
         let nearbySchoolsVC = NearbySchoolsViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
         let coordinateSearchVC = CoordinateSearchViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
 
-
         radiusSearchVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Radius Search", tag: 0)
         nearbySchoolsVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Nearby Schools", tag: 1)
         coordinateSearchVC.setTabBarImage(imageSFName: "book", title: "Coordinates Search", tag: 2)
-
 
         let radiusSearchNC = UINavigationController(rootViewController: radiusSearchVC)
         let nearbySchoolsNC = UINavigationController(rootViewController: nearbySchoolsVC)

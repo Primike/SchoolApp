@@ -28,7 +28,6 @@ class SchoolMapViewController: UIViewController {
         self.schoolColor = schoolColor
         
         super.init(nibName: nil, bundle: nil)
-
     }
     
     required init?(coder: NSCoder) {
@@ -41,7 +40,6 @@ class SchoolMapViewController: UIViewController {
         style()
         layout()
         setup()
-        
     }
     
     func style() {
@@ -70,8 +68,6 @@ class SchoolMapViewController: UIViewController {
             map.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             map.widthAnchor.constraint(equalTo: view.widthAnchor),
             map.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
-            
-            
         ])
     }
 

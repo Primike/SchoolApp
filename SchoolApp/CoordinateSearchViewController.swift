@@ -38,7 +38,6 @@ class CoordinateSearchViewController: UIViewController {
         style()
         layout()
         setup()
-        
     }
     
 
@@ -126,7 +125,6 @@ class CoordinateSearchViewController: UIViewController {
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
                 self!.nearbySchoolsViewModel.getNearbySchools()
                 self!.setupMap()
-                
             }
         }
     }
@@ -196,7 +194,6 @@ extension CoordinateSearchViewController: MKMapViewDelegate {
         let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
         
         navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
-        
     }
 }
 

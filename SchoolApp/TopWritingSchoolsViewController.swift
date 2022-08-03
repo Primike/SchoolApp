@@ -182,8 +182,6 @@ extension TopWritingSchoolsViewController: UITableViewDataSource {
     }
 }
 
-
-
 extension TopWritingSchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

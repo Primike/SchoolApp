@@ -47,7 +47,6 @@ class GraphBarsView: UIView {
 
         writingBar.translatesAutoresizingMaskIntoConstraints = false
 
-        
         readingBar.translatesAutoresizingMaskIntoConstraints = false
     }
     

@@ -25,10 +25,9 @@ class TopSchoolsHeaderView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
-     }
+    }
 
     func setup() {
-
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         headerStackView.axis = .horizontal
 
@@ -66,7 +65,6 @@ class TopSchoolsHeaderView: UIView {
         filterStackView.addSubview(schoolsLabel)
 
         NSLayoutConstraint.activate([
-
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -92,6 +90,5 @@ class TopSchoolsHeaderView: UIView {
             schoolsLabel.heightAnchor.constraint(equalTo: filterStackView.heightAnchor),
             schoolsLabel.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: 0.3),
         ])
-
     }
 }

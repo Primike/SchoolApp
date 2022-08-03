@@ -198,8 +198,6 @@ extension SearchReadingScoreViewController: UITableViewDataSource {
     }
 }
 
-
-
 extension SearchReadingScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

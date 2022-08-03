@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//fix double click same cell
 class SchoolComparisonViewController: UIViewController {
     
     let mySchoolsHeaderView = MySchoolsHeaderView()
@@ -39,7 +40,6 @@ class SchoolComparisonViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
     }
     
     func style() {
@@ -98,7 +98,7 @@ extension SchoolComparisonViewController: UITableViewDelegate {
         number = number + 1
         schoolsTableView.cellForRow(at: indexPath)?.isHighlighted = true
         if number == 2 {
-            navigationController?.pushViewController(ComparisonViewController(school1: mySchoolsViewModel.schools[cellIndex1], scores1: mySchoolsViewModel.schoolsScores[cellIndex1], school2: mySchoolsViewModel.schools[indexPath.row], scores2: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+            navigationController?.present(ComparisonViewController(school1: mySchoolsViewModel.schools[cellIndex1], scores1: mySchoolsViewModel.schoolsScores[cellIndex1], school2: mySchoolsViewModel.schools[indexPath.row], scores2: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
             number = 0
             schoolsTableView.reloadData()
         } else {
