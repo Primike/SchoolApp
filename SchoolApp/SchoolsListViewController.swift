@@ -92,7 +92,7 @@ extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsListViewModel.rowSelectSearch(indexPath: indexPath)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsListViewModel.schoolsSearchResults[indexPath.row], scores: schoolsListViewModel.schoolScores ?? SchoolScores()), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsListViewModel.schoolsSearchResults[indexPath.row], scores: schoolsListViewModel.schoolScores), animated: true)
     }
 }
 
@@ -103,6 +103,4 @@ extension SchoolsListViewController: UISearchBarDelegate {
         schoolsTableView.reloadData()
     }
 }
-    
-
 

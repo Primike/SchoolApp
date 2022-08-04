@@ -46,13 +46,14 @@ class NearbySchoolsViewController: UIViewController {
         nearbySchoolsHeaderView.backgroundColor = UIColor.systemBlue
         
         schoolsNumber.translatesAutoresizingMaskIntoConstraints = false
-        schoolsNumber.font = UIFont(name:"HelveticaNeue", size: 40.0)
+        schoolsNumber.font = UIFont(name:"HelveticaNeue", size: 20.0)
         schoolsNumber.adjustsFontSizeToFitWidth = true
         schoolsNumber.textAlignment = .center
         schoolsNumber.layer.borderWidth = 3
         schoolsNumber.layer.cornerRadius = 7.0
-        schoolsNumber.textColor = .white
+        schoolsNumber.textColor = .black
         schoolsNumber.delegate = self
+        schoolsNumber.backgroundColor = .white
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
@@ -85,7 +86,7 @@ class NearbySchoolsViewController: UIViewController {
             schoolsNumber.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.inputStackView.centerYAnchor),
             
             enterButton.heightAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
-            enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.widthAnchor, multiplier: 0.8),
+            enterButton.widthAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.widthAnchor),
             enterButton.centerYAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerYAnchor),
             enterButton.centerXAnchor.constraint(equalTo: nearbySchoolsHeaderView.buttonStackView.centerXAnchor),
         ])
@@ -130,6 +131,7 @@ class NearbySchoolsViewController: UIViewController {
 
 extension NearbySchoolsViewController {
     @objc func enterButtonTapped(sender: UIButton) {
+        
         nearbySchoolsHeaderView.errorLabel.isHidden = true
 
         if schoolsNumber.text!.isEmpty{

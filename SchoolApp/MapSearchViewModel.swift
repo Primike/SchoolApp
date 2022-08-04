@@ -16,8 +16,8 @@ class MapSearchViewModel {
     var nearbySchools = [School]()
     var latitude = 0.0
     var longitude = 0.0
-    var miles = 1.0
-    var number = 5
+    var miles = 0.0
+    var number = 10
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
         self.schoolsScores = schoolsSATData

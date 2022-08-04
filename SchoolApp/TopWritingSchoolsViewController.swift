@@ -52,9 +52,10 @@ class TopWritingSchoolsViewController: UIViewController {
         numberOfSchoolsText.textAlignment = .center
         numberOfSchoolsText.layer.borderWidth = 3
         numberOfSchoolsText.layer.cornerRadius = 7.0
-        numberOfSchoolsText.textColor = .white
+        numberOfSchoolsText.textColor = .black
         numberOfSchoolsText.delegate = self
-        
+        numberOfSchoolsText.backgroundColor = .white
+
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         errorLabel.textAlignment = .center
         errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)

@@ -98,6 +98,6 @@ extension MySchoolsViewController: UITableViewDataSource {
 extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.pushViewController(SchoolTabBarViewController(school: mySchoolsViewModel.schools[indexPath.row], scores: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+        navigationController?.present(SchoolTabBarViewController(school: mySchoolsViewModel.schools[indexPath.row], scores: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
     }
 }

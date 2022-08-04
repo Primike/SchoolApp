@@ -53,8 +53,9 @@ class SearchReadingScoreViewController: UIViewController {
         readingScoreText.textAlignment = .center
         readingScoreText.layer.borderWidth = 3
         readingScoreText.layer.cornerRadius = 7.0
-        readingScoreText.textColor = .white
+        readingScoreText.textColor = .black
         readingScoreText.delegate = self
+        readingScoreText.backgroundColor = .white
         
         schoolNumberText.translatesAutoresizingMaskIntoConstraints = false
         schoolNumberText.font = UIFont(name:"HelveticaNeue", size: 20.0)
@@ -62,8 +63,9 @@ class SearchReadingScoreViewController: UIViewController {
         schoolNumberText.textAlignment = .center
         schoolNumberText.layer.borderWidth = 3
         schoolNumberText.layer.cornerRadius = 7.0
-        schoolNumberText.textColor = .white
+        schoolNumberText.textColor = .black
         schoolNumberText.delegate = self
+        schoolNumberText.backgroundColor = .white
         
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         errorLabel.textAlignment = .center

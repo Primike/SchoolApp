@@ -15,7 +15,7 @@ class SchoolsListViewModel {
     var schoolsScores = [SchoolScores]()
     var schoolsSearchResults = [School]()
     
-    var schoolScores: SchoolScores?
+    var schoolScores = SchoolScores()
     
     init(schools: [School], schoolsScores: [SchoolScores]) {
         self.schoolsScores = schoolsScores
@@ -50,6 +50,8 @@ class SchoolsListViewModel {
     func rowSelectSearch(indexPath: IndexPath) {
         if let scores = schoolsScores.first(where: {$0.dbn == schoolsSearchResults[indexPath.row].dbn}) {
             schoolScores = scores
+        } else {
+            schoolScores = SchoolScores()
         }
     }
 }

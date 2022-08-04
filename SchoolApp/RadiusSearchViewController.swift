@@ -47,13 +47,14 @@ class RadiusSearchViewController: UIViewController {
         radiusSearchHeaderView.backgroundColor = UIColor.systemBlue
         
         milesText.translatesAutoresizingMaskIntoConstraints = false
-        milesText.font = UIFont(name:"HelveticaNeue", size: 40.0)
+        milesText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         milesText.adjustsFontSizeToFitWidth = true
         milesText.textAlignment = .center
         milesText.layer.borderWidth = 3
         milesText.layer.cornerRadius = 7.0
-        milesText.textColor = .white
+        milesText.textColor = .black
         milesText.delegate = self
+        milesText.backgroundColor = .white
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
@@ -86,7 +87,7 @@ class RadiusSearchViewController: UIViewController {
             milesText.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerYAnchor),
             
             enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
-            enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor, multiplier: 0.8),
+            enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor),
             enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
             enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),
         ])
