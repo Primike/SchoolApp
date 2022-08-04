@@ -179,7 +179,7 @@ extension TopMathSchoolsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+        return CGFloat(Int(view.bounds.height/5))
     }
 }
 

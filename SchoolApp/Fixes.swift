@@ -8,8 +8,12 @@
 import Foundation
 
 //design myschools
-// cahnge map number of schools and center on nearestschools
+
+//see if map can show all annotations
 //change mapsearch labels
 //change number of schools text input not allow other than integers
 //see if tabbar text font can be changed
-//cells a little too big in ipod see if heightanchorcan be made into an int then use that for cellheight
+//address search variable set to 0
+//add a distance to school
+
+//see if gradient can be placed on school list

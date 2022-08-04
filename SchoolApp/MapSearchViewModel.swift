@@ -17,6 +17,7 @@ class MapSearchViewModel {
     var latitude = 0.0
     var longitude = 0.0
     var miles = 0.0
+    var nearestNumber = 0
     var number = 10
     
     init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
@@ -33,7 +34,7 @@ class MapSearchViewModel {
         var array = schools
         nearbySchools = []
 
-        for _ in 0..<number {
+        for _ in 0..<nearestNumber {
             var closest = Double(10000)
             var index = 0
             for j in 0..<array.count {

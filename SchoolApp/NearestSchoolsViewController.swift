@@ -102,7 +102,7 @@ class NearbySchoolsViewController: UIViewController {
                 }
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: true)
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
                 
                 self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
@@ -150,7 +150,7 @@ extension NearbySchoolsViewController {
         
         if Int(schoolsNumber.text!) != nil{
 
-            self.nearbySchoolsViewModel.number = Int(schoolsNumber.text!)!
+            self.nearbySchoolsViewModel.nearestNumber = Int(schoolsNumber.text!)!
             self.nearbySchoolsViewModel.getNearbySchools()
             self.map.removeAnnotations(annotations)
             self.annotations = []
