@@ -152,12 +152,12 @@ extension SearchWritingScoreViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
-        if writingScoreText.text!.isEmpty {
+        if writingScoreText.text!.isEmpty || schoolNumberText.text!.isEmpty{
             errorHandler(message: "Insert A Value")
             return
         }
         
-        if Int(writingScoreText.text!) == nil {
+        if Int(writingScoreText.text!) == nil || Int(schoolNumberText.text!) == nil{
             errorHandler(message: "Please Enter An Integer Value")
             return
         }

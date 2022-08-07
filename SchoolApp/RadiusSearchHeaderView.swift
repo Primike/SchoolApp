@@ -46,7 +46,7 @@ class RadiusSearchHeaderView: UIView {
         headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.textAlignment = .center
-        headerLabel.text = "Search Nearby Schools By Miles"
+        headerLabel.text = "Search Nearby Schools"
         headerLabel.textColor = .white
         headerLabel.numberOfLines = 0
         

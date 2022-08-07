@@ -36,11 +36,10 @@ class TopSchoolsTabBarViewController: UITabBarController {
         let topReadingSchoolsVC = TopReadingSchoolsViewController(viewModel: TopSchoolsViewModel(schools: topSchoolsViewModel.schools, schoolsScores: topSchoolsViewModel.schoolsScores))
         let topWritingSchoolsVC = TopWritingSchoolsViewController(viewModel: TopSchoolsViewModel(schools: topSchoolsViewModel.schools, schoolsScores: topSchoolsViewModel.schoolsScores))
 
-        topSchoolsVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Top Schools", tag: 0)
-        topMathSchoolsVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Math", tag: 1)
-        topReadingSchoolsVC.setTabBarImage(imageSFName: "book", title: "Reading", tag: 2)
-        topWritingSchoolsVC.setTabBarImage(imageSFName: "book", title: "Writing", tag: 3)
-
+        topSchoolsVC.setTabBarImage(imageSFName: "star.fill", title: "Top Schools", tag: 0)
+        topMathSchoolsVC.setTabBarImage(imageSFName: "x.squareroot", title: "Top Math", tag: 1)
+        topReadingSchoolsVC.setTabBarImage(imageSFName: "book.fill", title: "Top Reading", tag: 2)
+        topWritingSchoolsVC.setTabBarImage(imageSFName: "pencil", title: "Top Writing", tag: 3)
 
         let topSchoolsNC = UINavigationController(rootViewController: topSchoolsVC)
         let topMathSchoolsNC = UINavigationController(rootViewController: topMathSchoolsVC)

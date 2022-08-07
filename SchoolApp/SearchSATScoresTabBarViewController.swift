@@ -35,10 +35,10 @@ class SearchSATScoresTabBarViewController: UITabBarController {
         let searchReadingVC = SearchReadingScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
         let searchWritingVC = SearchWritingScoreViewController(viewModel: SearchSATScoresViewModel(schools: searchSATScoresViewModel.schools, schoolsScores: searchSATScoresViewModel.schoolsScores))
 
-        searchTotalVC.setTabBarImage(imageSFName: "list.dash.header.rectangle", title: "Top Schools", tag: 0)
-        searchMathVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Top Math Schools", tag: 1)
-        searchReadingVC.setTabBarImage(imageSFName: "book", title: "Top Reading Schools", tag: 2)
-        searchWritingVC.setTabBarImage(imageSFName: "book", title: "Top Writing Schools", tag: 3)
+        searchTotalVC.setTabBarImage(imageSFName: "star.fill", title: "SAT Score", tag: 0)
+        searchMathVC.setTabBarImage(imageSFName: "x.squareroot", title: "Math Score", tag: 1)
+        searchReadingVC.setTabBarImage(imageSFName: "book.fill", title: "Reading Score", tag: 2)
+        searchWritingVC.setTabBarImage(imageSFName: "pencil", title: "Writing Score", tag: 3)
 
         let searchTotalNC = UINavigationController(rootViewController: searchTotalVC)
         let searchMathNC = UINavigationController(rootViewController: searchMathVC)
