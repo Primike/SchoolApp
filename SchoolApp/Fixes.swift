@@ -15,5 +15,4 @@ import Foundation
 
 //change zoom on map based on miles searched
 //see if gradient can be placed on school list
-//fix scores height sizze on push view
 //maybe nearby and adress combined

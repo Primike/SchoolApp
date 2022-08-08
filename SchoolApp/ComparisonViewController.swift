@@ -54,6 +54,7 @@ class ComparisonViewController: UIViewController {
     
     func style() {
         view.backgroundColor = .white
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         screenStackView.translatesAutoresizingMaskIntoConstraints = false

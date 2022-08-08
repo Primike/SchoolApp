@@ -101,8 +101,8 @@ class SchoolInfoViewController: UIViewController {
             screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             schoolInfoTopView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
-            schoolInfoTopView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             schoolInfoTopView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.5),
+            schoolInfoTopView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             schoolInfoTopView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
             
             schoolWebsiteButton.leftAnchor.constraint(equalTo: schoolInfoTopView.topButtonsStackView.leftAnchor),

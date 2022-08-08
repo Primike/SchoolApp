@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,13 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.appCoordinator = AppCoordinator(window: window!)
 //        self.appCoordinator.start()
         
-//        let viewModel = SchoolsListViewModel()
-//        let schoolsNavigationController = UINavigationController(rootViewController: SchoolsListViewController(viewModel: viewModel))
         let viewModel = HomeViewModel()
         let navigationController = UINavigationController(rootViewController: HomeViewController(viewModel: viewModel))
         window?.rootViewController = navigationController
         return true
     }
+
 }
 
 

@@ -149,7 +149,7 @@ extension AddressSearchViewController {
             self.longitude = placemark?.location?.coordinate.longitude ?? 0.0
             
             if self.latitude == 0.0 || self.longitude == 0.0 {
-                errorHandler(message: "Invalid Adress Please Try Again")
+                errorHandler(message: "Invalid Address Please Try Again")
                 return
             }
             

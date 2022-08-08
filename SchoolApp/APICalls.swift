@@ -170,6 +170,3 @@ extension SchoolServiceAPI {
         task.resume()
     }
 }
-
-
-

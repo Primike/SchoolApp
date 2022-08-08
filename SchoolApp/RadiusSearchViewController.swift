@@ -20,6 +20,7 @@ class RadiusSearchViewController: UIViewController {
     let nearbySchoolsViewModel: MapSearchViewModel
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
+    var location = CLLocation()
         
     init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
@@ -102,8 +103,11 @@ class RadiusSearchViewController: UIViewController {
                     return
                 }
                 
+                self!.location = location
+                
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
+                let x = 0.5
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02*x, longitudeDelta: 0.04*x)), animated: true)
                 
                 self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
@@ -155,6 +159,8 @@ extension RadiusSearchViewController {
             self.map.removeAnnotations(annotations)
             self.annotations = []
             self.setup()
+            //fix this
+            self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)), animated: true)
         }
 
         func errorHandler(message: String){

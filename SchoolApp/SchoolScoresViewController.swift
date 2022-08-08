@@ -42,6 +42,8 @@ class SchoolScoresViewController: UIViewController {
     }
     
     func style() {
+        view.backgroundColor = .systemBackground
+
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .systemBackground
         
