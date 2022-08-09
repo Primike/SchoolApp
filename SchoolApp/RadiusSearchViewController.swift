@@ -21,6 +21,7 @@ class RadiusSearchViewController: UIViewController {
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
+    var x = 1.0
         
     init(viewModel: MapSearchViewModel) {
         self.nearbySchoolsViewModel = viewModel
@@ -106,8 +107,8 @@ class RadiusSearchViewController: UIViewController {
                 self!.location = location
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                let x = 0.5
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02*x, longitudeDelta: 0.04*x)), animated: true)
+                
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02 * self!.x, longitudeDelta: 0.04 * self!.x)), animated: true)
                 
                 self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
                 self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
@@ -137,30 +138,29 @@ class RadiusSearchViewController: UIViewController {
 extension RadiusSearchViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         radiusSearchHeaderView.errorLabel.isHidden = true
-
-        if milesText.text!.isEmpty{
-            return
-        }
         
         if Double(milesText.text!) == nil{
             errorHandler(message: "Please Enter A Numerical Value")
             return
         }
         
-        if Double(milesText.text!)! > 50 {
-            errorHandler(message: "Please Type In A Value Less Than 50")
+        if Double(milesText.text!)! > 25 {
+            errorHandler(message: "Please Type In A Maximum Value of 25")
             return
         }
         
-        if Double(milesText.text!) != nil{
-
+        if Double(milesText.text!) != nil {
+            
+            self.x = Double(milesText.text!)!
             self.nearbySchoolsViewModel.miles = Double(milesText.text!)!
             self.nearbySchoolsViewModel.getSchoolsByMiles()
             self.map.removeAnnotations(annotations)
             self.annotations = []
-            self.setup()
-            //fix this
-            self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)), animated: true)
+            
+            self.addMapPin(latitude: String(nearbySchoolsViewModel.latitude), longitude: String(nearbySchoolsViewModel.longitude), label: "CURRENT ADDRESS")
+            self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: nearbySchoolsViewModel.latitude, longitude: nearbySchoolsViewModel.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * self.x, longitudeDelta: 0.04 * self.x)), animated: true)
+            
+            self.setupMap()
         }
 
         func errorHandler(message: String){

@@ -13,6 +13,5 @@ import Foundation
 //address search variable set to 0
 //add a distance to school
 
-//change zoom on map based on miles searched
 //see if gradient can be placed on school list
 //maybe nearby and adress combined
