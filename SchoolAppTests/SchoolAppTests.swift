@@ -10,47 +10,52 @@ import XCTest
 
 class SchoolAppTests: XCTestCase {
     
+    var schooldata = [School]()
+
     override func setUpWithError() throws {
-        
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testJSONDecoder() {
         do {
             if let bundlePath = Bundle.main.path(forResource: "SchoolsData",
                                                  ofType: "json"),
                 let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
                 let x = try! JSONDecoder().decode([School].self, from: jsonData)
-                
-                for i in 0..<x.count {
-                    XCTAssertNotNil(x[i].school_name)
-                    XCTAssertNotNil(x[i].longitude)
-                    XCTAssertNotNil(x[i].latitude)
-                    XCTAssertNotNil(x[i].boro)
-                    XCTAssertNotNil(x[i].dbn)
-                    XCTAssertNotNil(x[i].overview_paragraph)
-                    XCTAssertNotNil(x[i].interest1)
-                    XCTAssertNotNil(x[i].phone_number)
-                    XCTAssertNotNil(x[i].website)
-                    XCTAssertNotNil(x[i].location)
-                }
+                schooldata = x
             }
         } catch {
             print(error)
         }
+    }
 
+    override func tearDownWithError() throws {
+    }
+
+    func testJSONDecoder() {
+        for i in 0..<schooldata.count {
+            XCTAssertNotNil(schooldata[i].school_name)
+            XCTAssertNotNil(schooldata[i].longitude)
+            XCTAssertNotNil(schooldata[i].latitude)
+            XCTAssertNotNil(schooldata[i].boro)
+            XCTAssertNotNil(schooldata[i].dbn)
+            XCTAssertNotNil(schooldata[i].overview_paragraph)
+            XCTAssertNotNil(schooldata[i].interest1)
+            XCTAssertNotNil(schooldata[i].phone_number)
+            XCTAssertNotNil(schooldata[i].website)
+            XCTAssertNotNil(schooldata[i].location)
+        }
     }
     
-    func testIntegerConversion() {
-        guard let pathString = Bundle.main.path(forResource: "SchoolsData", ofType: "json") else {
-            fatalError("JSON not found")
+    func testDuplicateLongitude() {
+        var longitudeObject = [String: Int]()
+        
+        for i in schooldata {
+            if longitudeObject[i.longitude ?? "0"] != nil {
+                longitudeObject[i.longitude ?? "0"]! += 1
+            } else {
+                longitudeObject[i.longitude ?? "0"] = 1
+            }
         }
         
-        guard let json = try? String(contentsOfFile: pathString, encoding: .utf8) else {
-            fatalError("Unable to convert json to String")
+        for i in longitudeObject {
+            XCTAssert(i.value == 1)
         }
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class AddressSearchHeaderView: UIView {
     
+    let headerStackView = UIStackView()
     let addressHeaderLabel = UILabel()
     let addressStackView = UIStackView()
     let addressLabel = UILabel()
@@ -30,6 +31,8 @@ class AddressSearchHeaderView: UIView {
     }
     
     func setup() {
+        headerStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         addressStackView.translatesAutoresizingMaskIntoConstraints = false
         addressStackView.axis = .vertical
         
@@ -39,7 +42,6 @@ class AddressSearchHeaderView: UIView {
         addressHeaderLabel.textAlignment = .center
         addressHeaderLabel.text = "Search Nearby Schools By Address"
         addressHeaderLabel.textColor = .white
-        addressHeaderLabel.numberOfLines = 0
         
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
         addressLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
@@ -47,7 +49,6 @@ class AddressSearchHeaderView: UIView {
         addressLabel.textAlignment = .center
         addressLabel.text = "Address:"
         addressLabel.textColor = .white
-        addressLabel.numberOfLines = 0
         
         schoolNumberStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -57,7 +58,6 @@ class AddressSearchHeaderView: UIView {
         findLabel.textAlignment = .center
         findLabel.text = "Find"
         findLabel.textColor = .white
-        findLabel.numberOfLines = 0
         
         nearestLabel.translatesAutoresizingMaskIntoConstraints = false
         nearestLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
@@ -71,59 +71,64 @@ class AddressSearchHeaderView: UIView {
         errorLabel.textAlignment = .center
         errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
         errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.numberOfLines = 0
         errorLabel.textColor = .systemRed
         errorLabel.text = "Error Label"
         errorLabel.isHidden = true
     }
     
     func layout() {
-        self.addSubview(addressHeaderLabel)
-        self.addSubview(addressStackView)
-        self.addSubview(schoolNumberStackView)
+        self.addSubview(headerStackView)
         
-        addressStackView.addSubview(addressLabel)
-        addressStackView.addSubview(errorLabel)
+        headerStackView.addSubview(addressHeaderLabel)
+        headerStackView.addSubview(schoolNumberStackView)
+        headerStackView.addSubview(addressStackView)
         
         schoolNumberStackView.addSubview(findLabel)
         schoolNumberStackView.addSubview(nearestLabel)
+        
+        addressStackView.addSubview(addressLabel)
+        addressStackView.addSubview(errorLabel)
 
         NSLayoutConstraint.activate([
-            addressHeaderLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            addressHeaderLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
-            addressHeaderLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
-            addressHeaderLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
+            headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            headerStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            addressStackView.topAnchor.constraint(equalTo: addressHeaderLabel.bottomAnchor),
-            addressStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
-            addressStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
-            addressStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            addressHeaderLabel.topAnchor.constraint(equalTo: headerStackView.topAnchor),
+            addressHeaderLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.15),
+            addressHeaderLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.8),
+            addressHeaderLabel.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
             
-            addressLabel.topAnchor.constraint(equalTo: addressStackView.topAnchor),
-            addressLabel.leftAnchor.constraint(equalTo: addressStackView.leftAnchor),
-            addressLabel.heightAnchor.constraint(equalTo: addressStackView.heightAnchor),
-            addressLabel.widthAnchor.constraint(equalTo: addressStackView.widthAnchor, multiplier: 0.2),
-            
-            //maybe put inside another stack view
-            schoolNumberStackView.topAnchor.constraint(equalTo: addressStackView.bottomAnchor),
+            schoolNumberStackView.bottomAnchor.constraint(equalTo: addressStackView.topAnchor),
             schoolNumberStackView.leftAnchor.constraint(equalTo: addressStackView.leftAnchor),
-            schoolNumberStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
-            schoolNumberStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6),
+            schoolNumberStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.25),
+            schoolNumberStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.7),
             
             findLabel.topAnchor.constraint(equalTo: schoolNumberStackView.topAnchor),
             findLabel.leftAnchor.constraint(equalTo: schoolNumberStackView.leftAnchor),
             findLabel.heightAnchor.constraint(equalTo: schoolNumberStackView.heightAnchor),
-            findLabel.widthAnchor.constraint(equalTo: schoolNumberStackView.widthAnchor, multiplier: 0.3),
+            findLabel.widthAnchor.constraint(equalTo: schoolNumberStackView.widthAnchor, multiplier: 0.25),
             
             nearestLabel.topAnchor.constraint(equalTo: schoolNumberStackView.topAnchor),
             nearestLabel.rightAnchor.constraint(equalTo: schoolNumberStackView.rightAnchor),
             nearestLabel.heightAnchor.constraint(equalTo: schoolNumberStackView.heightAnchor),
             nearestLabel.widthAnchor.constraint(equalTo: schoolNumberStackView.widthAnchor, multiplier: 0.3),
             
-            errorLabel.topAnchor.constraint(equalTo: schoolNumberStackView.bottomAnchor),
-            errorLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
-            errorLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            errorLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            addressStackView.bottomAnchor.constraint(equalTo: errorLabel.topAnchor),
+            addressStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.4),
+            addressStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor),
+            addressStackView.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
+            
+            addressLabel.topAnchor.constraint(equalTo: addressStackView.topAnchor),
+            addressLabel.leftAnchor.constraint(equalTo: addressStackView.leftAnchor),
+            addressLabel.heightAnchor.constraint(equalTo: addressStackView.heightAnchor),
+            addressLabel.widthAnchor.constraint(equalTo: addressStackView.widthAnchor, multiplier: 0.2),
+            
+            errorLabel.bottomAnchor.constraint(equalTo: headerStackView.bottomAnchor),
+            errorLabel.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.15),
+            errorLabel.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.6),
+            errorLabel.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor),
         ])
     }
 }

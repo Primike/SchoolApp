@@ -14,12 +14,14 @@ class AddressSearchViewController: UIViewController {
     
     let addressSearchHeaderView = AddressSearchHeaderView()
     let map = MKMapView()
+    let schoolsNumber = UITextField()
     let addressText = UITextField()
     let enterButton = UIButton()
 
     let nearbySchoolsViewModel: MapSearchViewModel
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
+    var location = CLLocation()
     var latitude = 0.0
     var longitude = 0.0
         
@@ -48,6 +50,16 @@ class AddressSearchViewController: UIViewController {
         addressSearchHeaderView.translatesAutoresizingMaskIntoConstraints = false
         addressSearchHeaderView.backgroundColor = UIColor.systemBlue
         
+        schoolsNumber.translatesAutoresizingMaskIntoConstraints = false
+        schoolsNumber.font = UIFont(name:"HelveticaNeue", size: 15.0)
+        schoolsNumber.adjustsFontSizeToFitWidth = true
+        schoolsNumber.textAlignment = .center
+        schoolsNumber.layer.borderWidth = 3
+        schoolsNumber.layer.cornerRadius = 7.0
+        schoolsNumber.textColor = .black
+        schoolsNumber.delegate = self
+        schoolsNumber.backgroundColor = .white
+        
         addressText.translatesAutoresizingMaskIntoConstraints = false
         addressText.font = UIFont(name:"HelveticaNeue", size: 20.0)
         addressText.adjustsFontSizeToFitWidth = true
@@ -69,6 +81,7 @@ class AddressSearchViewController: UIViewController {
         view.addSubview(addressSearchHeaderView)
         view.addSubview(map)
         
+        addressSearchHeaderView.schoolNumberStackView.addSubview(schoolsNumber)
         addressSearchHeaderView.addressStackView.addSubview(addressText)
         addressSearchHeaderView.addressStackView.addSubview(enterButton)
         
@@ -78,20 +91,25 @@ class AddressSearchViewController: UIViewController {
             addressSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             addressSearchHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            map.topAnchor.constraint(equalTo: addressSearchHeaderView.bottomAnchor),
-            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            schoolsNumber.heightAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.heightAnchor),
+            schoolsNumber.leftAnchor.constraint(equalTo: addressText.leftAnchor),
+            schoolsNumber.widthAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.widthAnchor, multiplier: 0.3),
+            schoolsNumber.centerYAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.centerYAnchor),
             
-            addressText.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.5),
+            addressText.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.7),
             addressText.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.5),
             addressText.centerXAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.centerXAnchor),
             addressText.centerYAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.centerYAnchor),
             
             enterButton.rightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.rightAnchor),
-            enterButton.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.5),
-            enterButton.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.2),
+            enterButton.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.8),
+            enterButton.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.20),
             enterButton.centerYAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.centerYAnchor),
+            
+            map.topAnchor.constraint(equalTo: addressSearchHeaderView.bottomAnchor),
+            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 
@@ -104,6 +122,8 @@ class AddressSearchViewController: UIViewController {
                     return
                 }
                 
+                self!.location = location
+
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
                 strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
                 
@@ -136,7 +156,7 @@ extension AddressSearchViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         addressSearchHeaderView.errorLabel.isHidden = true
 
-        if addressText.text!.isEmpty{
+        if addressText.text!.isEmpty {
             errorHandler(message: "Insert An Address")
             return
         }
@@ -154,6 +174,9 @@ extension AddressSearchViewController {
             }
             
             if self.latitude != 0.0 && self.longitude != 0.0 {
+                if Int(self.schoolsNumber.text!) != nil {
+                    self.nearbySchoolsViewModel.nearestNumber = Int(self.schoolsNumber.text!)!
+                }
                 self.nearbySchoolsViewModel.latitude = self.latitude
                 self.nearbySchoolsViewModel.longitude = self.longitude
                 self.nearbySchoolsViewModel.getNearbySchools()
@@ -176,9 +199,11 @@ extension AddressSearchViewController {
 
 extension AddressSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
-        
-        navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+        if view.annotation?.title != "CURRENT LOCATION" {
+            let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
+            
+            navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+        }
     }
 }
 

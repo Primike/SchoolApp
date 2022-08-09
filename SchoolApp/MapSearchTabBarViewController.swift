@@ -32,18 +32,15 @@ class MapSearchTabBarViewController: UITabBarController {
     private func setupViews() {
         
         let radiusSearchVC = RadiusSearchViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
-        let nearbySchoolsVC = NearbySchoolsViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
         let coordinateSearchVC = AddressSearchViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
 
         radiusSearchVC.setTabBarImage(imageSFName: "mappin.circle.fill", title: "Radius Search", tag: 0)
-        nearbySchoolsVC.setTabBarImage(imageSFName: "arrow.left.arrow.right", title: "Nearby Schools", tag: 1)
         coordinateSearchVC.setTabBarImage(imageSFName: "location.magnifyingglass", title: "Address Search", tag: 2)
 
         let radiusSearchNC = UINavigationController(rootViewController: radiusSearchVC)
-        let nearbySchoolsNC = UINavigationController(rootViewController: nearbySchoolsVC)
         let coordinateSearchNC = UINavigationController(rootViewController: coordinateSearchVC)
         
-        let tabBarList = [radiusSearchNC, nearbySchoolsNC, coordinateSearchNC]
+        let tabBarList = [radiusSearchNC, coordinateSearchNC]
 
         viewControllers = tabBarList
     }

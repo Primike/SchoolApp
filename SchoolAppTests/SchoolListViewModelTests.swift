@@ -40,12 +40,5 @@ class SchoolListViewModelTests: XCTestCase {
         sut = nil
     }
     
-//    func testSearchBar() {
-//        sut.textChanged(searchText: "Clinton")
-//        
-//        for i in sut.schools {
-//            XCTAssert(i.mergedText!.contains("Clinton"))
-//        }
-//    }
     
 }
