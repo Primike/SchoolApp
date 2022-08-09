@@ -178,6 +178,24 @@ extension RadiusSearchViewController: MKMapViewDelegate {
             navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
         }
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+         let reuseIdentifier = "annotationView"
+         var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+         if #available(iOS 11.0, *) {
+             if view == nil {
+                 view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+             }
+             view?.displayPriority = .required
+         } else {
+             if view == nil {
+                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+             }
+         }
+         view?.annotation = annotation
+         view?.canShowCallout = true
+         return view
+     }
 }
 
 extension RadiusSearchViewController: UITextFieldDelegate {

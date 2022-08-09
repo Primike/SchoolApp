@@ -10,7 +10,9 @@ import UIKit
 
 class MySchoolsHeaderView: UIView {
     
+    let stackView = UIStackView()
     let mySchoolsLabel = UILabel()
+    let heartImage = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +27,12 @@ class MySchoolsHeaderView: UIView {
     func setup() {
         self.backgroundColor = .systemBlue
         
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        heartImage.translatesAutoresizingMaskIntoConstraints = false
+        heartImage.contentMode = .scaleAspectFit
+        heartImage.tintColor = .black
+        
         mySchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
         mySchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
         mySchoolsLabel.adjustsFontSizeToFitWidth = true
@@ -35,13 +43,26 @@ class MySchoolsHeaderView: UIView {
     }
     
     func layout() {
-        self.addSubview(mySchoolsLabel)
+        self.addSubview(stackView)
+        
+        stackView.addSubview(heartImage)
+        stackView.addSubview(mySchoolsLabel)
         
         NSLayoutConstraint.activate([
-            mySchoolsLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
-            mySchoolsLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            mySchoolsLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            mySchoolsLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
+            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            heartImage.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            heartImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.8),
+            heartImage.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.3),
+            heartImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
+            
+            mySchoolsLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.9),
+            mySchoolsLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.6),
+            mySchoolsLabel.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            mySchoolsLabel.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
         ])
     }
 }

@@ -173,6 +173,11 @@ extension AddressSearchViewController {
                 return
             }
             
+            if self.longitude > -73.55 || self.longitude < -74.33 || self.latitude > 41.01 || self.latitude < 40.4 {
+                errorHandler(message: "Please Enter An NYC Address")
+                return
+            }
+            
             if self.latitude != 0.0 && self.longitude != 0.0 {
                 if Int(self.schoolsNumber.text!) != nil {
                     self.nearbySchoolsViewModel.nearestNumber = Int(self.schoolsNumber.text!)!

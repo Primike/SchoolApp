@@ -40,12 +40,16 @@ class SchoolComparisonViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        mySchoolsViewModel.mySchools()
+        schoolsTableView.reloadData()
     }
     
     func style() {
         view.backgroundColor = .white
         
         mySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mySchoolsHeaderView.mySchoolsLabel.text = "Select 2 Schools To Compare"
         
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }

@@ -47,7 +47,14 @@ class MapSearchViewModel {
             
             array.remove(at: index)
         }
-        print(nearbySchools.count)
+        
+        for i in 0..<nearbySchools.count {
+            for j in 0..<nearbySchools.count {
+                if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
+                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009*Double(j))"
+                }
+            }
+        }
     }
     
     func getSchoolsByMiles() {

@@ -28,36 +28,67 @@ class SchoolAppTests: XCTestCase {
     override func tearDownWithError() throws {
     }
 
-    func testJSONDecoder() {
-        for i in 0..<schooldata.count {
-            XCTAssertNotNil(schooldata[i].school_name)
-            XCTAssertNotNil(schooldata[i].longitude)
-            XCTAssertNotNil(schooldata[i].latitude)
-            XCTAssertNotNil(schooldata[i].boro)
-            XCTAssertNotNil(schooldata[i].dbn)
-            XCTAssertNotNil(schooldata[i].overview_paragraph)
-            XCTAssertNotNil(schooldata[i].interest1)
-            XCTAssertNotNil(schooldata[i].phone_number)
-            XCTAssertNotNil(schooldata[i].website)
-            XCTAssertNotNil(schooldata[i].location)
-        }
-    }
+//    func testJSONDecoder() {
+//        for i in 0..<schooldata.count {
+//            XCTAssertNotNil(schooldata[i].school_name)
+//            XCTAssertNotNil(schooldata[i].longitude)
+//            XCTAssertNotNil(schooldata[i].latitude)
+//            XCTAssertNotNil(schooldata[i].boro)
+//            XCTAssertNotNil(schooldata[i].dbn)
+//            XCTAssertNotNil(schooldata[i].overview_paragraph)
+//            XCTAssertNotNil(schooldata[i].phone_number)
+//            XCTAssertNotNil(schooldata[i].website)
+//            XCTAssertNotNil(schooldata[i].location)
+//        }
+//    }
     
-    func testDuplicateLongitude() {
-        var longitudeObject = [String: Int]()
-        
-        for i in schooldata {
-            if longitudeObject[i.longitude ?? "0"] != nil {
-                longitudeObject[i.longitude ?? "0"]! += 1
-            } else {
-                longitudeObject[i.longitude ?? "0"] = 1
-            }
-        }
-        
-        for i in longitudeObject {
-            XCTAssert(i.value == 1)
-        }
-    }
+//    func testDuplicateLongitude() {
+//        var longitudeObject = [String: Int]()
+//
+//        for i in schooldata {
+//            if longitudeObject[i.longitude ?? "\(i.dbn)"] != nil {
+//                longitudeObject[i.longitude ?? "\(i.dbn)"]! += 1
+//            } else {
+//                longitudeObject[i.longitude ?? "\(i.dbn)"] = 1
+//            }
+//        }
+//
+//        for i in longitudeObject {
+//            XCTAssert(i.value <= 5)
+//        }
+//    }
+//
+//    func testDuplicateLatitude() {
+//        var latitudeObject = [String: Int]()
+//
+//        for i in schooldata {
+//            if latitudeObject[i.latitude ?? "\(i.dbn)"] != nil {
+//                latitudeObject[i.latitude ?? "\(i.dbn)"]! += 1
+//            } else {
+//                latitudeObject[i.latitude ?? "\(i.dbn)"] = 1
+//            }
+//        }
+//
+//        for i in latitudeObject {
+//            XCTAssert(i.value <= 5)
+//        }
+//    }
+    
+//    func testDuplicateCoordinates() {
+//        var object = [String: Int]()
+//        
+//        for i in schooldata {
+//            if object["\(i.latitude)\(i.longitude)" ?? "\(i.dbn)"] != nil {
+//                object["\(i.latitude)\(i.longitude)" ?? "\(i.dbn)"]! += 1
+//            } else {
+//                object["\(i.latitude)\(i.longitude)" ?? "\(i.dbn)"] = 1
+//            }
+//        }
+//        
+//        for i in object {
+//            XCTAssert(i.value <= 4)
+//        }
+//    }
 }
 
 

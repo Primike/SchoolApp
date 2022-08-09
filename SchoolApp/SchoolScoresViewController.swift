@@ -61,6 +61,12 @@ class SchoolScoresViewController: UIViewController {
         graphButton.setTitleColor(.black, for: .normal)
                 
         schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if schoolScores.sat_math_avg_score == "0" {
+            schoolScoresBottomView.satMathSubView.satSubjectScore.text = "Not Available"
+            schoolScoresBottomView.satWritingSubView.satSubjectScore.text = "Not Available"
+            schoolScoresBottomView.satReadingSubView.satSubjectScore.text = "Not Available"
+        }
     }
     
     func layout() {

@@ -15,10 +15,9 @@ struct School: Decodable {
     var location: String
     let website: String
     let phone_number: String
-    let interest1: String
     var mergedText: String?
-    var latitude = 0.0
-    var longitude = 0.0
+    var latitude: String?
+    var longitude: String?
     
     func lowercased() -> String {
         return school_name.lowercased()
