@@ -7,12 +7,12 @@
 
 import Foundation
 
-//design myschools
-
-//map clustering when very close
-//add a distance to school
+//add cluster for every map
+//add location in delegate
 
 //fix schools with same coordinates appwide
 //see if gradient can be placed on school list
 
+//change y axis
 //change classes to struct
+//enable distance after reject

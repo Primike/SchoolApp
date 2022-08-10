@@ -157,7 +157,7 @@ extension RadiusSearchViewController {
             self.map.removeAnnotations(annotations)
             self.annotations = []
             
-            self.addMapPin(latitude: String(nearbySchoolsViewModel.latitude), longitude: String(nearbySchoolsViewModel.longitude), label: "CURRENT ADDRESS")
+            self.addMapPin(latitude: String(nearbySchoolsViewModel.latitude), longitude: String(nearbySchoolsViewModel.longitude), label: "CURRENT LOCATION")
             self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: nearbySchoolsViewModel.latitude, longitude: nearbySchoolsViewModel.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * self.x, longitudeDelta: 0.04 * self.x)), animated: true)
             
             self.setupMap()

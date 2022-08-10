@@ -18,6 +18,7 @@ struct School: Decodable {
     var mergedText: String?
     var latitude: String?
     var longitude: String?
+    var distance: String?
     
     func lowercased() -> String {
         return school_name.lowercased()

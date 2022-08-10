@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//fix yaxis
 class ComparisonGraphView: UIView {
     
     let legendView: LegendView
@@ -25,7 +24,7 @@ class ComparisonGraphView: UIView {
         self.schoolScores = scores
         self.schoolScores2 = scores2
         
-        self.legendView = LegendView(frame: CGRect(), schoolName1: "SCHOOL 1 doiscjiosdjciosjdcoijsc", schoolName2: "SCHOOL 1 doiscjiosdjciosjdcoijsc")
+        self.legendView = LegendView(frame: CGRect(), schoolName1: "SCHOOL 1", schoolName2: "SCHOOL 2")
         self.comparisonBarsView = ComparisonBarsView(frame: CGRect(), scores: scores, scores2: scores2, schoolColor: schoolColor)
         
         super.init(frame: frame)

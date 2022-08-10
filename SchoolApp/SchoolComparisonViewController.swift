@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//fix double click same cell
 class SchoolComparisonViewController: UIViewController {
     
     let mySchoolsHeaderView = MySchoolsHeaderView()
@@ -16,7 +15,6 @@ class SchoolComparisonViewController: UIViewController {
     
     var number = 0
     var cellIndex1 = 0
-    var cellIndex2 = 1
 
     let mySchoolsViewModel: MySchoolsViewModel
     
@@ -40,6 +38,7 @@ class SchoolComparisonViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         mySchoolsViewModel.mySchools()
         schoolsTableView.reloadData()
     }
@@ -99,14 +98,20 @@ extension SchoolComparisonViewController: UITableViewDataSource {
 extension SchoolComparisonViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        number = number + 1
-        schoolsTableView.cellForRow(at: indexPath)?.isHighlighted = true
-        if number == 2 {
-            navigationController?.present(ComparisonViewController(school1: mySchoolsViewModel.schools[cellIndex1], scores1: mySchoolsViewModel.schoolsScores[cellIndex1], school2: mySchoolsViewModel.schools[indexPath.row], scores2: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+        if cellIndex1 == indexPath.row && number == 1 {
             number = 0
+            schoolsTableView.cellForRow(at: indexPath)?.isHighlighted = false
             schoolsTableView.reloadData()
         } else {
-            cellIndex1 = indexPath.row
+            number = number + 1
+            schoolsTableView.cellForRow(at: indexPath)?.isHighlighted = true
+            if number == 2 {
+                navigationController?.present(ComparisonViewController(school1: mySchoolsViewModel.schools[cellIndex1], scores1: mySchoolsViewModel.schoolsScores[cellIndex1], school2: mySchoolsViewModel.schools[indexPath.row], scores2: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+                number = 0
+                schoolsTableView.reloadData()
+            } else {
+                cellIndex1 = indexPath.row
+            }
         }
     }
 }

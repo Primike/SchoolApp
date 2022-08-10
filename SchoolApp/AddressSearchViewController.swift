@@ -188,7 +188,7 @@ extension AddressSearchViewController {
                 self.map.removeAnnotations(self.annotations)
                 self.annotations = []
                 
-                self.addMapPin(latitude: String(self.latitude), longitude: String(self.longitude), label: "CURRENT ADDRESS")
+                self.addMapPin(latitude: String(self.latitude), longitude: String(self.longitude), label: "CURRENT LOCATION")
                 self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
                 
                 self.setupMap()

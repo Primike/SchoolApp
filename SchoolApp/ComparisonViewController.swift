@@ -34,8 +34,8 @@ class ComparisonViewController: UIViewController {
         self.school2 = school2
         self.schoolScores2 = scores2
         
-        self.comparisonInfoView = ComparisonInfoView(frame: CGRect(), school: school, schoolColor: .black)
-        self.comparisonInfoView2 = ComparisonInfoView(frame: CGRect(), school: school2, schoolColor: .black)
+        self.comparisonInfoView = ComparisonInfoView(frame: CGRect(), school: school, color: .black)
+        self.comparisonInfoView2 = ComparisonInfoView(frame: CGRect(), school: school2, color: .brown)
         self.comparisonGraphView = ComparisonGraphView(frame: CGRect(), scores: scores1, scores2: scores2, schoolColor: schoolColor)
         super.init(nibName: nil, bundle: nil)
     }
@@ -62,16 +62,30 @@ class ComparisonViewController: UIViewController {
         topStackView.translatesAutoresizingMaskIntoConstraints = false
         
         comparisonInfoView.translatesAutoresizingMaskIntoConstraints = false
+        if schoolScores.dbn != "0" {
+            comparisonInfoView.testtakersLabel.text = "Test Takes: \(schoolScores.num_of_sat_test_takers)"
+            comparisonInfoView.mathLabel.text = "Math Score: \(schoolScores.sat_math_avg_score)"
+            comparisonInfoView.writingLabel.text = "Writing Score: \(schoolScores.sat_writing_avg_score)"
+            comparisonInfoView.readingLabel.text = "Reading Score: \(schoolScores.sat_critical_reading_avg_score)"
+        }
         
         comparisonInfoView2.translatesAutoresizingMaskIntoConstraints = false
+        if schoolScores2.dbn != "0" {
+            comparisonInfoView2.testtakersLabel.text = "Test Takes: \(schoolScores2.num_of_sat_test_takers)"
+            comparisonInfoView2.mathLabel.text = "Math Score: \(schoolScores2.sat_math_avg_score)"
+            comparisonInfoView2.writingLabel.text = "Writing Score: \(schoolScores2.sat_writing_avg_score)"
+            comparisonInfoView2.readingLabel.text = "Reading Score: \(schoolScores2.sat_critical_reading_avg_score)"
+        }
         
         verticalDivider.translatesAutoresizingMaskIntoConstraints = false
         verticalDivider.backgroundColor = .black
         
         comparisonGraphView.translatesAutoresizingMaskIntoConstraints = false
-
+        comparisonGraphView.legendView.school1Label.text = school.school_name
+        comparisonGraphView.legendView.school2Label.text = school.school_name
+        
         map.translatesAutoresizingMaskIntoConstraints = false
-
+        
     }
     
     func layout() {
@@ -85,7 +99,6 @@ class ComparisonViewController: UIViewController {
         topStackView.addSubview(comparisonInfoView)
         topStackView.addSubview(verticalDivider)
         topStackView.addSubview(comparisonInfoView2)
-
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -110,8 +123,8 @@ class ComparisonViewController: UIViewController {
             comparisonInfoView.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
             comparisonInfoView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.45),
             
-            verticalDivider.topAnchor.constraint(equalTo: topStackView.topAnchor),
-            verticalDivider.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
+            verticalDivider.heightAnchor.constraint(equalTo: topStackView.heightAnchor, multiplier: 0.9),
+            verticalDivider.bottomAnchor.constraint(equalTo: topStackView.bottomAnchor),
             verticalDivider.widthAnchor.constraint(equalToConstant: 5),
             verticalDivider.centerXAnchor.constraint(equalTo: topStackView.centerXAnchor),
             
@@ -120,7 +133,6 @@ class ComparisonViewController: UIViewController {
             comparisonInfoView2.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
             comparisonInfoView2.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.45),
             
-//            comparisonGraphView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
             comparisonGraphView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
             comparisonGraphView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
             comparisonGraphView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
@@ -145,6 +157,13 @@ class ComparisonViewController: UIViewController {
                 strongSelf.addMapPin(latitude: self!.school2.latitude!, longitude: self!.school2.longitude!, label: self!.school2.school_name)
 
                 strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
+                
+                let loc = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                let distance1 = loc.distance(from: CLLocation(latitude: Double(self!.school.latitude!) ?? 0.0, longitude: Double(self!.school.longitude!) ?? 0.0))
+                let distance2 = loc.distance(from: CLLocation(latitude: Double(self!.school2.latitude!) ?? 0.0, longitude: Double(self!.school2.longitude!) ?? 0.0))
+                
+                self!.comparisonInfoView.distanceLabel.text = "Distance: \(round(distance1/1609.34 * 100) / 100.0) miles"
+                self!.comparisonInfoView2.distanceLabel.text = "Distance: \(round(distance2/1609.34 * 100) / 100.0) miles"
             }
         }
     }

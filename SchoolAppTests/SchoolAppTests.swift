@@ -29,7 +29,8 @@ class SchoolAppTests: XCTestCase {
     }
 
 //    func testJSONDecoder() {
-//        for i in 0..<schooldata.count {
+//        for i in 304..<305{
+//            print(schooldata[i].school_name)
 //            XCTAssertNotNil(schooldata[i].school_name)
 //            XCTAssertNotNil(schooldata[i].longitude)
 //            XCTAssertNotNil(schooldata[i].latitude)
@@ -88,6 +89,14 @@ class SchoolAppTests: XCTestCase {
 //        for i in object {
 //            XCTAssert(i.value <= 4)
 //        }
+//    }
+    
+    
+//    func testFirstSchool() {
+//        XCTAssertNotNil(schooldata[0].latitude)
+//        XCTAssertNotNil(schooldata[0].longitude)
+//        XCTAssertNotNil(schooldata[0].distance)
+//
 //    }
 }
 

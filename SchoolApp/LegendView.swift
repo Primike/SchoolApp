@@ -45,6 +45,7 @@ class LegendView: UIView {
         school1Label.textAlignment = .center
         school1Label.text = schoolName1
         school1Label.textColor = .black
+        school1Label.numberOfLines = 2
         
         school2StackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -57,6 +58,7 @@ class LegendView: UIView {
         school2Label.textAlignment = .center
         school2Label.text = schoolName2
         school2Label.textColor = .brown
+        school2Label.numberOfLines = 2
     }
     
     func layout() {
@@ -82,7 +84,7 @@ class LegendView: UIView {
             school1Label.topAnchor.constraint(equalTo: school1StackView.topAnchor),
             school1Label.rightAnchor.constraint(equalTo: school1StackView.rightAnchor),
             school1Label.heightAnchor.constraint(equalTo: school1StackView.heightAnchor),
-            school1Label.widthAnchor.constraint(equalTo: school1StackView.widthAnchor, multiplier: 0.8),
+            school1Label.widthAnchor.constraint(equalTo: school1StackView.widthAnchor, multiplier: 0.7),
             
             school2StackView.topAnchor.constraint(equalTo: self.topAnchor),
             school2StackView.rightAnchor.constraint(equalTo: self.rightAnchor),
@@ -97,7 +99,7 @@ class LegendView: UIView {
             school2Label.topAnchor.constraint(equalTo: school2StackView.topAnchor),
             school2Label.rightAnchor.constraint(equalTo: school2StackView.rightAnchor),
             school2Label.heightAnchor.constraint(equalTo: school2StackView.heightAnchor),
-            school2Label.widthAnchor.constraint(equalTo: school2StackView.widthAnchor, multiplier: 0.8),
+            school2Label.widthAnchor.constraint(equalTo: school2StackView.widthAnchor, multiplier: 0.7),
         ])
     }
 }
