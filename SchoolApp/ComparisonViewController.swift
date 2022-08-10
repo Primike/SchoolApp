@@ -146,6 +146,8 @@ class ComparisonViewController: UIViewController {
     }
     
     func setup() {
+        map.delegate = self
+        
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {
@@ -175,4 +177,24 @@ class ComparisonViewController: UIViewController {
         pin.title = label
         map.addAnnotation(pin)
     }
+}
+
+extension ComparisonViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+         let reuseIdentifier = "annotationView"
+         var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+         if #available(iOS 11.0, *) {
+             if view == nil {
+                 view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+             }
+             view?.displayPriority = .required
+         } else {
+             if view == nil {
+                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+             }
+         }
+         view?.annotation = annotation
+         view?.canShowCallout = true
+         return view
+     }
 }

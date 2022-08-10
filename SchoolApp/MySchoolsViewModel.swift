@@ -41,6 +41,14 @@ class MySchoolsViewModel {
         }
         self.schools = mySchools
         self.schoolsScores = mySchoolsScores
+        
+        for i in 0..<schools.count {
+            for j in 0..<schools.count {
+                if i != j && schools[i].latitude == schools[j].latitude && schools[i].longitude == schools[j].longitude {
+                    schools[j].longitude = "\(Double(schools[j].longitude!)! + 0.0007 - 0.00009*Double(j))"
+                }
+            }
+        }
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {

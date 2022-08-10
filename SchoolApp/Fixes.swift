@@ -7,10 +7,7 @@
 
 import Foundation
 
-//add cluster for every map
-//add location in delegate
-
-//fix schools with same coordinates appwide
+//radius search cluster fix too far
 //see if gradient can be placed on school list
 
 //change y axis

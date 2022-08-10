@@ -31,7 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewModel = HomeViewModel()
         let navigationController = UINavigationController(rootViewController: HomeViewController(viewModel: viewModel))
         window?.rootViewController = navigationController
+        
+        askLocation()
+        
         return true
     }
-
+    
+    func askLocation() {
+        LocationManager.shared.getUserLocation { location in
+            
+        }
+    }
 }
