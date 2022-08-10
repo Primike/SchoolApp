@@ -15,11 +15,11 @@ class HomeViewController: UIViewController {
     let homeBottomView = HomeBottomView()
     
     let schoolsListButton = UIButton()
-    let topSchoolsButton = UIButton()
-    let myschoolsButton = UIButton()
     let mapSearchButton = UIButton()
+    let myschoolsButton = UIButton()
+    let topSchoolsButton = UIButton()
     let satSearchButton = UIButton()
-    
+
     let homeViewModel: HomeViewModel
 
     required init(viewModel: HomeViewModel) {
@@ -52,11 +52,11 @@ class HomeViewController: UIViewController {
         schoolsListButton.configuration = .filled()
         schoolsListButton.configuration?.baseBackgroundColor = .black
         
-        topSchoolsButton.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsButton.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
-        topSchoolsButton.setTitle("Top SAT Schools", for: .normal)
-        topSchoolsButton.configuration = .filled()
-        topSchoolsButton.configuration?.baseBackgroundColor = .black
+        mapSearchButton.translatesAutoresizingMaskIntoConstraints = false
+        mapSearchButton.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
+        mapSearchButton.setTitle("Map Search", for: .normal)
+        mapSearchButton.configuration = .filled()
+        mapSearchButton.configuration?.baseBackgroundColor = .black
         
         myschoolsButton.translatesAutoresizingMaskIntoConstraints = false
         myschoolsButton.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
@@ -64,11 +64,11 @@ class HomeViewController: UIViewController {
         myschoolsButton.configuration = .filled()
         myschoolsButton.configuration?.baseBackgroundColor = .black
         
-        mapSearchButton.translatesAutoresizingMaskIntoConstraints = false
-        mapSearchButton.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
-        mapSearchButton.setTitle("Map Search", for: .normal)
-        mapSearchButton.configuration = .filled()
-        mapSearchButton.configuration?.baseBackgroundColor = .black
+        topSchoolsButton.translatesAutoresizingMaskIntoConstraints = false
+        topSchoolsButton.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
+        topSchoolsButton.setTitle("Top Schools", for: .normal)
+        topSchoolsButton.configuration = .filled()
+        topSchoolsButton.configuration?.baseBackgroundColor = .black
         
         satSearchButton.translatesAutoresizingMaskIntoConstraints = false
         satSearchButton.addTarget(self, action: #selector(satSearchTapped), for: .primaryActionTriggered)
@@ -82,9 +82,9 @@ class HomeViewController: UIViewController {
         view.addSubview(homeBottomView)
     
         homeBottomView.schoolsListButtonView.addSubview(schoolsListButton)
-        homeBottomView.topSchoolsButtonView.addSubview(topSchoolsButton)
+        homeBottomView.mapSearchButtonView.addSubview(mapSearchButton)
         homeBottomView.mySchoolsButtonView.addSubview(myschoolsButton)
-        homeBottomView.smallButtonsView.addSubview(mapSearchButton)
+        homeBottomView.smallButtonsView.addSubview(topSchoolsButton)
         homeBottomView.smallButtonsView.addSubview(satSearchButton)
         
         NSLayoutConstraint.activate([
@@ -103,20 +103,20 @@ class HomeViewController: UIViewController {
             schoolsListButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
             schoolsListButton.centerYAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.centerYAnchor),
             
-            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.heightAnchor, multiplier: 0.8),
-            topSchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.widthAnchor),
-            topSchoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
-            topSchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.topSchoolsButtonView.centerYAnchor),
+            mapSearchButton.heightAnchor.constraint(equalTo: homeBottomView.mapSearchButtonView.heightAnchor, multiplier: 0.8),
+            mapSearchButton.widthAnchor.constraint(equalTo: homeBottomView.mapSearchButtonView.widthAnchor),
+            mapSearchButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
+            mapSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.mapSearchButtonView.centerYAnchor),
             
             myschoolsButton.heightAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.heightAnchor, multiplier: 0.8),
             myschoolsButton.widthAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.widthAnchor),
             myschoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
             myschoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.centerYAnchor),
             
-            mapSearchButton.leftAnchor.constraint(equalTo: homeBottomView.smallButtonsView.leftAnchor),
-            mapSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
-            mapSearchButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
-            mapSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
+            topSchoolsButton.leftAnchor.constraint(equalTo: homeBottomView.smallButtonsView.leftAnchor),
+            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
+            topSchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
+            topSchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
             
             satSearchButton.rightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.rightAnchor),
             satSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
@@ -205,16 +205,16 @@ extension HomeViewController {
         navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
-    @objc func topSchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+    @objc func mapSearchTapped(sender: UIButton) {
+        navigationController?.pushViewController(MapSearchTabBarViewController(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
         navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
     }
     
-    @objc func mapSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(MapSearchTabBarViewController(viewModel: MapSearchViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+    @objc func topSchoolsTapped(sender: UIButton) {
+        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
     @objc func satSearchTapped(sender: UIButton) {

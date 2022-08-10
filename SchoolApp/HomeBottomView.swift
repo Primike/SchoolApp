@@ -15,7 +15,7 @@ class HomeBottomView: UIView {
     let divider = UILabel()
     
     let schoolsListButtonView = UIView()
-    let topSchoolsButtonView = UIView()
+    let mapSearchButtonView = UIView()
     let mySchoolsButtonView = UIView()
     let smallButtonsView = UIView()
     
@@ -48,7 +48,7 @@ class HomeBottomView: UIView {
         divider.backgroundColor = .white
         
         schoolsListButtonView.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsButtonView.translatesAutoresizingMaskIntoConstraints = false
+        mapSearchButtonView.translatesAutoresizingMaskIntoConstraints = false
         mySchoolsButtonView.translatesAutoresizingMaskIntoConstraints = false
         smallButtonsView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -71,7 +71,7 @@ class HomeBottomView: UIView {
     func layout() {
         self.addSubview(titleView)
         self.addSubview(schoolsListButtonView)
-        self.addSubview(topSchoolsButtonView)
+        self.addSubview(mapSearchButtonView)
         self.addSubview(mySchoolsButtonView)
         self.addSubview(smallButtonsView)
         self.addSubview(bottomView)
@@ -103,12 +103,12 @@ class HomeBottomView: UIView {
             schoolsListButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
             schoolsListButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            topSchoolsButtonView.topAnchor.constraint(equalTo: schoolsListButtonView.bottomAnchor),
-            topSchoolsButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-            topSchoolsButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            topSchoolsButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            mapSearchButtonView.topAnchor.constraint(equalTo: schoolsListButtonView.bottomAnchor),
+            mapSearchButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            mapSearchButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            mapSearchButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            mySchoolsButtonView.topAnchor.constraint(equalTo: topSchoolsButtonView.bottomAnchor),
+            mySchoolsButtonView.topAnchor.constraint(equalTo: mapSearchButtonView.bottomAnchor),
             mySchoolsButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
             mySchoolsButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
             mySchoolsButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

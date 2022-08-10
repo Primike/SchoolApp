@@ -17,11 +17,11 @@ class MapSearchViewModel {
     var latitude = 0.0
     var longitude = 0.0
     var miles = 0.0
-    var nearestNumber = 0
+    var numberOfSchools = 0
     
-    init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
-        self.schoolsScores = schoolsSATData
-        self.schools = schoolsData
+    init(schools: [School], schoolsScores: [SchoolScores]) {
+        self.schools = schools
+        self.schoolsScores = schoolsScores
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
@@ -33,7 +33,7 @@ class MapSearchViewModel {
         var array = schools
         nearbySchools = []
 
-        for _ in 0..<nearestNumber {
+        for _ in 0..<numberOfSchools {
             var closest = Double(10000)
             var index = 0
             for j in 0..<array.count {
@@ -44,7 +44,6 @@ class MapSearchViewModel {
                 }
             }
             nearbySchools.append(array[index])
-            
             array.remove(at: index)
         }
         

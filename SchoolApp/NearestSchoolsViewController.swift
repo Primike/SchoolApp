@@ -150,7 +150,7 @@ extension NearbySchoolsViewController {
         
         if Int(schoolsNumber.text!) != nil{
 
-            self.nearbySchoolsViewModel.nearestNumber = Int(schoolsNumber.text!)!
+            self.nearbySchoolsViewModel.numberOfSchools = Int(schoolsNumber.text!)!
             self.nearbySchoolsViewModel.getNearbySchools()
             self.map.removeAnnotations(annotations)
             self.annotations = []

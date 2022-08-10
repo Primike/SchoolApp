@@ -5,8 +5,6 @@
 //  Created by Prince Avecillas on 6/2/22.
 //
 
-//viewwilltransitionto
-
 import Foundation
 
 struct SchoolServiceURLs {
@@ -19,7 +17,6 @@ class SchoolServiceAPI {
     static let shared = SchoolServiceAPI()
 
     func getSchoolsData(completion: @escaping (Result<[School], Error>) -> Void) {
-        
         guard Reachability.isConnectedToNetwork(),
               let url = URL(string: "\(SchoolServiceURLs.schoolsUrl)") else {
                   completion(.failure(CustomError.noConnection))
@@ -66,7 +63,6 @@ class SchoolServiceAPI {
     }
 
     func getSATData(completion: @escaping (Result<[SchoolScores], Error>) -> Void) {
-                
         guard let url = URL(string: "\(SchoolServiceURLs.schoolsScoresUrl)") else {
             completion(.failure(CustomError.noSATData))
             return

@@ -13,20 +13,19 @@ import CoreLocation
 class RadiusSearchViewController: UIViewController {
     
     let radiusSearchHeaderView = RadiusSearchHeaderView()
-    let map = MKMapView()
     let milesText = UITextField()
     let enterButton = UIButton()
+    let map = MKMapView()
 
-    let nearbySchoolsViewModel: MapSearchViewModel
-    var nearbySchools = [School]()
+    let mapSearchViewModel: MapSearchViewModel
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
-    var x = 1.0
+    var miles = 1.0
         
     init(viewModel: MapSearchViewModel) {
-        self.nearbySchoolsViewModel = viewModel
+        self.mapSearchViewModel = viewModel
+        
         super.init(nibName: nil, bundle: nil)
-
     }
     
     required init?(coder: NSCoder) {
@@ -108,18 +107,18 @@ class RadiusSearchViewController: UIViewController {
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
                 
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02 * self!.x, longitudeDelta: 0.04 * self!.x)), animated: true)
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02 * self!.miles, longitudeDelta: 0.04 * self!.miles)), animated: true)
                 
-                self!.nearbySchoolsViewModel.latitude = location.coordinate.latitude
-                self!.nearbySchoolsViewModel.longitude = location.coordinate.longitude
-                self!.nearbySchoolsViewModel.getSchoolsByMiles()
+                self!.mapSearchViewModel.latitude = location.coordinate.latitude
+                self!.mapSearchViewModel.longitude = location.coordinate.longitude
+                self!.mapSearchViewModel.getSchoolsByMiles()
                 self!.setupMap()
             }
         }
     }
     
     func setupMap() {
-        for i in nearbySchoolsViewModel.nearbySchools {
+        for i in mapSearchViewModel.nearbySchools {
             addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
         }
         map.addAnnotations(annotations)
@@ -150,15 +149,14 @@ extension RadiusSearchViewController {
         }
         
         if Double(milesText.text!) != nil {
-            
-            self.x = Double(milesText.text!)!
-            self.nearbySchoolsViewModel.miles = Double(milesText.text!)!
-            self.nearbySchoolsViewModel.getSchoolsByMiles()
+            self.miles = Double(milesText.text!)!
+            self.mapSearchViewModel.miles = Double(milesText.text!)!
+            self.mapSearchViewModel.getSchoolsByMiles()
             self.map.removeAnnotations(annotations)
             self.annotations = []
             
-            self.addMapPin(latitude: String(nearbySchoolsViewModel.latitude), longitude: String(nearbySchoolsViewModel.longitude), label: "CURRENT LOCATION")
-            self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: nearbySchoolsViewModel.latitude, longitude: nearbySchoolsViewModel.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * self.x, longitudeDelta: 0.04 * self.x)), animated: true)
+            self.addMapPin(latitude: String(mapSearchViewModel.latitude), longitude: String(mapSearchViewModel.longitude), label: "CURRENT LOCATION")
+            self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: mapSearchViewModel.latitude, longitude: mapSearchViewModel.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * self.miles, longitudeDelta: 0.04 * self.miles)), animated: true)
             
             self.setupMap()
         }
@@ -173,9 +171,9 @@ extension RadiusSearchViewController {
 extension RadiusSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title != "CURRENT LOCATION" {
-            let index = nearbySchoolsViewModel.findSchool(name: view.annotation!.title!!)
+            let index = mapSearchViewModel.findSchool(name: view.annotation!.title!!)
             
-            navigationController?.present(SchoolTabBarViewController(school: nearbySchoolsViewModel.nearbySchools[index], scores: nearbySchoolsViewModel.findSchoolScores(index: index)), animated: true)
+            navigationController?.present(SchoolTabBarViewController(school: mapSearchViewModel.nearbySchools[index], scores: mapSearchViewModel.findSchoolScores(index: index)), animated: true)
         }
     }
     

@@ -7,9 +7,10 @@
 
 import Foundation
 
+//fix denied location
 //radius search cluster fix too far
 //see if gradient can be placed on school list
 
-//change y axis
+//myschoolstabbar
+//app crahs on addres search school number
 //change classes to struct
-//enable distance after reject

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//search stuy then manhattan error
 class SchoolsListViewModel {
     
     var schools = [School]()

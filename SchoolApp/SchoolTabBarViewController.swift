@@ -34,6 +34,10 @@ class SchoolTabBarViewController: UITabBarController {
         setupTabBar()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        print("QWE")
+    }
+    
     private func setupViews() {
         
         let schoolInfoVC = SchoolInfoViewController(school: school, schoolColor: schoolColor)

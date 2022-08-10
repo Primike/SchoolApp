@@ -12,12 +12,12 @@ class RadiusSearchHeaderView: UIView {
     
     let headerStackView = UIStackView()
     let headerLabel = UILabel()
-    let withinLabel = UILabel()
-    let milesLabel = UILabel()
-    let errorLabel = UILabel()
     let middleStackView = UIStackView()
     let inputStackView = UIStackView()
+    let withinLabel = UILabel()
+    let milesLabel = UILabel()
     let buttonStackView = UIStackView()
+    let errorLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

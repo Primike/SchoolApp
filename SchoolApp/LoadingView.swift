@@ -51,7 +51,7 @@ class LoadingView: UIView {
     func layout() {
         self.addSubview(stackView)
         self.addSubview(activityIndicator)
-        
+
         stackView.addSubview(appTitleLabel)
         stackView.addSubview(appImage)
         

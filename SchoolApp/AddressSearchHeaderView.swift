@@ -12,11 +12,11 @@ class AddressSearchHeaderView: UIView {
     
     let headerStackView = UIStackView()
     let addressHeaderLabel = UILabel()
-    let addressStackView = UIStackView()
-    let addressLabel = UILabel()
     let schoolNumberStackView = UIStackView()
     let findLabel = UILabel()
     let nearestLabel = UILabel()
+    let addressStackView = UIStackView()
+    let addressLabel = UILabel()
     let errorLabel = UILabel()
     
     override init(frame: CGRect) {
@@ -82,12 +82,12 @@ class AddressSearchHeaderView: UIView {
         headerStackView.addSubview(addressHeaderLabel)
         headerStackView.addSubview(schoolNumberStackView)
         headerStackView.addSubview(addressStackView)
+        headerStackView.addSubview(errorLabel)
         
         schoolNumberStackView.addSubview(findLabel)
         schoolNumberStackView.addSubview(nearestLabel)
         
         addressStackView.addSubview(addressLabel)
-        addressStackView.addSubview(errorLabel)
 
         NSLayoutConstraint.activate([
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),

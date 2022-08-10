@@ -10,10 +10,12 @@ import UIKit
 
 class MapSearchTabBarViewController: UITabBarController {
     
-    let nearbySchoolsViewModel: MapSearchViewModel
+    var schools: [School]
+    var schoolScores: [SchoolScores]
     
-    init(viewModel: MapSearchViewModel) {
-        self.nearbySchoolsViewModel = viewModel
+    init(schools: [School], schoolsScores: [SchoolScores]) {
+        self.schools = schools
+        self.schoolScores = schoolsScores
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,8 +33,8 @@ class MapSearchTabBarViewController: UITabBarController {
     
     private func setupViews() {
         
-        let radiusSearchVC = RadiusSearchViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
-        let coordinateSearchVC = AddressSearchViewController(viewModel: MapSearchViewModel(schoolsSATData: nearbySchoolsViewModel.schoolsScores, schoolsData: nearbySchoolsViewModel.schools))
+        let radiusSearchVC = RadiusSearchViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: schoolScores))
+        let coordinateSearchVC = AddressSearchViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: schoolScores))
 
         radiusSearchVC.setTabBarImage(imageSFName: "mappin.circle.fill", title: "Radius Search", tag: 0)
         coordinateSearchVC.setTabBarImage(imageSFName: "location.magnifyingglass", title: "Address Search", tag: 2)

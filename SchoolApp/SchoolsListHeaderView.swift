@@ -69,7 +69,6 @@ class SchoolsListHeaderView: UIView {
         labelsStackView.addSubview(titleLabel)
         labelsStackView.addSubview(dateLabel)
 
-        
         NSLayoutConstraint.activate([
             headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),

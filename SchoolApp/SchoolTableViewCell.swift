@@ -58,7 +58,6 @@ class SchoolTableViewCell: UITableViewCell {
         schoolBoroLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         schoolBoroLabel.adjustsFontSizeToFitWidth = true
         schoolBoroLabel.textAlignment = .right
-
     }
     
     func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String)) {
