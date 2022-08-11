@@ -28,11 +28,11 @@ class MySchoolsTabBarViewController: UITabBarController {
         let vc1 = UINavigationController(rootViewController: MySchoolsViewController(viewModel: mySchoolsViewModel))
         let vc2 = UINavigationController(rootViewController: SchoolComparisonViewController(viewModel: mySchoolsViewModel))
         
-        vc1.tabBarItem.image = UIImage(systemName: "house")
-        vc2.tabBarItem.image = UIImage(systemName: "wrench.and.screwdriver")
+        vc1.tabBarItem.image = UIImage(systemName: "heart.circle.fill")
+        vc2.tabBarItem.image = UIImage(systemName: "arrow.up.arrow.down.circle.fill")
         
-        vc1.title = "About"
-        vc2.title = "Skills"
+        vc1.title = "My Schools"
+        vc2.title = "Compare Schools"
         
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white

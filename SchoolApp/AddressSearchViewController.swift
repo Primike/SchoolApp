@@ -161,6 +161,21 @@ extension AddressSearchViewController {
             return
         }
         
+        if numberOfSchoolsText.text!.isEmpty{
+            errorHandler(message: "Insert A Number Of Schools")
+            return
+        }
+        
+        if Int(numberOfSchoolsText.text!) == nil{
+            errorHandler(message: "Please Enter An Integer Value")
+            return
+        }
+        
+        if Int(numberOfSchoolsText.text!)! > mapSearchViewModel.schools.count {
+            errorHandler(message: "Please Type In A Value Less Than \(mapSearchViewModel.schools.count)")
+            return
+        }
+        
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(addressText.text!) {
             placemarks, error in
