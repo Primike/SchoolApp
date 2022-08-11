@@ -10,7 +10,7 @@ import UIKit
 
 class SchoolComparisonViewController: UIViewController {
     
-    let mySchoolsHeaderView = MySchoolsHeaderView()
+    let comparisonHeaderView = ComparisonHeaderView()
     let schoolsTableView = UITableView()
     
     var number = 0
@@ -46,24 +46,22 @@ class SchoolComparisonViewController: UIViewController {
     func style() {
         view.backgroundColor = .white
         
-        mySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        
-        mySchoolsHeaderView.mySchoolsLabel.text = "Select 2 Schools To Compare"
-        
+        comparisonHeaderView.translatesAutoresizingMaskIntoConstraints = false
+                
         schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {
-        view.addSubview(mySchoolsHeaderView)
+        view.addSubview(comparisonHeaderView)
         view.addSubview(schoolsTableView)
 
         NSLayoutConstraint.activate([
-            mySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
-            mySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mySchoolsHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            comparisonHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            comparisonHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
+            comparisonHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            comparisonHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            schoolsTableView.topAnchor.constraint(equalTo: mySchoolsHeaderView.bottomAnchor),
+            schoolsTableView.topAnchor.constraint(equalTo: comparisonHeaderView.bottomAnchor),
             schoolsTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

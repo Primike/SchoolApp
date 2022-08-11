@@ -53,12 +53,19 @@ class SchoolScoresViewController: UIViewController {
         schoolScoresTopView.translatesAutoresizingMaskIntoConstraints = false
         schoolScoresTopView.backgroundColor = schoolColor
         
+        var config = UIButton.Configuration.filled()
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .white
+        config.baseForegroundColor = .black
+        config.cornerStyle = .capsule
+        config.imagePlacement = .leading
+        config.imagePadding = 10.0
+        
         graphButton.translatesAutoresizingMaskIntoConstraints = false
-        graphButton.setTitle("Scores Graph", for:.normal)
         graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        graphButton.configuration = .filled()
-        graphButton.tintColor = .white
-        graphButton.setTitleColor(.black, for: .normal)
+        graphButton.configuration = config
+        graphButton.configuration?.title = "Scores Graph"
+        graphButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/20)
                 
         schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
         

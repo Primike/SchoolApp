@@ -70,12 +70,21 @@ class AddressSearchViewController: UIViewController {
         addressText.delegate = self
         addressText.backgroundColor = .white
         
+        var config = UIButton.Configuration.filled()
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .black
+        config.baseForegroundColor = .white
+        config.cornerStyle = .capsule
+        config.imagePlacement = .leading
+        config.imagePadding = 5.0
+        
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.setTitle("Find", for: .normal)
-        enterButton.configuration = .filled()
-        enterButton.configuration?.baseBackgroundColor = .black
-    }
+        enterButton.configuration = config
+        enterButton.configuration?.title = "Search"
+        enterButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
+        enterButton.configuration?.image = UIImage(systemName: "magnifyingglass",
+                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))    }
     
     func layout() {
         view.addSubview(addressSearchHeaderView)
@@ -102,8 +111,8 @@ class AddressSearchViewController: UIViewController {
             addressText.centerYAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.centerYAnchor),
             
             enterButton.rightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.rightAnchor),
-            enterButton.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.8),
-            enterButton.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.20),
+            enterButton.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.7),
+            enterButton.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.23),
             enterButton.centerYAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.centerYAnchor),
             
             map.topAnchor.constraint(equalTo: addressSearchHeaderView.bottomAnchor),

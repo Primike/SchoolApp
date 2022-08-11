@@ -57,11 +57,21 @@ class RadiusSearchViewController: UIViewController {
         milesText.delegate = self
         milesText.backgroundColor = .white
         
+        var config = UIButton.Configuration.filled()
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .black
+        config.baseForegroundColor = .white
+        config.cornerStyle = .capsule
+        config.imagePlacement = .leading
+        config.imagePadding = 5.0
+        
         enterButton.translatesAutoresizingMaskIntoConstraints = false
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.setTitle("Find", for: .normal)
-        enterButton.configuration = .filled()
-        enterButton.configuration?.baseBackgroundColor = .black
+        enterButton.configuration = config
+        enterButton.configuration?.title = "Search"
+        enterButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
+        enterButton.configuration?.image = UIImage(systemName: "magnifyingglass",
+                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))
     }
     
     func layout() {
@@ -87,7 +97,7 @@ class RadiusSearchViewController: UIViewController {
             milesText.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerXAnchor),
             milesText.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerYAnchor),
             
-            enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.7),
+            enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.6),
             enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor),
             enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
             enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),

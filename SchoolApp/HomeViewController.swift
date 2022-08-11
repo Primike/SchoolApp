@@ -44,41 +44,59 @@ class HomeViewController: UIViewController {
         homeTopView.translatesAutoresizingMaskIntoConstraints = false
         
         gradient.frame = view.layer.bounds
-        gradient.colors = [UIColor.clear.cgColor, UIColor.blue.cgColor]
+        gradient.colors = [UIColor.clear.cgColor, UIColor(red: 126/255, green: 47/255, blue: 158/255, alpha: 0.8).cgColor]
         
         homeBottomView.translatesAutoresizingMaskIntoConstraints = false
         homeBottomView.layer.cornerRadius = 70
         homeBottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
+        var config = UIButton.Configuration.filled()
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .black
+        config.baseForegroundColor = .white
+        config.cornerStyle = .capsule
+        config.imagePlacement = .leading
+        config.imagePadding = 10.0
+        
         schoolsListButton.translatesAutoresizingMaskIntoConstraints = false
         schoolsListButton.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
-        schoolsListButton.setTitle("NYC Schools List", for: .normal)
-        schoolsListButton.configuration = .filled()
-        schoolsListButton.configuration?.baseBackgroundColor = .black
-        
+        schoolsListButton.configuration = config
+        schoolsListButton.configuration?.title = "NYC Schools List"
+        schoolsListButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
+        schoolsListButton.configuration?.image = UIImage(systemName: "list.star",
+                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/18)!))
+
         mapSearchButton.translatesAutoresizingMaskIntoConstraints = false
         mapSearchButton.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
-        mapSearchButton.setTitle("Map Search", for: .normal)
-        mapSearchButton.configuration = .filled()
-        mapSearchButton.configuration?.baseBackgroundColor = .black
+        mapSearchButton.configuration = config
+        mapSearchButton.configuration?.title = "Map Search"
+        mapSearchButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
+        mapSearchButton.configuration?.image = UIImage(systemName: "map",
+                                                                        withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/18)!))
         
         myschoolsButton.translatesAutoresizingMaskIntoConstraints = false
         myschoolsButton.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
-        myschoolsButton.setTitle("My Schools", for: .normal)
-        myschoolsButton.configuration = .filled()
-        myschoolsButton.configuration?.baseBackgroundColor = .black
+        myschoolsButton.configuration = config
+        myschoolsButton.configuration?.title = "My Schools"
+        myschoolsButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
+        myschoolsButton.configuration?.image = UIImage(systemName: "bolt.heart",
+                                                                        withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/18)!))
         
         topSchoolsButton.translatesAutoresizingMaskIntoConstraints = false
         topSchoolsButton.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
-        topSchoolsButton.setTitle("Top Schools", for: .normal)
-        topSchoolsButton.configuration = .filled()
-        topSchoolsButton.configuration?.baseBackgroundColor = .black
+        topSchoolsButton.configuration = config
+        topSchoolsButton.configuration?.title = "Top Schools"
+        topSchoolsButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/30)
+        topSchoolsButton.configuration?.image = UIImage(systemName: "star",
+                                                                        withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/32)!))
         
         satSearchButton.translatesAutoresizingMaskIntoConstraints = false
         satSearchButton.addTarget(self, action: #selector(satSearchTapped), for: .primaryActionTriggered)
-        satSearchButton.setTitle("SAT Search", for: .normal)
-        satSearchButton.configuration = .filled()
-        satSearchButton.configuration?.baseBackgroundColor = .black
+        satSearchButton.configuration = config
+        satSearchButton.configuration?.title = "SAT Search"
+        satSearchButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/30)
+        satSearchButton.configuration?.image = UIImage(systemName: "books.vertical",
+                                                                        withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/32)!))
     }
     
     func layout() {
@@ -227,4 +245,3 @@ extension HomeViewController {
         navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoresViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
 }
-

@@ -55,7 +55,7 @@ class MySchoolsViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             mySchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            mySchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
             mySchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             mySchoolsHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             

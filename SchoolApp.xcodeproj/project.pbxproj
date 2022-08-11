@@ -81,6 +81,7 @@
 		B8E817462846A4600052C1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E817452846A4600052C1AE /* Assets.xcassets */; };
 		B8E817492846A4600052C1AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E817472846A4600052C1AE /* LaunchScreen.storyboard */; };
 		B8F5E4CB28873898009C4F54 /* TopSchoolsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F5E4CA28873898009C4F54 /* TopSchoolsHeaderView.swift */; };
+		B8F86F9128A556140095FDDC /* ComparisonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		B8E817482846A4600052C1AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8E8174A2846A4600052C1AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8F5E4CA28873898009C4F54 /* TopSchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsHeaderView.swift; sourceTree = "<group>"; };
+		B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */,
+				B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -676,8 +679,8 @@
 				B89D3CF5287F516A002300D1 /* SchoolsList */,
 				B8149D992888689D00743BD1 /* MapSearch */,
 				B89D3CF9287F5260002300D1 /* MySchools */,
-				B89D3CFA287F5281002300D1 /* SATSearch */,
 				B89D3CF7287F51F6002300D1 /* TopSchools */,
+				B89D3CFA287F5281002300D1 /* SATSearch */,
 				B89D3CF8287F520B002300D1 /* IndividualSchoolView */,
 				B819DF172892F0EC00B6C046 /* LocalData */,
 				B8E8176D2846AACE0052C1AE /* Files */,
@@ -863,6 +866,7 @@
 				B87C4B96289999250091CD45 /* ComparisonBarsView.swift in Sources */,
 				B82F179C28899B1C00AA42F1 /* SearchTotalScoreViewController.swift in Sources */,
 				B876AF0B287712C800718041 /* Coordinator.swift in Sources */,
+				B8F86F9128A556140095FDDC /* ComparisonHeaderView.swift in Sources */,
 				B87C4B862899630C0091CD45 /* MySchoolsTabBarViewController.swift in Sources */,
 				B873667728806CBE0076632F /* SchoolScoresTopView.swift in Sources */,
 				B8729F6F289B045000B7035A /* Fixes.swift in Sources */,
