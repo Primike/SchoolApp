@@ -57,7 +57,6 @@ class SchoolInfoViewController: UIViewController {
         screenStackView.translatesAutoresizingMaskIntoConstraints = false
         screenStackView.axis = .vertical
         
-        
         schoolWebsiteButton.translatesAutoresizingMaskIntoConstraints = false
         schoolWebsiteButton.setTitle("School Website", for: [])
         schoolWebsiteButton.titleLabel?.adjustsFontSizeToFitWidth = true

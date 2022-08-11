@@ -10,6 +10,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let gradient = CAGradientLayer()
     let loadingView = LoadingView()
     let homeTopView = HomeTopView()
     let homeBottomView = HomeBottomView()
@@ -41,6 +42,9 @@ class HomeViewController: UIViewController {
     
     func style() {
         homeTopView.translatesAutoresizingMaskIntoConstraints = false
+        
+        gradient.frame = view.layer.bounds
+        gradient.colors = [UIColor.clear.cgColor, UIColor.blue.cgColor]
         
         homeBottomView.translatesAutoresizingMaskIntoConstraints = false
         homeBottomView.layer.cornerRadius = 70
@@ -148,6 +152,8 @@ extension HomeViewController: RequestDelegate {
                 }
                 self.style()
                 self.layout()
+                self.homeTopView.layer.addSublayer(self.gradient)
+
             case .error(let error):
                 if error.localizedDescription == "SAT Data Unavailable" || error.localizedDescription == "Local SAT Data Error"{
                     self.homeViewModel.state = .success
@@ -210,7 +216,7 @@ extension HomeViewController {
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schoolsSATData: homeViewModel.schoolsScores, schoolsData: homeViewModel.schools)), animated: true)
+        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
     }
     
     @objc func topSchoolsTapped(sender: UIButton) {

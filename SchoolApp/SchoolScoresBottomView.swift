@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//make views
 class SchoolScoresBottomView: UIView {
     
     let satMathSubView: BottomSubjectView

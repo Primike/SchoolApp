@@ -13,9 +13,9 @@ class MySchoolsViewModel {
     var schools = [School]()
     var schoolsScores = [SchoolScores]()
     
-    init(schoolsSATData: [SchoolScores], schoolsData: [School]) {
-        self.schoolsScores = schoolsSATData
-        self.schools = schoolsData
+    init(schools: [School], schoolsScores: [SchoolScores]) {
+        self.schools = schools
+        self.schoolsScores = schoolsScores
         mySchools()
     }
     

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//change sf symbols
 class SchoolTabBarViewController: UITabBarController {
 
     var school: School
@@ -35,7 +34,6 @@ class SchoolTabBarViewController: UITabBarController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("QWE")
     }
     
     private func setupViews() {

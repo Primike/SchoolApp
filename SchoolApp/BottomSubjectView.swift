@@ -62,10 +62,12 @@ class BottomSubjectView: UIView {
             satSubjectStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             satSubjectStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             satSubjectStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
             satSubjectLabel.topAnchor.constraint(equalTo: satSubjectStackView.topAnchor),
             satSubjectLabel.heightAnchor.constraint(equalTo: satSubjectStackView.heightAnchor, multiplier: 0.4),
             satSubjectLabel.widthAnchor.constraint(equalTo: satSubjectStackView.widthAnchor, multiplier: 0.9),
             satSubjectLabel.centerXAnchor.constraint(equalTo: satSubjectStackView.centerXAnchor),
+            
             satSubjectScore.topAnchor.constraint(equalTo: satSubjectLabel.bottomAnchor),
             satSubjectScore.heightAnchor.constraint(equalTo: satSubjectStackView.heightAnchor, multiplier: 0.3),
             satSubjectScore.widthAnchor.constraint(equalTo: satSubjectStackView.widthAnchor, multiplier: 0.8),
