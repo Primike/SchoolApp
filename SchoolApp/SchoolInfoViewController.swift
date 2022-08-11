@@ -36,6 +36,7 @@ class SchoolInfoViewController: UIViewController {
         } else {
             addButtonImage = "plus.circle"
         }
+        
         super.init(nibName: nil, bundle: nil)
     }
     

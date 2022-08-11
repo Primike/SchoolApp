@@ -39,6 +39,7 @@ class MySchoolsHeaderView: UIView {
         mySchoolsLabel.textAlignment = .center
         mySchoolsLabel.text = "Add Schools And They Will Appear Here!"
         mySchoolsLabel.textColor = .white
+        mySchoolsLabel.numberOfLines = 0
     }
     
     func layout() {

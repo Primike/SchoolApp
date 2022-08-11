@@ -98,7 +98,7 @@ extension MySchoolsViewController: UITableViewDataSource {
 extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsTableView.reloadData()
-
+    
         navigationController?.present(SchoolTabBarViewController(school: mySchoolsViewModel.schools[indexPath.row], scores: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
     }
 }

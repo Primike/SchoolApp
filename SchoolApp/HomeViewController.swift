@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
         homeTopView.translatesAutoresizingMaskIntoConstraints = false
         
         gradient.frame = view.layer.bounds
-        gradient.colors = [UIColor.clear.cgColor, UIColor(red: 126/255, green: 47/255, blue: 158/255, alpha: 0.8).cgColor]
+        gradient.colors = [UIColor.clear.cgColor, UIColor(red: 101/255, green: 37/255, blue: 122/255, alpha: 0.8).cgColor]
         
         homeBottomView.translatesAutoresizingMaskIntoConstraints = false
         homeBottomView.layer.cornerRadius = 70

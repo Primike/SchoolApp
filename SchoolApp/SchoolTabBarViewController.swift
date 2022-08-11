@@ -34,6 +34,7 @@ class SchoolTabBarViewController: UITabBarController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        print("QWE")
     }
     
     private func setupViews() {
