@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomError {
+enum CustomError: Error {
     case noConnection, noSchoolsData, noSATData, noLocalSchoolsData, noLocalSATData
 }
 

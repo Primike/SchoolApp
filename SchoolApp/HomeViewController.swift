@@ -21,13 +21,13 @@ class HomeViewController: UIViewController {
     let topSchoolsButton = UIButton()
     let satSearchButton = UIButton()
 
-    let homeViewModel: HomeViewModel
+    let viewModel: HomeViewModel
+    var coordinator: HomeCoordinating?
 
     required init(viewModel: HomeViewModel) {
-        self.homeViewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
         
-        self.homeViewModel.delegate = self
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -35,9 +35,90 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        homeViewModel.getSchools()
+        if Reachability.isConnectedToNetwork() == false {
+            showAlert(error: AlertErrors.noConnection.rawValue)
+        }
+        showLoader()
+        fetchData()
         
         super.viewDidLoad()
+    }
+    
+    func fetchData() {
+        let dispatchGroup = DispatchGroup()
+        let queue = DispatchQueue(label: "queue")
+        
+        dispatchGroup.enter()
+        queue.async(group: dispatchGroup) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.viewModel.getSchools { result in
+                switch result {
+                case .success(_):
+                    dispatchGroup.leave()
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.showAlert(error: AlertErrors.schoolDataError.rawValue)
+                    }
+                    dispatchGroup.leave()
+                    return
+                }
+            }
+        }
+        
+        dispatchGroup.enter()
+        queue.async(group: dispatchGroup) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.viewModel.getSchoolScores { result in
+                switch result {
+                case .success(_):
+                    dispatchGroup.leave()
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.showAlert(error: AlertErrors.satDataError.rawValue)
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            for subview in self.view.subviews {
+                subview.removeFromSuperview()
+            }
+            self.style()
+            self.layout()
+            self.homeTopView.layer.addSublayer(self.gradient)
+        }
+    }
+    
+    func showLoader() {
+        self.loadingView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.loadingView)
+        NSLayoutConstraint.activate([
+            self.loadingView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.loadingView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.loadingView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.loadingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+        ])
+    }
+    
+    func showAlert(error: String) {
+        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+        }))
+        
+        present(alert, animated: true)
     }
     
     func style() {
@@ -146,102 +227,27 @@ class HomeViewController: UIViewController {
             satSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
         ])
     }
-}
-
-extension HomeViewController: RequestDelegate {
-    func didUpdate(with state: ViewState) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            switch state {
-            case .idle:
-                break
-            case .loading:
-                self.loadingView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(self.loadingView)
-                NSLayoutConstraint.activate([
-                    self.loadingView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                    self.loadingView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-                    self.loadingView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-                    self.loadingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-                ])
-            case .success:
-                for subview in self.view.subviews {
-                    subview.removeFromSuperview()
-                }
-                self.style()
-                self.layout()
-                self.homeTopView.layer.addSublayer(self.gradient)
-
-            case .error(let error):
-                if error.localizedDescription == "SAT Data Unavailable" || error.localizedDescription == "Local SAT Data Error"{
-                    self.homeViewModel.state = .success
-                }
-                self.showAlert(error: error.localizedDescription)
-            }
-        }
-    }
     
-    func showAlert(error: String) {
-        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-
-        if error == "SAT Data Unavailable" {
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-                self.homeViewModel.getSchoolScores()
-            }))
-            alert.addAction(UIAlertAction(title: "Use Local Data", style: .default, handler: { _ in
-                self.homeViewModel.getLocalSchoolScores()
-            }))
-        }
-        else if error == "Local SAT Data Error" {
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-                self.homeViewModel.getLocalSchoolScores()
-            }))
-            alert.addAction(UIAlertAction(title: "Retry Online Data", style: .default, handler: { action in
-                self.homeViewModel.getSchoolScores()
-            }))
-            alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
-            }))
-        }
-        else if error == "Local School Data Error" {
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-                self.homeViewModel.getLocalSchools()
-            }))
-            alert.addAction(UIAlertAction(title: "Retry Online Data", style: .default, handler: { action in
-                self.homeViewModel.getSchools()
-            }))
-            alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: { _ in
-            }))
-        } else {
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-                self.homeViewModel.getSchools()
-            }))
-            alert.addAction(UIAlertAction(title: "Use Local Data", style: .default, handler: { _ in
-                self.homeViewModel.getLocalSchools()
-            }))
-        }
-
-        present(alert, animated: true)
-    }
 }
 
 extension HomeViewController {
     @objc func nycSchoolsListTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
     }
     
     @objc func mapSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(MapSearchTabBarViewController(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores), animated: true)
+        navigationController?.pushViewController(MapSearchTabBarViewController(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores), animated: true)
     }
     
     @objc func mySchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
     }
     
     @objc func topSchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
     }
     
     @objc func satSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoresViewModel(schools: homeViewModel.schools, schoolsScores: homeViewModel.schoolsScores)), animated: true)
+        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoresViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
     }
 }

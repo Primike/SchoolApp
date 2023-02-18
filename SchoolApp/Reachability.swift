@@ -10,7 +10,7 @@ import SystemConfiguration
 
 class Reachability {
     
-    class func isConnectedToNetwork() -> Bool {
+    static func isConnectedToNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
