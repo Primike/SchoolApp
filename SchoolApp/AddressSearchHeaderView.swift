@@ -10,72 +10,91 @@ import UIKit
 
 class AddressSearchHeaderView: UIView {
     
-    let headerStackView = UIStackView()
-    let addressHeaderLabel = UILabel()
-    let schoolNumberStackView = UIStackView()
-    let findLabel = UILabel()
-    let nearestLabel = UILabel()
-    let addressStackView = UIStackView()
-    let addressLabel = UILabel()
-    let errorLabel = UILabel()
+    lazy var headerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var addressHeaderLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Search Nearby Schools By Address"
+        label.textColor = .white
+        return label
+    }()
+    
+    lazy var schoolNumberStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var findLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Find"
+        label.textColor = .white
+        return label
+    }()
+    
+    lazy var nearestLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Nearest Schools"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var addressStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var addressLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Address:"
+        label.textColor = .white
+        return label
+    }()
+
+    lazy var errorLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .systemRed
+        label.text = "Error Label"
+        label.isHidden = true
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setup()
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
-    
-    func setup() {
-        headerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        addressStackView.translatesAutoresizingMaskIntoConstraints = false
-        addressStackView.axis = .vertical
-        
-        addressHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
-        addressHeaderLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        addressHeaderLabel.adjustsFontSizeToFitWidth = true
-        addressHeaderLabel.textAlignment = .center
-        addressHeaderLabel.text = "Search Nearby Schools By Address"
-        addressHeaderLabel.textColor = .white
-        
-        addressLabel.translatesAutoresizingMaskIntoConstraints = false
-        addressLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        addressLabel.adjustsFontSizeToFitWidth = true
-        addressLabel.textAlignment = .center
-        addressLabel.text = "Address:"
-        addressLabel.textColor = .white
-        
-        schoolNumberStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        findLabel.translatesAutoresizingMaskIntoConstraints = false
-        findLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        findLabel.adjustsFontSizeToFitWidth = true
-        findLabel.textAlignment = .center
-        findLabel.text = "Find"
-        findLabel.textColor = .white
-        
-        nearestLabel.translatesAutoresizingMaskIntoConstraints = false
-        nearestLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        nearestLabel.adjustsFontSizeToFitWidth = true
-        nearestLabel.textAlignment = .center
-        nearestLabel.text = "Nearest Schools"
-        nearestLabel.textColor = .white
-        nearestLabel.numberOfLines = 0
-        
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.textAlignment = .center
-        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.textColor = .systemRed
-        errorLabel.text = "Error Label"
-        errorLabel.isHidden = true
-    }
-    
     func layout() {
         self.addSubview(headerStackView)
         

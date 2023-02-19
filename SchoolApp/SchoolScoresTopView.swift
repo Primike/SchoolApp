@@ -10,12 +10,57 @@ import UIKit
 
 class SchoolScoresTopView: UIView {
     
-    let schoolNameLabel = UILabel()
-    let headerStackView = UIStackView()
-    let collegeBoardImage = UIImageView(image: UIImage(named: "satheader"))
-    let scoresInfoStackView = UIStackView()
-    let scoresLabel = UILabel()
-    let testTakersLabel = UILabel()
+    lazy var schoolNameLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = school.school_name
+        label.textColor = .white
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+
+    lazy var headerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+
+    lazy var collegeBoardImage: UIImageView = {
+        var image = UIImageView(image: UIImage(named: "satheader"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    lazy var scoresInfoStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var scoresLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = "SAT Scores"
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+
+    lazy var testTakersLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Number of test takers: \(schoolScores.num_of_sat_test_takers)"
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
     
     let school: School
     let schoolScores: SATScores
@@ -27,42 +72,11 @@ class SchoolScoresTopView: UIView {
         self.schoolScores = schoolScores
         
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        schoolNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        schoolNameLabel.text = school.school_name
-        schoolNameLabel.textColor = .white
-        schoolNameLabel.textAlignment = .center
-        schoolNameLabel.adjustsFontSizeToFitWidth = true
-        
-        headerStackView.translatesAutoresizingMaskIntoConstraints = false
-        headerStackView.axis = .horizontal
-
-        collegeBoardImage.translatesAutoresizingMaskIntoConstraints = false
-        collegeBoardImage.contentMode = .scaleAspectFit
-
-        scoresInfoStackView.translatesAutoresizingMaskIntoConstraints = false
-
-        scoresLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoresLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        scoresLabel.text = "SAT Scores"
-        scoresLabel.textColor = .white
-        scoresLabel.adjustsFontSizeToFitWidth = true
-        
-        testTakersLabel.translatesAutoresizingMaskIntoConstraints = false
-        testTakersLabel.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        testTakersLabel.text = "Number of test takers: \(schoolScores.num_of_sat_test_takers)"
-        testTakersLabel.textColor = .white
-        testTakersLabel.numberOfLines = 0
-        testTakersLabel.adjustsFontSizeToFitWidth = true
     }
     
     func layout() {

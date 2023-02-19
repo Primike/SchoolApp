@@ -10,7 +10,17 @@ import UIKit
 
 class BarView: UIView {
     
-    let bar = UILabel()
+    lazy var bar: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = schoolColor
+        label.font = UIFont(name:"HelveticaNeue", size: 30.0)
+        label.text = sectionScore
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }()
     
     let sectionScore: String
     let schoolColor: UIColor
@@ -20,24 +30,13 @@ class BarView: UIView {
         self.schoolColor = schoolColor
     
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func style() {
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.backgroundColor = schoolColor
-        bar.font = UIFont(name:"HelveticaNeue", size: 30.0)
-        bar.text = sectionScore
-        bar.adjustsFontSizeToFitWidth = true
-        bar.textAlignment = .center
-        bar.textColor = .white
-    }
-    
+        
     func layout() {
         self.addSubview(bar)
         

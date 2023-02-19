@@ -10,12 +10,56 @@ import UIKit
 
 class SchoolInfoTopView: UIView {
     
-    let topButtonsStackView = UIStackView()
-    let schoolInfoStackView = UIStackView()
-    let schoolName = UILabel()
-    let schoolLocation = UILabel()
-    let schoolPhone = UILabel()
-    let schoolImage = UIImageView(image: UIImage(systemName: "book.circle"))
+    lazy var topButtonsStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var schoolInfoStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var schoolName: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = school.school_name
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        return label
+    }()
+
+    lazy var schoolLocation: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = school.location
+        label.textAlignment = .left
+        return label
+    }()
+
+    lazy var schoolPhone: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Phone: \(school.phone_number)"
+        label.textAlignment = .left
+        return label
+    }()
+
+    lazy var schoolImage: UIImageView = {
+        var image = UIImageView(image: UIImage(systemName: "book.circle"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = schoolColor
+        return image
+    }()
     
     let school: School
     let schoolColor: UIColor
@@ -25,44 +69,14 @@ class SchoolInfoTopView: UIView {
         self.schoolColor = schoolColor
         
         super.init(frame: frame)
-        style()
+
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func style() {
-        topButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        topButtonsStackView.axis = .horizontal
-        
-        schoolInfoStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        schoolName.adjustsFontSizeToFitWidth = true
-        schoolName.text = school.school_name
-        schoolName.numberOfLines = 2
-        schoolName.textAlignment = .left
-        
-        schoolLocation.translatesAutoresizingMaskIntoConstraints = false
-        schoolLocation.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        schoolLocation.adjustsFontSizeToFitWidth = true
-        schoolLocation.text = school.location
-        schoolLocation.textAlignment = .left
-        
-        schoolPhone.translatesAutoresizingMaskIntoConstraints = false
-        schoolPhone.adjustsFontSizeToFitWidth = true
-        schoolPhone.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        schoolPhone.text = "Phone: \(school.phone_number)"
-        schoolPhone.textAlignment = .left
-
-        schoolImage.translatesAutoresizingMaskIntoConstraints = false
-        schoolImage.contentMode = .scaleAspectFit
-        schoolImage.tintColor = schoolColor
-    }
-    
     func layout() {
         self.addSubview(topButtonsStackView)
         self.addSubview(schoolName)

@@ -10,10 +10,32 @@ import UIKit
 
 class ComparisonGraphView: UIView {
     
-    let legendView: LegendView
-    let yAxisView = YAxisView()
-    let comparisonBarsView: ComparisonBarsView
-    let xAxisView = XAxisView()
+    lazy var legendView: LegendView = {
+        var view = LegendView(frame: CGRect(), schoolName1: "SCHOOL 1", schoolName2: "SCHOOL 2")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var yAxisView: YAxisView = {
+        var view = YAxisView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var xAxisView: XAxisView = {
+        var view = XAxisView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var comparisonBarsView: ComparisonBarsView = {
+        var view = ComparisonBarsView(frame: CGRect(), scores: schoolScores, scores2: schoolScores2, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.black.cgColor
+        return view
+    }()
+    
     
     var schoolScores: SATScores
     let schoolScores2: SATScores
@@ -23,31 +45,15 @@ class ComparisonGraphView: UIView {
         self.schoolColor = schoolColor
         self.schoolScores = scores
         self.schoolScores2 = scores2
-        
-        self.legendView = LegendView(frame: CGRect(), schoolName1: "SCHOOL 1", schoolName2: "SCHOOL 2")
-        self.comparisonBarsView = ComparisonBarsView(frame: CGRect(), scores: scores, scores2: scores2, schoolColor: schoolColor)
-        
+                
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func style() {
-        legendView.translatesAutoresizingMaskIntoConstraints = false
         
-        yAxisView.translatesAutoresizingMaskIntoConstraints = false
-        
-        comparisonBarsView.translatesAutoresizingMaskIntoConstraints = false
-        comparisonBarsView.layer.borderWidth = 3
-        comparisonBarsView.layer.borderColor = UIColor.black.cgColor
-        
-        xAxisView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     func layout() {
         self.addSubview(legendView)
         self.addSubview(yAxisView)

@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     let viewModel: HomeViewModel
-    var coordinator: HomeCoordinating?
+    var coordinator: Coordinating?
 
     lazy var loadingView: LoadingView = {
         let view = LoadingView()

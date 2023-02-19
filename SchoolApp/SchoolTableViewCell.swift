@@ -10,11 +10,47 @@ import UIKit
 
 class SchoolTableViewCell: UITableViewCell {
     
-    let cellStackView = UIStackView()
-    let schoolInfoStackView = UIStackView()
-    let schoolNameLabel = UILabel()
-    let schoolAddressLabel = UILabel()
-    let schoolBoroLabel = UILabel()
+    lazy var cellStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    lazy var schoolInfoStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    lazy var schoolNameLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
+        return label
+    }()
+
+    lazy var schoolAddressLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    lazy var schoolBoroLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
+        return label
+    }()
 
     static let reuseID = "SchoolCell"
 
@@ -36,28 +72,6 @@ class SchoolTableViewCell: UITableViewCell {
         self.layer.masksToBounds = true
         self.accessoryType = .disclosureIndicator
         self.selectionStyle = .none
-        
-        cellStackView.translatesAutoresizingMaskIntoConstraints = false
-        cellStackView.axis = .horizontal
-        
-        schoolInfoStackView.translatesAutoresizingMaskIntoConstraints = false
-        schoolInfoStackView.axis = .vertical
-        
-        schoolNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        schoolNameLabel.textAlignment = .left
-        schoolNameLabel.adjustsFontSizeToFitWidth = true
-        schoolNameLabel.numberOfLines = 2
-
-        schoolAddressLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolAddressLabel.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        schoolAddressLabel.textAlignment = .left
-        schoolAddressLabel.adjustsFontSizeToFitWidth = true
-        
-        schoolBoroLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolBoroLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        schoolBoroLabel.adjustsFontSizeToFitWidth = true
-        schoolBoroLabel.textAlignment = .right
     }
     
     func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String)) {

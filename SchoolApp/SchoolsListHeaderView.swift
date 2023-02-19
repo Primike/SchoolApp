@@ -10,55 +10,72 @@ import UIKit
 
 class SchoolsListHeaderView: UIView {
 
-    let headerStackView = UIStackView()
-    let labelsStackView = UIStackView()
-    let titleLabel = UILabel()
-    let dateLabel = UILabel()
+    lazy var headerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    lazy var labelsStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    lazy var titleLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 50.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.text = "NYC High School List"
+        label.textColor = .black
+        return label
+    }()
+    
+    lazy var dateLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 20.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.text = "Last Updated September 10, 2018"
+        label.textColor = .black
+        return label
+    }()
 
-    let date = Date()
-    let dateFormatter = DateFormatter()
+    lazy var imageView: UIImageView = {
+        var imageView = UIImageView(image: UIImage(systemName: "book.circle"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .black
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    lazy var date: Date = {
+        var date = Date()
+        return date
+    }()
+    
+    lazy var dateFormatter: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY hh:mm:ss"
+        let _ = dateFormatter.string(from: date)
+        return dateFormatter
+    }()
 
-    let imageView = UIImageView(image: UIImage(systemName: "book.circle"))
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setup()
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
      }
-
-    func setup() {
-        dateFormatter.dateFormat = "MM/dd/YY hh:mm:ss"
-        let _ = dateFormatter.string(from: date)
-
-        headerStackView.translatesAutoresizingMaskIntoConstraints = false
-        headerStackView.axis = .horizontal
-
-        labelsStackView.translatesAutoresizingMaskIntoConstraints = false
-        labelsStackView.axis = .vertical
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 50.0 )
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textAlignment = .left
-        titleLabel.text = "NYC High School List"
-        titleLabel.textColor = .black
-
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.font = UIFont(name:"HelveticaNeue", size: 20.0 )
-        dateLabel.adjustsFontSizeToFitWidth = true
-        dateLabel.textAlignment = .left
-        dateLabel.text = "Last Updated September 10, 2018"
-        dateLabel.textColor = .black
-
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.tintColor = .black
-        imageView.contentMode = .scaleAspectFill
-    }
 
     func layout() {
         self.addSubview(headerStackView)

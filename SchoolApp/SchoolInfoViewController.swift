@@ -10,12 +10,54 @@ import UIKit
 
 class SchoolInfoViewController: UIViewController {
     
-    let scrollView = UIScrollView()
-    let screenStackView = UIStackView()
-    let schoolInfoTopView: SchoolInfoTopView
-    let schoolWebsiteButton = UIButton()
-    let addSchoolButton = UIButton()
-    let schoolInfoBottomView: SchoolInfoBottomView
+    lazy var scrollView: UIScrollView = {
+        var scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    lazy var screenStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    lazy var schoolWebsiteButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("School Website", for: [])
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.addTarget(self, action: #selector(websiteButtonTapped), for: .primaryActionTriggered)
+        button.configuration = .filled()
+        button.tintColor = schoolColor
+        return button
+    }()
+    
+    lazy var addSchoolButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addSchool), for: .primaryActionTriggered)
+        button.tintColor = schoolColor
+        button.titleLabel!.adjustsFontSizeToFitWidth = true
+        button.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
+        return button
+    }()
+    
+    lazy var schoolInfoBottomView: SchoolInfoBottomView = {
+        var view = SchoolInfoBottomView(frame: CGRect(), school: school, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 50
+        view.layer.maskedCorners = [.layerMinXMinYCorner]
+        view.backgroundColor = schoolColor
+        return view
+    }()
+    
+    lazy var schoolInfoTopView: SchoolInfoTopView = {
+        var view = SchoolInfoTopView(frame: CGRect(), school: school, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     let defaults = UserDefaults.standard
     var addButtonImage: String
@@ -25,9 +67,6 @@ class SchoolInfoViewController: UIViewController {
     init(school: School, schoolColor: UIColor) {
         self.school = school
         self.schoolColor = schoolColor
-        self.schoolInfoTopView = SchoolInfoTopView(frame: CGRect(), school: school, schoolColor: schoolColor)
-        self.schoolInfoBottomView = SchoolInfoBottomView(frame: CGRect(), school: school, schoolColor: schoolColor)
-        
         
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
         
@@ -46,35 +85,9 @@ class SchoolInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        style()
-        layout()
-    }
-    
-    func style() {
         view.backgroundColor = .systemBackground
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        screenStackView.translatesAutoresizingMaskIntoConstraints = false
-        screenStackView.axis = .vertical
-        
-        schoolWebsiteButton.translatesAutoresizingMaskIntoConstraints = false
-        schoolWebsiteButton.setTitle("School Website", for: [])
-        schoolWebsiteButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        schoolWebsiteButton.addTarget(self, action: #selector(websiteButtonTapped), for: .primaryActionTriggered)
-        schoolWebsiteButton.configuration = .filled()
-        schoolWebsiteButton.tintColor = schoolColor
-        
-        addSchoolButton.translatesAutoresizingMaskIntoConstraints = false
-        addSchoolButton.addTarget(self, action: #selector(addSchool), for: .primaryActionTriggered)
-        addSchoolButton.tintColor = schoolColor
-        addSchoolButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
 
-        schoolInfoBottomView.translatesAutoresizingMaskIntoConstraints = false
-        schoolInfoBottomView.layer.cornerRadius = 50
-        schoolInfoBottomView.layer.maskedCorners = [.layerMinXMinYCorner]
-        schoolInfoBottomView.backgroundColor = schoolColor
+        layout()
     }
     
     func layout() {

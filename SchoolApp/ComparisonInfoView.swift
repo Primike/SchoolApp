@@ -10,15 +10,102 @@ import UIKit
 
 class ComparisonInfoView: UIView {
     
-    let schoolInfoStackView = UIStackView()
-    let schoolName = UILabel()
-    let schoolLocation = UILabel()
-    let schoolPhone = UILabel()
-    let distanceLabel = UILabel()
-    let testtakersLabel = UILabel()
-    let mathLabel = UILabel()
-    let writingLabel = UILabel()
-    let readingLabel = UILabel()
+    lazy var schoolInfoStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var schoolName: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        label.textColor = color
+        label.text = school.school_name
+        return label
+    }()
+    
+    
+    lazy var schoolLocation: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.numberOfLines = 2
+        label.textColor = color
+        label.text = school.location
+        return label
+    }()
+    
+    lazy var schoolPhone: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.textAlignment = .left
+        label.textColor = color
+        label.text = "Phone: \(school.phone_number)"
+        return label
+    }()
+    
+    lazy var distanceLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Distance: Not Available"
+        label.textAlignment = .left
+        label.textColor = color
+        return label
+    }()
+    
+    lazy var testtakersLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Test Takers: Not Available"
+        label.textAlignment = .left
+        label.textColor = color
+        return label
+    }()
+    
+    lazy var mathLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Math Score: Not Available"
+        label.textAlignment = .left
+        label.textColor = color
+        return label
+    }()
+
+    lazy var writingLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Writing Score: Not Available"
+        label.textAlignment = .left
+        label.textColor = color
+        return label
+    }()
+    
+    lazy var readingLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "Reading Score: Not Available"
+        label.textAlignment = .left
+        label.textColor = color
+        return label
+    }()
     
     let school: School
     let color: UIColor
@@ -28,74 +115,11 @@ class ComparisonInfoView: UIView {
         self.color = color
         
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        schoolInfoStackView.translatesAutoresizingMaskIntoConstraints = false
-
-        schoolName.translatesAutoresizingMaskIntoConstraints = false
-        schoolName.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        schoolName.adjustsFontSizeToFitWidth = true
-        schoolName.text = school.school_name
-        schoolName.numberOfLines = 2
-        schoolName.textAlignment = .left
-        schoolName.textColor = color
-        
-        schoolLocation.translatesAutoresizingMaskIntoConstraints = false
-        schoolLocation.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        schoolLocation.adjustsFontSizeToFitWidth = true
-        schoolLocation.text = school.location
-        schoolLocation.textAlignment = .left
-        schoolLocation.numberOfLines = 2
-        schoolLocation.textColor = color
-        
-        schoolPhone.translatesAutoresizingMaskIntoConstraints = false
-        schoolPhone.adjustsFontSizeToFitWidth = true
-        schoolPhone.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        schoolPhone.text = "Phone: \(school.phone_number)"
-        schoolPhone.textAlignment = .left
-        schoolPhone.textColor = color
-        
-        distanceLabel.translatesAutoresizingMaskIntoConstraints = false
-        distanceLabel.adjustsFontSizeToFitWidth = true
-        distanceLabel.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        distanceLabel.text = "Distance: Not Available"
-        distanceLabel.textAlignment = .left
-        distanceLabel.textColor = color
-        
-        testtakersLabel.translatesAutoresizingMaskIntoConstraints = false
-        testtakersLabel.adjustsFontSizeToFitWidth = true
-        testtakersLabel.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        testtakersLabel.text = "Test Takers: Not Available"
-        testtakersLabel.textAlignment = .left
-        testtakersLabel.textColor = color
-        
-        mathLabel.translatesAutoresizingMaskIntoConstraints = false
-        mathLabel.adjustsFontSizeToFitWidth = true
-        mathLabel.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        mathLabel.text = "Math Score: Not Available"
-        mathLabel.textAlignment = .left
-        mathLabel.textColor = color
-        
-        writingLabel.translatesAutoresizingMaskIntoConstraints = false
-        writingLabel.adjustsFontSizeToFitWidth = true
-        writingLabel.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        writingLabel.text = "Writing Score: Not Available"
-        writingLabel.textAlignment = .left
-        writingLabel.textColor = color
-        
-        readingLabel.translatesAutoresizingMaskIntoConstraints = false
-        readingLabel.adjustsFontSizeToFitWidth = true
-        readingLabel.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        readingLabel.text = "Reading Score: Not Available"
-        readingLabel.textAlignment = .left
-        readingLabel.textColor = color
     }
     
     func layout() {

@@ -10,11 +10,72 @@ import UIKit
 
 class TopMathSchoolsViewController: UIViewController {
     
-    let topSchoolsHeaderView = TopSchoolsHeaderView()
-    let schoolsTableView = UITableView()
-    let numberOfSchoolsText = UITextField()
-    let errorLabel = UILabel()
-    let enterButton = UIButton()
+    lazy var topSchoolsHeaderView: TopSchoolsHeaderView = {
+        var view = TopSchoolsHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 30
+        view.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        view.backgroundColor = UIColor.systemGreen
+        view.topSchoolsLabel.text = "Top Schools By SAT Math Scores"
+        return view
+    }()
+
+    lazy var schoolsTableView: UITableView = {
+        var tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+
+    lazy var numberOfSchoolsText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = .center
+        textField.layer.borderWidth = 3
+        textField.layer.cornerRadius = 7.0
+        textField.textColor = .black
+        textField.delegate = self
+        textField.backgroundColor = .white
+        return textField
+    }()
+
+    lazy var errorLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        label.textColor = .red
+        label.isHidden = true
+        return label
+    }()
+
+    lazy var enterButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
+        button.configuration = configuration
+        button.configuration?.title = "Search"
+        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/19)
+        button.configuration?.image = UIImage(systemName: "magnifyingglass",
+                                              withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/22)!))
+        return button
+    }()
+    
+    lazy var configuration: UIButton.Configuration = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.titleAlignment = .center
+        configuration.baseBackgroundColor = .black
+        configuration.baseForegroundColor = .white
+        configuration.cornerStyle = .capsule
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5.0
+        return configuration
+    }()
     
     let topSchoolsViewModel: TopSchoolsViewModel
     
@@ -31,56 +92,8 @@ class TopMathSchoolsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
-        layout()
-        setup()
-    }
-    
-    func style() {
         view.backgroundColor = .white
-        
-        topSchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsHeaderView.layer.cornerRadius = 30
-        topSchoolsHeaderView.layer.maskedCorners = [.layerMaxXMaxYCorner]
-        topSchoolsHeaderView.backgroundColor = UIColor.systemGreen
-        
-        topSchoolsHeaderView.topSchoolsLabel.text = "Top Schools By SAT Math Scores"
-        
-        numberOfSchoolsText.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchoolsText.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        numberOfSchoolsText.adjustsFontSizeToFitWidth = true
-        numberOfSchoolsText.textAlignment = .center
-        numberOfSchoolsText.layer.borderWidth = 3
-        numberOfSchoolsText.layer.cornerRadius = 7.0
-        numberOfSchoolsText.textColor = .black
-        numberOfSchoolsText.delegate = self
-        numberOfSchoolsText.backgroundColor = .white
-        
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.textAlignment = .center
-        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.numberOfLines = 0
-        errorLabel.textColor = .red
-        errorLabel.isHidden = true
-        
-        var config = UIButton.Configuration.filled()
-        config.titleAlignment = .center
-        config.baseBackgroundColor = .black
-        config.baseForegroundColor = .white
-        config.cornerStyle = .capsule
-        config.imagePlacement = .leading
-        config.imagePadding = 5.0
-        
-        enterButton.translatesAutoresizingMaskIntoConstraints = false
-        enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.configuration = config
-        enterButton.configuration?.title = "Search"
-        enterButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/19)
-        enterButton.configuration?.image = UIImage(systemName: "magnifyingglass",
-                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/22)!))
-        
-        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
+        layout()
     }
     
     func layout() {
@@ -116,11 +129,6 @@ class TopMathSchoolsViewController: UIViewController {
             schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-    }
-    
-    func setup() {
-        schoolsTableView.delegate = self
-        schoolsTableView.dataSource = self
     }
 }
 

@@ -10,67 +10,88 @@ import UIKit
 
 class YAxisView: UIView {
     
-    let label800 = UILabel()
-    let stackView600 = UIStackView()
-    let label600 = UILabel()
-    let stackView400 = UIStackView()
-    let label400 = UILabel()
-    let stackView200 = UIStackView()
-    let label200 = UILabel()
-    let label0 = UILabel()
+    lazy var label800: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
+        label.text = "800 -"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        return label
+    }()
+
+    lazy var stackView600: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var label600: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
+        label.text = "600 -"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        return label
+    }()
+
+    lazy var stackView400: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var label400: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
+        label.text = "400 -"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        return label
+    }()
+
+    lazy var stackView200: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var label200: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
+        label.text = "200 -"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        return label
+    }()
+
+    lazy var label0: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
+        label.text = "0 -"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        return label
+    }()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        label800.translatesAutoresizingMaskIntoConstraints = false
-        label800.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label800.text = "800 -"
-        label800.textAlignment = .center
-        label800.adjustsFontSizeToFitWidth = true
-        label800.textColor = .black
-        
-        stackView600.translatesAutoresizingMaskIntoConstraints = false
-        
-        label600.translatesAutoresizingMaskIntoConstraints = false
-        label600.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label600.text = "600 -"
-        label600.textAlignment = .center
-        label600.adjustsFontSizeToFitWidth = true
-        label600.textColor = .black
-        
-        stackView400.translatesAutoresizingMaskIntoConstraints = false
-        
-        label400.translatesAutoresizingMaskIntoConstraints = false
-        label400.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label400.text = "400 -"
-        label400.textAlignment = .center
-        label400.adjustsFontSizeToFitWidth = true
-        label400.textColor = .black
-
-        stackView200.translatesAutoresizingMaskIntoConstraints = false
-        
-        label200.translatesAutoresizingMaskIntoConstraints = false
-        label200.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label200.text = "200 -"
-        label200.textAlignment = .center
-        label200.adjustsFontSizeToFitWidth = true
-        label200.textColor = .black
-
-        label0.translatesAutoresizingMaskIntoConstraints = false
-        label0.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label0.text = "0 -"
-        label0.textAlignment = .center
-        label0.adjustsFontSizeToFitWidth = true
-        label0.textColor = .black
     }
     
     func layout() {

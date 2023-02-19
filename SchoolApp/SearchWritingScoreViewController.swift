@@ -10,13 +10,87 @@ import UIKit
 
 class SearchWritingScoreViewController: UIViewController {
     
-    let searchSATScoresHeaderView = SearchScoresHeaderView()
-    let schoolsTableView = UITableView()
-    let writingScoreText = UITextField()
-    let schoolNumberText = UITextField()
-    let errorLabel = UILabel()
-    let enterButton = UIButton()
-        
+    lazy var searchSATScoresHeaderView: SearchScoresHeaderView = {
+        var view = SearchScoresHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 40
+        view.layer.maskedCorners = [.layerMinXMaxYCorner]
+        view.backgroundColor = UIColor.systemMint
+        view.topSchoolsLabel.text = "Search Schools By Writing Score"
+        return view
+    }()
+    
+    lazy var schoolsTableView: UITableView = {
+        var tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+    
+    lazy var writingScoreText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = .center
+        textField.layer.borderWidth = 3
+        textField.layer.cornerRadius = 7.0
+        textField.textColor = .black
+        textField.delegate = self
+        textField.backgroundColor = .white
+        return textField
+    }()
+
+    lazy var schoolNumberText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = .center
+        textField.layer.borderWidth = 3
+        textField.layer.cornerRadius = 7.0
+        textField.textColor = .black
+        textField.delegate = self
+        textField.backgroundColor = .white
+        return textField
+    }()
+
+    lazy var errorLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        label.textColor = .red
+        label.isHidden = true
+        return label
+    }()
+    
+    lazy var enterButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
+        button.configuration = configuration
+        button.configuration?.title = "Search"
+        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/19)
+        button.configuration?.image = UIImage(systemName: "magnifyingglass",
+                                                   withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/22)!))
+        return button
+    }()
+    
+    lazy var configuration: UIButton.Configuration = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.titleAlignment = .center
+        configuration.baseBackgroundColor = .black
+        configuration.baseForegroundColor = .white
+        configuration.cornerStyle = .capsule
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5.0
+        return configuration
+    }()
+            
     let searchSATScoreViewModel: SearchSATScoresViewModel
     
     required init(viewModel: SearchSATScoresViewModel) {
@@ -32,66 +106,9 @@ class SearchWritingScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
-        layout()
-        setup()
-    }
-    
-    func style() {
         view.backgroundColor = .white
-        
-        searchSATScoresHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        searchSATScoresHeaderView.layer.cornerRadius = 40
-        searchSATScoresHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner]
-        searchSATScoresHeaderView.backgroundColor = UIColor.systemMint
-        
-        searchSATScoresHeaderView.topSchoolsLabel.text = "Search Schools By Writing Score"
-        
-        writingScoreText.translatesAutoresizingMaskIntoConstraints = false
-        writingScoreText.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        writingScoreText.adjustsFontSizeToFitWidth = true
-        writingScoreText.textAlignment = .center
-        writingScoreText.layer.borderWidth = 3
-        writingScoreText.layer.cornerRadius = 7.0
-        writingScoreText.textColor = .black
-        writingScoreText.delegate = self
-        writingScoreText.backgroundColor = .white
-        
-        schoolNumberText.translatesAutoresizingMaskIntoConstraints = false
-        schoolNumberText.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        schoolNumberText.adjustsFontSizeToFitWidth = true
-        schoolNumberText.textAlignment = .center
-        schoolNumberText.layer.borderWidth = 3
-        schoolNumberText.layer.cornerRadius = 7.0
-        schoolNumberText.textColor = .black
-        schoolNumberText.delegate = self
-        schoolNumberText.backgroundColor = .white
-        
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.textAlignment = .center
-        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.numberOfLines = 0
-        errorLabel.textColor = .red
-        errorLabel.isHidden = true
-        
-        var config = UIButton.Configuration.filled()
-        config.titleAlignment = .center
-        config.baseBackgroundColor = .black
-        config.baseForegroundColor = .white
-        config.cornerStyle = .capsule
-        config.imagePlacement = .leading
-        config.imagePadding = 5.0
-        
-        enterButton.translatesAutoresizingMaskIntoConstraints = false
-        enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.configuration = config
-        enterButton.configuration?.title = "Search"
-        enterButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/19)
-        enterButton.configuration?.image = UIImage(systemName: "magnifyingglass",
-                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/22)!))
-        
-        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
+
+        layout()
     }
     
     func layout() {
@@ -134,11 +151,6 @@ class SearchWritingScoreViewController: UIViewController {
             enterButton.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.widthAnchor),
             enterButton.centerXAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.centerXAnchor),
         ])
-    }
-    
-    func setup() {
-        schoolsTableView.delegate = self
-        schoolsTableView.dataSource = self
     }
 }
 

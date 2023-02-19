@@ -10,8 +10,20 @@ import UIKit
 
 class SchoolScoresViewController: UIViewController {
     
-    let scrollView = UIScrollView()
-    let screenStackView = UIStackView()
+    lazy var scrollView: UIScrollView = {
+        var scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .systemBackground
+        return scrollView
+    }()
+    
+    lazy var screenStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+
     let schoolScoresTopView: SchoolScoresTopView
     let schoolScoresBottomView: SchoolScoresBottomView
     let graphButton = UIButton()
@@ -43,13 +55,7 @@ class SchoolScoresViewController: UIViewController {
     
     func style() {
         view.backgroundColor = .systemBackground
-
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .systemBackground
-        
-        screenStackView.translatesAutoresizingMaskIntoConstraints = false
-        screenStackView.axis = .vertical
-        
+                
         schoolScoresTopView.translatesAutoresizingMaskIntoConstraints = false
         schoolScoresTopView.backgroundColor = schoolColor
         

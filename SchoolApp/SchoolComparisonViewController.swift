@@ -10,13 +10,23 @@ import UIKit
 
 class SchoolComparisonViewController: UIViewController {
     
-    let comparisonHeaderView = ComparisonHeaderView()
-    let schoolsTableView = UITableView()
+    lazy var comparisonHeaderView: ComparisonHeaderView = {
+        var view = ComparisonHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var schoolsTableView: UITableView = {
+        var tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
     
+    let mySchoolsViewModel: MySchoolsViewModel
     var number = 0
     var cellIndex1 = 0
-
-    let mySchoolsViewModel: MySchoolsViewModel
     
     required init(viewModel: MySchoolsViewModel) {
         self.mySchoolsViewModel = viewModel
@@ -31,9 +41,9 @@ class SchoolComparisonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
+        view.backgroundColor = .white
+
         layout()
-        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,14 +51,6 @@ class SchoolComparisonViewController: UIViewController {
         
         mySchoolsViewModel.mySchools()
         schoolsTableView.reloadData()
-    }
-    
-    func style() {
-        view.backgroundColor = .white
-        
-        comparisonHeaderView.translatesAutoresizingMaskIntoConstraints = false
-                
-        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {
@@ -67,12 +69,6 @@ class SchoolComparisonViewController: UIViewController {
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    func setup() {
-        schoolsTableView.delegate = self
-        schoolsTableView.dataSource = self
-    }
-
 }
 
 extension SchoolComparisonViewController: UITableViewDataSource {

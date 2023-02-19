@@ -10,9 +10,35 @@ import UIKit
 
 class BottomSubjectView: UIView {
     
-    let satSubjectStackView = UIStackView()
-    let satSubjectLabel = UILabel()
-    let satSubjectScore = UILabel()
+    lazy var satSubjectStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = schoolColor
+        stackView.layer.cornerRadius = 25
+        return stackView
+    }()
+
+    lazy var satSubjectLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = subjectName
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
+    }()
+
+    lazy var satSubjectScore: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.text = "\(subjectScore)/800"
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
+    }()
     
     let schoolColor: UIColor
     let subjectName: String
@@ -24,32 +50,11 @@ class BottomSubjectView: UIView {
         self.subjectScore = subjectScore
         
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        satSubjectStackView.translatesAutoresizingMaskIntoConstraints = false
-        satSubjectStackView.backgroundColor = schoolColor
-        satSubjectStackView.layer.cornerRadius = 25
-        
-        satSubjectLabel.translatesAutoresizingMaskIntoConstraints = false
-        satSubjectLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        satSubjectLabel.text = subjectName
-        satSubjectLabel.textColor = .white
-        satSubjectLabel.adjustsFontSizeToFitWidth = true
-        satSubjectLabel.textAlignment = .center
-        
-        satSubjectScore.translatesAutoresizingMaskIntoConstraints = false
-        satSubjectScore.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        satSubjectScore.text = "\(subjectScore)/800"
-        satSubjectScore.textColor = .white
-        satSubjectScore.adjustsFontSizeToFitWidth = true
-        satSubjectScore.textAlignment = .center
     }
     
     func layout() {

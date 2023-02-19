@@ -10,9 +10,23 @@ import UIKit
 
 class GraphBarsView: UIView {
     
-    let mathBar: BarView
-    let writingBar: BarView
-    let readingBar: BarView
+    lazy var mathBar: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_math_avg_score, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var writingBar: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_writing_avg_score, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var readingBar: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var schoolScores: SATScores
     let schoolColor: UIColor
@@ -29,25 +43,12 @@ class GraphBarsView: UIView {
         let score3 = Int(scores.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score3)/Double(800)))
         
-        mathBar = BarView(frame: CGRect(), sectionScore: schoolScores.sat_math_avg_score, schoolColor: schoolColor)
-        writingBar = BarView(frame: CGRect(), sectionScore: schoolScores.sat_writing_avg_score, schoolColor: schoolColor)
-        readingBar = BarView(frame: CGRect(), sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: schoolColor)
-
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        mathBar.translatesAutoresizingMaskIntoConstraints = false
-
-        writingBar.translatesAutoresizingMaskIntoConstraints = false
-
-        readingBar.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func layout() {

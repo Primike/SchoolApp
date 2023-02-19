@@ -12,16 +12,42 @@ import CoreLocation
 
 class ComparisonViewController: UIViewController {
     
-    let scrollView = UIScrollView()
-    let screenStackView = UIStackView()
-    let topStackView = UIStackView()
+    lazy var scrollView: UIScrollView = {
+        var scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    lazy var screenStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var topStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var verticalDivider: UILabel = {
+        var divider = UILabel()
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.backgroundColor = .black
+        return divider
+    }()
+    
+    lazy var map: MKMapView = {
+        var map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
+        map.delegate = self
+        return map
+    }()
+    
     var comparisonInfoView: ComparisonInfoView
     let comparisonInfoView2: ComparisonInfoView
-    let verticalDivider = UILabel()
     let comparisonGraphView: ComparisonGraphView
-    let map = MKMapView()
 
-    
     var school: School
     var schoolScores: SATScores
     var school2: School
@@ -54,13 +80,7 @@ class ComparisonViewController: UIViewController {
     
     func style() {
         view.backgroundColor = .white
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-
-        screenStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        topStackView.translatesAutoresizingMaskIntoConstraints = false
-        
+                
         comparisonInfoView.translatesAutoresizingMaskIntoConstraints = false
         if schoolScores.dbn != "0" {
             comparisonInfoView.testtakersLabel.text = "Test Takes: \(schoolScores.num_of_sat_test_takers)"
@@ -77,15 +97,10 @@ class ComparisonViewController: UIViewController {
             comparisonInfoView2.readingLabel.text = "Reading Score: \(schoolScores2.sat_critical_reading_avg_score)"
         }
         
-        verticalDivider.translatesAutoresizingMaskIntoConstraints = false
-        verticalDivider.backgroundColor = .black
-        
         comparisonGraphView.translatesAutoresizingMaskIntoConstraints = false
         comparisonGraphView.legendView.school1Label.text = school.school_name
         comparisonGraphView.legendView.school2Label.text = school.school_name
-        
-        map.translatesAutoresizingMaskIntoConstraints = false
-        
+                
     }
     
     func layout() {
@@ -146,8 +161,6 @@ class ComparisonViewController: UIViewController {
     }
     
     func setup() {
-        map.delegate = self
-        
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {

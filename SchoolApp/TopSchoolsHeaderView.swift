@@ -10,50 +10,60 @@ import UIKit
 
 class TopSchoolsHeaderView: UIView {
 
-    let headerStackView = UIStackView()
-    let topSchoolsLabel = UILabel()
-    let filterStackView = UIStackView()
-    let topLabel = UILabel()
-    let schoolsLabel = UILabel()
+    lazy var headerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var topSchoolsLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Top Schools By Total SAT Score"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var filterStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var topLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Top"
+        label.textColor = .white
+        return label
+    }()
+
+    lazy var schoolsLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Schools"
+        label.textColor = .white
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setup()
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
-    }
-
-    func setup() {
-        headerStackView.translatesAutoresizingMaskIntoConstraints = false
-        headerStackView.axis = .horizontal
-
-        topSchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        topSchoolsLabel.adjustsFontSizeToFitWidth = true
-        topSchoolsLabel.textAlignment = .center
-        topSchoolsLabel.text = "Top Schools By Total SAT Score"
-        topSchoolsLabel.textColor = .white
-        topSchoolsLabel.numberOfLines = 0
-        
-        filterStackView.translatesAutoresizingMaskIntoConstraints = false
-
-        topLabel.translatesAutoresizingMaskIntoConstraints = false
-        topLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        topLabel.adjustsFontSizeToFitWidth = true
-        topLabel.textAlignment = .center
-        topLabel.text = "Top"
-        topLabel.textColor = .white
-        
-        schoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        schoolsLabel.adjustsFontSizeToFitWidth = true
-        schoolsLabel.textAlignment = .center
-        schoolsLabel.text = "Schools"
-        schoolsLabel.textColor = .white
     }
 
     func layout() {

@@ -10,36 +10,41 @@ import UIKit
 
 class ComparisonHeaderView: UIView {
     
-    let stackView = UIStackView()
-    let mySchoolsLabel = UILabel()
-    let heartImage = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
+    lazy var stackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var mySchoolsLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Select Two Schools To Compare Details"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var heartImage: UIImageView = {
+        var imageView = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .black
+        return imageView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        
+        self.backgroundColor = .black
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
-    }
-    
-    func setup() {
-        self.backgroundColor = .black
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        heartImage.translatesAutoresizingMaskIntoConstraints = false
-        heartImage.contentMode = .scaleAspectFit
-        heartImage.tintColor = .black
-        
-        mySchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        mySchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        mySchoolsLabel.adjustsFontSizeToFitWidth = true
-        mySchoolsLabel.textAlignment = .center
-        mySchoolsLabel.text = "Select Two Schools To Compare Details"
-        mySchoolsLabel.textColor = .white
-        mySchoolsLabel.numberOfLines = 0
     }
     
     func layout() {

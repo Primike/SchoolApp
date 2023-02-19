@@ -12,13 +12,71 @@ import CoreLocation
 
 class AddressSearchViewController: UIViewController {
     
-    let addressSearchHeaderView = AddressSearchHeaderView()
-    let map = MKMapView()
-    let numberOfSchoolsText = UITextField()
-    let addressText = UITextField()
-    let enterButton = UIButton()
+    lazy var addressSearchHeaderView: AddressSearchHeaderView = {
+        var view = AddressSearchHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.systemBlue
+        return view
+    }()
+    
+    lazy var map: MKMapView = {
+        var map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
+    
+    lazy var numberOfSchoolsText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name:"HelveticaNeue", size: 15.0)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = .center
+        textField.layer.borderWidth = 3
+        textField.layer.cornerRadius = 7.0
+        textField.textColor = .black
+        textField.delegate = self
+        textField.backgroundColor = .white
+        return textField
+    }()
+    
+    lazy var addressText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = .center
+        textField.layer.borderWidth = 3
+        textField.layer.cornerRadius = 7.0
+        textField.textColor = .black
+        textField.delegate = self
+        textField.backgroundColor = .white
+        return textField
+    }()
+    
+    lazy var enterButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
+        button.configuration = configuration
+        button.configuration?.title = "Search"
+        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
+        button.configuration?.image = UIImage(systemName: "magnifyingglass",
+                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))
+        return button
+    }()
 
-    let mapSearchViewModel: MapSearchViewModel
+    lazy var configuration: UIButton.Configuration = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.titleAlignment = .center
+        configuration.baseBackgroundColor = .black
+        configuration.baseForegroundColor = .white
+        configuration.cornerStyle = .capsule
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5.0
+        return configuration
+    }()
+
+    let viewModel: MapSearchViewModel
     var nearbySchools = [School]()
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
@@ -26,7 +84,7 @@ class AddressSearchViewController: UIViewController {
     var longitude = 0.0
         
     init(viewModel: MapSearchViewModel) {
-        self.mapSearchViewModel = viewModel
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,54 +95,49 @@ class AddressSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        style()
-        layout()
+        view.backgroundColor = .white
+
         setup()
+        layout()
     }
     
-    func style() {
-        view.backgroundColor = .white
-        map.translatesAutoresizingMaskIntoConstraints = false
+    func setup() {
+        map.delegate = self
         
-        addressSearchHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        addressSearchHeaderView.backgroundColor = UIColor.systemBlue
+        LocationManager.shared.getUserLocation { [weak self] location in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                self!.location = location
+
+                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
+                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
+                
+                self!.viewModel.latitude = location.coordinate.latitude
+                self!.viewModel.longitude = location.coordinate.longitude
+                self!.viewModel.getNearbySchools()
+                self!.setupMap()
+            }
+        }
+    }
+    
+    func setupMap() {
+        for i in viewModel.nearbySchools {
+            addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
+        }
+        map.addAnnotations(annotations)
+    }
+    
+    func addMapPin(latitude: String, longitude: String, label: String) {
+        let pin = MKPointAnnotation()
+        pin.coordinate.longitude = Double(longitude)!
+        pin.coordinate.latitude = Double(latitude)!
+        pin.title = label
         
-        numberOfSchoolsText.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchoolsText.font = UIFont(name:"HelveticaNeue", size: 15.0)
-        numberOfSchoolsText.adjustsFontSizeToFitWidth = true
-        numberOfSchoolsText.textAlignment = .center
-        numberOfSchoolsText.layer.borderWidth = 3
-        numberOfSchoolsText.layer.cornerRadius = 7.0
-        numberOfSchoolsText.textColor = .black
-        numberOfSchoolsText.delegate = self
-        numberOfSchoolsText.backgroundColor = .white
-        
-        addressText.translatesAutoresizingMaskIntoConstraints = false
-        addressText.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        addressText.adjustsFontSizeToFitWidth = true
-        addressText.textAlignment = .center
-        addressText.layer.borderWidth = 3
-        addressText.layer.cornerRadius = 7.0
-        addressText.textColor = .black
-        addressText.delegate = self
-        addressText.backgroundColor = .white
-        
-        var config = UIButton.Configuration.filled()
-        config.titleAlignment = .center
-        config.baseBackgroundColor = .black
-        config.baseForegroundColor = .white
-        config.cornerStyle = .capsule
-        config.imagePlacement = .leading
-        config.imagePadding = 5.0
-        
-        enterButton.translatesAutoresizingMaskIntoConstraints = false
-        enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.configuration = config
-        enterButton.configuration?.title = "Search"
-        enterButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
-        enterButton.configuration?.image = UIImage(systemName: "magnifyingglass",
-                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))    }
+        annotations.append(pin)
+    }
     
     func layout() {
         view.addSubview(addressSearchHeaderView)
@@ -121,44 +174,6 @@ class AddressSearchViewController: UIViewController {
             map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-
-    func setup() {
-        map.delegate = self
-        
-        LocationManager.shared.getUserLocation { [weak self] location in
-            DispatchQueue.main.async {
-                guard let strongSelf = self else {
-                    return
-                }
-                
-                self!.location = location
-
-                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
-                
-                self!.mapSearchViewModel.latitude = location.coordinate.latitude
-                self!.mapSearchViewModel.longitude = location.coordinate.longitude
-                self!.mapSearchViewModel.getNearbySchools()
-                self!.setupMap()
-            }
-        }
-    }
-    
-    func setupMap() {
-        for i in mapSearchViewModel.nearbySchools {
-            addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
-        }
-        map.addAnnotations(annotations)
-    }
-    
-    func addMapPin(latitude: String, longitude: String, label: String) {
-        let pin = MKPointAnnotation()
-        pin.coordinate.longitude = Double(longitude)!
-        pin.coordinate.latitude = Double(latitude)!
-        pin.title = label
-        
-        annotations.append(pin)
-    }
 }
 
 extension AddressSearchViewController {
@@ -180,8 +195,8 @@ extension AddressSearchViewController {
             return
         }
         
-        if Int(numberOfSchoolsText.text!)! > mapSearchViewModel.schools.count {
-            errorHandler(message: "Please Type In A Value Less Than \(mapSearchViewModel.schools.count)")
+        if Int(numberOfSchoolsText.text!)! > viewModel.schools.count {
+            errorHandler(message: "Please Type In A Value Less Than \(viewModel.schools.count)")
             return
         }
         
@@ -204,11 +219,11 @@ extension AddressSearchViewController {
             
             if self.latitude != 0.0 && self.longitude != 0.0 {
                 if Int(self.numberOfSchoolsText.text!) != nil {
-                    self.mapSearchViewModel.numberOfSchools = Int(self.numberOfSchoolsText.text!)!
+                    self.viewModel.numberOfSchools = Int(self.numberOfSchoolsText.text!)!
                 }
-                self.mapSearchViewModel.latitude = self.latitude
-                self.mapSearchViewModel.longitude = self.longitude
-                self.mapSearchViewModel.getNearbySchools()
+                self.viewModel.latitude = self.latitude
+                self.viewModel.longitude = self.longitude
+                self.viewModel.getNearbySchools()
                 self.map.removeAnnotations(self.annotations)
                 self.annotations = []
                 
@@ -229,9 +244,9 @@ extension AddressSearchViewController {
 extension AddressSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title != "CURRENT LOCATION" {
-            let index = mapSearchViewModel.findSchool(name: view.annotation!.title!!)
+            let index = viewModel.findSchool(name: view.annotation!.title!!)
             
-            navigationController?.present(SchoolTabBarViewController(school: mapSearchViewModel.nearbySchools[index], scores: mapSearchViewModel.findSchoolScores(index: index)), animated: true)
+            navigationController?.present(SchoolTabBarViewController(school: viewModel.nearbySchools[index], scores: viewModel.findSchoolScores(index: index)), animated: true)
         }
     }
     

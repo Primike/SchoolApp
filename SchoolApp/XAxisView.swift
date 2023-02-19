@@ -10,47 +10,52 @@ import UIKit
 
 class XAxisView: UIView {
     
-    let mathLabel = UILabel()
-    let writingLabel = UILabel()
-    let readingLabel = UILabel()
+    lazy var mathLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        label.text = subjectNames[0]
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        label.textColor = .black
+        return label
+    }()
+    
+    lazy var writingLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        label.text = subjectNames[1]
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        label.textColor = .black
+        return label
+    }()
+
+    lazy var readingLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        label.text = subjectNames[2]
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        label.textColor = .black
+        return label
+    }()
     
     let subjectNames = ["SAT MATH", "SAT WRITING", "SAT CRITICAL READING"]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        mathLabel.translatesAutoresizingMaskIntoConstraints = false
-        mathLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        mathLabel.text = subjectNames[0]
-        mathLabel.textAlignment = .center
-        mathLabel.adjustsFontSizeToFitWidth = true
-        mathLabel.numberOfLines = 0
-        mathLabel.textColor = .black
-
-        writingLabel.translatesAutoresizingMaskIntoConstraints = false
-        writingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        writingLabel.text = subjectNames[1]
-        writingLabel.textAlignment = .center
-        writingLabel.adjustsFontSizeToFitWidth = true
-        writingLabel.numberOfLines = 0
-        writingLabel.textColor = .black
-
-        readingLabel.translatesAutoresizingMaskIntoConstraints = false
-        readingLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        readingLabel.text = subjectNames[2]
-        readingLabel.textAlignment = .center
-        readingLabel.adjustsFontSizeToFitWidth = true
-        readingLabel.numberOfLines = 0
-        readingLabel.textColor = .black
     }
     
     func layout() {

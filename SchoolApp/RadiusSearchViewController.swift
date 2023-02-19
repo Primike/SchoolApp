@@ -12,11 +12,56 @@ import CoreLocation
 
 class RadiusSearchViewController: UIViewController {
     
-    let radiusSearchHeaderView = RadiusSearchHeaderView()
-    let milesText = UITextField()
-    let enterButton = UIButton()
-    let map = MKMapView()
-
+    lazy var radiusSearchHeaderView: RadiusSearchHeaderView = {
+        var view = RadiusSearchHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.systemBlue
+        return view
+    }()
+    
+    lazy var milesText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = .center
+        textField.layer.borderWidth = 3
+        textField.layer.cornerRadius = 7.0
+        textField.textColor = .black
+        textField.delegate = self
+        textField.backgroundColor = .white
+        return textField
+    }()
+    
+    lazy var enterButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
+        button.configuration = configuration
+        button.configuration?.title = "Search"
+        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
+        button.configuration?.image = UIImage(systemName: "magnifyingglass",
+                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))
+        return button
+    }()
+    
+    lazy var configuration: UIButton.Configuration = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.titleAlignment = .center
+        configuration.baseBackgroundColor = .black
+        configuration.baseForegroundColor = .white
+        configuration.cornerStyle = .capsule
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 5.0
+        return configuration
+    }()
+    
+    lazy var map: MKMapView = {
+        var map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
+    
     let mapSearchViewModel: MapSearchViewModel
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
@@ -34,76 +79,12 @@ class RadiusSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        style()
-        layout()
-        setup()
-    }
-
-    func style() {
         view.backgroundColor = .white
-        map.translatesAutoresizingMaskIntoConstraints = false
-        
-        radiusSearchHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        radiusSearchHeaderView.backgroundColor = UIColor.systemBlue
-        
-        milesText.translatesAutoresizingMaskIntoConstraints = false
-        milesText.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        milesText.adjustsFontSizeToFitWidth = true
-        milesText.textAlignment = .center
-        milesText.layer.borderWidth = 3
-        milesText.layer.cornerRadius = 7.0
-        milesText.textColor = .black
-        milesText.delegate = self
-        milesText.backgroundColor = .white
-        
-        var config = UIButton.Configuration.filled()
-        config.titleAlignment = .center
-        config.baseBackgroundColor = .black
-        config.baseForegroundColor = .white
-        config.cornerStyle = .capsule
-        config.imagePlacement = .leading
-        config.imagePadding = 5.0
-        
-        enterButton.translatesAutoresizingMaskIntoConstraints = false
-        enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        enterButton.configuration = config
-        enterButton.configuration?.title = "Search"
-        enterButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
-        enterButton.configuration?.image = UIImage(systemName: "magnifyingglass",
-                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))
+
+        setup()
+        layout()
     }
     
-    func layout() {
-        view.addSubview(radiusSearchHeaderView)
-        view.addSubview(map)
-        
-        radiusSearchHeaderView.inputStackView.addSubview(milesText)
-        radiusSearchHeaderView.buttonStackView.addSubview(enterButton)
-        
-        NSLayoutConstraint.activate([
-            radiusSearchHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            radiusSearchHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
-            radiusSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            radiusSearchHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            map.topAnchor.constraint(equalTo: radiusSearchHeaderView.bottomAnchor),
-            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            milesText.heightAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.heightAnchor, multiplier: 0.7),
-            milesText.widthAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.widthAnchor, multiplier: 0.3),
-            milesText.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerXAnchor),
-            milesText.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerYAnchor),
-            
-            enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.6),
-            enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor),
-            enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),
-        ])
-    }
-
     func setup() {
         map.delegate = self
         
@@ -141,6 +122,36 @@ class RadiusSearchViewController: UIViewController {
         pin.title = label
         
         annotations.append(pin)
+    }
+    
+    func layout() {
+        view.addSubview(radiusSearchHeaderView)
+        view.addSubview(map)
+        
+        radiusSearchHeaderView.inputStackView.addSubview(milesText)
+        radiusSearchHeaderView.buttonStackView.addSubview(enterButton)
+        
+        NSLayoutConstraint.activate([
+            radiusSearchHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            radiusSearchHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            radiusSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            radiusSearchHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            map.topAnchor.constraint(equalTo: radiusSearchHeaderView.bottomAnchor),
+            map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            milesText.heightAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.heightAnchor, multiplier: 0.7),
+            milesText.widthAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.widthAnchor, multiplier: 0.3),
+            milesText.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerXAnchor),
+            milesText.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.inputStackView.centerYAnchor),
+            
+            enterButton.heightAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.heightAnchor, multiplier: 0.6),
+            enterButton.widthAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.widthAnchor),
+            enterButton.centerYAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerYAnchor),
+            enterButton.centerXAnchor.constraint(equalTo: radiusSearchHeaderView.buttonStackView.centerXAnchor),
+        ])
     }
 }
 

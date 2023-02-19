@@ -10,14 +10,58 @@ import UIKit
 
 class SchoolGraphViewController: UIViewController {
 
-    let screenStackView = UIStackView()
-    let arrowImage = UIImageView(image: UIImage(systemName: "arrow.down"))
-    let schoolNameLabel = UILabel()
-    let topStackView = UIStackView()
+    lazy var screenStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
     
-    let yAxisView = YAxisView()
-    let graphBarsView: GraphBarsView
-    let xAxisView = XAxisView()
+    lazy var arrowImage: UIImageView = {
+        var image = UIImageView(image: UIImage(systemName: "arrow.down"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .black
+        return image
+    }()
+
+    lazy var schoolNameLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = school.school_name
+        label.textColor = schoolColor
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+
+    lazy var topStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    lazy var yAxisView: YAxisView = {
+        var view = YAxisView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var graphBarsView: GraphBarsView = {
+        var view = GraphBarsView(frame: CGRect(), scores: schoolScores, schoolColor: schoolColor)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.black.cgColor
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+    lazy var xAxisView: XAxisView = {
+        var view = XAxisView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     var school: School
     var schoolScores: SATScores
@@ -27,7 +71,6 @@ class SchoolGraphViewController: UIViewController {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor
-        graphBarsView = GraphBarsView(frame: CGRect(), scores: scores, schoolColor: schoolColor)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,39 +81,9 @@ class SchoolGraphViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        style()
-        layout()
-    }
-    
-    func style() {
         view.backgroundColor = .white
-        
-        screenStackView.translatesAutoresizingMaskIntoConstraints = false
-        screenStackView.axis = .vertical
-        
-        schoolNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        schoolNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        schoolNameLabel.text = school.school_name
-        schoolNameLabel.textColor = schoolColor
-        schoolNameLabel.textAlignment = .center
-        schoolNameLabel.adjustsFontSizeToFitWidth = true
 
-        arrowImage.translatesAutoresizingMaskIntoConstraints = false
-        arrowImage.contentMode = .scaleAspectFit
-        arrowImage.tintColor = .black
-        
-        topStackView.translatesAutoresizingMaskIntoConstraints = false
-        topStackView.axis = .horizontal
-        
-        yAxisView.translatesAutoresizingMaskIntoConstraints = false
-        
-        graphBarsView.translatesAutoresizingMaskIntoConstraints = false
-        graphBarsView.layer.borderWidth = 3
-        graphBarsView.layer.borderColor = UIColor.black.cgColor
-        graphBarsView.backgroundColor = .systemBackground
-        
-        xAxisView.translatesAutoresizingMaskIntoConstraints = false
+        layout()
     }
     
     func layout() {

@@ -10,38 +10,43 @@ import UIKit
 
 class MySchoolsHeaderView: UIView {
     
-    let stackView = UIStackView()
-    let mySchoolsLabel = UILabel()
-    let heartImage = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
+    lazy var stackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    lazy var mySchoolsLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Add Schools And They Will Appear Here!"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+
+    lazy var heartImage: UIImageView = {
+        var image = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .systemRed
+        return image
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        self.backgroundColor = .black
+
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
-    
-    func setup() {
-        self.backgroundColor = .black
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        heartImage.translatesAutoresizingMaskIntoConstraints = false
-        heartImage.contentMode = .scaleAspectFit
-        heartImage.tintColor = .systemRed
-        
-        mySchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        mySchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        mySchoolsLabel.adjustsFontSizeToFitWidth = true
-        mySchoolsLabel.textAlignment = .center
-        mySchoolsLabel.text = "Add Schools And They Will Appear Here!"
-        mySchoolsLabel.textColor = .white
-        mySchoolsLabel.numberOfLines = 0
-    }
-    
     func layout() {
         self.addSubview(stackView)
         

@@ -10,71 +10,92 @@ import UIKit
 
 class RadiusSearchHeaderView: UIView {
     
-    let headerStackView = UIStackView()
-    let headerLabel = UILabel()
-    let middleStackView = UIStackView()
-    let inputStackView = UIStackView()
-    let withinLabel = UILabel()
-    let milesLabel = UILabel()
-    let buttonStackView = UIStackView()
-    let errorLabel = UILabel()
+    lazy var headerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    lazy var headerLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Search Nearby Schools"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var middleStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    lazy var inputStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    lazy var withinLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Within"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+
+    lazy var milesLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Miles"
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var buttonStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    lazy var errorLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        label.textColor = .systemRed
+        label.isHidden = true
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setup()
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
-    
-    func setup() {
-        headerStackView.translatesAutoresizingMaskIntoConstraints = false
-        headerStackView.axis = .vertical
         
-        middleStackView.translatesAutoresizingMaskIntoConstraints = false
-        middleStackView.axis = .horizontal
-        
-        inputStackView.translatesAutoresizingMaskIntoConstraints = false
-        inputStackView.axis = .horizontal
-        
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        headerLabel.adjustsFontSizeToFitWidth = true
-        headerLabel.textAlignment = .center
-        headerLabel.text = "Search Nearby Schools"
-        headerLabel.textColor = .white
-        headerLabel.numberOfLines = 0
-        
-        withinLabel.translatesAutoresizingMaskIntoConstraints = false
-        withinLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        withinLabel.adjustsFontSizeToFitWidth = true
-        withinLabel.textAlignment = .center
-        withinLabel.text = "Within"
-        withinLabel.textColor = .white
-        withinLabel.numberOfLines = 0
-        
-        milesLabel.translatesAutoresizingMaskIntoConstraints = false
-        milesLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        milesLabel.adjustsFontSizeToFitWidth = true
-        milesLabel.textAlignment = .center
-        milesLabel.text = "Miles"
-        milesLabel.textColor = .white
-        milesLabel.numberOfLines = 0
-        
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.textAlignment = .center
-        errorLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.numberOfLines = 0
-        errorLabel.textColor = .systemRed
-        errorLabel.isHidden = true
-    }
-    
     func layout() {
         self.addSubview(headerStackView)
         headerStackView.addSubview(headerLabel)

@@ -13,8 +13,23 @@ import CoreLocation
 
 class SchoolMapViewController: UIViewController {
     
-    let titleLabel = UILabel()
-    let map = MKMapView()
+    lazy var titleLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
+        label.text = "\(schoolName) Map"
+        label.textColor = schoolColor
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var map: MKMapView = {
+        var map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
+        map.delegate = self
+        return map
+    }()
     
     let latitude: String
     let longitude: String
@@ -37,24 +52,12 @@ class SchoolMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
+        view.backgroundColor = .white
+
         layout()
         setup()
     }
-    
-    func style() {
-        view.backgroundColor = .white
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        titleLabel.text = "\(schoolName) Map"
-        titleLabel.textColor = schoolColor
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textAlignment = .center
-        
-        map.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     func layout() {
         view.addSubview(titleLabel)
         view.addSubview(map)
@@ -72,8 +75,6 @@ class SchoolMapViewController: UIViewController {
     }
 
     func setup() {
-        map.delegate = self
-        
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {

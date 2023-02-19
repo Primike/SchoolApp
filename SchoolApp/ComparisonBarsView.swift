@@ -10,15 +10,59 @@ import UIKit
 
 class ComparisonBarsView: UIView {
     
-    let mathStackView = UIStackView()
-    let mathBar: BarView
-    let mathBar2: BarView
-    let writingStackView = UIStackView()
-    let writingBar: BarView
-    let writingBar2: BarView
-    let readingStackView = UIStackView()
-    let readingBar: BarView
-    let readingBar2: BarView
+    lazy var mathStackView: UIStackView = {
+        var view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var mathBar: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_math_avg_score, schoolColor: .black)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var mathBar2: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores2.sat_math_avg_score, schoolColor: .brown)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var writingStackView: UIStackView = {
+        var view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var writingBar: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_writing_avg_score, schoolColor: .black)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var writingBar2: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores2.sat_writing_avg_score, schoolColor: .brown)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var readingStackView: UIStackView = {
+        var view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var readingBar: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: .black)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var readingBar2: BarView = {
+        var view = BarView(frame: CGRect(), sectionScore: schoolScores2.sat_critical_reading_avg_score, schoolColor: .brown)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var schoolScores: SATScores
     let schoolScores2: SATScores
@@ -43,36 +87,12 @@ class ComparisonBarsView: UIView {
         let score6 = Int(scores2.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score6)/Double(800)))
         
-        mathBar = BarView(frame: CGRect(), sectionScore: scores.sat_math_avg_score, schoolColor: .black)
-        writingBar = BarView(frame: CGRect(), sectionScore: scores.sat_writing_avg_score, schoolColor: .black)
-        readingBar = BarView(frame: CGRect(), sectionScore: scores.sat_critical_reading_avg_score, schoolColor: .black)
-        
-        mathBar2 = BarView(frame: CGRect(), sectionScore: scores2.sat_math_avg_score, schoolColor: .brown)
-        writingBar2 = BarView(frame: CGRect(), sectionScore: scores2.sat_writing_avg_score, schoolColor: .brown)
-        readingBar2 = BarView(frame: CGRect(), sectionScore: scores2.sat_critical_reading_avg_score, schoolColor: .brown)
-
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        mathStackView.translatesAutoresizingMaskIntoConstraints = false
-        mathBar.translatesAutoresizingMaskIntoConstraints = false
-        mathBar2.translatesAutoresizingMaskIntoConstraints = false
-
-        writingStackView.translatesAutoresizingMaskIntoConstraints = false
-        writingBar.translatesAutoresizingMaskIntoConstraints = false
-        writingBar2.translatesAutoresizingMaskIntoConstraints = false
-
-        readingStackView.translatesAutoresizingMaskIntoConstraints = false
-        readingBar.translatesAutoresizingMaskIntoConstraints = false
-        readingBar2.translatesAutoresizingMaskIntoConstraints = false
-
     }
     
     func layout() {

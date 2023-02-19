@@ -10,11 +10,23 @@ import UIKit
 
 class SchoolScoresBottomView: UIView {
     
-    let satMathSubView: BottomSubjectView
+    lazy var satMathSubView: BottomSubjectView = {
+        var view = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT MATH", subjectScore: schoolScores.sat_math_avg_score)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
-    let satWritingSubView: BottomSubjectView
+    lazy var satWritingSubView: BottomSubjectView = {
+        var view = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT WRITING", subjectScore: schoolScores.sat_writing_avg_score)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
-    let satReadingSubView: BottomSubjectView
+    lazy var satReadingSubView: BottomSubjectView = {
+        var view = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT CRITICAL READING", subjectScore: schoolScores.sat_critical_reading_avg_score)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     let school: School
     let schoolScores: SATScores
@@ -25,27 +37,14 @@ class SchoolScoresBottomView: UIView {
         self.schoolColor = schoolColor
         self.schoolScores = schoolScores
         
-        self.satMathSubView = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT MATH", subjectScore: schoolScores.sat_math_avg_score)
-        self.satWritingSubView = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT WRITING", subjectScore: schoolScores.sat_writing_avg_score)
-        self.satReadingSubView = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT CRITICAL READING", subjectScore: schoolScores.sat_critical_reading_avg_score)
-        
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func style() {
-        satMathSubView.translatesAutoresizingMaskIntoConstraints = false
         
-        satWritingSubView.translatesAutoresizingMaskIntoConstraints = false
-        
-        satReadingSubView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     func layout() {
         self.addSubview(satMathSubView)
         self.addSubview(satWritingSubView)

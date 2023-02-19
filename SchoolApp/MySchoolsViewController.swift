@@ -10,9 +10,18 @@ import UIKit
 
 class MySchoolsViewController: UIViewController {
     
-    let mySchoolsHeaderView = MySchoolsHeaderView()
-    let schoolsTableView = UITableView()
+    lazy var mySchoolsHeaderView: MySchoolsHeaderView = {
+        var view = MySchoolsHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
+    lazy var schoolsTableView: UITableView = {
+        var view = UITableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+        
     let mySchoolsViewModel: MySchoolsViewModel
     
     required init(viewModel: MySchoolsViewModel) {
@@ -28,9 +37,9 @@ class MySchoolsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
-        layout()
+        view.backgroundColor = .white
         setup()
+        layout()
         mySchoolsEmpty()
     }
     
@@ -40,13 +49,16 @@ class MySchoolsViewController: UIViewController {
         schoolsTableView.reloadData()
         mySchoolsEmpty()
     }
+        
+    func setup() {
+        schoolsTableView.delegate = self
+        schoolsTableView.dataSource = self
+    }
     
-    func style() {
-        view.backgroundColor = .white
-        
-        mySchoolsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        
-        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
+    func mySchoolsEmpty() {
+        if mySchoolsViewModel.schools.count > 0 {
+            mySchoolsHeaderView.mySchoolsLabel.text = "My Schools"
+        }
     }
     
     func layout() {
@@ -65,17 +77,7 @@ class MySchoolsViewController: UIViewController {
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    func setup() {
-        schoolsTableView.delegate = self
-        schoolsTableView.dataSource = self
-    }
-    
-    func mySchoolsEmpty() {
-        if mySchoolsViewModel.schools.count > 0 {
-            mySchoolsHeaderView.mySchoolsLabel.text = "My Schools"
-        }
-    }
+
 }
 
 extension MySchoolsViewController: UITableViewDataSource {

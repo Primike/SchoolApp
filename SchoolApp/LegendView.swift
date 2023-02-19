@@ -10,12 +10,55 @@ import UIKit
 
 class LegendView: UIView {
     
-    let school1StackView = UIStackView()
-    let school1Box = UILabel()
-    let school1Label = UILabel()
-    let school2StackView = UIStackView()
-    let school2Box = UILabel()
-    let school2Label = UILabel()
+    lazy var school1StackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var school1Box: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .black
+        return label
+    }()
+    
+    lazy var school1Label: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = schoolName1
+        label.textColor = .black
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    lazy var school2StackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var school2Box: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .brown
+        return label
+    }()
+    
+    lazy var school2Label: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = schoolName2
+        label.textColor = .brown
+        label.numberOfLines = 2
+        return label
+    }()
     
     let schoolName1: String
     let schoolName2: String
@@ -25,42 +68,13 @@ class LegendView: UIView {
         self.schoolName2 = schoolName2
         
         super.init(frame: frame)
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func style() {
-        school1StackView.translatesAutoresizingMaskIntoConstraints = false
         
-        school1Box.translatesAutoresizingMaskIntoConstraints = false
-        school1Box.backgroundColor = .black
-        
-        school1Label.translatesAutoresizingMaskIntoConstraints = false
-        school1Label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        school1Label.adjustsFontSizeToFitWidth = true
-        school1Label.textAlignment = .center
-        school1Label.text = schoolName1
-        school1Label.textColor = .black
-        school1Label.numberOfLines = 2
-        
-        school2StackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        school2Box.translatesAutoresizingMaskIntoConstraints = false
-        school2Box.backgroundColor = .brown
-        
-        school2Label.translatesAutoresizingMaskIntoConstraints = false
-        school2Label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        school2Label.adjustsFontSizeToFitWidth = true
-        school2Label.textAlignment = .center
-        school2Label.text = schoolName2
-        school2Label.textColor = .brown
-        school2Label.numberOfLines = 2
-    }
-    
     func layout() {
         self.addSubview(school1StackView)
         self.addSubview(school2StackView)

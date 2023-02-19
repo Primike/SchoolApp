@@ -12,18 +12,22 @@ class SchoolsListViewModel {
     
     var schools = [School]()
     var schoolsScores = [SATScores]()
-    var schoolsSearchResults = [School]()
+    var schoolSearchResults = [School]()
     
     var schoolScores = SATScores()
     
     init(schools: [School], schoolsScores: [SATScores]) {
         self.schoolsScores = schoolsScores
         self.schools = schools
-        self.schoolsSearchResults = schools
+        self.schoolSearchResults = schools
+    }
+    
+    func getNumOfRowsInSection() -> Int? {
+        return schoolSearchResults.count
     }
     
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        let school = schoolsSearchResults[indexPath.row]
+        let school = schoolSearchResults[indexPath.row]
         return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
     }
     
@@ -37,17 +41,17 @@ class SchoolsListViewModel {
             }
             search = search.replacingOccurrences(of: "&", with: "and")
 
-            schoolsSearchResults =
+            schoolSearchResults =
             schools.filter { school in
                 return school.mergedText!.lowercased().contains(search.lowercased())
             }
         } else {
-            schoolsSearchResults = schools
+            schoolSearchResults = schools
         }
     }
     
     func rowSelectSearch(indexPath: IndexPath) {
-        if let scores = schoolsScores.first(where: {$0.dbn == schoolsSearchResults[indexPath.row].dbn}) {
+        if let scores = schoolsScores.first(where: {$0.dbn == schoolSearchResults[indexPath.row].dbn}) {
             schoolScores = scores
         } else {
             schoolScores = SATScores()

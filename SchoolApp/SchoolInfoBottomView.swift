@@ -10,9 +10,34 @@ import UIKit
 
 class SchoolInfoBottomView: UIView {
     
-    let stackView = UIStackView()
-    let aboutLabel = UILabel()
-    let schoolDescription = UILabel()
+    lazy var stackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var aboutLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size:100.0)
+        label.text = "About:"
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.textColor = .white
+        return label
+    }()
+
+    lazy var schoolDescription: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = school.overview_paragraph
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.textColor = .white
+        return label
+    }()
     
     let school: School
     let schoolColor: UIColor
@@ -22,33 +47,14 @@ class SchoolInfoBottomView: UIView {
         self.schoolColor = schoolColor
         
         super.init(frame: frame)
-        style()
+
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func style() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        aboutLabel.translatesAutoresizingMaskIntoConstraints = false
-        aboutLabel.font = UIFont(name:"HelveticaNeue-Bold", size:100.0)
-        aboutLabel.text = "About:"
-        aboutLabel.adjustsFontSizeToFitWidth = true
-        aboutLabel.textAlignment = .left
-        aboutLabel.textColor = .white
-        
-        schoolDescription.translatesAutoresizingMaskIntoConstraints = false
-        schoolDescription.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        schoolDescription.adjustsFontSizeToFitWidth = true
-        schoolDescription.text = school.overview_paragraph
-        schoolDescription.numberOfLines = 0
-        schoolDescription.textAlignment = .left
-        schoolDescription.textColor = .white
-    }
-    
     func layout() {
         self.addSubview(stackView)
         stackView.addSubview(aboutLabel)

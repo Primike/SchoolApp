@@ -9,6 +9,8 @@ import UIKit
 
 class SchoolsListViewController: UIViewController {
 
+    let viewModel: SchoolsListViewModel
+
     lazy var schoolsListHeader: SchoolsListHeaderView = {
         let headerView = SchoolsListHeaderView(frame: .zero)
         var size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -32,11 +34,9 @@ class SchoolsListViewController: UIViewController {
         searchBar.isTranslucent = false
         return searchBar
     }()
-    
-    let schoolsListViewModel: SchoolsListViewModel
-    
+        
     required init(viewModel: SchoolsListViewModel) {
-        self.schoolsListViewModel = viewModel
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,13 +73,13 @@ class SchoolsListViewController: UIViewController {
 extension SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: schoolsListViewModel.getInfo(for: indexPath))
+        schoolCell.configure(info: viewModel.getInfo(for: indexPath))
 
         return schoolCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schoolsListViewModel.schoolsSearchResults.count
+        return viewModel.getNumOfRowsInSection() ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -89,15 +89,15 @@ extension SchoolsListViewController: UITableViewDataSource {
 
 extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        schoolsListViewModel.rowSelectSearch(indexPath: indexPath)
+        viewModel.rowSelectSearch(indexPath: indexPath)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: schoolsListViewModel.schoolsSearchResults[indexPath.row], scores: schoolsListViewModel.schoolScores), animated: true)
+        navigationController?.pushViewController(SchoolTabBarViewController(school: viewModel.schoolSearchResults[indexPath.row], scores: viewModel.schoolScores), animated: true)
     }
 }
 
 extension SchoolsListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        schoolsListViewModel.textChanged(searchText: searchText)
+        viewModel.textChanged(searchText: searchText)
         schoolsTableView.reloadData()
     }
 }
