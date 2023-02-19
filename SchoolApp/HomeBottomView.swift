@@ -10,62 +10,89 @@ import UIKit
 
 class HomeBottomView: UIView {
     
-    let titleView = UIView()
-    let appTitleLabel = UILabel()
-    let divider = UILabel()
+    lazy var titleView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
-    let schoolsListButtonView = UIView()
-    let mapSearchButtonView = UIView()
-    let mySchoolsButtonView = UIView()
-    let smallButtonsView = UIView()
+    lazy var appTitleLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = "Schools App"
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
+    }()
     
-    let bottomView = UIView()
-    let welcomeLabel = UILabel()
-    let divider2 = UILabel()
+    lazy var divider: UILabel = {
+        var divider = UILabel()
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.backgroundColor = .white
+        return divider
+    }()
     
+    lazy var schoolsListButtonView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var mapSearchButtonView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var mySchoolsButtonView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var smallButtonsView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var bottomView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 70
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    lazy var welcomeLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = "Welcome"
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var divider2: UILabel = {
+        var divider = UILabel()
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.backgroundColor = .black
+        return divider
+    }()
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        style()
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        titleView.translatesAutoresizingMaskIntoConstraints = false
-        
-        appTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        appTitleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        appTitleLabel.text = "Schools App"
-        appTitleLabel.textColor = .white
-        appTitleLabel.adjustsFontSizeToFitWidth = true
-        appTitleLabel.textAlignment = .center
-        
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.backgroundColor = .white
-        
-        schoolsListButtonView.translatesAutoresizingMaskIntoConstraints = false
-        mapSearchButtonView.translatesAutoresizingMaskIntoConstraints = false
-        mySchoolsButtonView.translatesAutoresizingMaskIntoConstraints = false
-        smallButtonsView.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.layer.cornerRadius = 70
-        bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        bottomView.backgroundColor = UIColor.white
-        
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
-        welcomeLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        welcomeLabel.text = "Welcome"
-        welcomeLabel.textColor = .black
-        welcomeLabel.adjustsFontSizeToFitWidth = true
-        welcomeLabel.textAlignment = .center
-        
-        divider2.translatesAutoresizingMaskIntoConstraints = false
-        divider2.backgroundColor = .black
     }
     
     func layout() {

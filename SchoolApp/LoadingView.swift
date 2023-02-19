@@ -10,42 +10,45 @@ import UIKit
 
 class LoadingView: UIView {
     
-    let gradient = CAGradientLayer()
-    let stackView = UIStackView()
-    let appTitleLabel = UILabel()
-    let appImage = UIImageView(image: UIImage(named: "appimage"))
-    let activityIndicator = UIActivityIndicatorView(style: .large)
+    lazy var stackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var appTitleLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.text = "Schools App"
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var appImage: UIImageView = {
+        var image = UIImageView(image: UIImage(named: "appimage"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        indicator.color = .systemBlue
+        return indicator
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        style()
         layout()
-        self.layer.addSublayer(gradient)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func style() {
-        gradient.frame = self.layer.bounds
-        gradient.colors = [UIColor.clear.cgColor, UIColor.blue.cgColor]
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        appTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        appTitleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        appTitleLabel.text = "Schools App"
-        appTitleLabel.textColor = .black
-        appTitleLabel.adjustsFontSizeToFitWidth = true
-        appTitleLabel.textAlignment = .center
-        
-        appImage.translatesAutoresizingMaskIntoConstraints = false
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.startAnimating()
-        activityIndicator.color = .systemBlue
     }
     
     func layout() {

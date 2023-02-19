@@ -11,9 +11,9 @@ import UIKit
 class MySchoolsViewModel {
     
     var schools = [School]()
-    var schoolsScores = [SchoolScores]()
+    var schoolsScores = [SATScores]()
     
-    init(schools: [School], schoolsScores: [SchoolScores]) {
+    init(schools: [School], schoolsScores: [SATScores]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
         mySchools()
@@ -21,7 +21,7 @@ class MySchoolsViewModel {
     
     func mySchools() {
         var mySchools = [School]()
-        var mySchoolsScores = [SchoolScores]()
+        var mySchoolsScores = [SATScores]()
         
         let defaults = UserDefaults.standard
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
@@ -36,7 +36,7 @@ class MySchoolsViewModel {
             if let scores = schoolsScores.first(where: {$0.dbn == i.dbn}) {
                 mySchoolsScores.append(scores)
             } else {
-                mySchoolsScores.append(SchoolScores())
+                mySchoolsScores.append(SATScores())
             }
         }
         self.schools = mySchools

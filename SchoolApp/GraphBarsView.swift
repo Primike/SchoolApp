@@ -14,11 +14,11 @@ class GraphBarsView: UIView {
     let writingBar: BarView
     let readingBar: BarView
     
-    var schoolScores: SchoolScores
+    var schoolScores: SATScores
     let schoolColor: UIColor
     var graphHeightValues = [Float]()
     
-    init(frame: CGRect, scores: SchoolScores, schoolColor: UIColor) {
+    init(frame: CGRect, scores: SATScores, schoolColor: UIColor) {
         self.schoolColor = schoolColor
         self.schoolScores = scores
         

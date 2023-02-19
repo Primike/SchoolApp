@@ -10,13 +10,23 @@ import UIKit
 
 class HomeTopView: UIView {
     
-    let wallpaper = UIImageView(image: UIImage(named: "schoolwallpaper"))
-    let wallpaper2 = UIImageView(image: UIImage(named: "pavement"))
+    lazy var schoolWallpaper: UIImageView = {
+        var image = UIImageView(image: UIImage(named: "schoolwallpaper"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleToFill
+        image.clipsToBounds = true
+        return image
+    }()
+    
+    lazy var pavementWallpaper: UIImageView = {
+        var image = UIImageView(image: UIImage(named: "pavement"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        style()
         layout()
     }
     
@@ -24,28 +34,20 @@ class HomeTopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func style() {
-        wallpaper.translatesAutoresizingMaskIntoConstraints = false
-        wallpaper.contentMode = .scaleToFill
-        wallpaper.clipsToBounds = true
-
-        wallpaper2.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     func layout() {
-        self.addSubview(wallpaper)
-        self.addSubview(wallpaper2)
+        self.addSubview(schoolWallpaper)
+        self.addSubview(pavementWallpaper)
 
         NSLayoutConstraint.activate([
-            wallpaper.topAnchor.constraint(equalTo: self.topAnchor),
-            wallpaper.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.55),
-            wallpaper.widthAnchor.constraint(equalTo: self.widthAnchor),
-            wallpaper.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            schoolWallpaper.topAnchor.constraint(equalTo: self.topAnchor),
+            schoolWallpaper.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.55),
+            schoolWallpaper.widthAnchor.constraint(equalTo: self.widthAnchor),
+            schoolWallpaper.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
-            wallpaper2.topAnchor.constraint(equalTo: wallpaper.bottomAnchor),
-            wallpaper2.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.45),
-            wallpaper2.widthAnchor.constraint(equalTo: self.widthAnchor),
-            wallpaper2.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            pavementWallpaper.topAnchor.constraint(equalTo: schoolWallpaper.bottomAnchor),
+            pavementWallpaper.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.45),
+            pavementWallpaper.widthAnchor.constraint(equalTo: self.widthAnchor),
+            pavementWallpaper.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
 }

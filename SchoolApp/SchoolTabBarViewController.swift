@@ -11,10 +11,10 @@ import UIKit
 class SchoolTabBarViewController: UITabBarController {
 
     var school: School
-    var schoolScores: SchoolScores
+    var schoolScores: SATScores
     var schoolColor = UIColor.systemBlue
     
-    init(school: School, scores: SchoolScores) {
+    init(school: School, scores: SATScores) {
         self.school = school
         self.schoolScores = scores
         

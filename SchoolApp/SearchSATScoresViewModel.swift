@@ -10,13 +10,13 @@ import UIKit
 
 class SearchSATScoresViewModel {
     var schools: [School]
-    var schoolsScores: [SchoolScores]
+    var schoolsScores: [SATScores]
     var calculatedSchools = [School]()
-    var calculatedSchoolsScores = [SchoolScores]()
+    var calculatedSchoolsScores = [SATScores]()
     var myTotalScore = 0
     var number = 10
     
-    init(schools: [School], schoolsScores: [SchoolScores]) {
+    init(schools: [School], schoolsScores: [SATScores]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
         

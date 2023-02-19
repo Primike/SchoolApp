@@ -1,5 +1,5 @@
 //
-//  SchoolStructs.swift
+//  School.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 6/2/22.

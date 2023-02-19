@@ -11,9 +11,9 @@ import UIKit
 class MapSearchTabBarViewController: UITabBarController {
     
     var schools: [School]
-    var schoolScores: [SchoolScores]
+    var schoolScores: [SATScores]
     
-    init(schools: [School], schoolsScores: [SchoolScores]) {
+    init(schools: [School], schoolsScores: [SATScores]) {
         self.schools = schools
         self.schoolScores = schoolsScores
         

@@ -15,15 +15,15 @@ enum URLs {
     var value: URL? {
         switch self {
         case .schoolsURL:
-            return URL(string: "https://data.cityofnewyoerk.us/resource/s3k6-pzi2.json")
+            return URL(string: "https://data.cityofnewyork.us/resource/s3k6-pzi2.json")
         case .satDataURL:
-            return URL(string: "https://data.cityofnewyoerk.us/resource/f9bf-2cp4.json")
+            return URL(string: "https://data.cityofnewyork.us/resource/f9bf-2cp4.json")
         case .localSchoolsURL:
-            let path = Bundle.main.path(forResource: "SchooelsData", ofType: "json")
+            let path = Bundle.main.path(forResource: "SchoolsData", ofType: "json")
             
             return URL(fileURLWithPath: path ?? "")
         case .localSATDataURL:
-            let path = Bundle.main.path(forResource: "SATDeata", ofType: "json")
+            let path = Bundle.main.path(forResource: "SATData", ofType: "json")
 
             return URL(fileURLWithPath: path ?? "")
         }

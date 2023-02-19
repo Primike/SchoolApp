@@ -23,12 +23,12 @@ class ComparisonViewController: UIViewController {
 
     
     var school: School
-    var schoolScores: SchoolScores
+    var schoolScores: SATScores
     var school2: School
-    var schoolScores2: SchoolScores
+    var schoolScores2: SATScores
     var schoolColor = UIColor.systemBlue
     
-    init(school1: School, scores1: SchoolScores, school2: School, scores2: SchoolScores) {
+    init(school1: School, scores1: SATScores, school2: School, scores2: SATScores) {
         self.school = school1
         self.schoolScores = scores1
         self.school2 = school2

@@ -9,10 +9,29 @@ import UIKit
 
 class SchoolsListViewController: UIViewController {
 
-    let schoolsListHeader = SchoolsListHeaderView(frame: .zero)
+    lazy var schoolsListHeader: SchoolsListHeaderView = {
+        let headerView = SchoolsListHeaderView(frame: .zero)
+        var size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        size.width = UIScreen.main.bounds.width
+        headerView.frame.size = size
+        return headerView
+    }()
 
-    let schoolsTableView = UITableView()
-    let schoolsSearchBar = UISearchBar()
+    lazy var schoolsTableView: UITableView = {
+        var tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.tableHeaderView = schoolsListHeader
+        return tableView
+    }()
+    
+    lazy var schoolsSearchBar: UISearchBar = {
+        var searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = "Search Schools"
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        return searchBar
+    }()
     
     let schoolsListViewModel: SchoolsListViewModel
     
@@ -29,24 +48,17 @@ class SchoolsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
-        layout()
-        setup()
-    }
-    
-    func style() {
         view.backgroundColor = .white
-        
-        schoolsTableView.translatesAutoresizingMaskIntoConstraints = false
-        
         navigationItem.titleView = schoolsSearchBar
-        schoolsSearchBar.searchBarStyle = UISearchBar.Style.default
-        schoolsSearchBar.placeholder = "Search Schools"
-        schoolsSearchBar.sizeToFit()
-        schoolsSearchBar.isTranslucent = false
+
+        layout()
     }
     
     func layout() {
+        schoolsTableView.delegate = self
+        schoolsTableView.dataSource = self
+        schoolsSearchBar.delegate = self
+
         view.addSubview(schoolsTableView)
 
         NSLayoutConstraint.activate([
@@ -55,17 +67,6 @@ class SchoolsListViewController: UIViewController {
             schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-    
-    func setup() {
-        schoolsTableView.delegate = self
-        schoolsTableView.dataSource = self
-        schoolsSearchBar.delegate = self
-        
-        var size = schoolsListHeader.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        size.width = UIScreen.main.bounds.width
-        schoolsListHeader.frame.size = size
-        schoolsTableView.tableHeaderView = schoolsListHeader
     }
 }
 
@@ -86,8 +87,6 @@ extension SchoolsListViewController: UITableViewDataSource {
     }
 }
 
-
-
 extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsListViewModel.rowSelectSearch(indexPath: indexPath)
@@ -98,7 +97,6 @@ extension SchoolsListViewController: UITableViewDelegate {
 
 extension SchoolsListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
         schoolsListViewModel.textChanged(searchText: searchText)
         schoolsTableView.reloadData()
     }

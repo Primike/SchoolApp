@@ -11,12 +11,12 @@ import UIKit
 class SchoolsListViewModel {
     
     var schools = [School]()
-    var schoolsScores = [SchoolScores]()
+    var schoolsScores = [SATScores]()
     var schoolsSearchResults = [School]()
     
-    var schoolScores = SchoolScores()
+    var schoolScores = SATScores()
     
-    init(schools: [School], schoolsScores: [SchoolScores]) {
+    init(schools: [School], schoolsScores: [SATScores]) {
         self.schoolsScores = schoolsScores
         self.schools = schools
         self.schoolsSearchResults = schools
@@ -50,7 +50,7 @@ class SchoolsListViewModel {
         if let scores = schoolsScores.first(where: {$0.dbn == schoolsSearchResults[indexPath.row].dbn}) {
             schoolScores = scores
         } else {
-            schoolScores = SchoolScores()
+            schoolScores = SATScores()
         }
     }
 }

@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol HomeCoordinating {
+protocol Coordinating {
     var navigationController: UINavigationController? { get set }
     func start()
 }
 
-class HomeCoordinator: HomeCoordinating {
+class HomeCoordinator: Coordinating {
     weak var navigationController: UINavigationController?
     
     public required init(navigationController: UINavigationController?) {

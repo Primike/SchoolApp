@@ -11,12 +11,12 @@ import UIKit
 class TopSchoolsViewModel {
     
     var schools = [School]()
-    var schoolsScores = [SchoolScores]()
-    var topSchoolsScores = [SchoolScores]()
+    var schoolsScores = [SATScores]()
+    var topSchoolsScores = [SATScores]()
     var topSchools = [School]()
     var number = 10
     
-    init(schools: [School], schoolsScores: [SchoolScores]) {
+    init(schools: [School], schoolsScores: [SATScores]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
     }

@@ -17,10 +17,10 @@ class SchoolScoresViewController: UIViewController {
     let graphButton = UIButton()
     
     let school: School
-    let schoolScores: SchoolScores
+    let schoolScores: SATScores
     let schoolColor: UIColor
     
-    init(school: School, scores: SchoolScores, schoolColor: UIColor) {
+    init(school: School, scores: SATScores, schoolColor: UIColor) {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor

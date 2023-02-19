@@ -20,10 +20,10 @@ class SchoolGraphViewController: UIViewController {
     let xAxisView = XAxisView()
 
     var school: School
-    var schoolScores: SchoolScores
+    var schoolScores: SATScores
     let schoolColor: UIColor
 
-    init(school: School, scores: SchoolScores, schoolColor: UIColor) {
+    init(school: School, scores: SATScores, schoolColor: UIColor) {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor

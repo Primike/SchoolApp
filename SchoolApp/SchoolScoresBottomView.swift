@@ -17,10 +17,10 @@ class SchoolScoresBottomView: UIView {
     let satReadingSubView: BottomSubjectView
 
     let school: School
-    let schoolScores: SchoolScores
+    let schoolScores: SATScores
     let schoolColor: UIColor
 
-    init(frame: CGRect, school: School, schoolScores: SchoolScores, schoolColor: UIColor) {
+    init(frame: CGRect, school: School, schoolScores: SATScores, schoolColor: UIColor) {
         self.school = school
         self.schoolColor = schoolColor
         self.schoolScores = schoolScores

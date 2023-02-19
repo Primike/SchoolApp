@@ -15,11 +15,11 @@ class ComparisonGraphView: UIView {
     let comparisonBarsView: ComparisonBarsView
     let xAxisView = XAxisView()
     
-    var schoolScores: SchoolScores
-    let schoolScores2: SchoolScores
+    var schoolScores: SATScores
+    let schoolScores2: SATScores
     let schoolColor: UIColor
     
-    init(frame: CGRect, scores: SchoolScores, scores2: SchoolScores, schoolColor: UIColor) {
+    init(frame: CGRect, scores: SATScores, scores2: SATScores, schoolColor: UIColor) {
         self.schoolColor = schoolColor
         self.schoolScores = scores
         self.schoolScores2 = scores2

@@ -7,11 +7,20 @@
 
 import Foundation
 
-class HomeViewModel {
+protocol HomeViewModeling {
+    var dataMangaer: HomeDataManaging { get set }
+    var schools: [School] { get set }
+    var schoolsScores: [SATScores] { get set }
+    func getSchools(completion: @escaping (Result<[School], Error>) -> Void)
+    func getSchoolScores(completion: @escaping (Result<[SATScores], Error>) -> Void)
+    func schoolsDataModifier(results: [School]) -> [School]
+    func satDataModifier(satData: [SATScores]) -> [SATScores]
+}
 
+class HomeViewModel: HomeViewModeling {
     var dataMangaer: HomeDataManaging
     var schools = [School]()
-    var schoolsScores = [SchoolScores]()
+    var schoolsScores = [SATScores]()
     
     required init(dataManager: HomeDataManaging) {
         self.dataMangaer = dataManager
@@ -43,7 +52,7 @@ class HomeViewModel {
         })
     }
     
-    func getSchoolScores(completion: @escaping (Result<[SchoolScores], Error>) -> Void) {
+    func getSchoolScores(completion: @escaping (Result<[SATScores], Error>) -> Void) {
         dataMangaer.getSATData(url: URLs.satDataURL.value, completion: {[weak self] result in
             guard let self = self else {
                 return
@@ -97,13 +106,13 @@ class HomeViewModel {
         return results
     }
     
-    func satDataModifier(satData: [SchoolScores]) -> [SchoolScores] {
+    func satDataModifier(satData: [SATScores]) -> [SATScores] {
         var satData = satData
         
         for i in 0..<satData.count {
             if Int(satData[i].sat_critical_reading_avg_score) != nil && Int(satData[i].sat_math_avg_score) != nil && Int(satData[i].sat_writing_avg_score) != nil {
             } else {
-                satData[i] = SchoolScores()
+                satData[i] = SATScores()
             }
         }
         
