@@ -15,6 +15,7 @@ protocol Coordinating {
 
 class HomeCoordinator: Coordinating {
     weak var navigationController: UINavigationController?
+    var childCoordinators: [Coordinating] = []
     
     public required init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
