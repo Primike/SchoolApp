@@ -13,3 +13,5 @@ This app also implements Mapkit and allows users to search by location
 This app allows users to save schools using user defaults
 
 This app also has a saved copy of the api database incase there is no connection
+
+App Video Demo: https://www.youtube.com/watch?v=Ir6Hv9RTg0g 
