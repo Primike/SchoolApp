@@ -16,15 +16,8 @@ class MySchoolsHeaderView: UIView {
         return stackView
     }()
 
-    lazy var mySchoolsLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Add Schools And They Will Appear Here!"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var mySchoolsLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Add Schools And They Will Appear Here!", labelTextColor: .white)
         return label
     }()
 

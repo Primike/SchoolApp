@@ -57,23 +57,12 @@ class AddressSearchViewController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "Search"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)
         button.configuration?.image = UIImage(systemName: "magnifyingglass",
                                                          withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/42)!))
         return button
-    }()
-
-    lazy var configuration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.baseBackgroundColor = .black
-        configuration.baseForegroundColor = .white
-        configuration.cornerStyle = .capsule
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 5.0
-        return configuration
     }()
 
     let viewModel: MapSearchViewModel

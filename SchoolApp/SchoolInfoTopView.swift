@@ -22,33 +22,20 @@ class SchoolInfoTopView: UIView {
         return stackView
     }()
 
-    lazy var schoolName: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.text = school.school_name
-        label.numberOfLines = 2
+    lazy var schoolName: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: schoolColor)
         label.textAlignment = .left
         return label
     }()
 
-    lazy var schoolLocation: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.text = school.location
+    lazy var schoolLocation: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.location, labelTextColor: .black)
         label.textAlignment = .left
         return label
     }()
 
-    lazy var schoolPhone: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Phone: \(school.phone_number)"
+    lazy var schoolPhone: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Phone: \(school.phone_number)", labelTextColor: .black)
         label.textAlignment = .left
         return label
     }()

@@ -16,15 +16,8 @@ class TopSchoolsHeaderView: UIView {
         return stackView
     }()
 
-    lazy var topSchoolsLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Top Schools By Total SAT Score"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var topSchoolsLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Top Schools By Total SAT Score", labelTextColor: .white)
         return label
     }()
     
@@ -34,25 +27,13 @@ class TopSchoolsHeaderView: UIView {
         return stackView
     }()
 
-    lazy var topLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Top"
-        label.textColor = .white
+    lazy var topLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Top", labelTextColor: .white)
         return label
     }()
 
-    lazy var schoolsLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Schools"
-        label.textColor = .white
+    lazy var schoolsLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Schools", labelTextColor: .white)
         return label
     }()
 

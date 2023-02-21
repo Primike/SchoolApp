@@ -10,6 +10,7 @@ import UIKit
 class SchoolsListViewController: UIViewController {
 
     let viewModel: SchoolsListViewModel
+    var coordinator: SchoolsListCoordinator?
 
     lazy var schoolsListHeader: SchoolsListHeaderView = {
         let headerView = SchoolsListHeaderView(frame: .zero)

@@ -16,14 +16,8 @@ class AddressSearchHeaderView: UIView {
         return stackView
     }()
     
-    lazy var addressHeaderLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Search Nearby Schools By Address"
-        label.textColor = .white
+    lazy var addressHeaderLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Nearby Schools By Address", labelTextColor: .white)
         return label
     }()
     
@@ -33,26 +27,13 @@ class AddressSearchHeaderView: UIView {
         return stackView
     }()
 
-    lazy var findLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Find"
-        label.textColor = .white
+    lazy var findLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Find", labelTextColor: .white)
         return label
     }()
     
-    lazy var nearestLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Nearest Schools"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var nearestLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Nearest Schools", labelTextColor: .white)
         return label
     }()
     
@@ -62,25 +43,13 @@ class AddressSearchHeaderView: UIView {
         return stackView
     }()
 
-    lazy var addressLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Address:"
-        label.textColor = .white
+    lazy var addressLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Address:", labelTextColor: .white)
         return label
     }()
 
-    lazy var errorLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .systemRed
-        label.text = "Error Label"
+    lazy var errorLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Error Label", labelTextColor: .systemRed)
         label.isHidden = true
         return label
     }()

@@ -16,14 +16,9 @@ class LoadingView: UIView {
         return stackView
     }()
     
-    lazy var appTitleLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = "Schools App"
-        label.textColor = .black
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    lazy var appTitleLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Schools App", labelTextColor: .black)
+        label.numberOfLines = 1
         return label
     }()
     
@@ -52,6 +47,8 @@ class LoadingView: UIView {
     }
     
     func layout() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(stackView)
         self.addSubview(activityIndicator)
 

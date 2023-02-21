@@ -24,30 +24,24 @@ class SchoolTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    lazy var schoolNameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var schoolNameLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 2
         return label
     }()
 
-    lazy var schoolAddressLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var schoolAddressLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        label.numberOfLines = 1
         label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
-    lazy var schoolBoroLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var schoolBoroLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .right
         return label
     }()

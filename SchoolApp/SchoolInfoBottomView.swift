@@ -16,26 +16,16 @@ class SchoolInfoBottomView: UIView {
         return stackView
     }()
     
-    lazy var aboutLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size:100.0)
-        label.text = "About:"
-        label.adjustsFontSizeToFitWidth = true
+    lazy var aboutLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "About:", labelTextColor: .white)
         label.textAlignment = .left
-        label.textColor = .white
         return label
     }()
 
-    lazy var schoolDescription: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.text = school.overview_paragraph
+    lazy var schoolDescription: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.overview_paragraph, labelTextColor: .white)
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.textColor = .white
         return label
     }()
     

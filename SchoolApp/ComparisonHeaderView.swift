@@ -16,15 +16,8 @@ class ComparisonHeaderView: UIView {
         return stackView
     }()
     
-    lazy var mySchoolsLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Select Two Schools To Compare Details"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var mySchoolsLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Select Two Schools To Compare Details", labelTextColor: .white)
         return label
     }()
     

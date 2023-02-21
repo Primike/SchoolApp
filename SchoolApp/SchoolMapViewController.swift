@@ -13,14 +13,8 @@ import CoreLocation
 
 class SchoolMapViewController: UIViewController {
     
-    lazy var titleLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        label.text = "\(schoolName) Map"
-        label.textColor = schoolColor
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    lazy var titleLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(schoolName) Map", labelTextColor: schoolColor)
         return label
     }()
     

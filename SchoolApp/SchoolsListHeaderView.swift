@@ -24,25 +24,19 @@ class SchoolsListHeaderView: UIView {
         return stackView
     }()
     
-    lazy var titleLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var titleLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "NYC High School List", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 50.0 )
-        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
         label.textAlignment = .left
-        label.text = "NYC High School List"
-        label.textColor = .black
         return label
     }()
     
-    lazy var dateLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var dateLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Last Updated September 10, 2018", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue", size: 20.0 )
-        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
         label.textAlignment = .left
-        label.text = "Last Updated September 10, 2018"
-        label.textColor = .black
         return label
     }()
 

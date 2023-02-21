@@ -16,14 +16,8 @@ class HomeBottomView: UIView {
         return view
     }()
     
-    lazy var appTitleLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = "Schools App"
-        label.textColor = .white
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    lazy var appTitleLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Schools App", labelTextColor: .white)
         return label
     }()
     
@@ -67,14 +61,8 @@ class HomeBottomView: UIView {
         return view
     }()
     
-    lazy var welcomeLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = "Welcome"
-        label.textColor = .black
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    lazy var welcomeLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Welcome", labelTextColor: .black)
         return label
     }()
     
@@ -96,6 +84,10 @@ class HomeBottomView: UIView {
     }
     
     func layout() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+//        self.layer.cornerRadius = 70
+//        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
         self.addSubview(titleView)
         self.addSubview(schoolsListButtonView)
         self.addSubview(mapSearchButtonView)

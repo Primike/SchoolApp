@@ -35,6 +35,8 @@ class HomeTopView: UIView {
     }
     
     func layout() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(schoolWallpaper)
         self.addSubview(pavementWallpaper)
 

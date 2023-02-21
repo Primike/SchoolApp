@@ -10,14 +10,9 @@ import UIKit
 
 class YAxisView: UIView {
     
-    lazy var label800: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var label800: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "800 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label.text = "800 -"
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
         return label
     }()
 
@@ -27,14 +22,9 @@ class YAxisView: UIView {
         return stackView
     }()
     
-    lazy var label600: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var label600: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "600 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label.text = "600 -"
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
         return label
     }()
 
@@ -44,14 +34,9 @@ class YAxisView: UIView {
         return stackView
     }()
     
-    lazy var label400: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var label400: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "400 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label.text = "400 -"
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
         return label
     }()
 
@@ -61,25 +46,15 @@ class YAxisView: UIView {
         return stackView
     }()
     
-    lazy var label200: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var label200: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "200 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label.text = "200 -"
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
         return label
     }()
 
-    lazy var label0: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var label0: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "0 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        label.text = "0 -"
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
         return label
     }()
 

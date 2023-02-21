@@ -16,94 +16,44 @@ class ComparisonInfoView: UIView {
         return stackView
     }()
 
-    lazy var schoolName: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 2
-        label.textAlignment = .left
-        label.textColor = color
-        label.text = school.school_name
+    lazy var schoolName: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: color)
         return label
     }()
     
     
-    lazy var schoolLocation: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .left
-        label.numberOfLines = 2
-        label.textColor = color
-        label.text = school.location
+    lazy var schoolLocation: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.location, labelTextColor: color)
         return label
     }()
     
-    lazy var schoolPhone: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.textAlignment = .left
-        label.textColor = color
-        label.text = "Phone: \(school.phone_number)"
+    lazy var schoolPhone: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Phone: \(school.phone_number)", labelTextColor: color)
         return label
     }()
     
-    lazy var distanceLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Distance: Not Available"
-        label.textAlignment = .left
-        label.textColor = color
+    lazy var distanceLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Distance: Not Available", labelTextColor: color)
         return label
     }()
     
-    lazy var testtakersLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Test Takers: Not Available"
-        label.textAlignment = .left
-        label.textColor = color
+    lazy var testtakersLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Test Takers: Not Available", labelTextColor: color)
         return label
     }()
     
-    lazy var mathLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Math Score: Not Available"
-        label.textAlignment = .left
-        label.textColor = color
+    lazy var mathLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Math Score: Not Available", labelTextColor: color)
         return label
     }()
 
-    lazy var writingLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Writing Score: Not Available"
-        label.textAlignment = .left
-        label.textColor = color
+    lazy var writingLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Writing Score: Not Available", labelTextColor: color)
         return label
     }()
     
-    lazy var readingLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Reading Score: Not Available"
-        label.textAlignment = .left
-        label.textColor = color
+    lazy var readingLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Reading Score: Not Available", labelTextColor: color)
         return label
     }()
     

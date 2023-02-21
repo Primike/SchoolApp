@@ -10,39 +10,21 @@ import UIKit
 
 class XAxisView: UIView {
     
-    lazy var mathLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var mathLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectNames[0], labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        label.text = subjectNames[0]
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.textColor = .black
         return label
     }()
     
-    lazy var writingLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var writingLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectNames[1], labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        label.text = subjectNames[1]
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.textColor = .black
         return label
     }()
 
-    lazy var readingLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var readingLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectNames[2], labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        label.text = subjectNames[2]
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.textColor = .black
         return label
     }()
     

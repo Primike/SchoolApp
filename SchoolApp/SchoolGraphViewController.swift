@@ -25,14 +25,9 @@ class SchoolGraphViewController: UIViewController {
         return image
     }()
 
-    lazy var schoolNameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = school.school_name
-        label.textColor = schoolColor
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
+    lazy var schoolNameLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: schoolColor)
+        label.numberOfLines = 1
         return label
     }()
 

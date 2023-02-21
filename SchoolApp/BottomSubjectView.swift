@@ -18,25 +18,13 @@ class BottomSubjectView: UIView {
         return stackView
     }()
 
-    lazy var satSubjectLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = subjectName
-        label.textColor = .white
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    lazy var satSubjectLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectName, labelTextColor: .white)
         return label
     }()
 
-    lazy var satSubjectScore: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "\(subjectScore)/800"
-        label.textColor = .white
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    lazy var satSubjectScore: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(subjectScore)/800", labelTextColor: .white)
         return label
     }()
     

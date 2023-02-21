@@ -10,15 +10,10 @@ import UIKit
 
 class BarView: UIView {
     
-    lazy var bar: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var bar: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: sectionScore, labelTextColor: .white)
         label.backgroundColor = schoolColor
         label.font = UIFont(name:"HelveticaNeue", size: 30.0)
-        label.text = sectionScore
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.textColor = .white
         return label
     }()
     

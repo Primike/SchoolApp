@@ -10,61 +10,57 @@ import UIKit
 
 class SearchScoresHeaderView: UIView {
 
-    let headerStackView = UIStackView()
-    let topSchoolsLabel = UILabel()
-    let filterStackView = UIStackView()
-    let scoreStackView = UIStackView()
-    let scoreLabel = UILabel()
-    let numberStackView = UIStackView()
-    let numberOfSchoolsLabel = UILabel()
+    lazy var headerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    lazy var topSchoolsLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .white)
+        return label
+    }()
+    
+    lazy var filterStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    lazy var scoreStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+
+    lazy var scoreLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Score", labelTextColor: .white)
+        return label
+    }()
+
+    lazy var numberStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+
+    lazy var numberOfSchoolsLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "# Of Schools", labelTextColor: .white)
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setup()
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    func setup() {
-        headerStackView.translatesAutoresizingMaskIntoConstraints = false
-        headerStackView.axis = .horizontal
-
-        topSchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        topSchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        topSchoolsLabel.adjustsFontSizeToFitWidth = true
-        topSchoolsLabel.textAlignment = .center
-        topSchoolsLabel.text = "Search Schools By SAT Score"
-        topSchoolsLabel.textColor = .white
-        topSchoolsLabel.numberOfLines = 0
-        
-        filterStackView.translatesAutoresizingMaskIntoConstraints = false
-        filterStackView.axis = .vertical
-
-        scoreStackView.translatesAutoresizingMaskIntoConstraints = false
-        scoreStackView.axis = .horizontal
-        
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        scoreLabel.adjustsFontSizeToFitWidth = true
-        scoreLabel.textAlignment = .center
-        scoreLabel.text = "Score"
-        scoreLabel.textColor = .white
-        scoreLabel.numberOfLines = 0
-        
-        numberStackView.translatesAutoresizingMaskIntoConstraints = false
-        numberStackView.axis = .horizontal
-        
-        numberOfSchoolsLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberOfSchoolsLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        numberOfSchoolsLabel.adjustsFontSizeToFitWidth = true
-        numberOfSchoolsLabel.textAlignment = .center
-        numberOfSchoolsLabel.text = "# Of Schools"
-        numberOfSchoolsLabel.textColor = .white
-        numberOfSchoolsLabel.numberOfLines = 0
     }
 
     func layout() {

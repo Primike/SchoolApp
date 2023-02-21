@@ -16,22 +16,15 @@ class LegendView: UIView {
         return stackView
     }()
     
-    lazy var school1Box: UILabel = {
-        var label = UILabel()
+    lazy var school1Box: UIView = {
+        var label = UIView()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
         return label
     }()
     
-    lazy var school1Label: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = schoolName1
-        label.textColor = .black
-        label.numberOfLines = 2
+    lazy var school1Label: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: schoolName1, labelTextColor: .black)
         return label
     }()
     
@@ -41,22 +34,15 @@ class LegendView: UIView {
         return stackView
     }()
     
-    lazy var school2Box: UILabel = {
-        var label = UILabel()
+    lazy var school2Box: UIView = {
+        var label = UIView()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .brown
         return label
     }()
     
-    lazy var school2Label: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = schoolName2
-        label.textColor = .brown
-        label.numberOfLines = 2
+    lazy var school2Label: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: schoolName2, labelTextColor: .brown)
         return label
     }()
     

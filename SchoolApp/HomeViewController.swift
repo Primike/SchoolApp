@@ -11,25 +11,20 @@ import UIKit
 class HomeViewController: UIViewController {
     
     let viewModel: HomeViewModel
-    var coordinator: Coordinating?
+    var coordinator: HomeCoordinator?
 
     lazy var loadingView: LoadingView = {
         let view = LoadingView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var homeBottomView: HomeBottomView = {
         let view = HomeBottomView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 70
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return view
     }()
     
     lazy var homeTopView: HomeTopView = {
         let view = HomeTopView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -44,7 +39,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "NYC Schools List"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
         button.configuration?.image = UIImage(systemName: "list.star",
@@ -56,7 +51,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "Map Search"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
         button.configuration?.image = UIImage(systemName: "map",
@@ -68,7 +63,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "My Schools"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
         button.configuration?.image = UIImage(systemName: "bolt.heart",
@@ -80,7 +75,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "Top Schools"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/30)
         button.configuration?.image = UIImage(systemName: "star",
@@ -92,23 +87,12 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(satSearchTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "SAT Search"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/30)
         button.configuration?.image = UIImage(systemName: "books.vertical",
                                                                         withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/32)!))
         return button
-    }()
-    
-    lazy var configuration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.baseBackgroundColor = .black
-        configuration.baseForegroundColor = .white
-        configuration.cornerStyle = .capsule
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 10.0
-        return configuration
     }()
 
     required init(viewModel: HomeViewModel) {
@@ -257,7 +241,12 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     @objc func nycSchoolsListTapped(sender: UIButton) {
-        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
+//        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
+        guard let coordinator = coordinator else {
+            return
+        }
+        
+        coordinator.goToSchoolsList(schools: viewModel.schools, schoolScores: viewModel.schoolsScores)
     }
     
     @objc func mapSearchTapped(sender: UIButton) {

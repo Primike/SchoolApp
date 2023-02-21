@@ -17,15 +17,8 @@ class RadiusSearchHeaderView: UIView {
         return stackView
     }()
     
-    lazy var headerLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Search Nearby Schools"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var headerLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Nearby Schools", labelTextColor: .white)
         return label
     }()
     
@@ -43,27 +36,13 @@ class RadiusSearchHeaderView: UIView {
         return stackView
     }()
 
-    lazy var withinLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Within"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var withinLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Within", labelTextColor: .white)
         return label
     }()
 
-    lazy var milesLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0 )
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.text = "Miles"
-        label.textColor = .white
-        label.numberOfLines = 0
+    lazy var milesLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Miles", labelTextColor: .white)
         return label
     }()
     
@@ -74,14 +53,8 @@ class RadiusSearchHeaderView: UIView {
         return stackView
     }()
 
-    lazy var errorLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.textColor = .systemRed
+    lazy var errorLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Miles", labelTextColor: .systemRed)
         label.isHidden = true
         return label
     }()

@@ -56,14 +56,8 @@ class SearchWritingScoreViewController: UIViewController {
         return textField
     }()
 
-    lazy var errorLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont(name:"HelveticaNeue-bold", size: 100.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.textColor = .red
+    lazy var errorLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .systemRed)
         label.isHidden = true
         return label
     }()
@@ -72,7 +66,7 @@ class SearchWritingScoreViewController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        button.configuration = configuration
+        button.configuration = SchoolAppButtonConfiguration.configuration
         button.configuration?.title = "Search"
         button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/19)
         button.configuration?.image = UIImage(systemName: "magnifyingglass",
@@ -80,17 +74,6 @@ class SearchWritingScoreViewController: UIViewController {
         return button
     }()
     
-    lazy var configuration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.baseBackgroundColor = .black
-        configuration.baseForegroundColor = .white
-        configuration.cornerStyle = .capsule
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 5.0
-        return configuration
-    }()
-            
     let searchSATScoreViewModel: SearchSATScoresViewModel
     
     required init(viewModel: SearchSATScoresViewModel) {

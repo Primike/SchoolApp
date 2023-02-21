@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E13C37029A44B0900638778 /* SchoolAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */; };
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
 		9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824008289879EB000D4BA0 /* SchoolAppTests.swift */; };
+		9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */; };
+		9E902E1929A4482800A39C77 /* SchoolAppButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */; };
 		9EA40B302884F782000DE8A0 /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */; };
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* MapSearchViewModel.swift */; };
@@ -93,9 +96,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppLabel.swift; sourceTree = "<group>"; };
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
 		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
+		9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListCoordinator.swift; sourceTree = "<group>"; };
+		9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppButtonConfiguration.swift; sourceTree = "<group>"; };
 		9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* MapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewModel.swift; sourceTree = "<group>"; };
@@ -204,6 +210,23 @@
 				B86AE962289C04130083FF0A /* SchoolListViewModelTests.swift */,
 			);
 			path = SchoolAppTests;
+			sourceTree = "<group>";
+		};
+		9E902E1229A4280B00A39C77 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */,
+			);
+			name = Coordinator;
+			sourceTree = "<group>";
+		};
+		9E902E1529A442E400A39C77 /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */,
+				9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */,
+			);
+			name = Catalog;
 			sourceTree = "<group>";
 		};
 		9EF64CBA29A1311F0012F890 /* DataManager */ = {
@@ -567,6 +590,7 @@
 		B89D3CF5287F516A002300D1 /* SchoolsList */ = {
 			isa = PBXGroup;
 			children = (
+				9E902E1229A4280B00A39C77 /* Coordinator */,
 				B82F178628898CEE00AA42F1 /* ViewControllers */,
 				B82F178728898D0300AA42F1 /* ViewModels */,
 				B89D3CF6287F51BD002300D1 /* Views */,
@@ -674,6 +698,7 @@
 		B8E8173B2846A45F0052C1AE /* SchoolApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E902E1529A442E400A39C77 /* Catalog */,
 				B8E8173C2846A45F0052C1AE /* AppDelegate.swift */,
 				B873667A288074AC0076632F /* Service */,
 				B804315A28523188004C9BAF /* Models */,
@@ -833,6 +858,7 @@
 				B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */,
 				9EF64CC029A19C5F0012F890 /* HomeButtonView.swift in Sources */,
 				B8E650B12889C39E0027716E /* AddressSearchHeaderView.swift in Sources */,
+				9E13C37029A44B0900638778 /* SchoolAppLabel.swift in Sources */,
 				B87C4B8C289977D10091CD45 /* ComparisonViewController.swift in Sources */,
 				B87C4B9828999BEE0091CD45 /* BarView.swift in Sources */,
 				B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */,
@@ -872,6 +898,7 @@
 				B87C4B862899630C0091CD45 /* MySchoolsTabBarViewController.swift in Sources */,
 				B873667728806CBE0076632F /* SchoolScoresTopView.swift in Sources */,
 				B8729F6F289B045000B7035A /* Fixes.swift in Sources */,
+				9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */,
 				B848D3D02856637A00FE01C9 /* SchoolTabBarViewController.swift in Sources */,
 				B8E650A82889B73E0027716E /* SearchMathScoreViewController.swift in Sources */,
 				B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */,
@@ -879,6 +906,7 @@
 				B83A84DE288F202B000752D5 /* NearbySchoolsHeaderView.swift in Sources */,
 				B8736662288055B60076632F /* HomeTopView.swift in Sources */,
 				B87366742880697F0076632F /* SchoolInfoBottomView.swift in Sources */,
+				9E902E1929A4482800A39C77 /* SchoolAppButtonConfiguration.swift in Sources */,
 				B841D463288E02670058E959 /* MapSearchTabBarViewController.swift in Sources */,
 				B8E650AA2889B74A0027716E /* SearchReadingScoreViewController.swift in Sources */,
 				B83A84E0288F228F000752D5 /* NearestSchoolsViewController.swift in Sources */,

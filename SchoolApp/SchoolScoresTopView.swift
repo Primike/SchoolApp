@@ -10,14 +10,8 @@ import UIKit
 
 class SchoolScoresTopView: UIView {
     
-    lazy var schoolNameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = school.school_name
-        label.textColor = .white
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
+    lazy var schoolNameLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: .white)
         return label
     }()
 
@@ -41,24 +35,13 @@ class SchoolScoresTopView: UIView {
         return stackView
     }()
 
-    lazy var scoresLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
-        label.text = "SAT Scores"
-        label.textColor = .white
-        label.adjustsFontSizeToFitWidth = true
+    lazy var scoresLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "SAT Scores", labelTextColor: .white)
         return label
     }()
 
-    lazy var testTakersLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
-        label.text = "Number of test takers: \(schoolScores.num_of_sat_test_takers)"
-        label.textColor = .white
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
+    lazy var testTakersLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Number of test takers: \(schoolScores.num_of_sat_test_takers)", labelTextColor: .white)
         return label
     }()
     
