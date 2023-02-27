@@ -11,9 +11,9 @@ import UIKit
 class MapSearchTabBarViewController: UITabBarController {
     
     var schools: [School]
-    var schoolScores: [SATScores]
+    var schoolScores: [SATData]
     
-    init(schools: [School], schoolsScores: [SATScores]) {
+    init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
         self.schoolScores = schoolsScores
         
@@ -32,7 +32,6 @@ class MapSearchTabBarViewController: UITabBarController {
     }
     
     private func setupViews() {
-        
         let radiusSearchVC = RadiusSearchViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: schoolScores))
         let coordinateSearchVC = AddressSearchViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: schoolScores))
 

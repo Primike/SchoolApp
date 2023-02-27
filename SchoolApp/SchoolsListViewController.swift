@@ -74,7 +74,7 @@ class SchoolsListViewController: UIViewController {
 extension SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: viewModel.getInfo(for: indexPath))
+        schoolCell.configure(viewModel: viewModel, indexPath: indexPath)
 
         return schoolCell
     }

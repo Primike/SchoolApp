@@ -19,17 +19,9 @@ class RadiusSearchViewController: UIViewController {
         return view
     }()
     
-    lazy var milesText: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.textAlignment = .center
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 7.0
-        textField.textColor = .black
+    lazy var milesText: SchoolAppTextField = {
+        var textField = SchoolAppTextField()
         textField.delegate = self
-        textField.backgroundColor = .white
         return textField
     }()
     

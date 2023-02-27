@@ -27,17 +27,9 @@ class TopSchoolsViewController: UIViewController {
         return tableView
     }()
 
-    lazy var numberOfSchoolsText: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.textAlignment = .center
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 7.0
-        textField.textColor = .black
+    lazy var numberOfSchoolsText: SchoolAppTextField = {
+        var textField = SchoolAppTextField()
         textField.delegate = self
-        textField.backgroundColor = .white
         return textField
     }()
 
@@ -168,7 +160,7 @@ extension TopSchoolsViewController {
 extension TopSchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: topSchoolsViewModel.getInfo(for: indexPath))
+        schoolCell.configure(viewModel: topSchoolsViewModel, indexPath: indexPath)
         schoolCell.schoolBoroLabel.text = "Rank #\(indexPath.row + 1)"
         schoolCell.schoolBoroLabel.textColor = .black
         return schoolCell

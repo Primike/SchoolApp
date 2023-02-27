@@ -8,29 +8,41 @@
 import Foundation
 import UIKit
 
-class SchoolsListViewModel {
+protocol SchoolCellMethods {
+    func getSchoolName(indexPath: IndexPath) -> String
+    func getSchoolAddress(indexPath: IndexPath) -> String
+    func getSchoolBoro(indexPath: IndexPath) -> String
+    func getSchoolColor(indexPath: IndexPath) -> UIColor
+    func getColor(schoolBoro: String) -> UIColor
+}
+protocol SchoolsListViewModeling {
+    var schools: [School] { get set }
+    var satData: [SATData] { get set }
+    var schoolSearchResults: [School] { get set }
+    var schoolScores: SATData { get set }
+    func getNumOfRowsInSection() -> Int?
+    func textChanged(searchText: String)
+    func rowSelectSearch(indexPath: IndexPath)
+}
+
+class SchoolsListViewModel: SchoolsListViewModeling, SchoolCellMethods {
     
     var schools = [School]()
-    var schoolsScores = [SATScores]()
+    var satData = [SATData]()
     var schoolSearchResults = [School]()
+    var schoolScores = SATData()
     
-    var schoolScores = SATScores()
-    
-    init(schools: [School], schoolsScores: [SATScores]) {
-        self.schoolsScores = schoolsScores
+    init(schools: [School], schoolsScores: [SATData]) {
+        self.satData = schoolsScores
         self.schools = schools
         self.schoolSearchResults = schools
     }
     
+    //MARK: TableView Methods
     func getNumOfRowsInSection() -> Int? {
         return schoolSearchResults.count
     }
-    
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        let school = schoolSearchResults[indexPath.row]
-        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
-    }
-    
+
     func textChanged(searchText: String) {
         var search = searchText
         
@@ -51,10 +63,47 @@ class SchoolsListViewModel {
     }
     
     func rowSelectSearch(indexPath: IndexPath) {
-        if let scores = schoolsScores.first(where: {$0.dbn == schoolSearchResults[indexPath.row].dbn}) {
+        if let scores = satData.first(where: {$0.dbn == schoolSearchResults[indexPath.row].dbn}) {
             schoolScores = scores
         } else {
-            schoolScores = SATScores()
+            schoolScores = SATData()
+        }
+    }
+    
+    //MARK: Cell Methods
+    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
+        let school = schoolSearchResults[indexPath.row]
+        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
+    }
+    
+    func getSchoolName(indexPath: IndexPath) -> String {
+        return schoolSearchResults[indexPath.row].school_name
+    }
+    
+    func getSchoolAddress(indexPath: IndexPath) -> String {
+        return schoolSearchResults[indexPath.row].location
+    }
+
+    func getSchoolBoro(indexPath: IndexPath) -> String {
+        return schoolSearchResults[indexPath.row].boro
+    }
+    
+    func getSchoolColor(indexPath: IndexPath) -> UIColor {
+        return getColor(schoolBoro: schoolSearchResults[indexPath.row].boro)
+    }
+
+    func getColor(schoolBoro: String) -> UIColor {
+        switch schoolBoro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.systemRed
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
         }
     }
 }

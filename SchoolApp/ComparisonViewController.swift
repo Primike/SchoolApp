@@ -49,12 +49,12 @@ class ComparisonViewController: UIViewController {
     let comparisonGraphView: ComparisonGraphView
 
     var school: School
-    var schoolScores: SATScores
+    var schoolScores: SATData
     var school2: School
-    var schoolScores2: SATScores
+    var schoolScores2: SATData
     var schoolColor = UIColor.systemBlue
     
-    init(school1: School, scores1: SATScores, school2: School, scores2: SATScores) {
+    init(school1: School, scores1: SATData, school2: School, scores2: SATData) {
         self.school = school1
         self.schoolScores = scores1
         self.school2 = school2

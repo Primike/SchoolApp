@@ -12,14 +12,14 @@ import CoreLocation
 
 class MapSearchViewModel {
     var schools = [School]()
-    var schoolsScores = [SATScores]()
+    var schoolsScores = [SATData]()
     var nearbySchools = [School]()
     var latitude = 0.0
     var longitude = 0.0
     var miles = 0.0
     var numberOfSchools = 0
     
-    init(schools: [School], schoolsScores: [SATScores]) {
+    init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
     }
@@ -81,7 +81,7 @@ class MapSearchViewModel {
         return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
     }
     
-    func findSchoolScores(index: Int) -> SATScores {
-        return schoolsScores.first(where: {$0.dbn == nearbySchools[index].dbn}) ?? SATScores(dbn: nearbySchools[index].dbn, num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0", sat_math_avg_score: "0", sat_writing_avg_score: "0")
+    func findSchoolScores(index: Int) -> SATData {
+        return schoolsScores.first(where: {$0.dbn == nearbySchools[index].dbn}) ?? SATData(dbn: nearbySchools[index].dbn, num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0", sat_math_avg_score: "0", sat_writing_avg_score: "0")
     }
 }

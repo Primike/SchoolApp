@@ -8,22 +8,17 @@
 import Foundation
 import UIKit
 
-class TopSchoolsViewModel {
+class TopSchoolsViewModel: SchoolCellMethods {
     
     var schools = [School]()
-    var schoolsScores = [SATScores]()
-    var topSchoolsScores = [SATScores]()
+    var schoolsScores = [SATData]()
+    var topSchoolsScores = [SATData]()
     var topSchools = [School]()
     var number = 10
     
-    init(schools: [School], schoolsScores: [SATScores]) {
+    init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
-    }
-    
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        let school = topSchools[indexPath.row]
-        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
     }
     
     func getTopSchools() {
@@ -97,4 +92,42 @@ class TopSchoolsViewModel {
             }
         }
     }
+    
+    //MARK: Cell Methods
+    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
+        let school = topSchools[indexPath.row]
+        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
+    }
+    
+    func getSchoolName(indexPath: IndexPath) -> String {
+        return topSchools[indexPath.row].school_name
+    }
+    
+    func getSchoolAddress(indexPath: IndexPath) -> String {
+        return topSchools[indexPath.row].location
+    }
+
+    func getSchoolBoro(indexPath: IndexPath) -> String {
+        return topSchools[indexPath.row].boro
+    }
+    
+    func getSchoolColor(indexPath: IndexPath) -> UIColor {
+        return getColor(schoolBoro: topSchools[indexPath.row].boro)
+    }
+
+    func getColor(schoolBoro: String) -> UIColor {
+        switch schoolBoro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.systemRed
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
+        }
+    }
+
 }

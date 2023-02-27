@@ -74,7 +74,7 @@ class SchoolComparisonViewController: UIViewController {
 extension SchoolComparisonViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: mySchoolsViewModel.getInfo(for: indexPath))
+        schoolCell.configure(viewModel: mySchoolsViewModel, indexPath: indexPath)
         schoolCell.schoolBoroLabel.text = "\(indexPath.row + 1)"
         schoolCell.selectionStyle = .gray
         return schoolCell

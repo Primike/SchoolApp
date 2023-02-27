@@ -59,10 +59,10 @@ class SchoolGraphViewController: UIViewController {
     }()
 
     var school: School
-    var schoolScores: SATScores
+    var schoolScores: SATData
     let schoolColor: UIColor
 
-    init(school: School, scores: SATScores, schoolColor: UIColor) {
+    init(school: School, scores: SATData, schoolColor: UIColor) {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor

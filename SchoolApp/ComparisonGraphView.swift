@@ -37,11 +37,11 @@ class ComparisonGraphView: UIView {
     }()
     
     
-    var schoolScores: SATScores
-    let schoolScores2: SATScores
+    var schoolScores: SATData
+    let schoolScores2: SATData
     let schoolColor: UIColor
     
-    init(frame: CGRect, scores: SATScores, scores2: SATScores, schoolColor: UIColor) {
+    init(frame: CGRect, scores: SATData, scores2: SATData, schoolColor: UIColor) {
         self.schoolColor = schoolColor
         self.schoolScores = scores
         self.schoolScores2 = scores2

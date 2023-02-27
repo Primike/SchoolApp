@@ -12,9 +12,6 @@ class SearchTotalScoreViewController: UIViewController {
     
     lazy var searchSATScoresHeaderView: SearchScoresHeaderView = {
         var view = SearchScoresHeaderView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 40
-        view.layer.maskedCorners = [.layerMinXMaxYCorner]
         view.topSchoolsLabel.text = "Search Schools By SAT Score"
         view.backgroundColor = UIColor.systemBlue
         return view
@@ -28,31 +25,15 @@ class SearchTotalScoreViewController: UIViewController {
         return tableView
     }()
     
-    lazy var totalScoreText: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.textAlignment = .center
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 7.0
-        textField.textColor = .black
+    lazy var totalScoreText: SchoolAppTextField = {
+        var textField = SchoolAppTextField()
         textField.delegate = self
-        textField.backgroundColor = .white
         return textField
     }()
 
-    lazy var schoolNumberText: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.textAlignment = .center
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 7.0
-        textField.textColor = .black
+    lazy var schoolNumberText: SchoolAppTextField = {
+        var textField = SchoolAppTextField()
         textField.delegate = self
-        textField.backgroundColor = .white
         return textField
     }()
 
@@ -191,7 +172,7 @@ extension SearchTotalScoreViewController {
 extension SearchTotalScoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
-        schoolCell.configure(info: searchSATScoreViewModel.getInfo(for: indexPath))
+        schoolCell.configure(viewModel: searchSATScoreViewModel, indexPath: indexPath)
         schoolCell.schoolBoroLabel.text = "Rank #\(indexPath.row + 1)"
         schoolCell.schoolBoroLabel.textColor = .black
         return schoolCell

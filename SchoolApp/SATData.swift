@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SATScores: Decodable {
+struct SATData: Decodable {
     var dbn = "0"
     var num_of_sat_test_takers = "Not Available"
     var sat_critical_reading_avg_score = "0"

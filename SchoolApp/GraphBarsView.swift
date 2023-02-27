@@ -28,11 +28,11 @@ class GraphBarsView: UIView {
         return view
     }()
     
-    var schoolScores: SATScores
+    var schoolScores: SATData
     let schoolColor: UIColor
     var graphHeightValues = [Float]()
     
-    init(frame: CGRect, scores: SATScores, schoolColor: UIColor) {
+    init(frame: CGRect, scores: SATData, schoolColor: UIColor) {
         self.schoolColor = schoolColor
         self.schoolScores = scores
         

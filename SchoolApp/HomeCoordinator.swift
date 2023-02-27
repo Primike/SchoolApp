@@ -36,7 +36,7 @@ class HomeCoordinator: NSObject, UINavigationControllerDelegate, Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func goToSchoolsList(schools: [School], schoolScores: [SATScores]) {
+    func goToSchoolsList(schools: [School], schoolScores: [SATData]) {
         guard let navigationController = navigationController else {
             return
         }

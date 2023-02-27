@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-class MySchoolsViewModel {
+class MySchoolsViewModel: SchoolCellMethods {
     
     var schools = [School]()
-    var schoolsScores = [SATScores]()
+    var schoolsScores = [SATData]()
     
-    init(schools: [School], schoolsScores: [SATScores]) {
+    init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
         mySchools()
@@ -21,7 +21,7 @@ class MySchoolsViewModel {
     
     func mySchools() {
         var mySchools = [School]()
-        var mySchoolsScores = [SATScores]()
+        var mySchoolsScores = [SATData]()
         
         let defaults = UserDefaults.standard
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
@@ -36,7 +36,7 @@ class MySchoolsViewModel {
             if let scores = schoolsScores.first(where: {$0.dbn == i.dbn}) {
                 mySchoolsScores.append(scores)
             } else {
-                mySchoolsScores.append(SATScores())
+                mySchoolsScores.append(SATData())
             }
         }
         self.schools = mySchools
@@ -51,9 +51,42 @@ class MySchoolsViewModel {
         }
     }
     
+    //MARK: Cell Methods
     func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-            let school = schools[indexPath.row]
-            return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
+        let school = schools[indexPath.row]
+        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
     }
+    
+    func getSchoolName(indexPath: IndexPath) -> String {
+        return schools[indexPath.row].school_name
+    }
+    
+    func getSchoolAddress(indexPath: IndexPath) -> String {
+        return schools[indexPath.row].location
+    }
+
+    func getSchoolBoro(indexPath: IndexPath) -> String {
+        return schools[indexPath.row].boro
+    }
+    
+    func getSchoolColor(indexPath: IndexPath) -> UIColor {
+        return getColor(schoolBoro: schools[indexPath.row].boro)
+    }
+
+    func getColor(schoolBoro: String) -> UIColor {
+        switch schoolBoro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.systemRed
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
+        }
+    }
+
 }
 

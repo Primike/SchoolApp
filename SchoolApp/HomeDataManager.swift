@@ -9,7 +9,7 @@ import Foundation
 
 protocol HomeDataManaging {
     func getSchools(url: URL?, completion: @escaping (Result<[School], Error>) -> Void)
-    func getSATData(url: URL?, completion: @escaping (Result<[SATScores], Error>) -> Void)
+    func getSATData(url: URL?, completion: @escaping (Result<[SATData], Error>) -> Void)
 }
 
 class HomeDataManager: HomeDataManaging {
@@ -35,7 +35,7 @@ class HomeDataManager: HomeDataManaging {
         task.resume()
     }
     
-    func getSATData(url: URL?, completion: @escaping (Result<[SATScores], Error>) -> Void) {
+    func getSATData(url: URL?, completion: @escaping (Result<[SATData], Error>) -> Void) {
         guard let url = url else {
             return
         }
@@ -47,7 +47,7 @@ class HomeDataManager: HomeDataManaging {
             }
             
             do {
-                var results = try JSONDecoder().decode([SATScores].self, from: data)
+                var results = try JSONDecoder().decode([SATData].self, from: data)
                 
                 completion(.success(results))
             } catch {

@@ -43,6 +43,8 @@ class SchoolTableViewCell: UITableViewCell {
         var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
         return label
     }()
 
@@ -50,30 +52,21 @@ class SchoolTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setup()
-        layout()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
-        self.layer.borderWidth = 5
-        self.layer.borderColor = UIColor.systemFill.cgColor
-        self.layer.cornerRadius = 20
-        self.layer.masksToBounds = true
-        self.accessoryType = .disclosureIndicator
-        self.selectionStyle = .none
-    }
-    
-    func configure(info: (schoolName: String, schoolAddress: String, schoolBoro: String)) {
-        self.schoolNameLabel.text = info.schoolName
-        self.schoolAddressLabel.text = info.schoolAddress
-        self.schoolBoroLabel.text = info.schoolBoro
-        self.schoolBoroLabel.textColor = getColor(schoolBoro: info.schoolBoro)
-        self.schoolNameLabel.textColor = getColor(schoolBoro: info.schoolBoro)
+    func configure(viewModel: SchoolCellMethods, indexPath: IndexPath) {
+        setup()
+        layout()
+        
+        schoolNameLabel.text = viewModel.getSchoolName(indexPath: indexPath)
+        schoolAddressLabel.text = viewModel.getSchoolAddress(indexPath: indexPath)
+        schoolBoroLabel.text = viewModel.getSchoolBoro(indexPath: indexPath)
+        schoolBoroLabel.textColor = viewModel.getSchoolColor(indexPath: indexPath)
+        schoolNameLabel.textColor = viewModel.getSchoolColor(indexPath: indexPath)
     }
     
     func getColor(schoolBoro: String) -> UIColor {
@@ -89,6 +82,15 @@ class SchoolTableViewCell: UITableViewCell {
         default:
             return .systemGreen
         }
+    }
+
+    func setup() {
+        self.layer.borderWidth = 5
+        self.layer.borderColor = UIColor.systemFill.cgColor
+        self.layer.cornerRadius = 20
+        self.layer.masksToBounds = true
+        self.accessoryType = .disclosureIndicator
+        self.selectionStyle = .none
     }
 
     func layout() {

@@ -12,7 +12,7 @@ class SchoolListViewModelTests: XCTestCase {
     
     var sut: SchoolsListViewModel!
     var schooldata = [School]()
-    var satData = [SATScores]()
+    var satData = [SATData]()
     
     override func setUpWithError() throws {
         do {
@@ -26,7 +26,7 @@ class SchoolListViewModelTests: XCTestCase {
             if let bundlePath = Bundle.main.path(forResource: "SATData",
                                                  ofType: "json"),
                 let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-                let y = try! JSONDecoder().decode([SATScores].self, from: jsonData)
+                let y = try! JSONDecoder().decode([SATData].self, from: jsonData)
                 satData = y
             }
         } catch {

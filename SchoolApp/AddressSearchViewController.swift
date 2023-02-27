@@ -25,31 +25,15 @@ class AddressSearchViewController: UIViewController {
         return map
     }()
     
-    lazy var numberOfSchoolsText: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name:"HelveticaNeue", size: 15.0)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.textAlignment = .center
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 7.0
-        textField.textColor = .black
+    lazy var numberOfSchoolsText: SchoolAppTextField = {
+        var textField = SchoolAppTextField()
         textField.delegate = self
-        textField.backgroundColor = .white
         return textField
     }()
     
-    lazy var addressText: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.textAlignment = .center
-        textField.layer.borderWidth = 3
-        textField.layer.cornerRadius = 7.0
-        textField.textColor = .black
+    lazy var addressText: SchoolAppTextField = {
+        var textField = SchoolAppTextField()
         textField.delegate = self
-        textField.backgroundColor = .white
         return textField
     }()
     

@@ -26,13 +26,21 @@ class SchoolScoresViewController: UIViewController {
 
     let schoolScoresTopView: SchoolScoresTopView
     let schoolScoresBottomView: SchoolScoresBottomView
-    let graphButton = UIButton()
+    lazy var graphButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
+        button.configuration = SchoolAppButtonConfiguration.configuration
+        button.configuration?.title = "Scores Graph"
+        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/20)
+        return button
+    }()
     
     let school: School
-    let schoolScores: SATScores
+    let schoolScores: SATData
     let schoolColor: UIColor
     
-    init(school: School, scores: SATScores, schoolColor: UIColor) {
+    init(school: School, scores: SATData, schoolColor: UIColor) {
         self.school = school
         self.schoolScores = scores
         self.schoolColor = schoolColor
@@ -58,20 +66,6 @@ class SchoolScoresViewController: UIViewController {
                 
         schoolScoresTopView.translatesAutoresizingMaskIntoConstraints = false
         schoolScoresTopView.backgroundColor = schoolColor
-        
-        var config = UIButton.Configuration.filled()
-        config.titleAlignment = .center
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        config.cornerStyle = .capsule
-        config.imagePlacement = .leading
-        config.imagePadding = 10.0
-        
-        graphButton.translatesAutoresizingMaskIntoConstraints = false
-        graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        graphButton.configuration = config
-        graphButton.configuration?.title = "Scores Graph"
-        graphButton.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/20)
                 
         schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
         

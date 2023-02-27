@@ -13,9 +13,9 @@ class SchoolsListCoordinator: Coordinating {
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
     var schools: [School]
-    var schoolScores: [SATScores]
+    var schoolScores: [SATData]
     
-    required init(navigationController: UINavigationController?, schools: [School], schoolScores: [SATScores]) {
+    required init(navigationController: UINavigationController?, schools: [School], schoolScores: [SATData]) {
         self.navigationController = navigationController
         self.schools = schools
         self.schoolScores = schoolScores

@@ -64,6 +64,10 @@ class SearchScoresHeaderView: UIView {
     }
 
     func layout() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.cornerRadius = 40
+        self.layer.maskedCorners = [.layerMinXMaxYCorner]
+
         self.addSubview(headerStackView)
         
         headerStackView.addSubview(topSchoolsLabel)
