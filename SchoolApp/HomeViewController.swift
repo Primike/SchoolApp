@@ -10,9 +10,6 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let viewModel: HomeViewModel
-    var coordinator: HomeCoordinator?
-
     lazy var loadingView: LoadingView = {
         let view = LoadingView()
         return view
@@ -35,65 +32,39 @@ class HomeViewController: UIViewController {
         return gradient
     }()
     
-    lazy var schoolsListButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var schoolsListButton: SchoolAppButton = {
+        let button = SchoolAppButton(title: "NYC Schools List", viewWidth: view.bounds.width, imageName: "list.star", titleSize: 17, imageSize: 18)
         button.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "NYC Schools List"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
-        button.configuration?.image = UIImage(systemName: "list.star",
-                                              withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/18)!))
         return button
     }()
 
-    lazy var mapSearchButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var mapSearchButton: SchoolAppButton = {
+        let button = SchoolAppButton(title: "Map Search", viewWidth: view.bounds.width, imageName: "map", titleSize: 17, imageSize: 18)
         button.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "Map Search"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
-        button.configuration?.image = UIImage(systemName: "map",
-                                              withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/18)!))
         return button
     }()
 
-    lazy var myschoolsButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var myschoolsButton: SchoolAppButton = {
+        let button = SchoolAppButton(title: "My Schools", viewWidth: view.bounds.width, imageName: "bolt.heart", titleSize: 17, imageSize: 18)
         button.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "My Schools"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/17)
-        button.configuration?.image = UIImage(systemName: "bolt.heart",
-                                              withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/18)!))
         return button
     }()
 
-    lazy var topSchoolsButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var topSchoolsButton: SchoolAppButton = {
+        let button = SchoolAppButton(title: "Top Schools", viewWidth: view.bounds.width, imageName: "star", titleSize: 30, imageSize: 32)
         button.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "Top Schools"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/30)
-        button.configuration?.image = UIImage(systemName: "star",
-                                                                        withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/32)!))
         return button
     }()
 
-    lazy var satSearchButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var satSearchButton: SchoolAppButton = {
+        let button = SchoolAppButton(title: "SAT Search", viewWidth: view.bounds.width, imageName: "books.vertical", titleSize: 30, imageSize: 32)
         button.addTarget(self, action: #selector(satSearchTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "SAT Search"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/30)
-        button.configuration?.image = UIImage(systemName: "books.vertical",
-                                                                        withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/32)!))
         return button
     }()
+    
+    let viewModel: HomeViewModel
+    var coordinator: HomeCoordinator?
+
 
     required init(viewModel: HomeViewModel) {
         self.viewModel = viewModel

@@ -40,15 +40,9 @@ class TopReadingSchoolsViewController: UIViewController {
         return label
     }()
 
-    lazy var enterButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var enterButton: SchoolAppButton = {
+        let button = SchoolAppButton(title: "Search", viewWidth: view.bounds.width, imageName: "magnifyingglass", titleSize: 19, imageSize: 22)
         button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "Search"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/19)
-        button.configuration?.image = UIImage(systemName: "magnifyingglass",
-                                              withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/22)!))
         return button
     }()
     

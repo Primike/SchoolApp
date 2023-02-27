@@ -18,7 +18,7 @@
 		9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */; };
 		9EF64CBC29A131A80012F890 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */; };
 		9EF64CBE29A170770012F890 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBD29A170770012F890 /* URLs.swift */; };
-		9EF64CC029A19C5F0012F890 /* HomeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBF29A19C5F0012F890 /* HomeButtonView.swift */; };
+		9EF64CC029A19C5F0012F890 /* SchoolAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */; };
 		B801DEEA287B281400EA2090 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B801DEE9287B281400EA2090 /* HomeViewModel.swift */; };
 		B801DEEC287BA97B00EA2090 /* TopSchoolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B801DEEB287BA97B00EA2090 /* TopSchoolsViewController.swift */; };
 		B801DEEE287BB4BF00EA2090 /* TopSchoolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B801DEED287BB4BF00EA2090 /* TopSchoolsViewModel.swift */; };
@@ -109,7 +109,7 @@
 		9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTextField.swift; sourceTree = "<group>"; };
 		9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		9EF64CBD29A170770012F890 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
-		9EF64CBF29A19C5F0012F890 /* HomeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonView.swift; sourceTree = "<group>"; };
+		9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppButton.swift; sourceTree = "<group>"; };
 		B801DEE9287B281400EA2090 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B801DEEB287BA97B00EA2090 /* TopSchoolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsViewController.swift; sourceTree = "<group>"; };
 		B801DEED287BB4BF00EA2090 /* TopSchoolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsViewModel.swift; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 				9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */,
 				9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */,
 				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
-				9EF64CBF29A19C5F0012F890 /* HomeButtonView.swift */,
+				9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */,
 			);
 			name = Catalog;
 			sourceTree = "<group>";
@@ -860,7 +860,7 @@
 				B8E650AE2889B9A90027716E /* SearchScoresHeaderView.swift in Sources */,
 				B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */,
 				9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */,
-				9EF64CC029A19C5F0012F890 /* HomeButtonView.swift in Sources */,
+				9EF64CC029A19C5F0012F890 /* SchoolAppButton.swift in Sources */,
 				B8E650B12889C39E0027716E /* AddressSearchHeaderView.swift in Sources */,
 				9E13C37029A44B0900638778 /* SchoolAppLabel.swift in Sources */,
 				B87C4B8C289977D10091CD45 /* ComparisonViewController.swift in Sources */,

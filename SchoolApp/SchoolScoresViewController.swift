@@ -26,13 +26,10 @@ class SchoolScoresViewController: UIViewController {
 
     let schoolScoresTopView: SchoolScoresTopView
     let schoolScoresBottomView: SchoolScoresBottomView
-    lazy var graphButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    
+    lazy var graphButton: SchoolAppButton = {
+        var button = SchoolAppButton(title: "Scores Graph", viewWidth: view.bounds.width, imageName: nil, titleSize: 20, imageSize: 20)
         button.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        button.configuration = SchoolAppButtonConfiguration.configuration
-        button.configuration?.title = "Scores Graph"
-        button.configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(view.bounds.width))/20)
         return button
     }()
     
