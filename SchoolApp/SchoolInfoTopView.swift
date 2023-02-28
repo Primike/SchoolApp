@@ -10,14 +10,13 @@ import UIKit
 
 class SchoolInfoTopView: UIView {
     
-    lazy var topButtonsStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var topButtonsStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
-    lazy var schoolInfoStackView: UIStackView = {
-        var stackView = UIStackView()
+    lazy var schoolInfoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()

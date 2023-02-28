@@ -1,5 +1,5 @@
 //
-//  NearbySchoolsViewController.swift
+//  AddressSearchViewController.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 7/17/22.

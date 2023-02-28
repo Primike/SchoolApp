@@ -10,10 +10,8 @@ import UIKit
 
 class SearchScoresHeaderView: UIView {
 
-    lazy var headerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var headerStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -22,17 +20,13 @@ class SearchScoresHeaderView: UIView {
         return label
     }()
     
-    lazy var filterStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var filterStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
-    lazy var scoreStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var scoreStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
@@ -41,10 +35,8 @@ class SearchScoresHeaderView: UIView {
         return label
     }()
 
-    lazy var numberStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var numberStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

@@ -16,9 +16,8 @@ class YAxisView: UIView {
         return label
     }()
 
-    lazy var stackView600: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var stackView600: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -28,9 +27,8 @@ class YAxisView: UIView {
         return label
     }()
 
-    lazy var stackView400: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var stackView400: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -40,9 +38,8 @@ class YAxisView: UIView {
         return label
     }()
 
-    lazy var stackView200: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var stackView200: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     

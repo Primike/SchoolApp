@@ -15,10 +15,8 @@ class SchoolScoresTopView: UIView {
         return label
     }()
 
-    lazy var headerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var headerStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
@@ -29,9 +27,8 @@ class SchoolScoresTopView: UIView {
         return image
     }()
     
-    lazy var scoresInfoStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var scoresInfoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

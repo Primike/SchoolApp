@@ -10,17 +10,13 @@ import UIKit
 
 class SchoolTableViewCell: UITableViewCell {
     
-    lazy var cellStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var cellStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
-    lazy var schoolInfoStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var schoolInfoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

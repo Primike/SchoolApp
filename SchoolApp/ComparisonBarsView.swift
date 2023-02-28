@@ -10,9 +10,8 @@ import UIKit
 
 class ComparisonBarsView: UIView {
     
-    lazy var mathStackView: UIStackView = {
-        var view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    lazy var mathStackView: SchoolAppStackView = {
+        var view = SchoolAppStackView()
         return view
     }()
     
@@ -28,9 +27,8 @@ class ComparisonBarsView: UIView {
         return view
     }()
 
-    lazy var writingStackView: UIStackView = {
-        var view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    lazy var writingStackView: SchoolAppStackView = {
+        var view = SchoolAppStackView()
         return view
     }()
 
@@ -46,9 +44,8 @@ class ComparisonBarsView: UIView {
         return view
     }()
 
-    lazy var readingStackView: UIStackView = {
-        var view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    lazy var readingStackView: SchoolAppStackView = {
+        var view = SchoolAppStackView()
         return view
     }()
 

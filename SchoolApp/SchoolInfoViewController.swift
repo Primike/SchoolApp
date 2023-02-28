@@ -16,9 +16,8 @@ class SchoolInfoViewController: UIViewController {
         return scrollView
     }()
     
-    lazy var screenStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var screenStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         stackView.axis = .vertical
         return stackView
     }()

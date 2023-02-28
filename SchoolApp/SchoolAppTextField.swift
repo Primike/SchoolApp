@@ -11,7 +11,6 @@ import UIKit
 class SchoolAppTextField: UITextField {
     
     override required init(frame: CGRect) {
-        
         super.init(frame: frame)
         layout()
     }

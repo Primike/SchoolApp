@@ -10,17 +10,15 @@ import UIKit
 
 class LegendView: UIView {
     
-    lazy var school1StackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var school1StackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
-    lazy var school1Box: UIView = {
-        var label = UIView()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .black
-        return label
+    lazy var school1Box: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.backgroundColor = .black
+        return stackView
     }()
     
     lazy var school1Label: SchoolAppLabel = {
@@ -28,17 +26,15 @@ class LegendView: UIView {
         return label
     }()
     
-    lazy var school2StackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var school2StackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
-    lazy var school2Box: UIView = {
-        var label = UIView()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .brown
-        return label
+    lazy var school2Box: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.backgroundColor = .brown
+        return stackView
     }()
     
     lazy var school2Label: SchoolAppLabel = {

@@ -10,10 +10,9 @@ import UIKit
 
 class HomeBottomView: UIView {
     
-    lazy var titleView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var titleStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
     }()
     
     lazy var appTitleLabel: SchoolAppLabel = {
@@ -28,37 +27,32 @@ class HomeBottomView: UIView {
         return divider
     }()
     
-    lazy var schoolsListButtonView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var schoolsListStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
     }()
 
-    lazy var mapSearchButtonView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var mapSearchStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
     }()
 
-    lazy var mySchoolsButtonView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var mySchoolsStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
     }()
 
-    lazy var smallButtonsView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var smallButtonsStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
     }()
     
-    lazy var bottomView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 70
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.backgroundColor = UIColor.white
-        return view
+    lazy var bottomStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.layer.cornerRadius = 70
+        stackView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        stackView.backgroundColor = UIColor.white
+        return stackView
     }()
     
     lazy var welcomeLabel: SchoolAppLabel = {
@@ -88,69 +82,69 @@ class HomeBottomView: UIView {
 //        self.layer.cornerRadius = 70
 //        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        self.addSubview(titleView)
-        self.addSubview(schoolsListButtonView)
-        self.addSubview(mapSearchButtonView)
-        self.addSubview(mySchoolsButtonView)
-        self.addSubview(smallButtonsView)
-        self.addSubview(bottomView)
+        self.addSubview(titleStackView)
+        self.addSubview(schoolsListStackView)
+        self.addSubview(mapSearchStackView)
+        self.addSubview(mySchoolsStackView)
+        self.addSubview(smallButtonsStackView)
+        self.addSubview(bottomStackView)
         
-        titleView.addSubview(appTitleLabel)
-        titleView.addSubview(divider)
+        titleStackView.addSubview(appTitleLabel)
+        titleStackView.addSubview(divider)
         
-        bottomView.addSubview(welcomeLabel)
-        bottomView.addSubview(divider2)
+        bottomStackView.addSubview(welcomeLabel)
+        bottomStackView.addSubview(divider2)
         
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: self.topAnchor),
-            titleView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
-            titleView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            titleView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            titleStackView.topAnchor.constraint(equalTo: self.topAnchor),
+            titleStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            titleStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            titleStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            appTitleLabel.topAnchor.constraint(equalTo: titleView.topAnchor),
-            appTitleLabel.heightAnchor.constraint(equalTo: titleView.heightAnchor, multiplier: 0.7),
-            appTitleLabel.widthAnchor.constraint(equalTo: titleView.widthAnchor, multiplier: 0.9),
-            appTitleLabel.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            appTitleLabel.topAnchor.constraint(equalTo: titleStackView.topAnchor),
+            appTitleLabel.heightAnchor.constraint(equalTo: titleStackView.heightAnchor, multiplier: 0.7),
+            appTitleLabel.widthAnchor.constraint(equalTo: titleStackView.widthAnchor, multiplier: 0.9),
+            appTitleLabel.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
             
             divider.topAnchor.constraint(equalTo: appTitleLabel.bottomAnchor),
             divider.heightAnchor.constraint(equalToConstant: 5),
-            divider.widthAnchor.constraint(equalTo: titleView.widthAnchor),
-            divider.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            divider.widthAnchor.constraint(equalTo: titleStackView.widthAnchor),
+            divider.centerXAnchor.constraint(equalTo: titleStackView.centerXAnchor),
             
-            schoolsListButtonView.topAnchor.constraint(equalTo: titleView.bottomAnchor),
-            schoolsListButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-            schoolsListButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            schoolsListButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            schoolsListStackView.topAnchor.constraint(equalTo: titleStackView.bottomAnchor),
+            schoolsListStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            schoolsListStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            schoolsListStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            mapSearchButtonView.topAnchor.constraint(equalTo: schoolsListButtonView.bottomAnchor),
-            mapSearchButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-            mapSearchButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            mapSearchButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            mapSearchStackView.topAnchor.constraint(equalTo: schoolsListStackView.bottomAnchor),
+            mapSearchStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            mapSearchStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            mapSearchStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            mySchoolsButtonView.topAnchor.constraint(equalTo: mapSearchButtonView.bottomAnchor),
-            mySchoolsButtonView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-            mySchoolsButtonView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            mySchoolsButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            mySchoolsStackView.topAnchor.constraint(equalTo: mapSearchStackView.bottomAnchor),
+            mySchoolsStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            mySchoolsStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            mySchoolsStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            smallButtonsView.topAnchor.constraint(equalTo: mySchoolsButtonView.bottomAnchor),
-            smallButtonsView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-            smallButtonsView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            smallButtonsView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            smallButtonsStackView.topAnchor.constraint(equalTo: mySchoolsStackView.bottomAnchor),
+            smallButtonsStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
+            smallButtonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            smallButtonsStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            bottomView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            bottomView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
-            bottomView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            bottomView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            bottomStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            bottomStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            bottomStackView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            bottomStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            welcomeLabel.topAnchor.constraint(equalTo: bottomView.topAnchor),
-            welcomeLabel.heightAnchor.constraint(equalTo: bottomView.heightAnchor, multiplier: 0.5),
-            welcomeLabel.widthAnchor.constraint(equalTo: bottomView.widthAnchor, multiplier: 0.8),
-            welcomeLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            welcomeLabel.topAnchor.constraint(equalTo: bottomStackView.topAnchor),
+            welcomeLabel.heightAnchor.constraint(equalTo: bottomStackView.heightAnchor, multiplier: 0.5),
+            welcomeLabel.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor, multiplier: 0.8),
+            welcomeLabel.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor),
             
             divider2.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
             divider2.heightAnchor.constraint(equalToConstant: 5),
-            divider2.widthAnchor.constraint(equalTo: bottomView.widthAnchor, multiplier: 0.8),
-            divider2.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            divider2.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor, multiplier: 0.8),
+            divider2.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor),
         ])
     }
 }

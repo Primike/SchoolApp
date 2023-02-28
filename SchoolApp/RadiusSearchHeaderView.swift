@@ -10,10 +10,8 @@ import UIKit
 
 class RadiusSearchHeaderView: UIView {
     
-    lazy var headerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var headerStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -22,17 +20,13 @@ class RadiusSearchHeaderView: UIView {
         return label
     }()
     
-    lazy var middleStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var middleStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
-    lazy var inputStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var inputStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
@@ -46,10 +40,8 @@ class RadiusSearchHeaderView: UIView {
         return label
     }()
     
-    lazy var buttonStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var buttonStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

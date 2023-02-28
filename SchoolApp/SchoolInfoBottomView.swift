@@ -10,9 +10,8 @@ import UIKit
 
 class SchoolInfoBottomView: UIView {
     
-    lazy var stackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     

@@ -10,10 +10,8 @@ import UIKit
 
 class SchoolGraphViewController: UIViewController {
 
-    lazy var screenStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+    lazy var screenStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -31,10 +29,8 @@ class SchoolGraphViewController: UIViewController {
         return label
     }()
 
-    lazy var topStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var topStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     

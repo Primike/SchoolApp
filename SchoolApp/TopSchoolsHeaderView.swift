@@ -10,9 +10,8 @@ import UIKit
 
 class TopSchoolsHeaderView: UIView {
 
-    lazy var headerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var headerStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
@@ -21,9 +20,8 @@ class TopSchoolsHeaderView: UIView {
         return label
     }()
     
-    lazy var filterStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var filterStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

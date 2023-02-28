@@ -10,9 +10,8 @@ import UIKit
 
 class AddressSearchHeaderView: UIView {
     
-    lazy var headerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var headerStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -21,9 +20,8 @@ class AddressSearchHeaderView: UIView {
         return label
     }()
     
-    lazy var schoolNumberStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var schoolNumberStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 
@@ -37,9 +35,8 @@ class AddressSearchHeaderView: UIView {
         return label
     }()
     
-    lazy var addressStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var addressStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

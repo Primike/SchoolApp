@@ -165,11 +165,11 @@ class HomeViewController: UIViewController {
         view.addSubview(homeTopView)
         view.addSubview(homeBottomView)
     
-        homeBottomView.schoolsListButtonView.addSubview(schoolsListButton)
-        homeBottomView.mapSearchButtonView.addSubview(mapSearchButton)
-        homeBottomView.mySchoolsButtonView.addSubview(myschoolsButton)
-        homeBottomView.smallButtonsView.addSubview(topSchoolsButton)
-        homeBottomView.smallButtonsView.addSubview(satSearchButton)
+        homeBottomView.schoolsListStackView.addSubview(schoolsListButton)
+        homeBottomView.mapSearchStackView.addSubview(mapSearchButton)
+        homeBottomView.mySchoolsStackView.addSubview(myschoolsButton)
+        homeBottomView.smallButtonsStackView.addSubview(topSchoolsButton)
+        homeBottomView.smallButtonsStackView.addSubview(satSearchButton)
         
         NSLayoutConstraint.activate([
             homeTopView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -182,30 +182,30 @@ class HomeViewController: UIViewController {
             homeBottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
             homeBottomView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
             
-            schoolsListButton.heightAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.heightAnchor, multiplier: 0.8),
-            schoolsListButton.widthAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.widthAnchor),
+            schoolsListButton.heightAnchor.constraint(equalTo: homeBottomView.schoolsListStackView.heightAnchor, multiplier: 0.8),
+            schoolsListButton.widthAnchor.constraint(equalTo: homeBottomView.schoolsListStackView.widthAnchor),
             schoolsListButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
-            schoolsListButton.centerYAnchor.constraint(equalTo: homeBottomView.schoolsListButtonView.centerYAnchor),
+            schoolsListButton.centerYAnchor.constraint(equalTo: homeBottomView.schoolsListStackView.centerYAnchor),
             
-            mapSearchButton.heightAnchor.constraint(equalTo: homeBottomView.mapSearchButtonView.heightAnchor, multiplier: 0.8),
-            mapSearchButton.widthAnchor.constraint(equalTo: homeBottomView.mapSearchButtonView.widthAnchor),
+            mapSearchButton.heightAnchor.constraint(equalTo: homeBottomView.mapSearchStackView.heightAnchor, multiplier: 0.8),
+            mapSearchButton.widthAnchor.constraint(equalTo: homeBottomView.mapSearchStackView.widthAnchor),
             mapSearchButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
-            mapSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.mapSearchButtonView.centerYAnchor),
+            mapSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.mapSearchStackView.centerYAnchor),
             
-            myschoolsButton.heightAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.heightAnchor, multiplier: 0.8),
-            myschoolsButton.widthAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.widthAnchor),
+            myschoolsButton.heightAnchor.constraint(equalTo: homeBottomView.mySchoolsStackView.heightAnchor, multiplier: 0.8),
+            myschoolsButton.widthAnchor.constraint(equalTo: homeBottomView.mySchoolsStackView.widthAnchor),
             myschoolsButton.centerXAnchor.constraint(equalTo: homeBottomView.centerXAnchor),
-            myschoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.mySchoolsButtonView.centerYAnchor),
+            myschoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.mySchoolsStackView.centerYAnchor),
             
-            topSchoolsButton.leftAnchor.constraint(equalTo: homeBottomView.smallButtonsView.leftAnchor),
-            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
-            topSchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
-            topSchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
+            topSchoolsButton.leftAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.leftAnchor),
+            topSchoolsButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.heightAnchor, multiplier: 0.6),
+            topSchoolsButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.widthAnchor, multiplier: 0.48),
+            topSchoolsButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.centerYAnchor),
             
-            satSearchButton.rightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.rightAnchor),
-            satSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsView.heightAnchor, multiplier: 0.6),
-            satSearchButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsView.widthAnchor, multiplier: 0.48),
-            satSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsView.centerYAnchor),
+            satSearchButton.rightAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.rightAnchor),
+            satSearchButton.heightAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.heightAnchor, multiplier: 0.6),
+            satSearchButton.widthAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.widthAnchor, multiplier: 0.48),
+            satSearchButton.centerYAnchor.constraint(equalTo: homeBottomView.smallButtonsStackView.centerYAnchor),
         ])
     }
 }

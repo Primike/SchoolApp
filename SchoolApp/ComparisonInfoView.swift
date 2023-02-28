@@ -10,9 +10,8 @@ import UIKit
 
 class ComparisonInfoView: UIView {
     
-    lazy var schoolInfoStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var schoolInfoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
 

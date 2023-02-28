@@ -10,9 +10,8 @@ import UIKit
 
 class ComparisonHeaderView: UIView {
     
-    lazy var stackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -20,15 +19,7 @@ class ComparisonHeaderView: UIView {
         var label = SchoolAppLabel(frame: CGRect(), labelText: "Select Two Schools To Compare Details", labelTextColor: .white)
         return label
     }()
-    
-    lazy var heartImage: UIImageView = {
-        var imageView = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .black
-        return imageView
-    }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -51,11 +42,6 @@ class ComparisonHeaderView: UIView {
             stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-//            heartImage.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-//            heartImage.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.8),
-//            heartImage.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.3),
-//            heartImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
             
             mySchoolsLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.9),
             mySchoolsLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8),

@@ -16,6 +16,7 @@
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* MapSearchViewModel.swift */; };
 		9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */; };
+		9EF49E8B29AD8575008122FF /* SchoolAppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF49E8A29AD8575008122FF /* SchoolAppStackView.swift */; };
 		9EF64CBC29A131A80012F890 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */; };
 		9EF64CBE29A170770012F890 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBD29A170770012F890 /* URLs.swift */; };
 		9EF64CC029A19C5F0012F890 /* SchoolAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */; };
@@ -107,6 +108,7 @@
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* MapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewModel.swift; sourceTree = "<group>"; };
 		9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTextField.swift; sourceTree = "<group>"; };
+		9EF49E8A29AD8575008122FF /* SchoolAppStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppStackView.swift; sourceTree = "<group>"; };
 		9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		9EF64CBD29A170770012F890 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppButton.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */,
 				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
 				9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */,
+				9EF49E8A29AD8575008122FF /* SchoolAppStackView.swift */,
 			);
 			name = Catalog;
 			sourceTree = "<group>";
@@ -879,6 +882,7 @@
 				B880A2BA284E61FF0071E43D /* SATData.swift in Sources */,
 				B82F177B28897A1500AA42F1 /* TopMathSchoolsViewController.swift in Sources */,
 				B86AE965289C24710083FF0A /* BottomSubjectView.swift in Sources */,
+				9EF49E8B29AD8575008122FF /* SchoolAppStackView.swift in Sources */,
 				9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */,
 				B87C4B8828996B1B0091CD45 /* SchoolComparisonViewController.swift in Sources */,
 				B801DEF2287D9F6300EA2090 /* MySchoolsViewModel.swift in Sources */,

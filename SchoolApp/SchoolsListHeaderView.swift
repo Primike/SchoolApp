@@ -10,17 +10,13 @@ import UIKit
 
 class SchoolsListHeaderView: UIView {
 
-    lazy var headerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var headerStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
-    lazy var labelsStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+    lazy var labelsStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -44,7 +40,7 @@ class SchoolsListHeaderView: UIView {
         var imageView = UIImageView(image: UIImage(systemName: "book.circle"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.tintColor = .black
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     

@@ -10,9 +10,8 @@ import UIKit
 
 class LoadingView: UIView {
     
-    lazy var stackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         return stackView
     }()
     
@@ -25,6 +24,7 @@ class LoadingView: UIView {
     lazy var appImage: UIImageView = {
         var image = UIImageView(image: UIImage(named: "appimage"))
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
         return image
     }()
     

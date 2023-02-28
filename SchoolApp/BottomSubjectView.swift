@@ -10,9 +10,8 @@ import UIKit
 
 class BottomSubjectView: UIView {
     
-    lazy var satSubjectStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var satSubjectStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
         stackView.backgroundColor = schoolColor
         stackView.layer.cornerRadius = 25
         return stackView

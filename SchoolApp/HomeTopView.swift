@@ -20,6 +20,7 @@ class HomeTopView: UIView {
     
     lazy var pavementWallpaper: UIImageView = {
         var image = UIImageView(image: UIImage(named: "pavement"))
+        image.contentMode = .scaleToFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
