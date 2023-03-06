@@ -8,7 +8,13 @@
 import Foundation
 import UIKit
 
-class MySchoolsViewModel: SchoolCellMethods {
+protocol MySchoolsViewModeling {
+    var schools: [School] { get set }
+    var schoolsScores: [SATData] { get set }
+    func mySchools()
+}
+
+class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
     
     var schools = [School]()
     var schoolsScores = [SATData]()

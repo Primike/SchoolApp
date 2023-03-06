@@ -9,9 +9,6 @@ import UIKit
 
 class SchoolsListViewController: UIViewController {
 
-    let viewModel: SchoolsListViewModel
-    var coordinator: SchoolsListCoordinator?
-
     lazy var schoolsListHeader: SchoolsListHeaderView = {
         let headerView = SchoolsListHeaderView(frame: .zero)
         var size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -36,6 +33,9 @@ class SchoolsListViewController: UIViewController {
         return searchBar
     }()
         
+    let viewModel: SchoolsListViewModel
+    var coordinator: SchoolsListCoordinator?
+
     required init(viewModel: SchoolsListViewModel) {
         self.viewModel = viewModel
 

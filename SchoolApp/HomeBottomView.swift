@@ -79,8 +79,6 @@ class HomeBottomView: UIView {
     
     func layout() {
         self.translatesAutoresizingMaskIntoConstraints = false
-//        self.layer.cornerRadius = 70
-//        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         self.addSubview(titleStackView)
         self.addSubview(schoolsListStackView)

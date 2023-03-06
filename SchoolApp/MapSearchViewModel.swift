@@ -10,7 +10,22 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapSearchViewModel {
+protocol MapSearchViewModeling {
+    var schools: [School] { get set }
+    var schoolsScores: [SATData] { get set }
+    var nearbySchools: [School] { get set }
+    var latitude: Double { get set }
+    var longitude: Double { get set }
+    var miles: Double { get set }
+    var numberOfSchools: Int { get set }
+    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String)
+    func getNearbySchools()
+    func getSchoolsByMiles()
+    func findSchool(name: String) -> Int
+    func findSchoolScores(index: Int) -> SATData
+}
+
+class MapSearchViewModel: MapSearchViewModeling {
     var schools = [School]()
     var schoolsScores = [SATData]()
     var nearbySchools = [School]()

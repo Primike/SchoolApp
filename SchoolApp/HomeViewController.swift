@@ -212,7 +212,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     @objc func nycSchoolsListTapped(sender: UIButton) {
-//        navigationController?.pushViewController(SchoolsListViewController(viewModel: SchoolsListViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
         guard let coordinator = coordinator else {
             return
         }

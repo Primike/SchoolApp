@@ -34,7 +34,6 @@ class ComparisonHeaderView: UIView {
     func layout() {
         self.addSubview(stackView)
         
-//        stackView.addSubview(heartImage)
         stackView.addSubview(mySchoolsLabel)
         
         NSLayoutConstraint.activate([
