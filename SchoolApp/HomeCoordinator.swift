@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-protocol Coordinating {
+protocol Coordinating: AnyObject {
     var navigationController: UINavigationController? { get set }
     var childCoordinators: [Coordinating] { get set }
     func start()
 }
 
-class HomeCoordinator: NSObject, UINavigationControllerDelegate, Coordinating {
-    var childCoordinators = [Coordinating]()
+class HomeCoordinator: Coordinating {
     weak var navigationController: UINavigationController?
+    var childCoordinators: [Coordinating] = []
     
     public required init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -48,26 +48,9 @@ class HomeCoordinator: NSObject, UINavigationControllerDelegate, Coordinating {
         schoolsListCoordinator.start()
     }
     
-//    func childDidFinish(_ child: Coordinating?) {
-//        for (index, coordinator) in childCoordinators.enumerated() {
-//            if coordinator === child {
-//                childCoordinators.remove(at: index)
-//                break
-//            }
-//        }
-//    }
-//    
-//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-//        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
-//            return
-//        }
-//        
-//        if navigationController.viewControllers.contains(fromViewController) {
-//            return
-//        }
-//        
-//        if let schoolsListViewController = fromViewController as? SchoolsListViewController {
-//            childDidFinish(schoolsListViewController.coordinator)
-//        }
-//    }
+    func childDidFinish(_ child: Coordinating) {
+        if let index = childCoordinators.firstIndex(where: { $0 === child }) {
+            childCoordinators.remove(at: index)
+        }
+    }
 }

@@ -55,6 +55,17 @@ class SchoolsListViewController: UIViewController {
         layout()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            dismissViewController()
+        }
+    }
+    
+    func dismissViewController() {
+        coordinator?.didFinish()
+    }
+
     func layout() {
         schoolsTableView.delegate = self
         schoolsTableView.dataSource = self

@@ -13,6 +13,10 @@
 		9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */; };
 		9E902E1929A4482800A39C77 /* SchoolAppButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */; };
 		9EA40B302884F782000DE8A0 /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */; };
+		9EB743FC29EC611F0041F35E /* MapSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB743FB29EC611F0041F35E /* MapSearchCoordinator.swift */; };
+		9EB743FF29EC619D0041F35E /* MySchoolsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB743FE29EC619D0041F35E /* MySchoolsCoordinator.swift */; };
+		9EB7440229EC62280041F35E /* TopSchoolsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7440129EC62280041F35E /* TopSchoolsCoordinator.swift */; };
+		9EB7440529EC629F0041F35E /* SATSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7440429EC629F0041F35E /* SATSearchCoordinator.swift */; };
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* MapSearchViewModel.swift */; };
 		9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */; };
@@ -105,6 +109,10 @@
 		9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListCoordinator.swift; sourceTree = "<group>"; };
 		9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppButtonConfiguration.swift; sourceTree = "<group>"; };
 		9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
+		9EB743FB29EC611F0041F35E /* MapSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchCoordinator.swift; sourceTree = "<group>"; };
+		9EB743FE29EC619D0041F35E /* MySchoolsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySchoolsCoordinator.swift; sourceTree = "<group>"; };
+		9EB7440129EC62280041F35E /* TopSchoolsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsCoordinator.swift; sourceTree = "<group>"; };
+		9EB7440429EC629F0041F35E /* SATSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATSearchCoordinator.swift; sourceTree = "<group>"; };
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* MapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewModel.swift; sourceTree = "<group>"; };
 		9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTextField.swift; sourceTree = "<group>"; };
@@ -237,6 +245,38 @@
 			name = Catalog;
 			sourceTree = "<group>";
 		};
+		9EB743FA29EC60F40041F35E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9EB743FB29EC611F0041F35E /* MapSearchCoordinator.swift */,
+			);
+			name = Coordinator;
+			sourceTree = "<group>";
+		};
+		9EB743FD29EC618F0041F35E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9EB743FE29EC619D0041F35E /* MySchoolsCoordinator.swift */,
+			);
+			name = Coordinator;
+			sourceTree = "<group>";
+		};
+		9EB7440029EC621C0041F35E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7440129EC62280041F35E /* TopSchoolsCoordinator.swift */,
+			);
+			name = Coordinator;
+			sourceTree = "<group>";
+		};
+		9EB7440329EC623D0041F35E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7440429EC629F0041F35E /* SATSearchCoordinator.swift */,
+			);
+			name = Coordinator;
+			sourceTree = "<group>";
+		};
 		9EF64CBA29A1311F0012F890 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +297,7 @@
 		B8149D992888689D00743BD1 /* MapSearch */ = {
 			isa = PBXGroup;
 			children = (
+				9EB743FA29EC60F40041F35E /* Coordinator */,
 				B82F178E28898DE300AA42F1 /* ViewControllers */,
 				B82F178F28898DED00AA42F1 /* ViewModels */,
 				B8E650AF2889C38A0027716E /* Views */,
@@ -617,6 +658,7 @@
 		B89D3CF7287F51F6002300D1 /* TopSchools */ = {
 			isa = PBXGroup;
 			children = (
+				9EB7440029EC621C0041F35E /* Coordinator */,
 				B82F178928898D5600AA42F1 /* ViewControllers */,
 				B82F178828898D3300AA42F1 /* ViewModels */,
 				B8F5E4C928873888009C4F54 /* Views */,
@@ -635,6 +677,7 @@
 		B89D3CF9287F5260002300D1 /* MySchools */ = {
 			isa = PBXGroup;
 			children = (
+				9EB743FD29EC618F0041F35E /* Coordinator */,
 				B82F178A28898DA300AA42F1 /* ViewControllers */,
 				B82F178B28898DAC00AA42F1 /* ViewModels */,
 				B88891BC2892C84600236F76 /* Views */,
@@ -645,6 +688,7 @@
 		B89D3CFA287F5281002300D1 /* SATSearch */ = {
 			isa = PBXGroup;
 			children = (
+				9EB7440329EC623D0041F35E /* Coordinator */,
 				B82F178C28898DC100AA42F1 /* ViewControllers */,
 				B82F178D28898DC800AA42F1 /* ViewModels */,
 				B82F17972889989800AA42F1 /* Views */,
@@ -855,6 +899,8 @@
 			files = (
 				B8E650AC2889B7570027716E /* SearchWritingScoreViewController.swift in Sources */,
 				B8F5E4CB28873898009C4F54 /* TopSchoolsHeaderView.swift in Sources */,
+				9EB743FF29EC619D0041F35E /* MySchoolsCoordinator.swift in Sources */,
+				9EB7440229EC62280041F35E /* TopSchoolsCoordinator.swift in Sources */,
 				B8736680288075AD0076632F /* YAxisView.swift in Sources */,
 				B89D3CF2287F18F8002300D1 /* SearchSATScoresViewModel.swift in Sources */,
 				B82F177F28897EA000AA42F1 /* TopWritingSchoolsViewController.swift in Sources */,
@@ -913,6 +959,7 @@
 				B801DEEC287BA97B00EA2090 /* TopSchoolsViewController.swift in Sources */,
 				B83A84DE288F202B000752D5 /* NearbySchoolsHeaderView.swift in Sources */,
 				B8736662288055B60076632F /* HomeTopView.swift in Sources */,
+				9EB743FC29EC611F0041F35E /* MapSearchCoordinator.swift in Sources */,
 				B87366742880697F0076632F /* SchoolInfoBottomView.swift in Sources */,
 				9E902E1929A4482800A39C77 /* SchoolAppButtonConfiguration.swift in Sources */,
 				B841D463288E02670058E959 /* MapSearchTabBarViewController.swift in Sources */,
@@ -925,6 +972,7 @@
 				B880AE28288726F500FB1F28 /* SchoolsListHeaderView.swift in Sources */,
 				B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */,
 				9EF64CBC29A131A80012F890 /* HomeCoordinator.swift in Sources */,
+				9EB7440529EC629F0041F35E /* SATSearchCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

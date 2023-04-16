@@ -34,7 +34,11 @@ class SchoolsListCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func didFinish() {
+        parentCoordinator?.childDidFinish(self)
+    }
+    
     deinit {
-        print("QWEWQE")
+        print("schoollistcoordinaot")
     }
 }
