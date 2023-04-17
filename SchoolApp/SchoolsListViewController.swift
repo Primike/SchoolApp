@@ -46,6 +46,10 @@ class SchoolsListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("viewcontroller")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +68,7 @@ class SchoolsListViewController: UIViewController {
     
     func dismissViewController() {
         coordinator?.didFinish()
+        // Dismiss or pop the view controller as needed
     }
 
     func layout() {

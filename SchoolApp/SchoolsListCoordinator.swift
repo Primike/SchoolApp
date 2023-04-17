@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class SchoolsListCoordinator: Coordinating {
-    weak var parentCoordinator: HomeCoordinator?
+class SchoolsListCoordinator: ChildCoordinating {
+    weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
-    var childCoordinators: [Coordinating] = []
+    var childCoordinators: [ChildCoordinating] = []
     var schools: [School]
     var schoolScores: [SATData]
     

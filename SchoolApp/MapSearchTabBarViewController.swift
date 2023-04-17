@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 class MapSearchTabBarViewController: UITabBarController {
-    
     var schools: [School]
     var schoolScores: [SATData]
+    var coordinator: ChildCoordinating?
     
-    init(schools: [School], schoolsScores: [SATData]) {
+    required init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
         self.schoolScores = schoolsScores
         

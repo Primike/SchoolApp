@@ -1,5 +1,5 @@
 //
-//  MySchoolsCoordinator.swift
+//  SchoolComparisonCoordinator.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 4/16/23.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class MySchoolsCoordinator: ChildCoordinating {
+class SchoolComparisonCoordinator: ChildCoordinating {
     weak var parentCoordinator: Coordinating?
-    var navigationController: UINavigationController?
+    weak var navigationController: UINavigationController?
     var childCoordinators: [ChildCoordinating] = []
     var viewModel: MySchoolsViewModel
     
@@ -24,12 +24,12 @@ class MySchoolsCoordinator: ChildCoordinating {
             return
         }
         
-        let mySchoolsViewController = MySchoolsViewController(viewModel: viewModel)
-        mySchoolsViewController.coordinator = self
-        navigationController.tabBarItem.title = "My Schools"
-        navigationController.tabBarItem.image = UIImage(systemName: "heart.circle.fill")
+        let schoolComparisonViewController = SchoolComparisonViewController(viewModel: viewModel)
+        schoolComparisonViewController.coordinator = self
+        navigationController.tabBarItem.title = "Compare Schools"
+        navigationController.tabBarItem.image = UIImage(systemName: "arrow.up.arrow.down.circle.fill")
 
-        navigationController.pushViewController(mySchoolsViewController, animated: false)
+        navigationController.pushViewController(schoolComparisonViewController, animated: false)
 
     }
 
@@ -38,6 +38,7 @@ class MySchoolsCoordinator: ChildCoordinating {
     }
     
     deinit {
-        print("myschoolscoordinator")
+        print("schoolcomparisoncoordinator")
     }
 }
+

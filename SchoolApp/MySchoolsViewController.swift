@@ -23,6 +23,7 @@ class MySchoolsViewController: UIViewController {
     }()
         
     let mySchoolsViewModel: MySchoolsViewModel
+    var coordinator: MySchoolsCoordinator?
     
     required init(viewModel: MySchoolsViewModel) {
         self.mySchoolsViewModel = viewModel
@@ -34,6 +35,9 @@ class MySchoolsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("myschoolsvc")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
