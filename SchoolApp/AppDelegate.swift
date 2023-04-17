@@ -11,7 +11,8 @@ import CoreLocation
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
+    var userLocation: CLLocation?
+
     var deviceOrientation = UIInterfaceOrientationMask.portrait
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -37,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func askLocation() {
-        LocationManager.shared.getUserLocation { location in
-            
+        LocationManager.shared.getUserLocation { [weak self] location in
+            self?.userLocation = location
         }
     }
 }

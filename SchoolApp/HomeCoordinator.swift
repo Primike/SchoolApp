@@ -65,12 +65,12 @@ class HomeCoordinator: Coordinating {
         case .schoolsList:
             coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
         case .mapSearch:
-            var viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
-            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
+            var viewModel = MapSearchViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
 
         case .mySchools:
             var viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
-            coordinator = MySchoolsCoordinator(navigationController: navigationController, viewModel: viewModel)
+            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
         case .topSchools:
             var viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MySchoolsCoordinator(navigationController: navigationController, viewModel: viewModel)

@@ -38,10 +38,14 @@ class RadiusSearchViewController: UIViewController {
     }()
     
     let mapSearchViewModel: MapSearchViewModel
+    weak var coordinator: RadiusSearchCoordinator?
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
     var miles = 1.0
         
+    deinit {
+        print("radsearchvc")
+    }
     init(viewModel: MapSearchViewModel) {
         self.mapSearchViewModel = viewModel
         

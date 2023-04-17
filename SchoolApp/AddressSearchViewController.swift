@@ -45,11 +45,15 @@ class AddressSearchViewController: UIViewController {
 
     let viewModel: MapSearchViewModel
     var nearbySchools = [School]()
+    weak var coordinator: AddressSearchCoordinator?
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
     var latitude = 0.0
     var longitude = 0.0
         
+    deinit {
+        print("addsearchvc")
+    }
     init(viewModel: MapSearchViewModel) {
         self.viewModel = viewModel
         

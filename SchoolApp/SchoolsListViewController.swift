@@ -34,7 +34,7 @@ class SchoolsListViewController: UIViewController {
     }()
         
     let viewModel: SchoolsListViewModel
-    var coordinator: SchoolsListCoordinator?
+    weak var coordinator: SchoolsListCoordinator?
 
     required init(viewModel: SchoolsListViewModel) {
         self.viewModel = viewModel

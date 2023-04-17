@@ -25,7 +25,7 @@ class SchoolComparisonViewController: UIViewController {
     }()
     
     let mySchoolsViewModel: MySchoolsViewModel
-    var coordinator: SchoolComparisonCoordinator?
+    weak var coordinator: SchoolComparisonCoordinator?
     var number = 0
     var cellIndex1 = 0
     
