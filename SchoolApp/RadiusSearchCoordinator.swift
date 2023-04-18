@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class RadiusSearchCoordinator: ChildCoordinating {
+class RadiusSearchCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var viewModel: MapSearchViewModel
     
     required init(navigationController: UINavigationController?, viewModel: MapSearchViewModel) {

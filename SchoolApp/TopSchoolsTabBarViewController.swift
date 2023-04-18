@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class TopSchoolsTabBarViewController: UITabBarController {
-    var coordinator: TopSchoolsTabBarCoordinator?
+    var coordinator: Coordinating?
         
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

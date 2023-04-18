@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class TopMathSchoolsCoordinator: ChildCoordinating {
+class TopMathSchoolsCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var viewModel: TopSchoolsViewModel
     
     required init(navigationController: UINavigationController?, viewModel: TopSchoolsViewModel) {

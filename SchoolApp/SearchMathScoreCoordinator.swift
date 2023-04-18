@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class SearchMathScoreCoordinator: ChildCoordinating {
+class SearchMathScoreCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var viewModel: SearchSATScoresViewModel
     
     required init(navigationController: UINavigationController?, viewModel: SearchSATScoresViewModel) {

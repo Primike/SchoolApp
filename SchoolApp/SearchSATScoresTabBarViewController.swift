@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SearchSATScoresTabBarViewController: UITabBarController {
-    var coordinator: SATSearchTabBarCoordinator?
+    var coordinator: Coordinating?
         
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

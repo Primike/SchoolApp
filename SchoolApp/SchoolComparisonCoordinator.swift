@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class SchoolComparisonCoordinator: ChildCoordinating {
+class SchoolComparisonCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var viewModel: MySchoolsViewModel
     
     required init(navigationController: UINavigationController?, viewModel: MySchoolsViewModel) {

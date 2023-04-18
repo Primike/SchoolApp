@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MapSearchTabBarViewController: UITabBarController {
-    var coordinator: MapSearchTabBarCoordinator?
+    var coordinator: Coordinating?
         
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

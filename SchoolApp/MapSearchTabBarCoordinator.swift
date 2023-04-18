@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class MapSearchTabBarCoordinator: ChildCoordinating {
+class MapSearchTabBarCoordinator: Coordinating {
     var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var viewModel: MapSearchViewModel
 
     required init(navigationController: UINavigationController?, viewModel: MapSearchViewModel) {

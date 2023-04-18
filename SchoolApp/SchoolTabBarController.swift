@@ -1,14 +1,14 @@
 //
-//  MySchoolsTabBarViewController.swift
+//  SchoolTabBarController.swift
 //  SchoolApp
 //
-//  Created by Prince Avecillas on 8/2/22.
+//  Created by Prince Avecillas on 4/18/23.
 //
 
 import Foundation
 import UIKit
 
-class MySchoolsTabBarViewController: UITabBarController {
+class SchoolTabBarViewController: UITabBarController {
     var coordinator: Coordinating?
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -21,4 +21,11 @@ class MySchoolsTabBarViewController: UITabBarController {
     func dismissViewController() {
         coordinator?.didFinish()
     }
+
+    private func setupTabBar() {
+        tabBar.tintColor = .black
+        tabBar.isTranslucent = false
+        tabBar.backgroundColor = .white
+    }
 }
+

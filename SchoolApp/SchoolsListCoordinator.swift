@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class SchoolsListCoordinator: ChildCoordinating {
+class SchoolsListCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var schools: [School]
     var schoolScores: [SATData]
     
@@ -39,6 +39,6 @@ class SchoolsListCoordinator: ChildCoordinating {
     }
     
     deinit {
-        print("SchoolListCoordinator")
+        print("School List Coordinator")
     }
 }

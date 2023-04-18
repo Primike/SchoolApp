@@ -85,19 +85,5 @@ class SchoolsListViewModel: SchoolsListViewModeling, SchoolCellMethods {
         return getColor(schoolBoro: schoolSearchResults[indexPath.row].boro)
     }
 
-    func getColor(schoolBoro: String) -> UIColor {
-        switch schoolBoro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
 }
 
