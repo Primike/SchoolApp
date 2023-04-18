@@ -14,7 +14,7 @@ import CoreLocation
 class SchoolMapViewController: UIViewController {
     
     lazy var titleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(schoolName) Map", labelTextColor: schoolColor)
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
         return label
     }()
     
@@ -25,16 +25,13 @@ class SchoolMapViewController: UIViewController {
         return map
     }()
     
-    let latitude: String
-    let longitude: String
-    let schoolName: String
     let schoolColor: UIColor
+    let viewModel: SchoolViewModel
+    weak var coordinator: Coordinating?
 
-    init(latitude: String, longitude: String, schoolName: String, schoolColor: UIColor) {
-        self.latitude = latitude
-        self.longitude = longitude
-        self.schoolName = schoolName
-        self.schoolColor = schoolColor
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -71,13 +68,13 @@ class SchoolMapViewController: UIViewController {
     func setup() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
               let userLocation = appDelegate.userLocation,
-              let latitude = Double(self.latitude),
-              let longitude = Double(self.longitude) else {
+              let latitude = Double(viewModel.school.latitude!),
+              let longitude = Double(viewModel.school.longitude!) else {
             return
         }
 
         addMapPin(latitude: String(userLocation.coordinate.latitude), longitude: String(userLocation.coordinate.longitude), label: "CURRENT LOCATION")
-        addMapPin(latitude: self.latitude, longitude: self.longitude, label: self.schoolName)
+        addMapPin(latitude: viewModel.school.latitude!, longitude: viewModel.school.longitude!, label: viewModel.school.school_name)
 
         map.setRegion(MKCoordinateRegion(center: .init(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
     }

@@ -15,6 +15,29 @@ protocol SchoolCellMethods {
     func getSchoolColor(indexPath: IndexPath) -> UIColor
     func getColor(schoolBoro: String) -> UIColor
 }
+
+protocol SchoolColor {
+    func getColor(schoolBoro: String) -> UIColor
+
+}
+
+extension SchoolColor {
+    func getColor(schoolBoro: String) -> UIColor {
+        switch schoolBoro {
+        case "M":
+            return UIColor.systemBlue
+        case "X":
+            return .systemOrange
+        case "K":
+            return UIColor.systemRed
+        case "Q":
+            return UIColor.systemPurple
+        default:
+            return .systemGreen
+        }
+    }
+}
+
 extension SchoolCellMethods {
     func getColor(schoolBoro: String) -> UIColor {
         switch schoolBoro {

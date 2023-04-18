@@ -70,7 +70,6 @@ class HomeViewController: UIViewController {
     let viewModel: HomeViewModel
     var coordinator: HomeCoordinator?
 
-
     required init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         

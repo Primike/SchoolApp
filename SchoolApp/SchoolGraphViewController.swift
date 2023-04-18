@@ -24,7 +24,7 @@ class SchoolGraphViewController: UIViewController {
     }()
 
     lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: schoolColor)
+        var label = SchoolAppLabel(frame: CGRect(), labelText: viewModel.school.school_name, labelTextColor: schoolColor)
         label.numberOfLines = 1
         return label
     }()
@@ -41,7 +41,7 @@ class SchoolGraphViewController: UIViewController {
     }()
     
     lazy var graphBarsView: GraphBarsView = {
-        var view = GraphBarsView(frame: CGRect(), scores: schoolScores, schoolColor: schoolColor)
+        var view = GraphBarsView(frame: CGRect(), scores: viewModel.schoolScores, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor
@@ -54,14 +54,12 @@ class SchoolGraphViewController: UIViewController {
         return view
     }()
 
-    var school: School
-    var schoolScores: SATData
     let schoolColor: UIColor
+    let viewModel: SchoolViewModel
 
-    init(school: School, scores: SATData, schoolColor: UIColor) {
-        self.school = school
-        self.schoolScores = scores
-        self.schoolColor = schoolColor
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         
         super.init(nibName: nil, bundle: nil)
     }

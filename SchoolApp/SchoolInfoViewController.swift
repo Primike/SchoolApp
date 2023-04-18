@@ -44,7 +44,7 @@ class SchoolInfoViewController: UIViewController {
     }()
     
     lazy var schoolInfoBottomView: SchoolInfoBottomView = {
-        var view = SchoolInfoBottomView(frame: CGRect(), school: school, schoolColor: schoolColor)
+        var view = SchoolInfoBottomView(frame: CGRect(), school: viewModel.school, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 50
         view.layer.maskedCorners = [.layerMinXMinYCorner]
@@ -53,23 +53,24 @@ class SchoolInfoViewController: UIViewController {
     }()
     
     lazy var schoolInfoTopView: SchoolInfoTopView = {
-        var view = SchoolInfoTopView(frame: CGRect(), school: school, schoolColor: schoolColor)
+        var view = SchoolInfoTopView(frame: CGRect(), school: viewModel.school, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     let defaults = UserDefaults.standard
     var addButtonImage: String
-    let school: School
+    let viewModel: SchoolViewModel
     let schoolColor: UIColor
+    weak var coordinator: Coordinating?
     
-    init(school: School, schoolColor: UIColor) {
-        self.school = school
-        self.schoolColor = schoolColor
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
         
-        if savedArray.contains(school.dbn) {
+        if savedArray.contains(viewModel.school.dbn) {
             addButtonImage = "checkmark"
         } else {
             addButtonImage = "plus.circle"
@@ -145,7 +146,7 @@ class SchoolInfoViewController: UIViewController {
 
 extension SchoolInfoViewController {
     @objc func websiteButtonTapped(sender: UIButton) {
-        guard let url = URL(string: "https://\(school.website)") else {
+        guard let url = URL(string: "https://\(viewModel.school.website)") else {
             return
         }
         UIApplication.shared.open(url) { success in
@@ -161,7 +162,7 @@ extension SchoolInfoViewController {
             addButtonImage = "checkmark"
             addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
             
-            savedArray.append(school.dbn)
+            savedArray.append(viewModel.school.dbn)
             defaults.set(savedArray, forKey: "array")
             
             self.showAlert()
@@ -170,7 +171,7 @@ extension SchoolInfoViewController {
             addButtonImage = "plus.circle"
             addSchoolButton.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
             
-            defaults.set(savedArray.filter { $0 != school.dbn }, forKey: "array")
+            defaults.set(savedArray.filter { $0 != viewModel.school.dbn }, forKey: "array")
         }
     }
 }

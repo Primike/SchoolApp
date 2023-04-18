@@ -44,10 +44,11 @@ class SchoolTableViewCell: UITableViewCell {
         return label
     }()
 
+    //Use reuse so the table can reuse the cells and not init new ones
     static let reuseID = "SchoolCell"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: SchoolTableViewCell.reuseID)
     }
 
     required init?(coder: NSCoder) {

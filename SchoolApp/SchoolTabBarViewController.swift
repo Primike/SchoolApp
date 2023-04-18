@@ -10,67 +10,23 @@ import UIKit
 
 class SchoolTabBarViewController: UITabBarController {
 
-    var school: School
-    var schoolScores: SATData
-    var schoolColor = UIColor.systemBlue
-    
-    init(school: School, scores: SATData) {
-        self.school = school
-        self.schoolScores = scores
+    weak var coordinator: SchoolTabCoordinator?
         
-        super.init(nibName: nil, bundle: nil)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            dismissViewController()
+        }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.schoolColor = self.getColor(school: school)
-        setupViews()
-        setupTabBar()
-    }
-    
-    private func setupViews() {
-        
-        let schoolInfoVC = SchoolInfoViewController(school: school, schoolColor: schoolColor)
-        let satScoresVC = SchoolScoresViewController(school: school, scores: schoolScores, schoolColor: schoolColor)
-        let schoolMapVC = SchoolMapViewController(latitude: school.latitude!, longitude: school.longitude!, schoolName: school.school_name, schoolColor: getColor(school: school))
-
-        schoolInfoVC.setTabBarImage(imageSFName: "graduationcap", title: "Summary", tag: 0)
-        satScoresVC.setTabBarImage(imageSFName: "percent", title: "SAT Scores", tag: 1)
-        schoolMapVC.setTabBarImage(imageSFName: "mappin", title: "School Map", tag: 2)
-
-        let schoolInfoNC = UINavigationController(rootViewController: schoolInfoVC)
-        let satScoresNC = UINavigationController(rootViewController: satScoresVC)
-        let schoolMapNC = UINavigationController(rootViewController: schoolMapVC)
-        
-        let tabBarList = [schoolInfoNC, satScoresNC, schoolMapNC]
-
-        viewControllers = tabBarList
+    func dismissViewController() {
+        coordinator?.didFinish()
     }
 
     private func setupTabBar() {
         tabBar.tintColor = .black
         tabBar.isTranslucent = false
         tabBar.backgroundColor = .white
-    }
-    
-    func getColor(school: School) -> UIColor {
-        switch school.boro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
     }
 }
 

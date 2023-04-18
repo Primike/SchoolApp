@@ -32,16 +32,15 @@ class SchoolScoresViewController: UIViewController {
         return button
     }()
     
-    let school: School
-    let schoolScores: SATData
     let schoolColor: UIColor
+    let viewModel: SchoolViewModel
+    weak var coordinator: Coordinating?
     
-    init(school: School, scores: SATData, schoolColor: UIColor) {
-        self.school = school
-        self.schoolScores = scores
-        self.schoolColor = schoolColor
-        schoolScoresTopView = SchoolScoresTopView(frame: CGRect(), school: school, schoolScores: schoolScores, schoolColor: schoolColor)
-        schoolScoresBottomView = SchoolScoresBottomView(frame: CGRect(), school: school, schoolScores: schoolScores, schoolColor: schoolColor)
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
+        schoolScoresTopView = SchoolScoresTopView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.schoolScores, schoolColor: schoolColor)
+        schoolScoresBottomView = SchoolScoresBottomView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.schoolScores, schoolColor: schoolColor)
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -65,7 +64,7 @@ class SchoolScoresViewController: UIViewController {
                 
         schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
         
-        if schoolScores.sat_math_avg_score == "0" {
+        if viewModel.schoolScores.sat_math_avg_score == "0" {
             schoolScoresBottomView.satMathSubView.satSubjectScore.text = "Not Available"
             schoolScoresBottomView.satWritingSubView.satSubjectScore.text = "Not Available"
             schoolScoresBottomView.satReadingSubView.satSubjectScore.text = "Not Available"
@@ -113,6 +112,6 @@ class SchoolScoresViewController: UIViewController {
 
 extension SchoolScoresViewController {
     @objc func graphButtonTapped(sender: UIButton) {
-        navigationController?.present(SchoolGraphViewController(school: school, scores: schoolScores, schoolColor: schoolColor), animated: true, completion: nil)
+        navigationController?.present(SchoolGraphViewController(viewModel: viewModel), animated: true, completion: nil)
     }
 }

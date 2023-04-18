@@ -55,6 +55,7 @@ class SchoolsListViewController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.titleView = schoolsSearchBar
+        schoolsTableView.register(SchoolTableViewCell.self, forCellReuseIdentifier: SchoolTableViewCell.reuseID)
 
         layout()
     }
@@ -66,12 +67,11 @@ class SchoolsListViewController: UIViewController {
         }
     }
     
-    func dismissViewController() {
+    private func dismissViewController() {
         coordinator?.didFinish()
-        // Dismiss or pop the view controller as needed
     }
 
-    func layout() {
+    private func layout() {
         schoolsTableView.delegate = self
         schoolsTableView.dataSource = self
         schoolsSearchBar.delegate = self
@@ -89,18 +89,18 @@ class SchoolsListViewController: UIViewController {
 
 extension SchoolsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let schoolCell = SchoolTableViewCell()
+        let schoolCell = tableView.dequeueReusableCell(withIdentifier: SchoolTableViewCell.reuseID, for: indexPath) as! SchoolTableViewCell
         schoolCell.configure(viewModel: viewModel, indexPath: indexPath)
 
         return schoolCell
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getNumOfRowsInSection() ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(Int(view.bounds.height/5))
+        return CGFloat(view.bounds.height/5)
     }
 }
 
