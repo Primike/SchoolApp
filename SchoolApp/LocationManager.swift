@@ -37,7 +37,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.stopUpdatingLocation()
     }
     
-    // CLLocationManagerDelegate method called when location updates are not available
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error.localizedDescription)")
     }

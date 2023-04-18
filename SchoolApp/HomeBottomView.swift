@@ -67,17 +67,16 @@ class HomeBottomView: UIView {
         return divider
     }()
         
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    init() {
+        super.init(frame: .zero)
         layout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func layout() {
+
+    private func layout() {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(titleStackView)

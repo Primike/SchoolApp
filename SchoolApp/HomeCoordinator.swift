@@ -4,33 +4,9 @@
 //
 //  Created by Prince Avecillas on 2/18/23.
 //
-enum ViewControllerType {
-    case schoolsList
-    case mapSearch
-    case mySchools
-    case topSchools
-    case satSearch
-}
-
-extension Coordinating {
-    func childDidFinish(_ child: Coordinating) {
-        // Default implementation
-    }
-}
 
 import Foundation
 import UIKit
-
-protocol Coordinating: AnyObject {
-    var navigationController: UINavigationController? { get set }
-    var childCoordinators: [ChildCoordinating] { get set }
-    func start()
-    func childDidFinish(_ child: Coordinating)
-}
-
-protocol ChildCoordinating: Coordinating {
-    var parentCoordinator: Coordinating? { get set }
-}
 
 class HomeCoordinator: Coordinating {
     weak var navigationController: UINavigationController?
@@ -65,18 +41,18 @@ class HomeCoordinator: Coordinating {
         case .schoolsList:
             coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
         case .mapSearch:
-            var viewModel = MapSearchViewModel(schools: schools, schoolsScores: schoolScores)
+            let viewModel = MapSearchViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
 
         case .mySchools:
-            var viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
+            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
         case .topSchools:
-            var viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
+            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MySchoolsCoordinator(navigationController: navigationController, viewModel: viewModel)
 
         case .satSearch:
-            var viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
+            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MySchoolsCoordinator(navigationController: navigationController, viewModel: viewModel)
 
         }

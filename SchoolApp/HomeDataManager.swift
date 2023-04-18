@@ -13,47 +13,32 @@ protocol HomeDataManaging {
 }
 
 class HomeDataManager: HomeDataManaging {
-    func getSchools(url: URL?, completion: @escaping (Result<[School], Error>) -> Void) {
+    private func fetchData<T: Decodable>(url: URL?, customError: CustomError, completion: @escaping (Result<[T], Error>) -> Void) {
         guard let url = url else {
             return
         }
 
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, _ in
             guard let data = data else {
-                completion(.failure(CustomError.noSchoolsData))
+                completion(.failure(customError))
                 return
             }
             
             do {
-                var results = try JSONDecoder().decode([School].self, from: data)
-                
+                let results = try JSONDecoder().decode([T].self, from: data)
                 completion(.success(results))
             } catch {
-                completion(.failure(CustomError.noSchoolsData))
+                completion(.failure(customError))
             }
         }
         task.resume()
     }
-    
-    func getSATData(url: URL?, completion: @escaping (Result<[SATData], Error>) -> Void) {
-        guard let url = url else {
-            return
-        }
 
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, _ in
-            guard let data = data else {
-                completion(.failure(CustomError.noSATData))
-                return
-            }
-            
-            do {
-                var results = try JSONDecoder().decode([SATData].self, from: data)
-                
-                completion(.success(results))
-            } catch {
-                completion(.failure(CustomError.noSATData))
-            }
-        }
-        task.resume()
+    func getSchools(url: URL?, completion: @escaping (Result<[School], Error>) -> Void) {
+        fetchData(url: url, customError: .noSchoolsData, completion: completion)
+    }
+
+    func getSATData(url: URL?, completion: @escaping (Result<[SATData], Error>) -> Void) {
+        fetchData(url: url, customError: .noSATData, completion: completion)
     }
 }
