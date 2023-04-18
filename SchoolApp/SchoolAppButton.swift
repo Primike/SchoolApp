@@ -32,14 +32,15 @@ class SchoolAppButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupButton() {
+    private func setupButton() {
         translatesAutoresizingMaskIntoConstraints = false
         configuration = SchoolAppButtonConfiguration.configuration
         configuration?.title = title
         configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(viewWidth))/titleSize)
         if let imageName = imageName {
-            configuration?.image = UIImage(systemName: imageName,
-                                           withConfiguration: UIImage.SymbolConfiguration(font: UIFont(name:"HelveticaNeue", size: CGFloat(Int(viewWidth))/imageSize)!))
+            if let font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(viewWidth))/imageSize) {
+                configuration?.image = UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(font: font))
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  TopSchoolsCoordinator.swift
+//  TopWritingSchoolsCoordinator.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 4/17/23.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TopSchoolsCoordinator: ChildCoordinating {
+class TopWritingSchoolsCoordinator: ChildCoordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
     var childCoordinators: [ChildCoordinating] = []
@@ -24,12 +24,12 @@ class TopSchoolsCoordinator: ChildCoordinating {
             return
         }
         
-        let topSchoolsViewController = TopSchoolsViewController(viewModel: viewModel)
-        topSchoolsViewController.coordinator = self
-        navigationController.tabBarItem.title = "Top Schools"
-        navigationController.tabBarItem.image = UIImage(systemName: "star.fill")
+        let topWritingViewController = TopWritingSchoolsViewController(viewModel: viewModel)
+        topWritingViewController.coordinator = self
+        navigationController.tabBarItem.title = "Top Writing"
+        navigationController.tabBarItem.image = UIImage(systemName: "pencil")
 
-        navigationController.pushViewController(topSchoolsViewController, animated: false)
+        navigationController.pushViewController(topWritingViewController, animated: false)
 
     }
 
@@ -38,6 +38,10 @@ class TopSchoolsCoordinator: ChildCoordinating {
     }
     
     deinit {
-        print("Top Schools Coordinator")
+        print("Top Reading Coordinator")
     }
 }
+
+
+
+

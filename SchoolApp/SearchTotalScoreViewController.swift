@@ -50,6 +50,7 @@ class SearchTotalScoreViewController: UIViewController {
     }()
     
     let searchSATScoreViewModel: SearchSATScoresViewModel
+    weak var coordinator: Coordinating?
     
     required init(viewModel: SearchSATScoresViewModel) {
         self.searchSATScoreViewModel = viewModel

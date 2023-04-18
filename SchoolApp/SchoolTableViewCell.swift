@@ -65,22 +65,7 @@ class SchoolTableViewCell: UITableViewCell {
         schoolNameLabel.textColor = viewModel.getSchoolColor(indexPath: indexPath)
     }
     
-    func getColor(schoolBoro: String) -> UIColor {
-        switch schoolBoro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
-
-    func setup() {
+    private func setup() {
         self.layer.borderWidth = 5
         self.layer.borderColor = UIColor.systemFill.cgColor
         self.layer.cornerRadius = 20
@@ -89,7 +74,7 @@ class SchoolTableViewCell: UITableViewCell {
         self.selectionStyle = .none
     }
 
-    func layout() {
+    private func layout() {
         self.addSubview(cellStackView)
 
         cellStackView.addSubview(schoolInfoStackView)

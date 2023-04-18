@@ -231,7 +231,7 @@ extension HomeViewController {
         case 2:
             type = .mySchools
         case 3:
-            type = .satSearch
+            type = .topSchools
         case 4:
             type = .satSearch
         default:
@@ -240,28 +240,4 @@ extension HomeViewController {
         
         coordinator.goToViewController(type: type, schools: viewModel.schools, schoolScores: viewModel.schoolsScores)
     }
-    
-//    @objc func nycSchoolsListTapped(sender: UIButton) {
-//        guard let coordinator = coordinator else {
-//            return
-//        }
-//
-//        coordinator.goToViewController(type: .schoolsList, schools: viewModel.schools, schoolScores: viewModel.schoolsScores)
-//    }
-//
-//    @objc func mapSearchTapped(sender: UIButton) {
-//        navigationController?.pushViewController(MapSearchTabBarViewController(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores), animated: true)
-//    }
-//
-//    @objc func mySchoolsTapped(sender: UIButton) {
-//        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
-//    }
-//
-//    @objc func topSchoolsTapped(sender: UIButton) {
-//        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
-//    }
-//
-//    @objc func satSearchTapped(sender: UIButton) {
-//        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoresViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
-//    }
 }

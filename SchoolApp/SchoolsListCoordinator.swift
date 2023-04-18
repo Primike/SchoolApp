@@ -39,6 +39,6 @@ class SchoolsListCoordinator: ChildCoordinating {
     }
     
     deinit {
-        print("schoollistcoordinaot")
+        print("SchoolListCoordinator")
     }
 }

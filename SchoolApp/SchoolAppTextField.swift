@@ -19,7 +19,7 @@ class SchoolAppTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func layout() {
+    private func layout() {
         translatesAutoresizingMaskIntoConstraints = false
         font = UIFont(name:"HelveticaNeue", size: 20.0)
         adjustsFontSizeToFitWidth = true

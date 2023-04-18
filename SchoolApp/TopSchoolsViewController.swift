@@ -46,6 +46,7 @@ class TopSchoolsViewController: UIViewController {
     }()
         
     let topSchoolsViewModel: TopSchoolsViewModel
+    weak var coordinator: Coordinating?
     
     required init(viewModel: TopSchoolsViewModel) {
         self.topSchoolsViewModel = viewModel

@@ -14,9 +14,3 @@ struct SATData: Decodable {
     var sat_math_avg_score = "0"
     var sat_writing_avg_score = "0"
 }
-
-enum satSectionScores {
-    case sat_critical_reading_avg_score
-    case sat_math_avg_score
-    case sat_writing_avg_score
-}

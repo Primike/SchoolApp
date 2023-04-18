@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-protocol SchoolCellMethods {
-    func getSchoolName(indexPath: IndexPath) -> String
-    func getSchoolAddress(indexPath: IndexPath) -> String
-    func getSchoolBoro(indexPath: IndexPath) -> String
-    func getSchoolColor(indexPath: IndexPath) -> UIColor
-    func getColor(schoolBoro: String) -> UIColor
-}
 protocol SchoolsListViewModeling {
     var schools: [School] { get set }
     var satData: [SATData] { get set }

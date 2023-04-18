@@ -40,6 +40,7 @@ class HomeCoordinator: Coordinating {
         switch type {
         case .schoolsList:
             coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
+            
         case .mapSearch:
             let viewModel = MapSearchViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
@@ -47,13 +48,14 @@ class HomeCoordinator: Coordinating {
         case .mySchools:
             let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
+            
         case .topSchools:
-            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
-            coordinator = MySchoolsCoordinator(navigationController: navigationController, viewModel: viewModel)
+            let viewModel = TopSchoolsViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = TopSchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
 
         case .satSearch:
-            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
-            coordinator = MySchoolsCoordinator(navigationController: navigationController, viewModel: viewModel)
+            let viewModel = SearchSATScoresViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = SATSearchTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
 
         }
         
