@@ -11,79 +11,69 @@ import UIKit
 protocol SchoolsListViewModeling {
     var schools: [School] { get set }
     var satData: [SATData] { get set }
-    var schoolSearchResults: [School] { get set }
-    var schoolScores: SATData { get set }
-    func getNumOfRowsInSection() -> Int?
+    var searchResults: [School] { get set }
+    func getNumOfRowsInSection() -> Int
     func textChanged(searchText: String)
-    func rowSelectSearch(indexPath: IndexPath)
+    func getSchool(indexPath: IndexPath) -> School
+    func getSATData(indexPath: IndexPath) -> SATData
 }
 
 class SchoolsListViewModel: SchoolsListViewModeling, SchoolCellMethods {
     
     var schools = [School]()
     var satData = [SATData]()
-    var schoolSearchResults = [School]()
-    var schoolScores = SATData()
+    var searchResults = [School]()
     
     init(schools: [School], schoolsScores: [SATData]) {
         self.satData = schoolsScores
         self.schools = schools
-        self.schoolSearchResults = schools
+        self.searchResults = schools
     }
     
     //MARK: TableView Methods
-    func getNumOfRowsInSection() -> Int? {
-        return schoolSearchResults.count
+    func getNumOfRowsInSection() -> Int {
+        return searchResults.count
     }
 
     func textChanged(searchText: String) {
-        var search = searchText
-        
-        if searchText != "" {
-            let array = [" ", ",", ".", "-", "(", ")", ":", "/"]
-            for i in array {
-                search = search.replacingOccurrences(of: i, with: "")
-            }
-            search = search.replacingOccurrences(of: "&", with: "and")
+        if !searchText.isEmpty {
+            let unwantedCharacters = Set(" ,.-():/")
+            let search = searchText
+                .replacingOccurrences(of: "&", with: "and")
+                .filter { !unwantedCharacters.contains($0) }
+                .lowercased()
 
-            schoolSearchResults =
-            schools.filter { school in
-                return school.mergedText!.lowercased().contains(search.lowercased())
+            searchResults = schools.filter { school in
+                return school.mergedText!.lowercased().contains(search)
             }
         } else {
-            schoolSearchResults = schools
+            searchResults = schools
         }
     }
-    
-    func rowSelectSearch(indexPath: IndexPath) {
-        if let scores = satData.first(where: {$0.dbn == schoolSearchResults[indexPath.row].dbn}) {
-            schoolScores = scores
-        } else {
-            schoolScores = SATData()
-        }
+
+    func getSchool(indexPath: IndexPath) -> School {
+        return searchResults[indexPath.row]
     }
     
-    //MARK: Cell Methods
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        let school = schoolSearchResults[indexPath.row]
-        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
+    func getSATData(indexPath: IndexPath) -> SATData {
+        return satData.first(where: {$0.dbn == searchResults[indexPath.row].dbn}) ?? SATData()
     }
     
+    //MARK: Cell Setup Methods
     func getSchoolName(indexPath: IndexPath) -> String {
-        return schoolSearchResults[indexPath.row].school_name
+        return searchResults[indexPath.row].school_name
     }
     
     func getSchoolAddress(indexPath: IndexPath) -> String {
-        return schoolSearchResults[indexPath.row].location
+        return searchResults[indexPath.row].location
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return schoolSearchResults[indexPath.row].boro
+        return searchResults[indexPath.row].boro
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {
-        return getColor(schoolBoro: schoolSearchResults[indexPath.row].boro)
+        return getColor(schoolBoro: searchResults[indexPath.row].boro)
     }
-
 }
 

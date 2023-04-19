@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+//maybe font emun
 class SchoolAppLabel: UILabel {
     
     var labelText: String

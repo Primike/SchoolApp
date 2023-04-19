@@ -45,11 +45,7 @@ class SchoolsListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        print("viewcontroller")
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,7 +88,7 @@ extension SchoolsListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.getNumOfRowsInSection() ?? 0
+        return viewModel.getNumOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,9 +98,7 @@ extension SchoolsListViewController: UITableViewDataSource {
 
 extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.rowSelectSearch(indexPath: indexPath)
-        
-        coordinator?.goToSchoolView(school: viewModel.schoolSearchResults[indexPath.row], schoolScores: viewModel.schoolScores)
+        coordinator?.goToSchoolView(school: viewModel.getSchool(indexPath: indexPath), schoolScores: viewModel.getSATData(indexPath: indexPath))
     }
 }
 

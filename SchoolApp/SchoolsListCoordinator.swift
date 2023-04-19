@@ -34,10 +34,6 @@ class SchoolsListCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func didFinish() {
-        parentCoordinator?.childDidFinish(self)
-    }
-    
     func goToSchoolView(school: School, schoolScores: SATData) {
         guard let navigationController = navigationController else {
             return
@@ -55,6 +51,10 @@ class SchoolsListCoordinator: Coordinating {
         if let index = childCoordinators.firstIndex(where: { $0 === child }) {
             childCoordinators.remove(at: index)
         }
+    }
+    
+    func didFinish() {
+        parentCoordinator?.childDidFinish(self)
     }
     
     deinit {
