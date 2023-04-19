@@ -104,7 +104,7 @@ extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.rowSelectSearch(indexPath: indexPath)
         
-        navigationController?.pushViewController(SchoolTabBarViewController(school: viewModel.schoolSearchResults[indexPath.row], scores: viewModel.schoolScores), animated: true)
+        coordinator?.goToSchoolView(school: viewModel.schoolSearchResults[indexPath.row], schoolScores: viewModel.schoolScores)
     }
 }
 

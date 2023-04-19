@@ -45,7 +45,7 @@ class SchoolTabCoordinator: Coordinating {
         let tabBarViewController = SchoolTabBarViewController()
         tabBarViewController.coordinator = self
         tabBarViewController.setViewControllers([searchTotalNavController, searchMathNavController, searchReadingNavController], animated: true)
-        navigationController.pushViewController(tabBarViewController, animated: true)
+        navigationController.present(tabBarViewController, animated: true)
     }
     
     func didFinish() {

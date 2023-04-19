@@ -45,7 +45,7 @@ class AddressSearchViewController: UIViewController {
 
     let viewModel: MapSearchViewModel
     var nearbySchools = [School]()
-    weak var coordinator: Coordinating?
+    weak var coordinator: MapSearchCoordinator?
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
     var latitude = 0.0
@@ -215,7 +215,6 @@ extension AddressSearchViewController: MKMapViewDelegate {
             let index = viewModel.findSchool(name: view.annotation!.title!!)
             
             coordinator?.goToSchoolView(school: viewModel.nearbySchools[index], schoolScores: viewModel.findSchoolScores(index: index))
-//            navigationController?.present(SchoolTabBarViewController(school: , scores: ), animated: true)
         }
     }
     

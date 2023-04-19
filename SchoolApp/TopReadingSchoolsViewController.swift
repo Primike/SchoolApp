@@ -47,7 +47,7 @@ class TopReadingSchoolsViewController: UIViewController {
     }()
     
     let topSchoolsViewModel: TopSchoolsViewModel
-    weak var coordinator: Coordinating?
+    weak var coordinator: TopSchoolsCoordinator?
     
     required init(viewModel: TopSchoolsViewModel) {
         self.topSchoolsViewModel = viewModel
@@ -174,6 +174,6 @@ extension TopReadingSchoolsViewController: UITableViewDataSource {
 extension TopReadingSchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        navigationController?.present(SchoolTabBarViewController(school: topSchoolsViewModel.topSchools[indexPath.row], scores: topSchoolsViewModel.topSchoolsScores[indexPath.row]), animated: true)
+        coordinator?.goToSchoolView(school: topSchoolsViewModel.topSchools[indexPath.row], schoolScores: topSchoolsViewModel.topSchoolsScores[indexPath.row])
     }
 }

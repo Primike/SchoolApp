@@ -32,11 +32,26 @@ class MySchoolsCoordinator: Coordinating {
         navigationController.pushViewController(mySchoolsViewController, animated: false)
 
     }
-
-    func didFinish() {
-//        parentCoordinator?.childDidFinish(self)
-    }
     
+    func goToSchoolView(school: School, schoolScores: SATData) {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let viewModel = SchoolViewModel(school: school, scores: schoolScores)
+        let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
+        
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+        
+    func childDidFinish(_ child: Coordinating) {
+        if let index = childCoordinators.firstIndex(where: { $0 === child }) {
+            childCoordinators.remove(at: index)
+        }
+    }
+
     deinit {
         print("myschoolscoordinator")
     }

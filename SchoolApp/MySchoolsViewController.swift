@@ -37,9 +37,6 @@ class MySchoolsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print("myschoolsvc")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,6 +98,6 @@ extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsTableView.reloadData()
     
-        navigationController?.present(SchoolTabBarViewController(school: mySchoolsViewModel.schools[indexPath.row], scores: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+        coordinator?.goToSchoolView(school: mySchoolsViewModel.schools[indexPath.row], schoolScores: mySchoolsViewModel.schoolsScores[indexPath.row])
     }
 }
