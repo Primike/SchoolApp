@@ -1,25 +1,25 @@
 //
-//  TopSchoolsCoordinator.swift
+//  SATSearchCoordinator.swift
 //  SchoolApp
 //
-//  Created by Prince Avecillas on 4/17/23.
+//  Created by Prince Avecillas on 4/18/23.
 //
 
 import Foundation
 import UIKit
 
-class TopSchoolsCoordinator: Coordinating {
+class SATSearchCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
-    var viewModel: TopSchoolsViewModel
+    var viewModel: SearchSATScoresViewModel
     var searchType: SearchType
     
     enum SearchType {
-        case topSchools, topMath, topReading, topWriting
+        case totalSearch, mathSearch, readingSearch, writingSearch
     }
     
-    required init(navigationController: UINavigationController?, viewModel: TopSchoolsViewModel, searchType: SearchType) {
+    required init(navigationController: UINavigationController?, viewModel: SearchSATScoresViewModel, searchType: SearchType) {
         self.navigationController = navigationController
         self.viewModel = viewModel
         self.searchType = searchType
@@ -32,29 +32,29 @@ class TopSchoolsCoordinator: Coordinating {
         
         let viewController: UIViewController
         switch searchType {
-        case .topSchools:
-            let radiusSearchViewController = TopSchoolsViewController(viewModel: viewModel)
+        case .totalSearch:
+            let radiusSearchViewController = SearchTotalScoreViewController(viewModel: viewModel)
             radiusSearchViewController.coordinator = self
             viewController = radiusSearchViewController
-            navigationController.tabBarItem.title = "Top Schools"
+            navigationController.tabBarItem.title = "SAT Score"
             navigationController.tabBarItem.image = UIImage(systemName: "star.fill")
-        case .topMath:
-            let addressSearchViewController = TopMathSchoolsViewController(viewModel: viewModel)
+        case .mathSearch:
+            let addressSearchViewController = SearchMathScoreViewController(viewModel: viewModel)
             addressSearchViewController.coordinator = self
             viewController = addressSearchViewController
-            navigationController.tabBarItem.title = "Top Math"
+            navigationController.tabBarItem.title = "Math Score"
             navigationController.tabBarItem.image = UIImage(systemName: "x.squareroot")
-        case .topReading:
-            let addressSearchViewController = TopReadingSchoolsViewController(viewModel: viewModel)
+        case .readingSearch:
+            let addressSearchViewController = SearchReadingScoreViewController(viewModel: viewModel)
             addressSearchViewController.coordinator = self
             viewController = addressSearchViewController
-            navigationController.tabBarItem.title = "Top Reading"
+            navigationController.tabBarItem.title = "Reading Score"
             navigationController.tabBarItem.image = UIImage(systemName: "book.fill")
-        case .topWriting:
-            let addressSearchViewController = TopWritingSchoolsViewController(viewModel: viewModel)
+        case .writingSearch:
+            let addressSearchViewController = SearchWritingScoreViewController(viewModel: viewModel)
             addressSearchViewController.coordinator = self
             viewController = addressSearchViewController
-            navigationController.tabBarItem.title = "Top Writing"
+            navigationController.tabBarItem.title = "Writing Score"
             navigationController.tabBarItem.image = UIImage(systemName: "pencil")
 
         }
@@ -84,4 +84,5 @@ class TopSchoolsCoordinator: Coordinating {
     deinit {
         print("Map Search Coordinator")
     }
+
 }

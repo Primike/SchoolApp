@@ -25,18 +25,18 @@ class MapSearchTabBarCoordinator: Coordinating {
         }
         
         let radiusSearchNavController = UINavigationController()
-        let radiusSearchCoordinator = RadiusSearchCoordinator(navigationController: radiusSearchNavController, viewModel: viewModel)
+        let radiusSearchCoordinator = MapSearchCoordinator(navigationController: radiusSearchNavController, viewModel: viewModel, searchType: .radius)
         radiusSearchCoordinator.parentCoordinator = self
         radiusSearchCoordinator.start()
         childCoordinators.append(radiusSearchCoordinator)
 
         let addressSearchNavController = UINavigationController()
-        let addressSearchCoordinator = AddressSearchCoordinator(navigationController: addressSearchNavController, viewModel: viewModel)
+        let addressSearchCoordinator = MapSearchCoordinator(navigationController: addressSearchNavController, viewModel: viewModel, searchType: .address)
         addressSearchCoordinator.parentCoordinator = self
         addressSearchCoordinator.start()
         childCoordinators.append(addressSearchCoordinator)
 
-        let tabBarViewController = MapSearchTabBarViewController()
+        let tabBarViewController = SchoolTabBarViewController()
         tabBarViewController.coordinator = self
         tabBarViewController.setViewControllers([radiusSearchNavController, addressSearchNavController], animated: true)
         navigationController.pushViewController(tabBarViewController, animated: true)

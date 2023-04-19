@@ -10,7 +10,7 @@ import UIKit
 
 class HomeCoordinator: Coordinating {
     weak var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     
     public required init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -35,7 +35,7 @@ class HomeCoordinator: Coordinating {
             return
         }
                 
-        let coordinator: ChildCoordinating
+        let coordinator: Coordinating
         
         switch type {
         case .schoolsList:

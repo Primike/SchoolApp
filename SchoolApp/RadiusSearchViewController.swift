@@ -38,7 +38,7 @@ class RadiusSearchViewController: UIViewController {
     }()
     
     let mapSearchViewModel: MapSearchViewModel
-    weak var coordinator: RadiusSearchCoordinator?
+    weak var coordinator: MapSearchCoordinator?
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
     var miles = 1.0
@@ -173,7 +173,8 @@ extension RadiusSearchViewController: MKMapViewDelegate {
         if view.annotation?.title != "CURRENT LOCATION" {
             let index = mapSearchViewModel.findSchool(name: view.annotation!.title!!)
             
-            navigationController?.present(SchoolTabBarViewController(school: mapSearchViewModel.nearbySchools[index], scores: mapSearchViewModel.findSchoolScores(index: index)), animated: true)
+            coordinator?.goToSchoolView(school: mapSearchViewModel.nearbySchools[index], schoolScores: mapSearchViewModel.findSchoolScores(index: index))
+//            navigationController?.present(SchoolTabBarViewController(school: mapSearchViewModel.nearbySchools[index], scores: mapSearchViewModel.findSchoolScores(index: index)), animated: true)
         }
     }
     

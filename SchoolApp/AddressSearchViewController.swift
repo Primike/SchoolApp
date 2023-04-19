@@ -45,15 +45,12 @@ class AddressSearchViewController: UIViewController {
 
     let viewModel: MapSearchViewModel
     var nearbySchools = [School]()
-    weak var coordinator: AddressSearchCoordinator?
+    weak var coordinator: Coordinating?
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
     var latitude = 0.0
     var longitude = 0.0
         
-    deinit {
-        print("addsearchvc")
-    }
     init(viewModel: MapSearchViewModel) {
         self.viewModel = viewModel
         
@@ -217,7 +214,8 @@ extension AddressSearchViewController: MKMapViewDelegate {
         if view.annotation?.title != "CURRENT LOCATION" {
             let index = viewModel.findSchool(name: view.annotation!.title!!)
             
-            navigationController?.present(SchoolTabBarViewController(school: viewModel.nearbySchools[index], scores: viewModel.findSchoolScores(index: index)), animated: true)
+            coordinator?.goToSchoolView(school: viewModel.nearbySchools[index], schoolScores: viewModel.findSchoolScores(index: index))
+//            navigationController?.present(SchoolTabBarViewController(school: , scores: ), animated: true)
         }
     }
     

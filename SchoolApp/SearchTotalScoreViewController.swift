@@ -50,7 +50,7 @@ class SearchTotalScoreViewController: UIViewController {
     }()
     
     let searchSATScoreViewModel: SearchSATScoresViewModel
-    weak var coordinator: Coordinating?
+    weak var coordinator: SATSearchCoordinator?
     
     required init(viewModel: SearchSATScoresViewModel) {
         self.searchSATScoreViewModel = viewModel
@@ -185,6 +185,7 @@ extension SearchTotalScoreViewController: UITableViewDataSource {
 extension SearchTotalScoreViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        coordinator?.goToSchoolView(school: searchSATScoreViewModel.calculatedSchools[indexPath.row], schoolScores: searchSATScoreViewModel.calculatedSchoolsScores[indexPath.row])
         navigationController?.present(SchoolTabBarViewController(school: searchSATScoreViewModel.calculatedSchools[indexPath.row], scores: searchSATScoreViewModel.calculatedSchoolsScores[indexPath.row]), animated: true)
     }
 }

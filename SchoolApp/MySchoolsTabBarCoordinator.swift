@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class MySchoolsTabBarCoordinator: ChildCoordinating {
+class MySchoolsTabBarCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     weak var navigationController: UINavigationController?
-    var childCoordinators: [ChildCoordinating] = []
+    var childCoordinators: [Coordinating] = []
     var viewModel: MySchoolsViewModel
     
     required init(navigationController: UINavigationController?, viewModel: MySchoolsViewModel) {
@@ -36,7 +36,7 @@ class MySchoolsTabBarCoordinator: ChildCoordinating {
         schoolComparisonCoordinator.start()
         childCoordinators.append(schoolComparisonCoordinator)
 
-        let tabBarViewController = MySchoolsTabBarViewController()
+        let tabBarViewController = SchoolTabBarViewController()
         tabBarViewController.coordinator = self
         tabBarViewController.setViewControllers([mySchoolsNavController, schoolComparisonNavController], animated: true)
         navigationController.pushViewController(tabBarViewController, animated: true)
