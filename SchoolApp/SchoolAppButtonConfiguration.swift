@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SchoolAppButtonConfiguration {
-    static var configuration: UIButton.Configuration = {
+    static let configuration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.filled()
         configuration.titleAlignment = .center
         configuration.baseBackgroundColor = .black

@@ -120,3 +120,25 @@ class HomeViewModel: HomeViewModeling {
     }
 }
 
+struct SearchSchool {
+    let originalSchool: School
+    var location: String
+    var mergedText: String
+    var latitude: String
+    var longitude: String
+    
+    init(from school: School) {
+        self.originalSchool = school
+        self.location = school.location
+        self.latitude = school.latitude ?? "0"
+        self.longitude = school.longitude ?? "0"
+        
+        var merged = school.school_name + school.location
+        let charactersToRemove = [" ", ",", ".", "-", "(", ")", ":", "/"]
+        for char in charactersToRemove {
+            merged = merged.replacingOccurrences(of: char, with: "")
+        }
+        merged = merged.replacingOccurrences(of: "&", with: "and")
+        self.mergedText = merged
+    }
+}

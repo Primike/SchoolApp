@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-protocol Coordinating: AnyObject {
-    var navigationController: UINavigationController? { get set }
-    var childCoordinators: [Coordinating] { get set }
-    func start()
-}
-
 class HomeCoordinator: Coordinating {
     weak var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
@@ -36,16 +30,38 @@ class HomeCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func goToSchoolsList(schools: [School], schoolScores: [SATData]) {
+    func goToViewController(type: ViewControllerType, schools: [School], schoolScores: [SATData]) {
         guard let navigationController = navigationController else {
             return
         }
-
-        let schoolsListCoordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
+                
+        let coordinator: Coordinating
         
-        childCoordinators.append(schoolsListCoordinator)
-        schoolsListCoordinator.parentCoordinator = self
-        schoolsListCoordinator.start()
+        switch type {
+        case .schoolsList:
+            coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
+            
+        case .mapSearch:
+            let viewModel = MapSearchViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
+
+        case .mySchools:
+            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
+            
+        case .topSchools:
+            let viewModel = TopSchoolsViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = TopSchoolsTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
+
+        case .satSearch:
+            let viewModel = SearchSATScoresViewModel(schools: schools, schoolsScores: schoolScores)
+            coordinator = SATSearchTabBarCoordinator(navigationController: navigationController, viewModel: viewModel)
+
+        }
+        
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
     }
     
     func childDidFinish(_ child: Coordinating) {

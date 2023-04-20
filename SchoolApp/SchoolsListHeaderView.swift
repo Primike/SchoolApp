@@ -43,19 +43,6 @@ class SchoolsListHeaderView: UIView {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
-    lazy var date: Date = {
-        var date = Date()
-        return date
-    }()
-    
-    lazy var dateFormatter: DateFormatter = {
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/YY hh:mm:ss"
-        let _ = dateFormatter.string(from: date)
-        return dateFormatter
-    }()
-
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,7 +54,7 @@ class SchoolsListHeaderView: UIView {
          super.init(coder: aDecoder)
      }
 
-    func layout() {
+    private func layout() {
         self.addSubview(headerStackView)
 
         headerStackView.addSubview(labelsStackView)

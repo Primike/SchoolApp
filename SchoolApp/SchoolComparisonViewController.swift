@@ -25,6 +25,7 @@ class SchoolComparisonViewController: UIViewController {
     }()
     
     let mySchoolsViewModel: MySchoolsViewModel
+    weak var coordinator: SchoolComparisonCoordinator?
     var number = 0
     var cellIndex1 = 0
     
@@ -53,6 +54,9 @@ class SchoolComparisonViewController: UIViewController {
         schoolsTableView.reloadData()
     }
     
+    deinit {
+        print("comparisonVC")
+    }
     func layout() {
         view.addSubview(comparisonHeaderView)
         view.addSubview(schoolsTableView)

@@ -18,7 +18,6 @@ protocol MapSearchViewModeling {
     var longitude: Double { get set }
     var miles: Double { get set }
     var numberOfSchools: Int { get set }
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String)
     func getNearbySchools()
     func getSchoolsByMiles()
     func findSchool(name: String) -> Int
@@ -38,12 +37,7 @@ class MapSearchViewModel: MapSearchViewModeling {
         self.schools = schools
         self.schoolsScores = schoolsScores
     }
-    
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-            let school = schools[indexPath.row]
-            return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
-    }
-    
+        
     func getNearbySchools() {
         var array = schools
         nearbySchools = []

@@ -63,11 +63,6 @@ class SearchSATScoresViewModel: SchoolCellMethods {
     }
         
     //MARK: Cell Methods
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        let school = calculatedSchools[indexPath.row]
-        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
-    }
-    
     func getSchoolName(indexPath: IndexPath) -> String {
         return calculatedSchools[indexPath.row].school_name
     }

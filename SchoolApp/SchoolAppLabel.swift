@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+//maybe font emun
 class SchoolAppLabel: UILabel {
     
     var labelText: String
@@ -25,7 +25,7 @@ class SchoolAppLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func layout() {
+    private func layout() {
         translatesAutoresizingMaskIntoConstraints = false
         font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         text = labelText

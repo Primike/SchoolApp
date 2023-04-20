@@ -19,7 +19,7 @@ class SchoolAppStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func layout() {
+    private func layout() {
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

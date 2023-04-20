@@ -14,7 +14,7 @@ import CoreLocation
 class SchoolMapViewController: UIViewController {
     
     lazy var titleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(schoolName) Map", labelTextColor: schoolColor)
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
         return label
     }()
     
@@ -25,16 +25,13 @@ class SchoolMapViewController: UIViewController {
         return map
     }()
     
-    let latitude: String
-    let longitude: String
-    let schoolName: String
     let schoolColor: UIColor
+    let viewModel: SchoolViewModel
+    weak var coordinator: Coordinating?
 
-    init(latitude: String, longitude: String, schoolName: String, schoolColor: UIColor) {
-        self.latitude = latitude
-        self.longitude = longitude
-        self.schoolName = schoolName
-        self.schoolColor = schoolColor
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -69,20 +66,19 @@ class SchoolMapViewController: UIViewController {
     }
 
     func setup() {
-        LocationManager.shared.getUserLocation { [weak self] location in
-            DispatchQueue.main.async {
-                guard let strongSelf = self else {
-                    return
-                }
-                
-                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.addMapPin(latitude: self!.latitude, longitude: self!.longitude, label: self!.schoolName)
-
-                strongSelf.map.setRegion(MKCoordinateRegion(center: .init(latitude: Double(self!.latitude)!, longitude: Double(self!.longitude)!), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
-            }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let userLocation = appDelegate.userLocation,
+              let latitude = Double(viewModel.school.latitude!),
+              let longitude = Double(viewModel.school.longitude!) else {
+            return
         }
+
+        addMapPin(latitude: String(userLocation.coordinate.latitude), longitude: String(userLocation.coordinate.longitude), label: "CURRENT LOCATION")
+        addMapPin(latitude: viewModel.school.latitude!, longitude: viewModel.school.longitude!, label: viewModel.school.school_name)
+
+        map.setRegion(MKCoordinateRegion(center: .init(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
     }
-    
+
     func addMapPin(latitude: String, longitude: String, label: String) {
         let pin = MKPointAnnotation()
         pin.coordinate.longitude = Double(longitude)!

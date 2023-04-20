@@ -17,12 +17,15 @@ class MySchoolsViewController: UIViewController {
     }()
     
     lazy var schoolsTableView: UITableView = {
-        var view = UITableView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        var tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
         
     let mySchoolsViewModel: MySchoolsViewModel
+    weak var coordinator: MySchoolsCoordinator?
     
     required init(viewModel: MySchoolsViewModel) {
         self.mySchoolsViewModel = viewModel
@@ -38,7 +41,6 @@ class MySchoolsViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        setup()
         layout()
         mySchoolsEmpty()
     }
@@ -49,12 +51,7 @@ class MySchoolsViewController: UIViewController {
         schoolsTableView.reloadData()
         mySchoolsEmpty()
     }
-        
-    func setup() {
-        schoolsTableView.delegate = self
-        schoolsTableView.dataSource = self
-    }
-    
+            
     func mySchoolsEmpty() {
         if mySchoolsViewModel.schools.count > 0 {
             mySchoolsHeaderView.mySchoolsLabel.text = "My Schools"
@@ -101,6 +98,6 @@ extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsTableView.reloadData()
     
-        navigationController?.present(SchoolTabBarViewController(school: mySchoolsViewModel.schools[indexPath.row], scores: mySchoolsViewModel.schoolsScores[indexPath.row]), animated: true)
+        coordinator?.goToSchoolView(school: mySchoolsViewModel.schools[indexPath.row], schoolScores: mySchoolsViewModel.schoolsScores[indexPath.row])
     }
 }

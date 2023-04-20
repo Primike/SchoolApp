@@ -34,37 +34,41 @@ class HomeViewController: UIViewController {
     
     lazy var schoolsListButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "NYC Schools List", viewWidth: view.bounds.width, imageName: "list.star", titleSize: 17, imageSize: 18)
-        button.addTarget(self, action: #selector(nycSchoolsListTapped), for: .primaryActionTriggered)
+        button.tag = 0
+        button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
         return button
     }()
 
     lazy var mapSearchButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "Map Search", viewWidth: view.bounds.width, imageName: "map", titleSize: 17, imageSize: 18)
-        button.addTarget(self, action: #selector(mapSearchTapped), for: .primaryActionTriggered)
+        button.tag = 1
+        button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
         return button
     }()
 
     lazy var myschoolsButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "My Schools", viewWidth: view.bounds.width, imageName: "bolt.heart", titleSize: 17, imageSize: 18)
-        button.addTarget(self, action: #selector(mySchoolsTapped), for: .primaryActionTriggered)
+        button.tag = 2
+        button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
         return button
     }()
 
     lazy var topSchoolsButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "Top Schools", viewWidth: view.bounds.width, imageName: "star", titleSize: 30, imageSize: 32)
-        button.addTarget(self, action: #selector(topSchoolsTapped), for: .primaryActionTriggered)
+        button.tag = 3
+        button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
         return button
     }()
 
     lazy var satSearchButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "SAT Search", viewWidth: view.bounds.width, imageName: "books.vertical", titleSize: 30, imageSize: 32)
-        button.addTarget(self, action: #selector(satSearchTapped), for: .primaryActionTriggered)
+        button.tag = 4
+        button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
         return button
     }()
     
     let viewModel: HomeViewModel
     var coordinator: HomeCoordinator?
-
 
     required init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -211,27 +215,28 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController {
-    @objc func nycSchoolsListTapped(sender: UIButton) {
+    @objc func buttonTapped(sender: UIButton) {
         guard let coordinator = coordinator else {
             return
         }
+
+        var type: ViewControllerType
         
-        coordinator.goToSchoolsList(schools: viewModel.schools, schoolScores: viewModel.schoolsScores)
-    }
-    
-    @objc func mapSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(MapSearchTabBarViewController(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores), animated: true)
-    }
-    
-    @objc func mySchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(MySchoolsTabBarViewController(viewModel: MySchoolsViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
-    }
-    
-    @objc func topSchoolsTapped(sender: UIButton) {
-        navigationController?.pushViewController(TopSchoolsTabBarViewController(viewModel: TopSchoolsViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
-    }
-    
-    @objc func satSearchTapped(sender: UIButton) {
-        navigationController?.pushViewController(SearchSATScoresTabBarViewController(viewModel: SearchSATScoresViewModel(schools: viewModel.schools, schoolsScores: viewModel.schoolsScores)), animated: true)
+        switch sender.tag {
+        case 0:
+            type = .schoolsList
+        case 1:
+            type = .mapSearch
+        case 2:
+            type = .mySchools
+        case 3:
+            type = .topSchools
+        case 4:
+            type = .satSearch
+        default:
+            return
+        }
+        
+        coordinator.goToViewController(type: type, schools: viewModel.schools, schoolScores: viewModel.schoolsScores)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SchoolsListCoordinator: Coordinating {
-    weak var parentCoordinator: HomeCoordinator?
+    weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
     var schools: [School]
@@ -34,11 +34,30 @@ class SchoolsListCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func goToSchoolView(school: School, schoolScores: SATData) {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let viewModel = SchoolViewModel(school: school, scores: schoolScores)
+        let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
+        
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+        
+    func childDidFinish(_ child: Coordinating) {
+        if let index = childCoordinators.firstIndex(where: { $0 === child }) {
+            childCoordinators.remove(at: index)
+        }
+    }
+    
     func didFinish() {
         parentCoordinator?.childDidFinish(self)
     }
     
     deinit {
-        print("schoollistcoordinaot")
+        print("School List Coordinator")
     }
 }

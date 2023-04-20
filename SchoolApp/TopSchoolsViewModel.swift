@@ -94,11 +94,6 @@ class TopSchoolsViewModel: SchoolCellMethods {
     }
     
     //MARK: Cell Methods
-    func getInfo(for indexPath: IndexPath) -> (schoolName: String, schoolAddress: String, schoolBoro: String) {
-        let school = topSchools[indexPath.row]
-        return (schoolName: school.school_name, schoolAddress: school.location, schoolBoro: school.boro)
-    }
-    
     func getSchoolName(indexPath: IndexPath) -> String {
         return topSchools[indexPath.row].school_name
     }
