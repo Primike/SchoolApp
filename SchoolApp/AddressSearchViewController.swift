@@ -212,9 +212,9 @@ extension AddressSearchViewController {
 extension AddressSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title != "CURRENT LOCATION" {
-            let index = viewModel.findSchool(name: view.annotation!.title!!)
+            let index = viewModel.getSchool(name: view.annotation!.title!!)
             
-            coordinator?.goToSchoolView(school: viewModel.nearbySchools[index], schoolScores: viewModel.findSchoolScores(index: index))
+            coordinator?.goToSchoolView(school: viewModel.nearbySchools[index], schoolScores: viewModel.getSATScores(index: index))
         }
     }
     

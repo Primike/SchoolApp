@@ -12,11 +12,13 @@ class SATSearchTabBarCoordinator: Coordinating {
     var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
-    var viewModel: SearchSATScoresViewModel
+    var schools: [School]
+    var satData: [SATData]
 
-    required init(navigationController: UINavigationController?, viewModel: SearchSATScoresViewModel) {
+    required init(navigationController: UINavigationController?, schools: [School], satData: [SATData]) {
         self.navigationController = navigationController
-        self.viewModel = viewModel
+        self.schools = schools
+        self.satData = satData
     }
     
     func start() {
@@ -25,25 +27,25 @@ class SATSearchTabBarCoordinator: Coordinating {
         }
         
         let searchTotalNavController = UINavigationController()
-        let searchTotalCoordinator = SATSearchCoordinator(navigationController: searchTotalNavController, viewModel: viewModel, searchType: .totalSearch)
+        let searchTotalCoordinator = SATSearchCoordinator(navigationController: searchTotalNavController, viewModel: SearchSATScoresViewModel(schools: schools, schoolsScores: satData), searchType: .totalSearch)
         searchTotalCoordinator.parentCoordinator = self
         searchTotalCoordinator.start()
         childCoordinators.append(searchTotalCoordinator)
 
         let searchMathNavController = UINavigationController()
-        let searchMathCoordinator = SATSearchCoordinator(navigationController: searchMathNavController, viewModel: viewModel, searchType: .mathSearch)
+        let searchMathCoordinator = SATSearchCoordinator(navigationController: searchMathNavController, viewModel: SearchSATScoresViewModel(schools: schools, schoolsScores: satData), searchType: .mathSearch)
         searchMathCoordinator.parentCoordinator = self
         searchMathCoordinator.start()
         childCoordinators.append(searchMathCoordinator)
         
         let searchReadingNavController = UINavigationController()
-        let searchReadingCoordinator = SATSearchCoordinator(navigationController: searchReadingNavController, viewModel: viewModel, searchType: .readingSearch)
+        let searchReadingCoordinator = SATSearchCoordinator(navigationController: searchReadingNavController, viewModel: SearchSATScoresViewModel(schools: schools, schoolsScores: satData), searchType: .readingSearch)
         searchReadingCoordinator.parentCoordinator = self
         searchReadingCoordinator.start()
         childCoordinators.append(searchReadingCoordinator)
 
         let searchWritingNavController = UINavigationController()
-        let searchWritingCoordinator = SATSearchCoordinator(navigationController: searchWritingNavController, viewModel: viewModel, searchType: .writingSearch)
+        let searchWritingCoordinator = SATSearchCoordinator(navigationController: searchWritingNavController, viewModel: SearchSATScoresViewModel(schools: schools, schoolsScores: satData), searchType: .writingSearch)
         searchWritingCoordinator.parentCoordinator = self
         searchWritingCoordinator.start()
         childCoordinators.append(searchWritingCoordinator)

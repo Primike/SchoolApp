@@ -21,11 +21,31 @@ class TopSchoolsViewModel: SchoolCellMethods {
         self.schoolsScores = schoolsScores
     }
     
-    func getTopSchools() {
+    enum TopSchoolsCategory {
+        case math
+        case reading
+        case writing
+        case combined
+    }
+
+    func getTopSchools(for category: TopSchoolsCategory) {
         topSchoolsScores = []
         topSchools = []
         
-        let sortedScores = schoolsScores.sorted(by: { Int($0.sat_critical_reading_avg_score)! + Int($0.sat_math_avg_score)! + Int($0.sat_writing_avg_score)! > Int($1.sat_critical_reading_avg_score)! + Int($1.sat_math_avg_score)! + Int($1.sat_writing_avg_score)!})
+        let sortedScores = schoolsScores.sorted(by: { score1, score2 in
+            switch category {
+            case .math:
+                return Int(score1.sat_math_avg_score)! > Int(score2.sat_math_avg_score)!
+            case .reading:
+                return Int(score1.sat_critical_reading_avg_score)! > Int(score2.sat_critical_reading_avg_score)!
+            case .writing:
+                return Int(score1.sat_writing_avg_score)! > Int(score2.sat_writing_avg_score)!
+            case .combined:
+                let totalScore1 = Int(score1.sat_critical_reading_avg_score)! + Int(score1.sat_math_avg_score)! + Int(score1.sat_writing_avg_score)!
+                let totalScore2 = Int(score2.sat_critical_reading_avg_score)! + Int(score2.sat_math_avg_score)! + Int(score2.sat_writing_avg_score)!
+                return totalScore1 > totalScore2
+            }
+        })
         
         for i in 0..<sortedScores.count {
             if topSchoolsScores.count != self.number {
@@ -38,61 +58,7 @@ class TopSchoolsViewModel: SchoolCellMethods {
             }
         }
     }
-    
-    func getTopMathSchools() {
-        topSchoolsScores = []
-        topSchools = []
-        
-        let sortedScores = schoolsScores.sorted(by: { Int($0.sat_math_avg_score)! > Int($1.sat_math_avg_score)! })
-        
-        for i in 0..<sortedScores.count {
-            if topSchoolsScores.count != self.number {
-                if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(sortedScores[i])
-                    topSchools.append(school)
-                }
-            } else {
-                break
-            }
-        }
-    }
-    
-    func getTopReadingSchools() {
-        topSchoolsScores = []
-        topSchools = []
-        
-        let sortedScores = schoolsScores.sorted(by: { Int($0.sat_critical_reading_avg_score)! > Int($1.sat_critical_reading_avg_score)! })
-        
-        for i in 0..<sortedScores.count {
-            if topSchoolsScores.count != self.number {
-                if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(sortedScores[i])
-                    topSchools.append(school)
-                }
-            } else {
-                break
-            }
-        }
-    }
-    
-    func getTopWritingSchools() {
-        topSchoolsScores = []
-        topSchools = []
-        
-        let sortedScores = schoolsScores.sorted(by: { Int($0.sat_writing_avg_score)! > Int($1.sat_writing_avg_score)! })
-        
-        for i in 0..<sortedScores.count {
-            if topSchoolsScores.count != self.number {
-                if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(sortedScores[i])
-                    topSchools.append(school)
-                }
-            } else {
-                break
-            }
-        }
-    }
-    
+
     //MARK: Cell Methods
     func getSchoolName(indexPath: IndexPath) -> String {
         return topSchools[indexPath.row].school_name
@@ -109,20 +75,4 @@ class TopSchoolsViewModel: SchoolCellMethods {
     func getSchoolColor(indexPath: IndexPath) -> UIColor {
         return getColor(schoolBoro: topSchools[indexPath.row].boro)
     }
-
-    func getColor(schoolBoro: String) -> UIColor {
-        switch schoolBoro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
-
 }

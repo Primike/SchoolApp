@@ -20,8 +20,8 @@ protocol MapSearchViewModeling {
     var numberOfSchools: Int { get set }
     func getNearbySchools()
     func getSchoolsByMiles()
-    func findSchool(name: String) -> Int
-    func findSchoolScores(index: Int) -> SATData
+    func getSchool(name: String) -> Int
+    func getSATScores(index: Int) -> SATData
 }
 
 class MapSearchViewModel: MapSearchViewModeling {
@@ -39,58 +39,54 @@ class MapSearchViewModel: MapSearchViewModeling {
     }
         
     func getNearbySchools() {
-        var array = schools
         nearbySchools = []
 
-        for _ in 0..<numberOfSchools {
-            var closest = Double(10000)
-            var index = 0
-            for j in 0..<array.count {
-                let difference = abs(latitude - Double(array[j].latitude!)!) + abs(longitude - Double(array[j].longitude!)!)
-                if difference < closest {
-                    closest = difference
-                    index = j
-                }
-            }
-            nearbySchools.append(array[index])
-            array.remove(at: index)
+        // Sort the array by distance and take the first 'numberOfSchools' elements
+        let sortedSchools = schools.sorted { school1, school2 in
+            let distance1 = abs(latitude - Double(school1.latitude!)!) + abs(longitude - Double(school1.longitude!)!)
+            let distance2 = abs(latitude - Double(school2.latitude!)!) + abs(longitude - Double(school2.longitude!)!)
+            return distance1 < distance2
         }
         
+        nearbySchools = Array(sortedSchools.prefix(numberOfSchools))
+        
+        // Adjust the longitude of overlapping schools
         for i in 0..<nearbySchools.count {
             for j in 0..<nearbySchools.count {
                 if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
-                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009*Double(j))"
+                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
                 }
             }
         }
     }
-    
+
     func getSchoolsByMiles() {
         nearbySchools = []
         
-        for i in schools {
-            let loc = CLLocation(latitude: Double(i.latitude!)!, longitude: Double(i.longitude!)!)
+        let distanceThreshold = miles * 1609.34 // Convert miles to meters
+        
+        // Filter schools within the specified distance
+        nearbySchools = schools.filter { school in
+            let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
             let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
-            
-            if distance < Double(miles * 1609.34) {
-                nearbySchools.append(i)
-            }
+            return distance < distanceThreshold
         }
         
+        // Adjust the longitude of overlapping schools
         for i in 0..<nearbySchools.count {
             for j in 0..<nearbySchools.count {
                 if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
-                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009*Double(j))"
+                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
                 }
             }
         }
     }
-    
-    func findSchool(name: String) -> Int {
+
+    func getSchool(name: String) -> Int {
         return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
     }
     
-    func findSchoolScores(index: Int) -> SATData {
-        return schoolsScores.first(where: {$0.dbn == nearbySchools[index].dbn}) ?? SATData(dbn: nearbySchools[index].dbn, num_of_sat_test_takers: "Not Available", sat_critical_reading_avg_score: "0", sat_math_avg_score: "0", sat_writing_avg_score: "0")
+    func getSATScores(index: Int) -> SATData {
+        return schoolsScores.first(where: {$0.dbn == nearbySchools[index].dbn}) ?? SATData(dbn: nearbySchools[index].dbn)
     }
 }

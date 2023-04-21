@@ -61,7 +61,7 @@ class RadiusSearchHeaderView: UIView {
          super.init(coder: aDecoder)
     }
         
-    func layout() {
+    private func layout() {
         self.addSubview(headerStackView)
         headerStackView.addSubview(headerLabel)
         headerStackView.addSubview(middleStackView)

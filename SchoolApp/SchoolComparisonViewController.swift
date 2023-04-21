@@ -54,9 +54,6 @@ class SchoolComparisonViewController: UIViewController {
         schoolsTableView.reloadData()
     }
     
-    deinit {
-        print("comparisonVC")
-    }
     func layout() {
         view.addSubview(comparisonHeaderView)
         view.addSubview(schoolsTableView)

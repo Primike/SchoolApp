@@ -12,11 +12,13 @@ class MapSearchTabBarCoordinator: Coordinating {
     var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
-    var viewModel: MapSearchViewModel
+    var schools: [School]
+    var satData: [SATData]
 
-    required init(navigationController: UINavigationController?, viewModel: MapSearchViewModel) {
+    required init(navigationController: UINavigationController?, schools: [School], satData: [SATData]) {
         self.navigationController = navigationController
-        self.viewModel = viewModel
+        self.schools = schools
+        self.satData = satData  
     }
     
     func start() {
@@ -25,13 +27,13 @@ class MapSearchTabBarCoordinator: Coordinating {
         }
         
         let radiusSearchNavController = UINavigationController()
-        let radiusSearchCoordinator = MapSearchCoordinator(navigationController: radiusSearchNavController, viewModel: viewModel, searchType: .radius)
+        let radiusSearchCoordinator = MapSearchCoordinator(navigationController: radiusSearchNavController, viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData), searchType: .radius)
         radiusSearchCoordinator.parentCoordinator = self
         radiusSearchCoordinator.start()
         childCoordinators.append(radiusSearchCoordinator)
 
         let addressSearchNavController = UINavigationController()
-        let addressSearchCoordinator = MapSearchCoordinator(navigationController: addressSearchNavController, viewModel: viewModel, searchType: .address)
+        let addressSearchCoordinator = MapSearchCoordinator(navigationController: addressSearchNavController, viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData), searchType: .address)
         addressSearchCoordinator.parentCoordinator = self
         addressSearchCoordinator.start()
         childCoordinators.append(addressSearchCoordinator)

@@ -12,11 +12,13 @@ class TopSchoolsTabBarCoordinator: Coordinating {
     var parentCoordinator: Coordinating?
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
-    var viewModel: TopSchoolsViewModel
+    var schools: [School]
+    var satData: [SATData]
 
-    required init(navigationController: UINavigationController?, viewModel: TopSchoolsViewModel) {
+    required init(navigationController: UINavigationController?, schools: [School], satData: [SATData]) {
         self.navigationController = navigationController
-        self.viewModel = viewModel
+        self.schools = schools
+        self.satData = satData
     }
     
     func start() {
@@ -25,25 +27,25 @@ class TopSchoolsTabBarCoordinator: Coordinating {
         }
         
         let topSchoolsNavController = UINavigationController()
-        let topSchoolsCoordinator = TopSchoolsCoordinator(navigationController: topSchoolsNavController, viewModel: viewModel, searchType: .topSchools)
+        let topSchoolsCoordinator = TopSchoolsCoordinator(navigationController: topSchoolsNavController, viewModel: TopSchoolsViewModel(schools: schools, schoolsScores: satData), searchType: .topSchools)
         topSchoolsCoordinator.parentCoordinator = self
         topSchoolsCoordinator.start()
         childCoordinators.append(topSchoolsCoordinator)
 
         let topMathNavController = UINavigationController()
-        let topMathCoordinator = TopSchoolsCoordinator(navigationController: topMathNavController, viewModel: viewModel, searchType: .topMath)
+        let topMathCoordinator = TopSchoolsCoordinator(navigationController: topMathNavController, viewModel: TopSchoolsViewModel(schools: schools, schoolsScores: satData), searchType: .topMath)
         topMathCoordinator.parentCoordinator = self
         topMathCoordinator.start()
         childCoordinators.append(topMathCoordinator)
         
         let topReadingNavController = UINavigationController()
-        let topReadingCoordinator = TopSchoolsCoordinator(navigationController: topReadingNavController, viewModel: viewModel, searchType: .topReading)
+        let topReadingCoordinator = TopSchoolsCoordinator(navigationController: topReadingNavController, viewModel: TopSchoolsViewModel(schools: schools, schoolsScores: satData), searchType: .topReading)
         topReadingCoordinator.parentCoordinator = self
         topReadingCoordinator.start()
         childCoordinators.append(topReadingCoordinator)
 
         let topWritingNavController = UINavigationController()
-        let topWritingCoordinator = TopSchoolsCoordinator(navigationController: topWritingNavController, viewModel: viewModel, searchType: .topWriting)
+        let topWritingCoordinator = TopSchoolsCoordinator(navigationController: topWritingNavController, viewModel: TopSchoolsViewModel(schools: schools, schoolsScores: satData), searchType: .topWriting)
         topWritingCoordinator.parentCoordinator = self
         topWritingCoordinator.start()
         childCoordinators.append(topWritingCoordinator)
