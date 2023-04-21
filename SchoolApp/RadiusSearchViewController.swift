@@ -43,9 +43,6 @@ class RadiusSearchViewController: UIViewController {
     var location = CLLocation()
     var miles = 1.0
         
-    deinit {
-        print("radsearchvc")
-    }
     init(viewModel: MapSearchViewModel) {
         self.mapSearchViewModel = viewModel
         
@@ -69,20 +66,20 @@ class RadiusSearchViewController: UIViewController {
         
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
                 
-                self!.location = location
+                self.location = location
                 
-                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
+                self.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
                 
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02 * self!.miles, longitudeDelta: 0.04 * self!.miles)), animated: true)
+                self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02 * self.miles, longitudeDelta: 0.04 * self.miles)), animated: true)
                 
-                self!.mapSearchViewModel.latitude = location.coordinate.latitude
-                self!.mapSearchViewModel.longitude = location.coordinate.longitude
-                self!.mapSearchViewModel.getSchoolsByMiles()
-                self!.setupMap()
+                self.mapSearchViewModel.latitude = location.coordinate.latitude
+                self.mapSearchViewModel.longitude = location.coordinate.longitude
+                self.mapSearchViewModel.getSchoolsByMiles()
+                self.setupMap()
             }
         }
     }
@@ -138,43 +135,44 @@ extension RadiusSearchViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         radiusSearchHeaderView.errorLabel.isHidden = true
         
-        if Double(milesText.text!) == nil{
+        guard let milesValue = Double(milesText.text!) else {
             errorHandler(message: "Please Enter A Numerical Value")
             return
         }
         
-        if Double(milesText.text!)! > 25 {
+        if milesValue > 25 {
             errorHandler(message: "Please Type In A Maximum Value of 25")
             return
         }
         
-        if Double(milesText.text!) != nil {
-            self.miles = Double(milesText.text!)!
-            self.mapSearchViewModel.miles = Double(milesText.text!)!
-            self.mapSearchViewModel.getSchoolsByMiles()
-            self.map.removeAnnotations(annotations)
-            self.annotations = []
-            
-            self.addMapPin(latitude: String(mapSearchViewModel.latitude), longitude: String(mapSearchViewModel.longitude), label: "CURRENT LOCATION")
-            self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: mapSearchViewModel.latitude, longitude: mapSearchViewModel.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * self.miles, longitudeDelta: 0.04 * self.miles)), animated: true)
-            
-            self.setupMap()
-        }
+        updateMapRadius(miles: milesValue)
+    }
 
-        func errorHandler(message: String){
-            radiusSearchHeaderView.errorLabel.isHidden = false
-            radiusSearchHeaderView.errorLabel.text = message
-        }
+    private func updateMapRadius(miles: Double) {
+        self.miles = miles
+        self.mapSearchViewModel.miles = miles
+        self.mapSearchViewModel.getSchoolsByMiles()
+        self.map.removeAnnotations(annotations)
+        self.annotations = []
+        
+        self.addMapPin(latitude: String(mapSearchViewModel.latitude), longitude: String(mapSearchViewModel.longitude), label: "CURRENT LOCATION")
+        self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: mapSearchViewModel.latitude, longitude: mapSearchViewModel.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * self.miles, longitudeDelta: 0.04 * self.miles)), animated: true)
+        
+        self.setupMap()
+    }
+
+    private func errorHandler(message: String) {
+        radiusSearchHeaderView.errorLabel.isHidden = false
+        radiusSearchHeaderView.errorLabel.text = message
     }
 }
 
 extension RadiusSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title != "CURRENT LOCATION" {
-            let index = mapSearchViewModel.findSchool(name: view.annotation!.title!!)
+            let index = mapSearchViewModel.getSchool(name: view.annotation!.title!!)
             
-            coordinator?.goToSchoolView(school: mapSearchViewModel.nearbySchools[index], schoolScores: mapSearchViewModel.findSchoolScores(index: index))
-//            navigationController?.present(SchoolTabBarViewController(school: mapSearchViewModel.nearbySchools[index], scores: mapSearchViewModel.findSchoolScores(index: index)), animated: true)
+            coordinator?.goToSchoolView(school: mapSearchViewModel.nearbySchools[index], schoolScores: mapSearchViewModel.getSATScores(index: index))
         }
     }
     

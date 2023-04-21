@@ -9,12 +9,11 @@ import Foundation
 import CoreLocation
 import MapKit
 
-import CoreLocation
-
 class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     let manager = CLLocationManager()
     var completion: ((CLLocation) -> Void)?
+    var lastKnownLocation: CLLocation?
     
     // Method to retrieve the user's location
     func getUserLocation(completion: @escaping ((CLLocation) -> Void)) {
@@ -33,6 +32,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         
+        lastKnownLocation = location
         completion?(location)
         manager.stopUpdatingLocation()
     }
@@ -41,4 +41,3 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         print("Failed to get user location: \(error.localizedDescription)")
     }
 }
-

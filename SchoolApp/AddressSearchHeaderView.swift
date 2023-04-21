@@ -61,7 +61,7 @@ class AddressSearchHeaderView: UIView {
          super.init(coder: aDecoder)
     }
         
-    func layout() {
+    private func layout() {
         self.addSubview(headerStackView)
         
         headerStackView.addSubview(addressHeaderLabel)

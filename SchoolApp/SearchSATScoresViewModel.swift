@@ -19,7 +19,6 @@ class SearchSATScoresViewModel: SchoolCellMethods {
     init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
         self.schoolsScores = schoolsScores
-        
     }
     
     func searchTotalScores() {
@@ -78,20 +77,4 @@ class SearchSATScoresViewModel: SchoolCellMethods {
     func getSchoolColor(indexPath: IndexPath) -> UIColor {
         return getColor(schoolBoro: calculatedSchools[indexPath.row].boro)
     }
-
-    func getColor(schoolBoro: String) -> UIColor {
-        switch schoolBoro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
-
 }

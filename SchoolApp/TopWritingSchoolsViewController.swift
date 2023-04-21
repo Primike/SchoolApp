@@ -125,7 +125,7 @@ extension TopWritingSchoolsViewController {
 
         if numberOfSchoolsText.text!.isEmpty {
             topSchoolsViewModel.number = 10
-            topSchoolsViewModel.getTopWritingSchools()
+            topSchoolsViewModel.getTopSchools(for: .writing)
             schoolsTableView.reloadData()
             return
         }
@@ -143,7 +143,7 @@ extension TopWritingSchoolsViewController {
         if Int(numberOfSchoolsText.text!) != nil {
             
             topSchoolsViewModel.number = Int(numberOfSchoolsText.text!)!
-            topSchoolsViewModel.getTopWritingSchools()
+            topSchoolsViewModel.getTopSchools(for: .writing)
             schoolsTableView.reloadData()
         }
 
