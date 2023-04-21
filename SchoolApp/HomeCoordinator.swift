@@ -50,7 +50,8 @@ class HomeCoordinator: Coordinating {
             
         case .topSchools:
             let viewModel = TopSchoolsViewModel(schools: schools, schoolsScores: schoolScores)
-            coordinator = TopSchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
+            coordinator = TopSchoolsCoordinatorB(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
+//            coordinator = TopSchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
 
         case .satSearch:
             let viewModel = SearchSATScoresViewModel(schools: schools, schoolsScores: schoolScores)

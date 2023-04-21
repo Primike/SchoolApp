@@ -11,28 +11,28 @@ import UIKit
 class GraphBarsView: UIView {
     
     lazy var mathBar: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_math_avg_score, schoolColor: schoolColor)
+        let view = BarView(sectionScore: schoolScores.sat_math_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var writingBar: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_writing_avg_score, schoolColor: schoolColor)
+        let view = BarView(sectionScore: schoolScores.sat_writing_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var readingBar: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: schoolColor)
+        let view = BarView(sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     var schoolScores: SATData
-    let schoolColor: UIColor
+    var schoolColor: UIColor
     var graphHeightValues = [Float]()
     
-    init(frame: CGRect, scores: SATData, schoolColor: UIColor) {
+    init(scores: SATData, schoolColor: UIColor) {
         self.schoolColor = schoolColor
         self.schoolScores = scores
         
@@ -43,7 +43,8 @@ class GraphBarsView: UIView {
         let score3 = Int(scores.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score3)/Double(800)))
         
-        super.init(frame: frame)
+        super.init(frame: .zero)
+
         layout()
     }
     

@@ -16,13 +16,13 @@ class ComparisonBarsView: UIView {
     }()
     
     lazy var mathBar: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_math_avg_score, schoolColor: .black)
+        var view = BarView(sectionScore: schoolScores.sat_math_avg_score, schoolColor: .black)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var mathBar2: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores2.sat_math_avg_score, schoolColor: .brown)
+        var view = BarView(sectionScore: schoolScores2.sat_math_avg_score, schoolColor: .brown)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -33,13 +33,13 @@ class ComparisonBarsView: UIView {
     }()
 
     lazy var writingBar: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_writing_avg_score, schoolColor: .black)
+        var view = BarView(sectionScore: schoolScores.sat_writing_avg_score, schoolColor: .black)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var writingBar2: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores2.sat_writing_avg_score, schoolColor: .brown)
+        var view = BarView(sectionScore: schoolScores2.sat_writing_avg_score, schoolColor: .brown)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,13 +50,13 @@ class ComparisonBarsView: UIView {
     }()
 
     lazy var readingBar: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: .black)
+        var view = BarView(sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: .black)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var readingBar2: BarView = {
-        var view = BarView(frame: CGRect(), sectionScore: schoolScores2.sat_critical_reading_avg_score, schoolColor: .brown)
+        var view = BarView(sectionScore: schoolScores2.sat_critical_reading_avg_score, schoolColor: .brown)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

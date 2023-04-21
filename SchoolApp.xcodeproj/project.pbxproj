@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9E13C37029A44B0900638778 /* SchoolAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */; };
+		9E2E0ECF29F2DDA600B66965 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ECE29F2DDA600B66965 /* view.swift */; };
+		9E2E0ED129F2F38600B66965 /* TopSchoolsCoordinatorB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinatorB.swift */; };
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
 		9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824008289879EB000D4BA0 /* SchoolAppTests.swift */; };
 		9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */; };
@@ -114,6 +116,8 @@
 
 /* Begin PBXFileReference section */
 		9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppLabel.swift; sourceTree = "<group>"; };
+		9E2E0ECE29F2DDA600B66965 /* view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
+		9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinatorB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsCoordinatorB.swift; sourceTree = "<group>"; };
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
 		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 			children = (
 				9EB7440129EC62280041F35E /* TopSchoolsTabBarCoordinator.swift */,
 				9EB7441C29EE20A60041F35E /* TopSchoolsCoordinator.swift */,
+				9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinatorB.swift */,
 			);
 			name = Coordinator;
 			sourceTree = "<group>";
@@ -458,6 +463,7 @@
 				B82F177A28897A1500AA42F1 /* TopMathSchoolsViewController.swift */,
 				B82F177C28897DF200AA42F1 /* TopReadingSchoolsViewController.swift */,
 				B82F177E28897EA000AA42F1 /* TopWritingSchoolsViewController.swift */,
+				9E2E0ECE29F2DDA600B66965 /* view.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1014,6 +1020,7 @@
 				B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */,
 				9EB7443229EEFD4E0041F35E /* SchoolTabCoordinator.swift in Sources */,
 				9EB7441A29EE18C90041F35E /* SchoolCellMethods.swift in Sources */,
+				9E2E0ED129F2F38600B66965 /* TopSchoolsCoordinatorB.swift in Sources */,
 				B87C4B96289999250091CD45 /* ComparisonBarsView.swift in Sources */,
 				B82F179C28899B1C00AA42F1 /* SearchTotalScoreViewController.swift in Sources */,
 				B8F86F9128A556140095FDDC /* ComparisonHeaderView.swift in Sources */,
@@ -1034,6 +1041,7 @@
 				B8E650AA2889B74A0027716E /* SearchReadingScoreViewController.swift in Sources */,
 				B83A84E0288F228F000752D5 /* NearestSchoolsViewController.swift in Sources */,
 				B803EAC1286DF99300E7A26B /* HomeViewController.swift in Sources */,
+				9E2E0ECF29F2DDA600B66965 /* view.swift in Sources */,
 				B801DEEE287BB4BF00EA2090 /* TopSchoolsViewModel.swift in Sources */,
 				B801DEF4287DA31400EA2090 /* MySchoolsViewController.swift in Sources */,
 				9ECCFD4229EF72B80004F3D1 /* SATSearchCoordinator.swift in Sources */,

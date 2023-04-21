@@ -11,27 +11,28 @@ import UIKit
 class BarView: UIView {
     
     lazy var bar: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: sectionScore, labelTextColor: .white)
+        let label = SchoolAppLabel(frame: CGRect(), labelText: sectionScore, labelTextColor: .white)
         label.backgroundColor = schoolColor
         label.font = UIFont(name:"HelveticaNeue", size: 30.0)
         return label
     }()
     
-    let sectionScore: String
-    let schoolColor: UIColor
+    var sectionScore: String
+    var schoolColor: UIColor
     
-    init(frame: CGRect, sectionScore: String, schoolColor: UIColor) {
+    init(sectionScore: String, schoolColor: UIColor) {
         self.sectionScore = sectionScore
         self.schoolColor = schoolColor
+        
+        super.init(frame: .zero)
     
-        super.init(frame: frame)
         layout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+
     func layout() {
         self.addSubview(bar)
         

@@ -11,12 +11,12 @@ import UIKit
 class SchoolGraphViewController: UIViewController {
 
     lazy var screenStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
+        let stackView = SchoolAppStackView()
         return stackView
     }()
     
     lazy var arrowImage: UIImageView = {
-        var image = UIImageView(image: UIImage(systemName: "arrow.down"))
+        let image = UIImageView(image: UIImage(systemName: "arrow.down"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.tintColor = .black
@@ -24,24 +24,24 @@ class SchoolGraphViewController: UIViewController {
     }()
 
     lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: viewModel.school.school_name, labelTextColor: schoolColor)
+        let label = SchoolAppLabel(frame: CGRect(), labelText: viewModel.school.school_name, labelTextColor: schoolColor)
         label.numberOfLines = 1
         return label
     }()
 
     lazy var topStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
+        let stackView = SchoolAppStackView()
         return stackView
     }()
     
     lazy var yAxisView: YAxisView = {
-        var view = YAxisView()
+        let view = YAxisView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     lazy var graphBarsView: GraphBarsView = {
-        var view = GraphBarsView(frame: CGRect(), scores: viewModel.schoolScores, schoolColor: schoolColor)
+        let view = GraphBarsView(scores: viewModel.schoolScores, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor
@@ -49,7 +49,7 @@ class SchoolGraphViewController: UIViewController {
         return view
     }()
     lazy var xAxisView: XAxisView = {
-        var view = XAxisView()
+        let view = XAxisView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -75,7 +75,7 @@ class SchoolGraphViewController: UIViewController {
         layout()
     }
     
-    func layout() {
+    private func layout() {
         view.addSubview(screenStackView)
 
         screenStackView.addSubview(arrowImage)

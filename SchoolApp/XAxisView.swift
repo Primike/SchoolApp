@@ -11,27 +11,25 @@ import UIKit
 class XAxisView: UIView {
     
     lazy var mathLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectNames[0], labelTextColor: .black)
+        let label = SchoolAppLabel(frame: CGRect(), labelText: "SAT MATH", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         return label
     }()
     
     lazy var writingLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectNames[1], labelTextColor: .black)
+        let label = SchoolAppLabel(frame: CGRect(), labelText: "SAT WRITING", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         return label
     }()
 
     lazy var readingLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectNames[2], labelTextColor: .black)
+        let label = SchoolAppLabel(frame: CGRect(), labelText: "SAT CRITICAL READING", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         return label
     }()
     
-    let subjectNames = ["SAT MATH", "SAT WRITING", "SAT CRITICAL READING"]
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         
         layout()
     }
@@ -40,7 +38,7 @@ class XAxisView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func layout() {
+    private func layout() {
         self.addSubview(mathLabel)
         self.addSubview(writingLabel)
         self.addSubview(readingLabel)

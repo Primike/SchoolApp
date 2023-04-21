@@ -10,12 +10,12 @@ import UIKit
 
 class TopSchoolsViewController: UIViewController {
     
-    lazy var topSchoolsHeaderView: TopSchoolsHeaderView = {
-        var view = TopSchoolsHeaderView()
+    lazy var topSchoolsHeaderView: TopSchoolsHeaderViewa = {
+        var view = TopSchoolsHeaderViewa()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 30
         view.layer.maskedCorners = [.layerMaxXMaxYCorner]
-        view.backgroundColor = UIColor.systemBlue
+//        view.backgroundColor = UIColor.systemBlue
         return view
     }()
     
@@ -46,7 +46,7 @@ class TopSchoolsViewController: UIViewController {
     }()
         
     let topSchoolsViewModel: TopSchoolsViewModel
-    weak var coordinator: TopSchoolsCoordinator?
+    weak var coordinator: TopSchoolsCoordinatorB?
     
     required init(viewModel: TopSchoolsViewModel) {
         self.topSchoolsViewModel = viewModel
@@ -61,37 +61,61 @@ class TopSchoolsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+
+        topSchoolsHeaderView.submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
+
         layout()
+    }
+
+    // Add this function in TopSchoolsViewController
+    @objc func submitButtonTapped(sender: UIButton) {
+        let selectedIndex = topSchoolsHeaderView.segmentedControl.selectedSegmentIndex
+        let category: TopSchoolsViewModel.TopSchoolsCategory
+
+        switch selectedIndex {
+        case 0:
+            category = .math
+        case 1:
+            category = .reading
+        case 2:
+            category = .writing
+        default:
+            category = .combined
+        }
+
+        let numberOfSchools = Int(topSchoolsHeaderView.numberOfSchoolsText.text!) ?? 10
+        topSchoolsViewModel.number = numberOfSchools
+        topSchoolsViewModel.getTopSchools(for: category)
+        schoolsTableView.reloadData()
     }
 
     func layout() {
         view.addSubview(topSchoolsHeaderView)
         view.addSubview(schoolsTableView)
         
-        topSchoolsHeaderView.filterStackView.addSubview(numberOfSchoolsText)
-        topSchoolsHeaderView.addSubview(errorLabel)
-        topSchoolsHeaderView.addSubview(enterButton)
+//        topSchoolsHeaderView.filterStackView.addSubview(numberOfSchoolsText)
+//        topSchoolsHeaderView.addSubview(errorLabel)
+//        topSchoolsHeaderView.addSubview(enterButton)
 
         NSLayoutConstraint.activate([
             topSchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topSchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.20),
             topSchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            numberOfSchoolsText.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
-            numberOfSchoolsText.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.3),
-            numberOfSchoolsText.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
-            numberOfSchoolsText.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-            
-            errorLabel.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.bottomAnchor),
-            errorLabel.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.2),
-            errorLabel.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
-            errorLabel.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-            
-            enterButton.bottomAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.bottomAnchor),
-            enterButton.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.5),
-            enterButton.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+//            numberOfSchoolsText.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
+//            numberOfSchoolsText.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.3),
+//            numberOfSchoolsText.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
+//            numberOfSchoolsText.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+//
+//            errorLabel.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.bottomAnchor),
+//            errorLabel.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.2),
+//            errorLabel.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
+//            errorLabel.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
+//
+//            enterButton.bottomAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.bottomAnchor),
+//            enterButton.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.5),
+//            enterButton.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor),
+//            enterButton.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
             
             schoolsTableView.topAnchor.constraint(equalTo: topSchoolsHeaderView.bottomAnchor),
             schoolsTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),

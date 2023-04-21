@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol SchoolCellMethods {
+protocol SchoolCellMethods: SchoolColor {
     func getSchoolName(indexPath: IndexPath) -> String
     func getSchoolAddress(indexPath: IndexPath) -> String
     func getSchoolBoro(indexPath: IndexPath) -> String
@@ -22,23 +22,6 @@ protocol SchoolColor {
 }
 
 extension SchoolColor {
-    func getColor(schoolBoro: String) -> UIColor {
-        switch schoolBoro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
-}
-
-extension SchoolCellMethods {
     func getColor(schoolBoro: String) -> UIColor {
         switch schoolBoro {
         case "M":
