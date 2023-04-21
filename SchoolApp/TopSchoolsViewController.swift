@@ -15,7 +15,6 @@ class TopSchoolsViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 30
         view.layer.maskedCorners = [.layerMaxXMaxYCorner]
-//        view.backgroundColor = UIColor.systemBlue
         return view
     }()
     
@@ -46,7 +45,7 @@ class TopSchoolsViewController: UIViewController {
     }()
         
     let topSchoolsViewModel: TopSchoolsViewModel
-    weak var coordinator: TopSchoolsCoordinatorB?
+    weak var coordinator: TopSchoolsCoordinator?
     
     required init(viewModel: TopSchoolsViewModel) {
         self.topSchoolsViewModel = viewModel
@@ -65,28 +64,6 @@ class TopSchoolsViewController: UIViewController {
         topSchoolsHeaderView.submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
 
         layout()
-    }
-
-    // Add this function in TopSchoolsViewController
-    @objc func submitButtonTapped(sender: UIButton) {
-        let selectedIndex = topSchoolsHeaderView.segmentedControl.selectedSegmentIndex
-        let category: TopSchoolsViewModel.TopSchoolsCategory
-
-        switch selectedIndex {
-        case 0:
-            category = .math
-        case 1:
-            category = .reading
-        case 2:
-            category = .writing
-        default:
-            category = .combined
-        }
-
-        let numberOfSchools = Int(topSchoolsHeaderView.numberOfSchoolsText.text!) ?? 10
-        topSchoolsViewModel.number = numberOfSchools
-        topSchoolsViewModel.getTopSchools(for: category)
-        schoolsTableView.reloadData()
     }
 
     func layout() {
@@ -142,37 +119,57 @@ extension TopSchoolsViewController: UITextFieldDelegate {
 }
 
 extension TopSchoolsViewController {
+    // Add this function in TopSchoolsViewController
+    @objc func submitButtonTapped(sender: UIButton) {
+        let selectedIndex = topSchoolsHeaderView.segmentedControl.selectedSegmentIndex
+        var category: TopSchoolsViewModel.TopSchoolsCategory
+
+        switch selectedIndex {
+        case 0:
+            category = .math
+        case 1:
+            category = .reading
+        case 2:
+            category = .writing
+        default:
+            category = .combined
+        }
+
+        let numberOfSchools = Int(topSchoolsHeaderView.numberOfSchoolsText.text!) ?? 10
+        topSchoolsViewModel.number = numberOfSchools
+        topSchoolsViewModel.getTopSchools(for: category)
+        schoolsTableView.reloadData()
+    }
+
     @objc func enterButtonTapped(sender: UIButton) {
         errorLabel.isHidden = true
 
-        if numberOfSchoolsText.text!.isEmpty {
+        guard let inputText = numberOfSchoolsText.text, !inputText.isEmpty else {
             topSchoolsViewModel.number = 10
             topSchoolsViewModel.getTopSchools(for: .combined)
             schoolsTableView.reloadData()
             return
         }
-        
-        if Int(numberOfSchoolsText.text!) == nil {
-            errorHandler(message: "Please Enter An Integer Value")
+
+        guard let inputNumber = Int(inputText) else {
+            errorHandler(message: "Please enter an integer value")
             return
-        }
-        
-        if Int(numberOfSchoolsText.text!)! < 0 || Int(numberOfSchoolsText.text!)! > topSchoolsViewModel.schoolsScores.count {
-            errorHandler(message: "Please Type In Values Between 0 And \(topSchoolsViewModel.schoolsScores.count)")
-            return
-        }
-        
-        if Int(numberOfSchoolsText.text!) != nil {
-            topSchoolsViewModel.number = Int(numberOfSchoolsText.text!)!
-            topSchoolsViewModel.getTopSchools(for: .combined)
-            print(topSchoolsViewModel.topSchoolsScores, topSchoolsViewModel.topSchools)
-            schoolsTableView.reloadData()
         }
 
-        func errorHandler(message: String){
-             errorLabel.isHidden = false
-             errorLabel.text = message
+        if inputNumber < 0 || inputNumber > topSchoolsViewModel.schoolsScores.count {
+            errorHandler(message: "Please type in values between 0 and \(topSchoolsViewModel.schoolsScores.count)")
+            return
         }
+
+        topSchoolsViewModel.number = inputNumber
+        topSchoolsViewModel.getTopSchools(for: .combined)
+        print(topSchoolsViewModel.topSchoolsScores, topSchoolsViewModel.topSchools)
+        schoolsTableView.reloadData()
+    }
+
+    func errorHandler(message: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = message
     }
 }
 
