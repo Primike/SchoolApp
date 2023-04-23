@@ -8,13 +8,21 @@
 import Foundation
 import UIKit
 
-class TopSchoolsViewModel: SchoolCellMethods {
+protocol TopSchoolsViewModeling {
+    var schools: [School] { get set }
+    var schoolsScores: [SATData] { get set }
+    var topSchools: [School] { get set }
+    
+    func getTopSchools(selectedSegment: Int, number: Int)
+    func getSchool(index: IndexPath) -> School?
+    func getSATScores(index: IndexPath) -> SATData
+}
+
+class TopSchoolsViewModel: TopSchoolsViewModeling, SchoolCellMethods {
     
     var schools = [School]()
     var schoolsScores = [SATData]()
-    var topSchoolsScores = [SATData]()
     var topSchools = [School]()
-    var number = 10
     
     init(schools: [School], schoolsScores: [SATData]) {
         self.schools = schools
@@ -27,12 +35,27 @@ class TopSchoolsViewModel: SchoolCellMethods {
         case writing
         case combined
     }
+    
+    func getTopSchools(selectedSegment: Int, number: Int) {
+        var category: TopSchoolsCategory
 
-    func getTopSchools(for category: TopSchoolsCategory) {
-        topSchoolsScores = []
-        topSchools = []
-        
-        let sortedScores = schoolsScores.sorted(by: { score1, score2 in
+        switch selectedSegment {
+        case 0:
+            category = .combined
+        case 1:
+            category = .math
+        case 2:
+            category = .reading
+        default:
+            category = .writing
+        }
+
+        sortSATData(category: category)
+        addSchools(number: number)
+    }
+    
+    private func sortSATData(category: TopSchoolsCategory) {
+        schoolsScores = schoolsScores.sorted(by: { score1, score2 in
             switch category {
             case .math:
                 return Int(score1.sat_math_avg_score)! > Int(score2.sat_math_avg_score)!
@@ -46,17 +69,25 @@ class TopSchoolsViewModel: SchoolCellMethods {
                 return totalScore1 > totalScore2
             }
         })
-        
-        for i in 0..<sortedScores.count {
-            if topSchoolsScores.count != self.number {
-                if let school = schools.first(where: {$0.dbn == sortedScores[i].dbn}) {
-                    topSchoolsScores.append(sortedScores[i])
-                    topSchools.append(school)
-                }
-            } else {
-                break
+    }
+    
+    private func addSchools(number: Int) {
+        let topSAT = Array(schoolsScores.prefix(number))
+        topSchools = []
+
+        topSAT.forEach { satData in
+            if let school = schools.first(where: { $0.dbn == satData.dbn }) {
+                topSchools.append(school)
             }
         }
+    }
+
+    func getSchool(index: IndexPath) -> School? {
+        return topSchools[index.row]
+    }
+    
+    func getSATScores(index: IndexPath) -> SATData {
+        return schoolsScores.first(where: {$0.dbn == topSchools[index.row].dbn}) ?? SATData()
     }
 
     //MARK: Cell Methods
