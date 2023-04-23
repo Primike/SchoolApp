@@ -144,3 +144,108 @@
 //        ])
 //    }
 //}
+
+
+//class TopSchoolsHeaderViewa: UIView {
+//    
+//    lazy var headerStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.axis = .vertical
+//        stackView.distribution = .equalSpacing
+//        stackView.alignment = .center
+//        return stackView
+//    }()
+//    
+//    lazy var filterStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.axis = .horizontal
+//        stackView.distribution = .equalSpacing
+//        stackView.alignment = .center
+//        stackView.spacing = 30
+//        return stackView
+//    }()
+//
+//    lazy var segmentedControl: UISegmentedControl = {
+//        let items = ["Math", "Reading", "Writing", "Combined"]
+//        let segmentedControl = UISegmentedControl(items: items)
+//        segmentedControl.selectedSegmentIndex = 3
+//        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+//        segmentedControl.backgroundColor = .white
+//        return segmentedControl
+//    }()
+//    
+//    lazy var numberOfSchoolsText: UITextField = {
+//        let textField = UITextField()
+//        textField.translatesAutoresizingMaskIntoConstraints = false
+//        textField.borderStyle = .roundedRect
+//        textField.placeholder = "Number of schools"
+//        textField.keyboardType = .numberPad
+//        return textField
+//    }()
+//    lazy var errorLabel: SchoolAppLabel = {
+//        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .systemRed)
+//        label.isHidden = false
+//        label.text = "QWEQWE"
+//        label.font = UIFont.preferredFont(forTextStyle: .body)
+//        label.adjustsFontForContentSizeCategory = true
+//        return label
+//    }()
+//
+//    lazy var submitButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setTitle("Submit", for: .normal)
+//        button.backgroundColor = .black
+//        return button
+//    }()
+//    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        layout()
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
+//    func layout() {
+//        self.backgroundColor = .systemBlue
+//        addSubview(headerStackView)
+//        
+//        headerStackView.addArrangedSubview(segmentedControl)
+//        headerStackView.addArrangedSubview(filterStackView)
+//        headerStackView.addArrangedSubview(errorLabel)
+//        
+//        filterStackView.addArrangedSubview(numberOfSchoolsText)
+//        filterStackView.addArrangedSubview(submitButton)
+//        
+//        let isRegularWidth = traitCollection.horizontalSizeClass == .regular
+//
+//        let numberOfSchoolsTextWidthConstraint = numberOfSchoolsText.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: isRegularWidth ? 0.6 : 0.7)
+//        numberOfSchoolsTextWidthConstraint.priority = UILayoutPriority(rawValue: 999)
+//
+//        let submitButtonWidthConstraint = submitButton.widthAnchor.constraint(equalTo: filterStackView.widthAnchor, multiplier: isRegularWidth ? 0.4 : 0.3)
+//        submitButtonWidthConstraint.priority = UILayoutPriority(rawValue: 999)
+//            
+//        NSLayoutConstraint.activate([
+//            headerStackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+//            headerStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+//            headerStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+//            headerStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//            
+//            numberOfSchoolsTextWidthConstraint,
+//            submitButtonWidthConstraint,
+//        ])
+//        
+//        if isRegularWidth {
+//            let fontSize: CGFloat = 24
+//            numberOfSchoolsText.font = UIFont.systemFont(ofSize: fontSize)
+//            submitButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
+//            segmentedControl.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: fontSize)], for: .normal)
+//            errorLabel.font = UIFont.systemFont(ofSize: fontSize)
+//        }
+//    }
+//}
+//

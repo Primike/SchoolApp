@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9E13C37029A44B0900638778 /* SchoolAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */; };
-		9E2E0ECF29F2DDA600B66965 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ECE29F2DDA600B66965 /* view.swift */; };
+		9E2E0ECF29F2DDA600B66965 /* TopSchoolsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ECE29F2DDA600B66965 /* TopSchoolsHeaderView.swift */; };
 		9E2E0ED129F2F38600B66965 /* TopSchoolsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */; };
+		9E2E0ED329F32BFB00B66965 /* header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ED229F32BFB00B66965 /* header.swift */; };
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
 		9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824008289879EB000D4BA0 /* SchoolAppTests.swift */; };
 		9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */; };
@@ -95,7 +96,6 @@
 		B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */; };
 		B8E817462846A4600052C1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E817452846A4600052C1AE /* Assets.xcassets */; };
 		B8E817492846A4600052C1AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E817472846A4600052C1AE /* LaunchScreen.storyboard */; };
-		B8F5E4CB28873898009C4F54 /* TopSchoolsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F5E4CA28873898009C4F54 /* TopSchoolsHeaderView.swift */; };
 		B8F86F9128A556140095FDDC /* ComparisonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +111,9 @@
 
 /* Begin PBXFileReference section */
 		9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppLabel.swift; sourceTree = "<group>"; };
-		9E2E0ECE29F2DDA600B66965 /* view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
+		9E2E0ECE29F2DDA600B66965 /* TopSchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsHeaderView.swift; sourceTree = "<group>"; };
 		9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsCoordinator.swift; sourceTree = "<group>"; };
+		9E2E0ED229F32BFB00B66965 /* header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = header.swift; sourceTree = "<group>"; };
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
 		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
@@ -201,7 +202,6 @@
 		B8E817452846A4600052C1AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8E817482846A4600052C1AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8E8174A2846A4600052C1AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8F5E4CA28873898009C4F54 /* TopSchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsHeaderView.swift; sourceTree = "<group>"; };
 		B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -532,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E650AD2889B9A90027716E /* SearchScoresHeaderView.swift */,
+				9E2E0ED229F32BFB00B66965 /* header.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -828,8 +829,7 @@
 		B8F5E4C928873888009C4F54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9E2E0ECE29F2DDA600B66965 /* view.swift */,
-				B8F5E4CA28873898009C4F54 /* TopSchoolsHeaderView.swift */,
+				9E2E0ECE29F2DDA600B66965 /* TopSchoolsHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -946,11 +946,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8E650AC2889B7570027716E /* SearchWritingScoreViewController.swift in Sources */,
-				B8F5E4CB28873898009C4F54 /* TopSchoolsHeaderView.swift in Sources */,
 				9EB743FF29EC619D0041F35E /* MySchoolsTabBarCoordinator.swift in Sources */,
 				B8736680288075AD0076632F /* YAxisView.swift in Sources */,
 				B89D3CF2287F18F8002300D1 /* SearchSATScoresViewModel.swift in Sources */,
 				9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */,
+				9E2E0ED329F32BFB00B66965 /* header.swift in Sources */,
 				9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */,
 				B8E650AE2889B9A90027716E /* SearchScoresHeaderView.swift in Sources */,
 				B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */,
@@ -1021,7 +1021,7 @@
 				B8E650AA2889B74A0027716E /* SearchReadingScoreViewController.swift in Sources */,
 				B83A84E0288F228F000752D5 /* NearestSchoolsViewController.swift in Sources */,
 				B803EAC1286DF99300E7A26B /* HomeViewController.swift in Sources */,
-				9E2E0ECF29F2DDA600B66965 /* view.swift in Sources */,
+				9E2E0ECF29F2DDA600B66965 /* TopSchoolsHeaderView.swift in Sources */,
 				B801DEEE287BB4BF00EA2090 /* TopSchoolsViewModel.swift in Sources */,
 				B801DEF4287DA31400EA2090 /* MySchoolsViewController.swift in Sources */,
 				9ECCFD4229EF72B80004F3D1 /* SATSearchCoordinator.swift in Sources */,

@@ -10,8 +10,8 @@ import UIKit
 
 class TopSchoolsViewController: UIViewController {
     
-    lazy var topSchoolsHeaderView: TopSchoolsHeaderViewa = {
-        var view = TopSchoolsHeaderViewa()
+    lazy var topSchoolsHeaderView: TopSchoolsHeaderView = {
+        var view = TopSchoolsHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 30
         view.layer.maskedCorners = [.layerMaxXMaxYCorner]
@@ -26,24 +26,6 @@ class TopSchoolsViewController: UIViewController {
         return tableView
     }()
 
-    lazy var numberOfSchoolsText: SchoolAppTextField = {
-        var textField = SchoolAppTextField()
-        textField.delegate = self
-        return textField
-    }()
-
-    lazy var errorLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .systemRed)
-        label.isHidden = true
-        return label
-    }()
-
-    lazy var enterButton: SchoolAppButton = {
-        let button = SchoolAppButton(title: "Search", viewWidth: view.bounds.width, imageName: "magnifyingglass", titleSize: 19, imageSize: 22)
-        button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        return button
-    }()
-        
     let topSchoolsViewModel: TopSchoolsViewModel
     weak var coordinator: TopSchoolsCoordinator?
     
@@ -61,39 +43,21 @@ class TopSchoolsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        topSchoolsHeaderView.submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
+        topSchoolsHeaderView.searchButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
 
         layout()
     }
 
-    func layout() {
+    private func layout() {
         view.addSubview(topSchoolsHeaderView)
         view.addSubview(schoolsTableView)
         
-//        topSchoolsHeaderView.filterStackView.addSubview(numberOfSchoolsText)
-//        topSchoolsHeaderView.addSubview(errorLabel)
-//        topSchoolsHeaderView.addSubview(enterButton)
-
         NSLayoutConstraint.activate([
             topSchoolsHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topSchoolsHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.20),
             topSchoolsHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            
-//            numberOfSchoolsText.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.topAnchor),
-//            numberOfSchoolsText.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.3),
-//            numberOfSchoolsText.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.3),
-//            numberOfSchoolsText.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-//
-//            errorLabel.topAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.bottomAnchor),
-//            errorLabel.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.2),
-//            errorLabel.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
-//            errorLabel.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-//
-//            enterButton.bottomAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.bottomAnchor),
-//            enterButton.heightAnchor.constraint(equalTo: topSchoolsHeaderView.headerStackView.heightAnchor, multiplier: 0.5),
-//            enterButton.widthAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.widthAnchor),
-//            enterButton.centerXAnchor.constraint(equalTo: topSchoolsHeaderView.filterStackView.centerXAnchor),
-            
+            topSchoolsHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                        
             schoolsTableView.topAnchor.constraint(equalTo: topSchoolsHeaderView.bottomAnchor),
             schoolsTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
@@ -102,55 +66,17 @@ class TopSchoolsViewController: UIViewController {
     }
 }
 
-extension TopSchoolsViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        numberOfSchoolsText.endEditing(true)
-        errorLabel.isHidden = true
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        errorLabel.isHidden = true
-    }
-}
-
 extension TopSchoolsViewController {
-    // Add this function in TopSchoolsViewController
     @objc func submitButtonTapped(sender: UIButton) {
+        topSchoolsHeaderView.errorLabel.isHidden = true
         let selectedIndex = topSchoolsHeaderView.segmentedControl.selectedSegmentIndex
-        var category: TopSchoolsViewModel.TopSchoolsCategory
 
-        switch selectedIndex {
-        case 0:
-            category = .math
-        case 1:
-            category = .reading
-        case 2:
-            category = .writing
-        default:
-            category = .combined
-        }
-
-        let numberOfSchools = Int(topSchoolsHeaderView.numberOfSchoolsText.text!) ?? 10
-        topSchoolsViewModel.number = numberOfSchools
-        topSchoolsViewModel.getTopSchools(for: category)
-        schoolsTableView.reloadData()
-    }
-
-    @objc func enterButtonTapped(sender: UIButton) {
-        errorLabel.isHidden = true
-
-        guard let inputText = numberOfSchoolsText.text, !inputText.isEmpty else {
-            topSchoolsViewModel.number = 10
-            topSchoolsViewModel.getTopSchools(for: .combined)
+        guard let inputText = topSchoolsHeaderView.numberTextField.text, !inputText.isEmpty else {
+            topSchoolsViewModel.getTopSchools(selectedSegment: selectedIndex, number: 5)
             schoolsTableView.reloadData()
             return
         }
-
+        
         guard let inputNumber = Int(inputText) else {
             errorHandler(message: "Please enter an integer value")
             return
@@ -161,19 +87,17 @@ extension TopSchoolsViewController {
             return
         }
 
-        topSchoolsViewModel.number = inputNumber
-        topSchoolsViewModel.getTopSchools(for: .combined)
-        print(topSchoolsViewModel.topSchoolsScores, topSchoolsViewModel.topSchools)
+        topSchoolsViewModel.getTopSchools(selectedSegment: selectedIndex, number: inputNumber)
         schoolsTableView.reloadData()
     }
 
     func errorHandler(message: String) {
-        errorLabel.isHidden = false
-        errorLabel.text = message
+        topSchoolsHeaderView.errorLabel.isHidden = false
+        topSchoolsHeaderView.errorLabel.text = message
     }
 }
 
-extension TopSchoolsViewController: UITableViewDataSource {
+extension TopSchoolsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(viewModel: topSchoolsViewModel, indexPath: indexPath)
@@ -189,11 +113,12 @@ extension TopSchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(Int(view.bounds.height/5))
     }
-}
-
-extension TopSchoolsViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        coordinator?.goToSchoolView(school: topSchoolsViewModel.topSchools[indexPath.row], schoolScores: topSchoolsViewModel.topSchoolsScores[indexPath.row])
+        guard let school = topSchoolsViewModel.getSchool(index: indexPath) else {
+            return
+        }
+        
+        coordinator?.goToSchoolView(school: school, schoolScores: topSchoolsViewModel.getSATScores(index: indexPath))
     }
 }
