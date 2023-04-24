@@ -20,7 +20,7 @@ class TopSchoolsHeaderView: UIView {
     }()
 
     lazy var titleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Top Schools", labelTextColor: .black)
+        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Top Schools", labelTextColor: .white)
         return label
     }()
 
@@ -59,6 +59,8 @@ class TopSchoolsHeaderView: UIView {
     }
     
     func layout() {
+        self.backgroundColor = .systemBlue
+        
         self.addSubview(headerStackView)
         
         headerStackView.addSubview(titleLabel)

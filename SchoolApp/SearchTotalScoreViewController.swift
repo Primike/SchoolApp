@@ -10,9 +10,8 @@ import UIKit
 
 class SearchTotalScoreViewController: UIViewController {
     
-    lazy var searchSATScoresHeaderView: SearchScoresHeaderView = {
-        var view = SearchScoresHeaderView()
-        view.topSchoolsLabel.text = "Search Schools By SAT Score"
+    lazy var searchSATScoresHeaderView: SearchScoresHeaderViewa = {
+        var view = SearchScoresHeaderViewa()
         view.backgroundColor = UIColor.systemBlue
         return view
     }()
@@ -23,30 +22,6 @@ class SearchTotalScoreViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
-    }()
-    
-    lazy var totalScoreText: SchoolAppTextField = {
-        var textField = SchoolAppTextField()
-        textField.delegate = self
-        return textField
-    }()
-
-    lazy var schoolNumberText: SchoolAppTextField = {
-        var textField = SchoolAppTextField()
-        textField.delegate = self
-        return textField
-    }()
-
-    lazy var errorLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .systemRed)
-        label.isHidden = true
-        return label
-    }()
-    
-    lazy var enterButton: SchoolAppButton = {
-        let button = SchoolAppButton(title: "Search", viewWidth: view.bounds.width, imageName: "magnifyingglass", titleSize: 19, imageSize: 22)
-        button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
-        return button
     }()
     
     let searchSATScoreViewModel: SearchSATScoresViewModel
@@ -66,6 +41,7 @@ class SearchTotalScoreViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        searchSATScoresHeaderView.searchButton.addTarget(self, action: #selector(enterButtonTapped), for: .touchUpInside)
 
         layout()
     }
@@ -73,12 +49,7 @@ class SearchTotalScoreViewController: UIViewController {
     func layout() {
         view.addSubview(searchSATScoresHeaderView)
         view.addSubview(schoolsTableView)
-        
-        searchSATScoresHeaderView.scoreStackView.addSubview(totalScoreText)
-        searchSATScoresHeaderView.numberStackView.addSubview(schoolNumberText)
-        searchSATScoresHeaderView.filterStackView.addSubview(errorLabel)
-        searchSATScoresHeaderView.filterStackView.addSubview(enterButton)
-        
+                
         NSLayoutConstraint.activate([
             searchSATScoresHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchSATScoresHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.20),
@@ -90,77 +61,43 @@ class SearchTotalScoreViewController: UIViewController {
             schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            totalScoreText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.topAnchor),
-            totalScoreText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.rightAnchor),
-            totalScoreText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.heightAnchor),
-            totalScoreText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.scoreStackView.widthAnchor, multiplier: 0.45),
-            
-            schoolNumberText.topAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.topAnchor),
-            schoolNumberText.rightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.rightAnchor),
-            schoolNumberText.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.heightAnchor),
-            schoolNumberText.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.numberStackView.widthAnchor, multiplier: 0.45),
-            
-            errorLabel.topAnchor.constraint(equalTo: totalScoreText.bottomAnchor),
-            errorLabel.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.heightAnchor, multiplier: 0.2),
-            errorLabel.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.widthAnchor, multiplier: 0.9),
-            errorLabel.centerXAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.centerXAnchor),
-            
-            enterButton.bottomAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.bottomAnchor),
-            enterButton.heightAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.heightAnchor, multiplier: 0.5),
-            enterButton.widthAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.widthAnchor),
-            enterButton.centerXAnchor.constraint(equalTo: searchSATScoresHeaderView.filterStackView.centerXAnchor),
         ])
-    }
-}
-
-//check if need to add other text to endeditin
-extension SearchTotalScoreViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        totalScoreText.endEditing(true)
-        errorLabel.isHidden = true
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        errorLabel.isHidden = true
     }
 }
 
 extension SearchTotalScoreViewController {
     @objc func enterButtonTapped(sender: UIButton) {
-        errorLabel.isHidden = true
+        searchSATScoresHeaderView.errorLabel.isHidden = true
+        let selectedIndex = searchSATScoresHeaderView.segmentedControl.selectedSegmentIndex
 
-        if totalScoreText.text!.isEmpty || schoolNumberText.text!.isEmpty{
+        guard let totalScoreText = searchSATScoresHeaderView.totalScoreText.text,
+              let schoolNumberText = searchSATScoresHeaderView.schoolNumberText.text,
+              !totalScoreText.isEmpty, !schoolNumberText.isEmpty else {
             errorHandler(message: "Insert A Value")
             return
         }
-        
-        if Int(totalScoreText.text!) == nil || Int(schoolNumberText.text!) == nil{
+
+        guard let totalScore = Int(totalScoreText), let schoolNumber = Int(schoolNumberText) else {
             errorHandler(message: "Please Enter An Integer Value")
             return
         }
-        
-        if Int(totalScoreText.text!)! < 600 || Int(totalScoreText.text!)! > 2400 {
-            errorHandler(message: "Please Type In Values Between 600 And 2400")
+
+        if totalScore < 200 || totalScore > 2400 {
+            errorHandler(message: "Please Type In Scores Between 600 And 2400")
             return
         }
-        
-        if Int(totalScoreText.text!) != nil {
-            searchSATScoreViewModel.myTotalScore = Int(totalScoreText.text!)!
-            searchSATScoreViewModel.number = Int(schoolNumberText.text!) ?? 10
-            searchSATScoreViewModel.searchTotalScores()
-            searchSATScoreViewModel.getSearchedSchools()
-            schoolsTableView.reloadData()
-        }
 
-        func errorHandler(message: String){
-             errorLabel.isHidden = false
-             errorLabel.text = message
-        }
+        searchSATScoreViewModel.getTopSchools(selectedSegment: selectedIndex, number: schoolNumber, score: totalScore)
+//        searchSATScoreViewModel.myTotalScore = totalScore
+//        searchSATScoreViewModel.number = schoolNumber
+//        searchSATScoreViewModel.searchTotalScores()
+//        searchSATScoreViewModel.getSearchedSchools()
+        schoolsTableView.reloadData()
+    }
+
+    func errorHandler(message: String){
+        searchSATScoresHeaderView.errorLabel.isHidden = false
+        searchSATScoresHeaderView.errorLabel.text = message
     }
 }
 
