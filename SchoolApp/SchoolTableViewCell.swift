@@ -21,14 +21,14 @@ class SchoolTableViewCell: UITableViewCell {
     }()
 
     lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         label.textAlignment = .left
         return label
     }()
 
     lazy var schoolAddressLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue", size: 20.0)
         label.numberOfLines = 1
         label.textAlignment = .left
@@ -36,7 +36,7 @@ class SchoolTableViewCell: UITableViewCell {
     }()
     
     lazy var schoolBoroLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
@@ -48,7 +48,7 @@ class SchoolTableViewCell: UITableViewCell {
     static let reuseID = "SchoolCell"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: SchoolTableViewCell.reuseID)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
     required init?(coder: NSCoder) {

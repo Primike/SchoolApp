@@ -10,8 +10,8 @@ import UIKit
 
 class SearchTotalScoreViewController: UIViewController {
     
-    lazy var searchSATScoresHeaderView: SearchScoresHeaderViewa = {
-        var view = SearchScoresHeaderViewa()
+    lazy var searchSATScoresHeaderView: SearchScoresHeaderView = {
+        var view = SearchScoresHeaderView()
         view.backgroundColor = UIColor.systemBlue
         return view
     }()
@@ -88,10 +88,6 @@ extension SearchTotalScoreViewController {
         }
 
         searchSATScoreViewModel.getTopSchools(selectedSegment: selectedIndex, number: schoolNumber, score: totalScore)
-//        searchSATScoreViewModel.myTotalScore = totalScore
-//        searchSATScoreViewModel.number = schoolNumber
-//        searchSATScoreViewModel.searchTotalScores()
-//        searchSATScoreViewModel.getSearchedSchools()
         schoolsTableView.reloadData()
     }
 

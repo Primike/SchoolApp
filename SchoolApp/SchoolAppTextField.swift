@@ -10,8 +10,8 @@ import UIKit
 
 class SchoolAppTextField: UITextField {
     
-    override required init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         layout()
     }
     

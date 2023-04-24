@@ -11,7 +11,7 @@ import UIKit
 class SchoolScoresTopView: UIView {
     
     lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: school.school_name, labelTextColor: .white)
         return label
     }()
 
@@ -33,12 +33,12 @@ class SchoolScoresTopView: UIView {
     }()
 
     lazy var scoresLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "SAT Scores", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "SAT Scores", labelTextColor: .white)
         return label
     }()
 
     lazy var testTakersLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Number of test takers: \(schoolScores.num_of_sat_test_takers)", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Number of test takers: \(schoolScores.num_of_sat_test_takers)", labelTextColor: .white)
         return label
     }()
     

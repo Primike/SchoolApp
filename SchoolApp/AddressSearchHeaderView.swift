@@ -16,7 +16,7 @@ class AddressSearchHeaderView: UIView {
     }()
     
     lazy var addressHeaderLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Nearby Schools By Address", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Search Nearby Schools By Address", labelTextColor: .white)
         return label
     }()
     
@@ -26,12 +26,12 @@ class AddressSearchHeaderView: UIView {
     }()
 
     lazy var findLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Find", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Find", labelTextColor: .white)
         return label
     }()
     
     lazy var nearestLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Nearest Schools", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Nearest Schools", labelTextColor: .white)
         return label
     }()
     
@@ -41,12 +41,12 @@ class AddressSearchHeaderView: UIView {
     }()
 
     lazy var addressLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Address:", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Address:", labelTextColor: .white)
         return label
     }()
 
     lazy var errorLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Error Label", labelTextColor: .systemRed)
+        var label = SchoolAppLabel(labelText: "Error Label", labelTextColor: .systemRed)
         label.isHidden = true
         return label
     }()

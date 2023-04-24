@@ -16,7 +16,7 @@ class LoadingView: UIView {
     }()
     
     lazy var appTitleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Schools App", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "Schools App", labelTextColor: .black)
         label.numberOfLines = 1
         return label
     }()

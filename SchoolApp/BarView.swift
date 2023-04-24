@@ -11,7 +11,7 @@ import UIKit
 class BarView: UIView {
     
     lazy var bar: SchoolAppLabel = {
-        let label = SchoolAppLabel(frame: CGRect(), labelText: sectionScore, labelTextColor: .white)
+        let label = SchoolAppLabel(labelText: sectionScore, labelTextColor: .white)
         label.backgroundColor = schoolColor
         label.font = UIFont(name:"HelveticaNeue", size: 30.0)
         return label

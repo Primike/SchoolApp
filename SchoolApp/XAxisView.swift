@@ -11,19 +11,19 @@ import UIKit
 class XAxisView: UIView {
     
     lazy var mathLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(frame: CGRect(), labelText: "SAT MATH", labelTextColor: .black)
+        let label = SchoolAppLabel(labelText: "SAT MATH", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         return label
     }()
     
     lazy var writingLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(frame: CGRect(), labelText: "SAT WRITING", labelTextColor: .black)
+        let label = SchoolAppLabel(labelText: "SAT WRITING", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         return label
     }()
 
     lazy var readingLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(frame: CGRect(), labelText: "SAT CRITICAL READING", labelTextColor: .black)
+        let label = SchoolAppLabel(labelText: "SAT CRITICAL READING", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         return label
     }()

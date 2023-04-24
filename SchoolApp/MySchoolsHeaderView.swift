@@ -16,7 +16,7 @@ class MySchoolsHeaderView: UIView {
     }()
 
     lazy var mySchoolsLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Add Schools And They Will Appear Here!", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Add Schools And They Will Appear Here!", labelTextColor: .white)
         return label
     }()
 

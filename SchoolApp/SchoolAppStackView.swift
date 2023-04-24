@@ -10,8 +10,8 @@ import UIKit
 
 class SchoolAppStackView: UIStackView {
     
-    required override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         layout()
     }
     

@@ -7,17 +7,17 @@
 
 import Foundation
 import UIKit
-//maybe font emun
+
 class SchoolAppLabel: UILabel {
     
-    var labelText: String
-    var labelTextColor: UIColor
+    private(set) var labelText: String
+    private(set) var labelTextColor: UIColor
     
-    required init(frame: CGRect, labelText: String, labelTextColor: UIColor) {
+    required init(labelText: String, labelTextColor: UIColor) {
         self.labelText = labelText
         self.labelTextColor = labelTextColor
         
-        super.init(frame: frame)
+        super.init(frame: .zero)
         layout()
     }
     

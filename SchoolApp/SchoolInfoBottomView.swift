@@ -16,13 +16,13 @@ class SchoolInfoBottomView: UIView {
     }()
     
     lazy var aboutLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "About:", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "About:", labelTextColor: .white)
         label.textAlignment = .left
         return label
     }()
 
     lazy var schoolDescription: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.overview_paragraph, labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: school.overview_paragraph, labelTextColor: .white)
         label.numberOfLines = 0
         label.textAlignment = .left
         return label

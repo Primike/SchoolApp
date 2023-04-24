@@ -16,7 +16,7 @@ class ComparisonHeaderView: UIView {
     }()
     
     lazy var mySchoolsLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Select Two Schools To Compare Details", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Select Two Schools To Compare Details", labelTextColor: .white)
         return label
     }()
         

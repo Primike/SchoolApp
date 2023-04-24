@@ -18,12 +18,12 @@ class BottomSubjectView: UIView {
     }()
 
     lazy var satSubjectLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: subjectName, labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: subjectName, labelTextColor: .white)
         return label
     }()
 
     lazy var satSubjectScore: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "\(subjectScore)/800", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "\(subjectScore)/800", labelTextColor: .white)
         return label
     }()
     

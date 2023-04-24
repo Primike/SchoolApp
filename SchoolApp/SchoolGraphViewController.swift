@@ -24,7 +24,7 @@ class SchoolGraphViewController: UIViewController {
     }()
 
     lazy var schoolNameLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(frame: CGRect(), labelText: viewModel.school.school_name, labelTextColor: schoolColor)
+        let label = SchoolAppLabel(labelText: viewModel.school.school_name, labelTextColor: schoolColor)
         label.numberOfLines = 1
         return label
     }()

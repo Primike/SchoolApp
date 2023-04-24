@@ -10,19 +10,15 @@ import UIKit
 
 class SATSearchCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    weak var navigationController: UINavigationController?
+    var navigationController: UINavigationController?
     var childCoordinators: [Coordinating] = []
-    var viewModel: SearchSATScoresViewModel
-    var searchType: SearchType
+    var schools: [School]
+    var schoolScores: [SATData]
     
-    enum SearchType {
-        case totalSearch, mathSearch, readingSearch, writingSearch
-    }
-    
-    required init(navigationController: UINavigationController?, viewModel: SearchSATScoresViewModel, searchType: SearchType) {
+    required init(navigationController: UINavigationController?, schools: [School], schoolScores: [SATData]) {
         self.navigationController = navigationController
-        self.viewModel = viewModel
-        self.searchType = searchType
+        self.schools = schools
+        self.schoolScores = schoolScores
     }
     
     func start() {
@@ -30,38 +26,14 @@ class SATSearchCoordinator: Coordinating {
             return
         }
         
-        let viewController: UIViewController
-        switch searchType {
-        case .totalSearch:
-            let radiusSearchViewController = SearchTotalScoreViewController(viewModel: viewModel)
-            radiusSearchViewController.coordinator = self
-            viewController = radiusSearchViewController
-            navigationController.tabBarItem.title = "SAT Score"
-            navigationController.tabBarItem.image = UIImage(systemName: "star.fill")
-        case .mathSearch:
-            let addressSearchViewController = SearchMathScoreViewController(viewModel: viewModel)
-            addressSearchViewController.coordinator = self
-            viewController = addressSearchViewController
-            navigationController.tabBarItem.title = "Math Score"
-            navigationController.tabBarItem.image = UIImage(systemName: "x.squareroot")
-        case .readingSearch:
-            let addressSearchViewController = SearchReadingScoreViewController(viewModel: viewModel)
-            addressSearchViewController.coordinator = self
-            viewController = addressSearchViewController
-            navigationController.tabBarItem.title = "Reading Score"
-            navigationController.tabBarItem.image = UIImage(systemName: "book.fill")
-        case .writingSearch:
-            let addressSearchViewController = SearchWritingScoreViewController(viewModel: viewModel)
-            addressSearchViewController.coordinator = self
-            viewController = addressSearchViewController
-            navigationController.tabBarItem.title = "Writing Score"
-            navigationController.tabBarItem.image = UIImage(systemName: "pencil")
-
-        }
+        let viewModel = SearchSATScoresViewModel(schools: schools, schoolsScores: schoolScores)
         
-        navigationController.pushViewController(viewController, animated: false)
+        let viewController = SearchTotalScoreViewController(viewModel: viewModel)
+        viewController.coordinator = self
+        
+        navigationController.pushViewController(viewController, animated: true)
     }
-
+    
     func goToSchoolView(school: School, schoolScores: SATData) {
         guard let navigationController = navigationController else {
             return
@@ -80,9 +52,13 @@ class SATSearchCoordinator: Coordinating {
             childCoordinators.remove(at: index)
         }
     }
-
+    
+    func didFinish() {
+        parentCoordinator?.childDidFinish(self)
+    }
+    
     deinit {
-        print("Map Search Coordinator")
+        print("SAT Search Coordinator")
     }
 
 }

@@ -16,7 +16,7 @@ class RadiusSearchHeaderView: UIView {
     }()
     
     lazy var headerLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Nearby Schools", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Search Nearby Schools", labelTextColor: .white)
         return label
     }()
     
@@ -31,12 +31,12 @@ class RadiusSearchHeaderView: UIView {
     }()
 
     lazy var withinLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Within", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Within", labelTextColor: .white)
         return label
     }()
 
     lazy var milesLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Miles", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Miles", labelTextColor: .white)
         return label
     }()
     
@@ -46,7 +46,7 @@ class RadiusSearchHeaderView: UIView {
     }()
 
     lazy var errorLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Miles", labelTextColor: .systemRed)
+        var label = SchoolAppLabel(labelText: "Miles", labelTextColor: .systemRed)
         label.isHidden = true
         return label
     }()

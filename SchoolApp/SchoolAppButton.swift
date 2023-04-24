@@ -10,20 +10,20 @@ import UIKit
 
 class SchoolAppButton: UIButton {
     
-    var title: String
-    var viewWidth: CGFloat
-    var imageName: String?
-    var titleSize: CGFloat
-    var imageSize:CGFloat
+    private(set) var title: String
+    private(set) var viewWidth: CGFloat
+    private(set) var imageName: String?
+    private(set) var titleSize: CGFloat
+    private(set) var imageSize: CGFloat
     
-    init(title: String, viewWidth: CGFloat, imageName: String?, titleSize: CGFloat, imageSize: CGFloat) {
+    init(title: String, viewWidth: CGFloat, imageName: String? = nil, titleSize: CGFloat = 14.0, imageSize: CGFloat = 14.0) {
         self.title = title
         self.viewWidth = viewWidth
         self.imageName = imageName
         self.titleSize = titleSize
         self.imageSize = imageSize
         
-        super.init(frame: CGRect())
+        super.init(frame: .zero)
         
         setupButton()
     }

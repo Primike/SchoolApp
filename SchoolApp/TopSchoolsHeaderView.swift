@@ -20,7 +20,7 @@ class TopSchoolsHeaderView: UIView {
     }()
 
     lazy var titleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Search Top Schools", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Search Top Schools", labelTextColor: .white)
         return label
     }()
 
@@ -39,7 +39,7 @@ class TopSchoolsHeaderView: UIView {
     }()
     
     lazy var errorLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "qweqwe", labelTextColor: .systemRed)
+        var label = SchoolAppLabel(labelText: "qweqwe", labelTextColor: .systemRed)
         label.isHidden = true
         return label
     }()

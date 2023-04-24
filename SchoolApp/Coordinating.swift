@@ -31,13 +31,3 @@ extension Coordinating {
         
     }
 }
-
-//protocol ChildCoordinating: Coordinating {
-//    var parentCoordinator: Coordinating? { get set }
-//}
-//
-//extension ChildCoordinating {
-//    func didFinish() {
-//
-//    }
-//}

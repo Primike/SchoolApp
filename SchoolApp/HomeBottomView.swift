@@ -16,7 +16,7 @@ class HomeBottomView: UIView {
     }()
     
     lazy var appTitleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Schools App", labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: "Schools App", labelTextColor: .white)
         return label
     }()
     
@@ -56,7 +56,7 @@ class HomeBottomView: UIView {
     }()
     
     lazy var welcomeLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Welcome", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "Welcome", labelTextColor: .black)
         return label
     }()
     

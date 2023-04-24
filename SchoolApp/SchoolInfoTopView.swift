@@ -22,19 +22,19 @@ class SchoolInfoTopView: UIView {
     }()
 
     lazy var schoolName: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: schoolColor)
+        var label = SchoolAppLabel(labelText: school.school_name, labelTextColor: schoolColor)
         label.textAlignment = .left
         return label
     }()
 
     lazy var schoolLocation: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.location, labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: school.location, labelTextColor: .black)
         label.textAlignment = .left
         return label
     }()
 
     lazy var schoolPhone: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Phone: \(school.phone_number)", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "Phone: \(school.phone_number)", labelTextColor: .black)
         label.textAlignment = .left
         return label
     }()

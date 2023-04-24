@@ -54,7 +54,7 @@ class HomeCoordinator: Coordinating {
 
         case .satSearch:
             let viewModel = SearchSATScoresViewModel(schools: schools, schoolsScores: schoolScores)
-            coordinator = SATSearchTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
+            coordinator = SATSearchCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
 
         }
         

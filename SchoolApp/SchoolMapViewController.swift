@@ -14,7 +14,7 @@ import CoreLocation
 class SchoolMapViewController: UIViewController {
     
     lazy var titleLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(frame: CGRect(), labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
+        let label = SchoolAppLabel(labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
         return label
     }()
     

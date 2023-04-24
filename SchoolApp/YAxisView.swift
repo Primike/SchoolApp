@@ -11,7 +11,7 @@ import UIKit
 class YAxisView: UIView {
     
     lazy var label800: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "800 -", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "800 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         return label
     }()
@@ -22,7 +22,7 @@ class YAxisView: UIView {
     }()
     
     lazy var label600: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "600 -", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "600 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         return label
     }()
@@ -33,7 +33,7 @@ class YAxisView: UIView {
     }()
     
     lazy var label400: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "400 -", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "400 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         return label
     }()
@@ -44,13 +44,13 @@ class YAxisView: UIView {
     }()
     
     lazy var label200: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "200 -", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "200 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         return label
     }()
 
     lazy var label0: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "0 -", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "0 -", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
         return label
     }()

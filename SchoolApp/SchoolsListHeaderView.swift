@@ -21,7 +21,7 @@ class SchoolsListHeaderView: UIView {
     }()
     
     lazy var titleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "NYC High School List", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "NYC High School List", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 50.0 )
         label.numberOfLines = 1
         label.textAlignment = .left
@@ -29,7 +29,7 @@ class SchoolsListHeaderView: UIView {
     }()
     
     lazy var dateLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Last Updated September 10, 2018", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "Last Updated September 10, 2018", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue", size: 20.0 )
         label.numberOfLines = 1
         label.textAlignment = .left

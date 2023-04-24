@@ -16,43 +16,43 @@ class ComparisonInfoView: UIView {
     }()
 
     lazy var schoolName: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.school_name, labelTextColor: color)
+        var label = SchoolAppLabel(labelText: school.school_name, labelTextColor: color)
         return label
     }()
     
     
     lazy var schoolLocation: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: school.location, labelTextColor: color)
+        var label = SchoolAppLabel(labelText: school.location, labelTextColor: color)
         return label
     }()
     
     lazy var schoolPhone: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Phone: \(school.phone_number)", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Phone: \(school.phone_number)", labelTextColor: color)
         return label
     }()
     
     lazy var distanceLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Distance: Not Available", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Distance: Not Available", labelTextColor: color)
         return label
     }()
     
     lazy var testtakersLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Test Takers: Not Available", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Test Takers: Not Available", labelTextColor: color)
         return label
     }()
     
     lazy var mathLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Math Score: Not Available", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Math Score: Not Available", labelTextColor: color)
         return label
     }()
 
     lazy var writingLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Writing Score: Not Available", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Writing Score: Not Available", labelTextColor: color)
         return label
     }()
     
     lazy var readingLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: "Reading Score: Not Available", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Reading Score: Not Available", labelTextColor: color)
         return label
     }()
     

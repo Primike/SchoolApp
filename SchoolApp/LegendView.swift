@@ -22,7 +22,7 @@ class LegendView: UIView {
     }()
     
     lazy var school1Label: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: schoolName1, labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: schoolName1, labelTextColor: .black)
         return label
     }()
     
@@ -38,7 +38,7 @@ class LegendView: UIView {
     }()
     
     lazy var school2Label: SchoolAppLabel = {
-        var label = SchoolAppLabel(frame: CGRect(), labelText: schoolName2, labelTextColor: .brown)
+        var label = SchoolAppLabel(labelText: schoolName2, labelTextColor: .brown)
         return label
     }()
     
