@@ -45,15 +45,12 @@ class HomeCoordinator: Coordinating {
             coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
 
         case .mySchools:
-            let viewModel = MySchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
             
         case .topSchools:
-            let viewModel = TopSchoolsViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = TopSchoolsCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
 
         case .satSearch:
-            let viewModel = SearchSATScoresViewModel(schools: schools, schoolsScores: schoolScores)
             coordinator = SATSearchCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
 
         }

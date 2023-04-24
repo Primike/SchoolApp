@@ -78,67 +78,43 @@ class HomeViewModel: HomeViewModeling {
     }
     
     func schoolsDataModifier(results: [School]) -> [School] {
-        var results = results
-        
-        for i in 0..<results.count {
-            if let index = results[i].location.firstIndex(of: "(") {
-                results[i].location = String(results[i].location[..<index])
+        var modifiedResults = results.map { (school) -> School in
+            var updatedSchool = school
+            
+            if let index = updatedSchool.location.firstIndex(of: "(") {
+                updatedSchool.location = String(updatedSchool.location[..<index])
             }
-        }
-        
-        for i in 0..<results.count {
-            var mergedText = results[i].school_name + results[i].location
+            
+            var mergedText = updatedSchool.school_name + updatedSchool.location
             let array = [" ", ",", ".", "-", "(", ")", ":", "/"]
-            for j in array {
-                mergedText = mergedText.replacingOccurrences(of: j, with: "")
+            array.forEach { character in
+                mergedText = mergedText.replacingOccurrences(of: character, with: "")
             }
             mergedText = mergedText.replacingOccurrences(of: "&", with: "and")
-            results[i].mergedText = mergedText
-        }
-        
-        for i in 0..<results.count {
-            if results[i].latitude == nil || results[i].longitude == nil{
-                results[i].latitude = "0"
-                results[i].longitude = "0"
+            updatedSchool.mergedText = mergedText
+            
+            if updatedSchool.latitude == nil || updatedSchool.longitude == nil {
+                updatedSchool.latitude = "0"
+                updatedSchool.longitude = "0"
             }
+            
+            return updatedSchool
         }
         
-        return results
+        return modifiedResults
     }
-    
-    func satDataModifier(satData: [SATData]) -> [SATData] {
-        var satData = satData
-        
-        for i in 0..<satData.count {
-            if Int(satData[i].sat_critical_reading_avg_score) != nil && Int(satData[i].sat_math_avg_score) != nil && Int(satData[i].sat_writing_avg_score) != nil {
-            } else {
-                satData[i] = SATData()
-            }
-        }
-        
-        return satData
-    }
-}
 
-struct SearchSchool {
-    let originalSchool: School
-    var location: String
-    var mergedText: String
-    var latitude: String
-    var longitude: String
-    
-    init(from school: School) {
-        self.originalSchool = school
-        self.location = school.location
-        self.latitude = school.latitude ?? "0"
-        self.longitude = school.longitude ?? "0"
-        
-        var merged = school.school_name + school.location
-        let charactersToRemove = [" ", ",", ".", "-", "(", ")", ":", "/"]
-        for char in charactersToRemove {
-            merged = merged.replacingOccurrences(of: char, with: "")
+    func satDataModifier(satData: [SATData]) -> [SATData] {
+        let modifiedSatData = satData.map { satRecord -> SATData in
+            if Int(satRecord.sat_critical_reading_avg_score) != nil,
+               Int(satRecord.sat_math_avg_score) != nil,
+               Int(satRecord.sat_writing_avg_score) != nil {
+                return satRecord
+            } else {
+                return SATData()
+            }
         }
-        merged = merged.replacingOccurrences(of: "&", with: "and")
-        self.mergedText = merged
+        
+        return modifiedSatData
     }
 }

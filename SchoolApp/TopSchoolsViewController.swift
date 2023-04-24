@@ -47,6 +47,13 @@ class TopSchoolsViewController: UIViewController {
 
         layout()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            coordinator?.didFinish()
+        }
+    }
 
     private func layout() {
         view.addSubview(topSchoolsHeaderView)

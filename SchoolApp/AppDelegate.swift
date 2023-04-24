@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import Network
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,11 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         coordinator.start()
+        Reachability.startMonitoring()
         askLocation()
         
         return true
     }
     
+    func applicationWillTerminate(_ application: UIApplication) {
+        Reachability.stopMonitoring()
+    }
+
     func askLocation() {
         LocationManager.shared.getUserLocation { [weak self] location in
             guard let self = self else {

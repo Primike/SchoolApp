@@ -24,7 +24,7 @@ extension Coordinating {
     }
     
     func childDidFinish(_ child: Coordinating) {
-        // Default implementation
+
     }
     
     func didFinish() {

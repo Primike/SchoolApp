@@ -46,6 +46,13 @@ class SearchTotalScoreViewController: UIViewController {
         layout()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            coordinator?.didFinish()
+        }
+    }
+
     func layout() {
         view.addSubview(searchSATScoresHeaderView)
         view.addSubview(schoolsTableView)

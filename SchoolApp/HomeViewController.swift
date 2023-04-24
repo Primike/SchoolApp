@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Network
 
 class HomeViewController: UIViewController {
     
@@ -81,7 +82,7 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        if Reachability.isConnectedToNetwork() == false {
+        if !Reachability.isConnected {
             showAlert(error: AlertErrors.noConnection.rawValue)
         }
         showLoader()
@@ -89,7 +90,7 @@ class HomeViewController: UIViewController {
         
         super.viewDidLoad()
     }
-    
+
     func fetchData() {
         let dispatchGroup = DispatchGroup()
         let queue = DispatchQueue(label: "queue")
