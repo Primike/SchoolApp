@@ -71,19 +71,21 @@ class SearchScoresHeaderView: UIView {
     }()
 
     lazy var searchButton: SchoolAppButton = {
-        let button = SchoolAppButton(title: "Search", viewWidth: self.bounds.width, imageName: "magnifyingglass", titleSize: 19, imageSize: 22)
+        let button = SchoolAppButton(title: "Search", viewWidth: parentViewWidth, imageName: "magnifyingglass", titleSize: 38, imageSize: 35)
         return button
     }()
 
-
-    init() {
-        super.init(frame: .zero)
+    let parentViewWidth: CGFloat
+    
+    init(viewWidth: CGFloat) {
+        self.parentViewWidth = viewWidth
         
+        super.init(frame: .zero)
         layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func layout() {

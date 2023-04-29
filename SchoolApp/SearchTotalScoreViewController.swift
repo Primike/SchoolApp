@@ -11,7 +11,7 @@ import UIKit
 class SearchTotalScoreViewController: UIViewController {
     
     lazy var searchSATScoresHeaderView: SearchScoresHeaderView = {
-        var view = SearchScoresHeaderView()
+        var view = SearchScoresHeaderView(viewWidth: view.bounds.width)
         view.backgroundColor = UIColor.systemBlue
         return view
     }()

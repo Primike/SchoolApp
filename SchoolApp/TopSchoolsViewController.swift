@@ -11,7 +11,7 @@ import UIKit
 class TopSchoolsViewController: UIViewController {
     
     lazy var topSchoolsHeaderView: TopSchoolsHeaderView = {
-        var view = TopSchoolsHeaderView()
+        var view = TopSchoolsHeaderView(viewWidth: view.bounds.width)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 30
         view.layer.maskedCorners = [.layerMaxXMaxYCorner]
