@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Network
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, HomeViewModelDelegate {
     
     lazy var loadingView: LoadingView = {
         let view = LoadingView()
@@ -86,65 +86,18 @@ class HomeViewController: UIViewController {
             showAlert(error: AlertErrors.noConnection.rawValue)
         }
         showLoader()
-        fetchData()
+        viewModel.fetchData()
+        viewModel.delegate = self
         
         super.viewDidLoad()
     }
-
-    func fetchData() {
-        let dispatchGroup = DispatchGroup()
-        let queue = DispatchQueue(label: "queue")
-        
-        dispatchGroup.enter()
-        queue.async(group: dispatchGroup) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.viewModel.getSchools { result in
-                switch result {
-                case .success(_):
-                    dispatchGroup.leave()
-                case .failure(_):
-                    DispatchQueue.main.async {
-                        self.showAlert(error: AlertErrors.schoolDataError.rawValue)
-                    }
-                    dispatchGroup.leave()
-                    return
-                }
-            }
+    
+    func didUpdate() {
+        for subview in self.view.subviews {
+            subview.removeFromSuperview()
         }
-        
-        dispatchGroup.enter()
-        queue.async(group: dispatchGroup) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.viewModel.getSchoolScores { result in
-                switch result {
-                case .success(_):
-                    dispatchGroup.leave()
-                case .failure(_):
-                    DispatchQueue.main.async {
-                        self.showAlert(error: AlertErrors.satDataError.rawValue)
-                    }
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        
-        dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            for subview in self.view.subviews {
-                subview.removeFromSuperview()
-            }
-            self.layout()
-            self.homeTopView.layer.addSublayer(self.gradient)
-        }
+        self.layout()
+        self.homeTopView.layer.addSublayer(self.gradient)
     }
     
     func showLoader() {

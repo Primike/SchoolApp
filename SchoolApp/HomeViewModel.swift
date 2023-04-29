@@ -11,99 +11,100 @@ protocol HomeViewModeling {
     var dataMangaer: HomeDataManaging { get set }
     var schools: [School] { get set }
     var schoolsScores: [SATData] { get set }
-    func getSchools(completion: @escaping (Result<[School], Error>) -> Void)
-    func getSchoolScores(completion: @escaping (Result<[SATData], Error>) -> Void)
     func schoolsDataModifier(results: [School]) -> [School]
     func satDataModifier(satData: [SATData]) -> [SATData]
+}
+
+//classes only Anyobject for weak refrences
+protocol HomeViewModelDelegate: AnyObject {
+    func didUpdate()
 }
 
 class HomeViewModel: HomeViewModeling {
     var dataMangaer: HomeDataManaging
     var schools = [School]()
     var schoolsScores = [SATData]()
+    weak var delegate: HomeViewModelDelegate?
     
     required init(dataManager: HomeDataManaging) {
         self.dataMangaer = dataManager
     }
     
-    func getSchools(completion: @escaping (Result<[School], Error>) -> Void) {
-        dataMangaer.getSchools(url: URLs.schoolsURL.value, completion: {[weak self] (result) in
-            guard let self = self else {
-                return
-            }
-            
+    func fetchData() {
+        let dispatchGroup = DispatchGroup()
+
+        dispatchGroup.enter()
+        dispatchGroup.enter()
+
+        fetchSchools {
+            dispatchGroup.leave()
+        }
+
+        fetchSATData {
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.didUpdate()
+        }
+    }
+
+    func fetchSchools(completion: @escaping () -> Void) {
+        dataMangaer.getSchools(url: URLs.schoolsURL.value) { [weak self] (result) in
+            guard let self = self else { return }
+
             switch result {
             case .success(let schools):
                 self.schools = schools
-                completion(.success(schools))
             case .failure(_):
-                self.dataMangaer.getSchools(url: URLs.localSchoolsURL.value) { result in
-                    switch result {
-                    case .success(let schools):
-                        self.schools = schools
-                        completion(.success(schools))
-                    case .failure(let error):
-                        completion(.failure(error))
-                        return
-                    }
-                }
+                let schools = self.dataMangaer.getLocalSchools(fileName: LocalFiles.localSchoolsURL.rawValue)
+                self.schools = schools
             }
-            self.schools = self.schoolsDataModifier(results: self.schools)
-        })
+            completion()
+        }
     }
-    
-    func getSchoolScores(completion: @escaping (Result<[SATData], Error>) -> Void) {
-        dataMangaer.getSATData(url: URLs.satDataURL.value, completion: {[weak self] result in
-            guard let self = self else {
-                return
-            }
-            
+
+    func fetchSATData(completion: @escaping () -> Void) {
+        dataMangaer.getSATData(url: URLs.schoolsURL.value) { [weak self] (result) in
+            guard let self = self else { return }
+
             switch result {
-            case .success(let scores):
-                self.schoolsScores = scores
-                completion(.success(scores))
+            case .success(let satData):
+                self.schoolsScores = satData
             case .failure(_):
-                self.dataMangaer.getSATData(url: URLs.localSATDataURL.value) { result in
-                    switch result {
-                    case .success(let schools):
-                        self.schoolsScores = schools
-                        completion(.success(schools))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                }
+                let satData = self.dataMangaer.getLocalSATData(fileName: LocalFiles.localSATDataURL.rawValue)
+                self.schoolsScores = satData
             }
-            self.schoolsScores = self.satDataModifier(satData: self.schoolsScores)
-        })
+            completion()
+        }
     }
     
+    //MARK: Modify data to improve search results
     func schoolsDataModifier(results: [School]) -> [School] {
-        var modifiedResults = results.map { (school) -> School in
+        return results.map { school in
             var updatedSchool = school
-            
+
             if let index = updatedSchool.location.firstIndex(of: "(") {
                 updatedSchool.location = String(updatedSchool.location[..<index])
             }
-            
-            var mergedText = updatedSchool.school_name + updatedSchool.location
-            let array = [" ", ",", ".", "-", "(", ")", ":", "/"]
-            array.forEach { character in
-                mergedText = mergedText.replacingOccurrences(of: character, with: "")
-            }
-            mergedText = mergedText.replacingOccurrences(of: "&", with: "and")
-            updatedSchool.mergedText = mergedText
-            
+
+            let mergedText = updatedSchool.school_name + updatedSchool.location
+            let charactersToRemove = Set(" ,.-():/")
+            let mergedTextWithoutSpecialChars = mergedText.filter { !charactersToRemove.contains($0) }
+            let finalMergedText = mergedTextWithoutSpecialChars.replacingOccurrences(of: "&", with: "and")
+            updatedSchool.mergedText = finalMergedText
+
             if updatedSchool.latitude == nil || updatedSchool.longitude == nil {
                 updatedSchool.latitude = "0"
                 updatedSchool.longitude = "0"
             }
-            
+
             return updatedSchool
         }
-        
-        return modifiedResults
     }
 
+    //MARK: If an element has incomplete scores replace with SATDATA() for app features
     func satDataModifier(satData: [SATData]) -> [SATData] {
         let modifiedSatData = satData.map { satRecord -> SATData in
             if Int(satRecord.sat_critical_reading_avg_score) != nil,
