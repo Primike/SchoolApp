@@ -21,7 +21,7 @@
 		9EB7440A29ECD0770041F35E /* SchoolComparisonCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7440929ECD0770041F35E /* SchoolComparisonCoordinator.swift */; };
 		9EB7441229EDD8A40041F35E /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441129EDD8A40041F35E /* ServiceError.swift */; };
 		9EB7441529EDD9050041F35E /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441429EDD9050041F35E /* Coordinating.swift */; };
-		9EB7441829EDD9440041F35E /* ViewControllerTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441729EDD9440041F35E /* ViewControllerTypes.swift */; };
+		9EB7441829EDD9440041F35E /* VCTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441729EDD9440041F35E /* VCTypesEnum.swift */; };
 		9EB7441A29EE18C90041F35E /* SchoolCellMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */; };
 		9EB7442F29EEFD080041F35E /* SchoolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */; };
 		9EB7443229EEFD4E0041F35E /* SchoolTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7443129EEFD4E0041F35E /* SchoolTabCoordinator.swift */; };
@@ -120,7 +120,7 @@
 		9EB7440929ECD0770041F35E /* SchoolComparisonCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolComparisonCoordinator.swift; sourceTree = "<group>"; };
 		9EB7441129EDD8A40041F35E /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 		9EB7441429EDD9050041F35E /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
-		9EB7441729EDD9440041F35E /* ViewControllerTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTypes.swift; sourceTree = "<group>"; };
+		9EB7441729EDD9440041F35E /* VCTypesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCTypesEnum.swift; sourceTree = "<group>"; };
 		9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCellMethods.swift; sourceTree = "<group>"; };
 		9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewModel.swift; sourceTree = "<group>"; };
 		9EB7443129EEFD4E0041F35E /* SchoolTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTabCoordinator.swift; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 		9EB7441629EDD9390041F35E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9EB7441729EDD9440041F35E /* ViewControllerTypes.swift */,
+				9EB7441729EDD9440041F35E /* VCTypesEnum.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -998,7 +998,7 @@
 				B8736662288055B60076632F /* HomeTopView.swift in Sources */,
 				9EB743FC29EC611F0041F35E /* MapSearchTabBarCoordinator.swift in Sources */,
 				B87366742880697F0076632F /* SchoolInfoBottomView.swift in Sources */,
-				9EB7441829EDD9440041F35E /* ViewControllerTypes.swift in Sources */,
+				9EB7441829EDD9440041F35E /* VCTypesEnum.swift in Sources */,
 				9E902E1929A4482800A39C77 /* SchoolAppButtonConfiguration.swift in Sources */,
 				B83A84E0288F228F000752D5 /* NearestSchoolsViewController.swift in Sources */,
 				B803EAC1286DF99300E7A26B /* HomeViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ViewControllerTypes.swift
+//  VCTypesEnum.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 4/17/23.

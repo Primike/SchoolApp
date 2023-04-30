@@ -45,8 +45,8 @@ class HomeViewModel: HomeViewModeling {
         }
 
         dispatchGroup.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.didUpdate()
+            guard let self = self, let delegate = self.delegate else { return }
+            delegate.didUpdate()
         }
     }
 
@@ -61,6 +61,8 @@ class HomeViewModel: HomeViewModeling {
                 let schools = self.dataMangaer.getLocalSchools(fileName: LocalFiles.localSchoolsURL.rawValue)
                 self.schools = schools
             }
+            
+            self.schools = self.schoolsDataModifier(results: self.schools)
             completion()
         }
     }
@@ -76,6 +78,8 @@ class HomeViewModel: HomeViewModeling {
                 let satData = self.dataMangaer.getLocalSATData(fileName: LocalFiles.localSATDataURL.rawValue)
                 self.schoolsScores = satData
             }
+            
+            self.schoolsScores = self.satDataModifier(satData: self.schoolsScores)
             completion()
         }
     }
