@@ -43,7 +43,7 @@ class TopSchoolsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        topSchoolsHeaderView.searchButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
+        topSchoolsHeaderView.searchButton.addTarget(self, action: #selector(submitButtonTapped), for: .primaryActionTriggered)
 
         layout()
     }
@@ -108,8 +108,8 @@ extension TopSchoolsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(viewModel: topSchoolsViewModel, indexPath: indexPath)
-        schoolCell.schoolBoroLabel.text = "Rank #\(indexPath.row + 1)"
-        schoolCell.schoolBoroLabel.textColor = .black
+        schoolCell.schoolBoro.text = "Rank #\(indexPath.row + 1)"
+        schoolCell.schoolBoro.textColor = .black
         return schoolCell
     }
     

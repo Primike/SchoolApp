@@ -54,7 +54,7 @@
 		B841D468288E08550058E959 /* RadiusSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */; };
 		B86AE963289C04130083FF0A /* SchoolListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86AE962289C04130083FF0A /* SchoolListViewModelTests.swift */; };
 		B86AE965289C24710083FF0A /* BottomSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86AE964289C24710083FF0A /* BottomSubjectView.swift */; };
-		B8729F6D289ABA6D00B7035A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8729F6C289ABA6D00B7035A /* LoadingView.swift */; };
+		B8729F6D289ABA6D00B7035A /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8729F6C289ABA6D00B7035A /* LoaderView.swift */; };
 		B8729F6F289B045000B7035A /* Fixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8729F6E289B045000B7035A /* Fixes.swift */; };
 		B8736662288055B60076632F /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8736661288055B60076632F /* HomeTopView.swift */; };
 		B8736664288057480076632F /* HomeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8736663288057480076632F /* HomeBottomView.swift */; };
@@ -153,7 +153,7 @@
 		B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSearchHeaderView.swift; sourceTree = "<group>"; };
 		B86AE962289C04130083FF0A /* SchoolListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolListViewModelTests.swift; sourceTree = "<group>"; };
 		B86AE964289C24710083FF0A /* BottomSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSubjectView.swift; sourceTree = "<group>"; };
-		B8729F6C289ABA6D00B7035A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		B8729F6C289ABA6D00B7035A /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		B8729F6E289B045000B7035A /* Fixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixes.swift; sourceTree = "<group>"; };
 		B8736661288055B60076632F /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = "<group>"; };
 		B8736663288057480076632F /* HomeBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomView.swift; sourceTree = "<group>"; };
@@ -243,6 +243,7 @@
 			children = (
 				9ECCFD3C29EF651B0004F3D1 /* Extension */,
 				9EB7441B29EE18CF0041F35E /* Protocols */,
+				B8729F6C289ABA6D00B7035A /* LoaderView.swift */,
 				9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */,
 				9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */,
 				9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */,
@@ -742,7 +743,6 @@
 		B8B33B2D2880418F0096118D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B8729F6C289ABA6D00B7035A /* LoadingView.swift */,
 				B8736661288055B60076632F /* HomeTopView.swift */,
 				B8736663288057480076632F /* HomeBottomView.swift */,
 			);
@@ -955,7 +955,7 @@
 				B841D466288E05110058E959 /* RadiusSearchViewController.swift in Sources */,
 				9ECCFD4029EF6DC30004F3D1 /* MapSearchCoordinator.swift in Sources */,
 				B88891BE2892C86700236F76 /* MySchoolsHeaderView.swift in Sources */,
-				B8729F6D289ABA6D00B7035A /* LoadingView.swift in Sources */,
+				B8729F6D289ABA6D00B7035A /* LoaderView.swift in Sources */,
 				B87C4B8E289984F30091CD45 /* ComparisonInfoView.swift in Sources */,
 				B841D468288E08550058E959 /* RadiusSearchHeaderView.swift in Sources */,
 				B880A2BA284E61FF0071E43D /* SATData.swift in Sources */,

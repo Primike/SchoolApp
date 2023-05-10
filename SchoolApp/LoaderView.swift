@@ -1,5 +1,5 @@
 //
-//  LoadingView.swift
+//  LoaderView.swift
 //  SchoolApp
 //
 //  Created by Prince Avecillas on 8/3/22.
@@ -8,8 +8,17 @@
 import Foundation
 import UIKit
 
-class LoadingView: UIView {
+class LoaderView: UIView {
     
+    init() {
+        super.init(frame: .zero)
+        layout()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     lazy var stackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
         return stackView
@@ -36,20 +45,11 @@ class LoadingView: UIView {
         return indicator
     }()
     
-    init() {
-        super.init(frame: .zero)
-        layout()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     private func layout() {
-        self.translatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
         
-        self.addSubview(stackView)
-        self.addSubview(activityIndicator)
+        addSubview(stackView)
+        addSubview(activityIndicator)
 
         stackView.addSubview(appTitleLabel)
         stackView.addSubview(appImage)

@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 class HomeCoordinator: Coordinating {
-    weak var navigationController: UINavigationController?
-    var childCoordinators: [Coordinating] = []
     
+    var childCoordinators: [Coordinating] = []
+    weak var navigationController: UINavigationController?
+
     public required init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }

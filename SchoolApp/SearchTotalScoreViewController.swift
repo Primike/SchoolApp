@@ -108,8 +108,8 @@ extension SearchTotalScoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(viewModel: searchSATScoreViewModel, indexPath: indexPath)
-        schoolCell.schoolBoroLabel.text = "Rank #\(indexPath.row + 1)"
-        schoolCell.schoolBoroLabel.textColor = .black
+        schoolCell.schoolBoro.text = "Rank #\(indexPath.row + 1)"
+        schoolCell.schoolBoro.textColor = .black
         return schoolCell
     }
     

@@ -10,40 +10,6 @@ import UIKit
 
 class SchoolTableViewCell: UITableViewCell {
     
-    lazy var cellStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        return stackView
-    }()
-    
-    lazy var schoolInfoStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        return stackView
-    }()
-
-    lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        label.textAlignment = .left
-        return label
-    }()
-
-    lazy var schoolAddressLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        label.numberOfLines = 1
-        label.textAlignment = .left
-        return label
-    }()
-    
-    lazy var schoolBoroLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
-        label.textAlignment = .right
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 1
-        return label
-    }()
-
     //Use reuse so the table can reuse the cells and not init new ones
     static let reuseID = "SchoolCell"
 
@@ -54,16 +20,50 @@ class SchoolTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    lazy var cellStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
+    }()
+    
+    lazy var schoolInfoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
+    }()
+
+    lazy var schoolName: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        label.textAlignment = .left
+        return label
+    }()
+
+    lazy var schoolAddress: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
+        label.font = UIFont(name:"HelveticaNeue", size: 20.0)
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var schoolBoro: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+        label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
+        return label
+    }()
     
     func configure(viewModel: SchoolCellMethods, indexPath: IndexPath) {
         setup()
         layout()
         
-        schoolNameLabel.text = viewModel.getSchoolName(indexPath: indexPath)
-        schoolAddressLabel.text = viewModel.getSchoolAddress(indexPath: indexPath)
-        schoolBoroLabel.text = viewModel.getSchoolBoro(indexPath: indexPath)
-        schoolBoroLabel.textColor = viewModel.getSchoolColor(indexPath: indexPath)
-        schoolNameLabel.textColor = viewModel.getSchoolColor(indexPath: indexPath)
+        schoolName.text = viewModel.getSchoolName(indexPath: indexPath)
+        schoolName.textColor = viewModel.getSchoolColor(indexPath: indexPath)
+        schoolAddress.text = viewModel.getSchoolAddress(indexPath: indexPath)
+        schoolBoro.text = viewModel.getSchoolBoro(indexPath: indexPath)
+        schoolBoro.textColor = viewModel.getSchoolColor(indexPath: indexPath)
     }
     
     private func setup() {
@@ -79,10 +79,10 @@ class SchoolTableViewCell: UITableViewCell {
         self.addSubview(cellStackView)
 
         cellStackView.addSubview(schoolInfoStackView)
-        cellStackView.addSubview(schoolBoroLabel)
+        cellStackView.addSubview(schoolBoro)
         
-        schoolInfoStackView.addSubview(schoolNameLabel)
-        schoolInfoStackView.addSubview(schoolAddressLabel)
+        schoolInfoStackView.addSubview(schoolName)
+        schoolInfoStackView.addSubview(schoolAddress)
 
         NSLayoutConstraint.activate([
             cellStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
@@ -95,20 +95,20 @@ class SchoolTableViewCell: UITableViewCell {
             schoolInfoStackView.heightAnchor.constraint(equalTo: cellStackView.heightAnchor),
             schoolInfoStackView.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.7),
             
-            schoolNameLabel.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
-            schoolNameLabel.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
-            schoolNameLabel.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.5),
-            schoolNameLabel.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
+            schoolName.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
+            schoolName.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
+            schoolName.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.5),
+            schoolName.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
             
-            schoolAddressLabel.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor),
-            schoolAddressLabel.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
-            schoolAddressLabel.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.3),
-            schoolAddressLabel.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.9),
+            schoolAddress.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
+            schoolAddress.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
+            schoolAddress.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.3),
+            schoolAddress.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.9),
             
-            schoolBoroLabel.topAnchor.constraint(equalTo: cellStackView.topAnchor),
-            schoolBoroLabel.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),
-            schoolBoroLabel.heightAnchor.constraint(equalTo: cellStackView.heightAnchor ,multiplier: 0.3),
-            schoolBoroLabel.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.2),
+            schoolBoro.topAnchor.constraint(equalTo: cellStackView.topAnchor),
+            schoolBoro.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),
+            schoolBoro.heightAnchor.constraint(equalTo: cellStackView.heightAnchor ,multiplier: 0.3),
+            schoolBoro.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.2),
         ])
     }
 }

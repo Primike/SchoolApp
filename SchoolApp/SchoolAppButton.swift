@@ -34,9 +34,11 @@ class SchoolAppButton: UIButton {
     
     private func setupButton() {
         translatesAutoresizingMaskIntoConstraints = false
+        
         configuration = SchoolAppButtonConfiguration.configuration
         configuration?.title = title
         configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(viewWidth))/titleSize)
+        
         if let imageName = imageName {
             if let font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(viewWidth))/imageSize) {
                 configuration?.image = UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(font: font))

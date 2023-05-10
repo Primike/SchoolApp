@@ -81,7 +81,7 @@ extension MySchoolsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(viewModel: mySchoolsViewModel, indexPath: indexPath)
-        schoolCell.schoolBoroLabel.text = "\(indexPath.row + 1)"
+        schoolCell.schoolBoro.text = "\(indexPath.row + 1)"
         return schoolCell
     }
     
