@@ -10,22 +10,18 @@ import UIKit
 
 class TopSchoolsCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var schools: [School]
     var schoolScores: [SATData]
     
-    required init(navigationController: UINavigationController?, schools: [School], schoolScores: [SATData]) {
+    required init(navigationController: UINavigationController, schools: [School], schoolScores: [SATData]) {
         self.navigationController = navigationController
         self.schools = schools
         self.schoolScores = schoolScores
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let viewModel = TopSchoolsViewModel(schools: schools, schoolsScores: schoolScores)
         
         let viewController = TopSchoolsViewController(viewModel: viewModel)
@@ -35,10 +31,6 @@ class TopSchoolsCoordinator: Coordinating {
     }
     
     func goToSchoolView(school: School, schoolScores: SATData) {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let viewModel = SchoolViewModel(school: school, scores: schoolScores)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         

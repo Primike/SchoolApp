@@ -10,20 +10,16 @@ import UIKit
 
 class SchoolTabCoordinator: Coordinating {
     var parentCoordinator: Coordinating?
-    var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var viewModel: SchoolViewModel
 
-    required init(navigationController: UINavigationController?, viewModel: SchoolViewModel) {
+    required init(navigationController: UINavigationController, viewModel: SchoolViewModel) {
         self.navigationController = navigationController
         self.viewModel = viewModel
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let searchTotalNavController = UINavigationController()
         let searchTotalCoordinator = SchoolInfoCoordinator(navigationController: searchTotalNavController, viewModel: viewModel)
         searchTotalCoordinator.parentCoordinator = self

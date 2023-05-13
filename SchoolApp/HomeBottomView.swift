@@ -10,6 +10,19 @@ import UIKit
 
 class HomeBottomView: UIView {
     
+    var parentViewWidth: CGFloat
+    
+    init(viewWidth: CGFloat) {
+        self.parentViewWidth = viewWidth
+        
+        super.init(frame: .zero)
+        layout()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     lazy var titleStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
         return stackView
@@ -97,19 +110,6 @@ class HomeBottomView: UIView {
         return divider
     }()
         
-    var parentViewWidth: CGFloat
-    
-    init(viewWidth: CGFloat) {
-        self.parentViewWidth = viewWidth
-        
-        super.init(frame: .zero)
-        layout()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     private func layout() {
         self.translatesAutoresizingMaskIntoConstraints = false
         

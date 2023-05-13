@@ -82,8 +82,9 @@ class HomeViewController: UIViewController, HomeViewModelDelegate {
         for subview in view.subviews {
             subview.removeFromSuperview()
         }
-        layout()
+        
         addButtons()
+        layout()
         homeTopView.layer.addSublayer(gradient)
     }
 
@@ -117,9 +118,7 @@ class HomeViewController: UIViewController, HomeViewModelDelegate {
 
 extension HomeViewController {
     @objc func buttonTapped(sender: UIButton) {
-        guard let coordinator = coordinator else {
-            return
-        }
+        guard let coordinator = coordinator else { return }
 
         var type: ViewControllerType
         
@@ -138,6 +137,6 @@ extension HomeViewController {
             return
         }
         
-        coordinator.goToViewController(type: type, schools: viewModel.schools, schoolScores: viewModel.schoolsScores)
+        coordinator.goToViewController(type: type, schools: viewModel.schools, schoolScores: viewModel.satScores)
     }
 }

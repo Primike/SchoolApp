@@ -10,20 +10,16 @@ import UIKit
 
 class MySchoolsCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var viewModel: MySchoolsViewModel
     
-    required init(navigationController: UINavigationController?, viewModel: MySchoolsViewModel) {
+    required init(navigationController: UINavigationController, viewModel: MySchoolsViewModel) {
         self.navigationController = navigationController
         self.viewModel = viewModel
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let mySchoolsViewController = MySchoolsViewController(viewModel: viewModel)
         mySchoolsViewController.coordinator = self
         navigationController.tabBarItem.title = "My Schools"
@@ -34,10 +30,6 @@ class MySchoolsCoordinator: Coordinating {
     }
     
     func goToSchoolView(school: School, schoolScores: SATData) {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let viewModel = SchoolViewModel(school: school, scores: schoolScores)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         

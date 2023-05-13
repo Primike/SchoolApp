@@ -10,7 +10,7 @@ import UIKit
 
 class MapSearchCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    weak var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var viewModel: MapSearchViewModel
     var searchType: SearchType
@@ -19,17 +19,13 @@ class MapSearchCoordinator: Coordinating {
         case radius, address
     }
     
-    required init(navigationController: UINavigationController?, viewModel: MapSearchViewModel, searchType: SearchType) {
+    required init(navigationController: UINavigationController, viewModel: MapSearchViewModel, searchType: SearchType) {
         self.navigationController = navigationController
         self.viewModel = viewModel
         self.searchType = searchType
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let viewController: UIViewController
         switch searchType {
         case .radius:
@@ -50,10 +46,6 @@ class MapSearchCoordinator: Coordinating {
     }
 
     func goToSchoolView(school: School, schoolScores: SATData) {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let viewModel = SchoolViewModel(school: school, scores: schoolScores)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         

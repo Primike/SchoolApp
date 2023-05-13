@@ -10,20 +10,16 @@ import UIKit
 
 class SchoolComparisonCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    weak var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var viewModel: MySchoolsViewModel
     
-    required init(navigationController: UINavigationController?, viewModel: MySchoolsViewModel) {
+    required init(navigationController: UINavigationController, viewModel: MySchoolsViewModel) {
         self.navigationController = navigationController
         self.viewModel = viewModel
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let schoolComparisonViewController = SchoolComparisonViewController(viewModel: viewModel)
         schoolComparisonViewController.coordinator = self
         navigationController.tabBarItem.title = "Compare Schools"

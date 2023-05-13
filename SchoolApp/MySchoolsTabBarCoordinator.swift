@@ -10,22 +10,18 @@ import UIKit
 
 class MySchoolsTabBarCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    weak var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var schools: [School]
     var satData: [SATData]
     
-    required init(navigationController: UINavigationController?, schools: [School], satData: [SATData]) {
+    required init(navigationController: UINavigationController, schools: [School], satData: [SATData]) {
         self.navigationController = navigationController
         self.schools = schools
         self.satData = satData
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-
         let mySchoolsNavController = UINavigationController()
         let mySchoolsCoordinator = MySchoolsCoordinator(navigationController: mySchoolsNavController, viewModel: MySchoolsViewModel(schools: schools, schoolsScores: satData))
         mySchoolsCoordinator.parentCoordinator = self

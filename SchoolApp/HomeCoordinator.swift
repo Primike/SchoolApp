@@ -11,17 +11,13 @@ import UIKit
 class HomeCoordinator: Coordinating {
     
     var childCoordinators: [Coordinating] = []
-    weak var navigationController: UINavigationController?
+    var navigationController: UINavigationController
 
-    public required init(navigationController: UINavigationController?) {
+    public required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let dataManager = HomeDataManager()
         let viewModel = HomeViewModel(dataManager: dataManager)
         
@@ -32,10 +28,6 @@ class HomeCoordinator: Coordinating {
     }
     
     func goToViewController(type: ViewControllerType, schools: [School], schoolScores: [SATData]) {
-        guard let navigationController = navigationController else {
-            return
-        }
-                
         let coordinator: Coordinating
         
         switch type {
@@ -65,5 +57,9 @@ class HomeCoordinator: Coordinating {
         if let index = childCoordinators.firstIndex(where: { $0 === child }) {
             childCoordinators.remove(at: index)
         }
+    }
+    
+    deinit {
+        print("Home Coordinator")
     }
 }

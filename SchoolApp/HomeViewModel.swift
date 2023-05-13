@@ -8,9 +8,9 @@
 import Foundation
 
 protocol HomeViewModeling {
-    var dataMangaer: HomeDataManaging { get set }
+    var dataManager: HomeDataManaging { get set }
     var schools: [School] { get set }
-    var schoolsScores: [SATData] { get set }
+    var satScores: [SATData] { get set }
     func schoolsDataModifier(results: [School]) -> [School]
     func satDataModifier(satData: [SATData]) -> [SATData]
 }
@@ -21,13 +21,13 @@ protocol HomeViewModelDelegate: AnyObject {
 }
 
 class HomeViewModel: HomeViewModeling {
-    var dataMangaer: HomeDataManaging
+    var dataManager: HomeDataManaging
     var schools = [School]()
-    var schoolsScores = [SATData]()
+    var satScores = [SATData]()
     weak var delegate: HomeViewModelDelegate?
     
     required init(dataManager: HomeDataManaging) {
-        self.dataMangaer = dataManager
+        self.dataManager = dataManager
     }
     
     func fetchData() {
@@ -51,14 +51,14 @@ class HomeViewModel: HomeViewModeling {
     }
 
     func fetchSchools(completion: @escaping () -> Void) {
-        dataMangaer.getSchools(url: URLs.schoolsURL.value) { [weak self] (result) in
+        dataManager.getSchools(url: URLs.schoolsURL.value) { [weak self] (result) in
             guard let self = self else { return }
 
             switch result {
             case .success(let schools):
                 self.schools = schools
             case .failure(_):
-                let schools = self.dataMangaer.getLocalSchools(fileName: LocalFiles.localSchoolsURL.rawValue)
+                let schools = self.dataManager.getLocalSchools(fileName: LocalFilesPath.schoolsPath.rawValue)
                 self.schools = schools
             }
             
@@ -68,18 +68,18 @@ class HomeViewModel: HomeViewModeling {
     }
 
     func fetchSATData(completion: @escaping () -> Void) {
-        dataMangaer.getSATData(url: URLs.schoolsURL.value) { [weak self] (result) in
+        dataManager.getSATData(url: URLs.schoolsURL.value) { [weak self] (result) in
             guard let self = self else { return }
 
             switch result {
             case .success(let satData):
-                self.schoolsScores = satData
+                self.satScores = satData
             case .failure(_):
-                let satData = self.dataMangaer.getLocalSATData(fileName: LocalFiles.localSATDataURL.rawValue)
-                self.schoolsScores = satData
+                let satData = self.dataManager.getLocalSATData(fileName: LocalFilesPath.satDataPath.rawValue)
+                self.satScores = satData
             }
             
-            self.schoolsScores = self.satDataModifier(satData: self.schoolsScores)
+            self.satScores = self.satDataModifier(satData: self.satScores)
             completion()
         }
     }

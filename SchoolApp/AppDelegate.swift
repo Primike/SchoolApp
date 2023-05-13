@@ -13,6 +13,7 @@ import Network
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var userLocation: CLLocation?
+    var coordinator: Coordinating?
     var deviceOrientation = UIInterfaceOrientationMask.portrait
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -22,16 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         let navigationController = UINavigationController()
-        let coordinator = HomeCoordinator(navigationController: navigationController)
+        coordinator = HomeCoordinator(navigationController: navigationController)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         window.backgroundColor = .systemBackground
         window.rootViewController = navigationController
         self.window = window
-        
-        coordinator.start()
+                
         Reachability.startMonitoring()
+        coordinator?.start()
         askLocation()
         
         return true

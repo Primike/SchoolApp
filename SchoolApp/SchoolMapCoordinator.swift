@@ -10,20 +10,16 @@ import UIKit
 
 class SchoolMapCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
-    weak var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var viewModel: SchoolViewModel
     
-    required init(navigationController: UINavigationController?, viewModel: SchoolViewModel) {
+    required init(navigationController: UINavigationController, viewModel: SchoolViewModel) {
         self.navigationController = navigationController
         self.viewModel = viewModel
     }
     
     func start() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
         let schoolScoresViewController = SchoolMapViewController(viewModel: viewModel)
         schoolScoresViewController.coordinator = self
         navigationController.tabBarItem.title = "School Map"
