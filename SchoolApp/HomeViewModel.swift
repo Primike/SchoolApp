@@ -8,11 +8,10 @@
 import Foundation
 
 protocol HomeViewModeling {
-    var dataManager: HomeDataManaging { get set }
-    var schools: [School] { get set }
-    var satScores: [SATData] { get set }
-    func schoolsDataModifier(results: [School]) -> [School]
-    func satDataModifier(satData: [SATData]) -> [SATData]
+    var schools: [School] { get }
+    var satData: [SATData] { get }
+    var delegate: HomeViewModelDelegate? { get set }
+    func fetchData()
 }
 
 //classes only Anyobject for weak refrences
@@ -20,10 +19,11 @@ protocol HomeViewModelDelegate: AnyObject {
     func didUpdate()
 }
 
-class HomeViewModel: HomeViewModeling {
-    var dataManager: HomeDataManaging
-    var schools = [School]()
-    var satScores = [SATData]()
+final class HomeViewModel: HomeViewModeling {
+    
+    private let dataManager: HomeDataManaging
+    private(set) var schools = [School]()
+    private(set) var satData = [SATData]()
     weak var delegate: HomeViewModelDelegate?
     
     required init(dataManager: HomeDataManaging) {
@@ -50,14 +50,15 @@ class HomeViewModel: HomeViewModeling {
         }
     }
 
-    func fetchSchools(completion: @escaping () -> Void) {
+    private func fetchSchools(completion: @escaping () -> Void) {
         dataManager.getSchools(url: URLs.schoolsURL.value) { [weak self] (result) in
             guard let self = self else { return }
 
             switch result {
             case .success(let schools):
                 self.schools = schools
-            case .failure(_):
+            case .failure(let error):
+                print("Fetch Schools Failed: \(error.localizedDescription)")
                 let schools = self.dataManager.getLocalSchools(fileName: LocalFilesPath.schoolsPath.rawValue)
                 self.schools = schools
             }
@@ -67,25 +68,26 @@ class HomeViewModel: HomeViewModeling {
         }
     }
 
-    func fetchSATData(completion: @escaping () -> Void) {
+    private func fetchSATData(completion: @escaping () -> Void) {
         dataManager.getSATData(url: URLs.schoolsURL.value) { [weak self] (result) in
             guard let self = self else { return }
 
             switch result {
             case .success(let satData):
-                self.satScores = satData
-            case .failure(_):
+                self.satData = satData
+            case .failure(let error):
+                print("Fetch SAT Data Failed: \(error.localizedDescription)")
                 let satData = self.dataManager.getLocalSATData(fileName: LocalFilesPath.satDataPath.rawValue)
-                self.satScores = satData
+                self.satData = satData
             }
             
-            self.satScores = self.satDataModifier(satData: self.satScores)
+            self.satData = self.satDataModifier(satData: self.satData)
             completion()
         }
     }
     
     //MARK: Modify data to improve search results
-    func schoolsDataModifier(results: [School]) -> [School] {
+    private func schoolsDataModifier(results: [School]) -> [School] {
         return results.map { school in
             var updatedSchool = school
 
@@ -109,7 +111,7 @@ class HomeViewModel: HomeViewModeling {
     }
 
     //MARK: If an element has incomplete scores replace with SATDATA() for app features
-    func satDataModifier(satData: [SATData]) -> [SATData] {
+    private func satDataModifier(satData: [SATData]) -> [SATData] {
         let modifiedSatData = satData.map { satRecord -> SATData in
             if Int(satRecord.sat_critical_reading_avg_score) != nil,
                Int(satRecord.sat_math_avg_score) != nil,

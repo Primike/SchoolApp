@@ -27,25 +27,24 @@ class HomeCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func goToViewController(type: ViewControllerType, schools: [School], schoolScores: [SATData]) {
+    func goToViewController(type: ViewControllerType, schools: [School], satData: [SATData]) {
         let coordinator: Coordinating
         
         switch type {
         case .schoolsList:
-            coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
+            coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: satData)
             
         case .mapSearch:
-            coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
+            coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)
 
         case .mySchools:
-            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: schoolScores)
+            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)
             
         case .topSchools:
-            coordinator = TopSchoolsCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
+            coordinator = TopSchoolsCoordinator(navigationController: navigationController, schools: schools, schoolScores: satData)
 
         case .satSearch:
-            coordinator = SATSearchCoordinator(navigationController: navigationController, schools: schools, schoolScores: schoolScores)
-
+            coordinator = SATSearchCoordinator(navigationController: navigationController, schools: schools, schoolScores: satData)
         }
         
         childCoordinators.append(coordinator)
@@ -60,6 +59,6 @@ class HomeCoordinator: Coordinating {
     }
     
     deinit {
-        print("Home Coordinator")
+        print("Home Coordinator Deinit")
     }
 }

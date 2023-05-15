@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import Network
 
-class HomeViewController: UIViewController, HomeViewModelDelegate {
+final class HomeViewController: UIViewController, HomeViewModelDelegate {
     
-    let viewModel: HomeViewModel
+    private(set) var viewModel: HomeViewModeling
     weak var coordinator: HomeCoordinator?
 
-    required init(viewModel: HomeViewModel) {
+    required init(viewModel: HomeViewModeling) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -118,25 +118,25 @@ class HomeViewController: UIViewController, HomeViewModelDelegate {
 
 extension HomeViewController {
     @objc func buttonTapped(sender: UIButton) {
-        guard let coordinator = coordinator else { return }
-
-        var type: ViewControllerType
-        
-        switch sender.tag {
-        case 0:
-            type = .schoolsList
-        case 1:
-            type = .mapSearch
-        case 2:
-            type = .mySchools
-        case 3:
-            type = .topSchools
-        case 4:
-            type = .satSearch
-        default:
+        guard let coordinator = coordinator,  let buttonTag = HomeButtonTag(rawValue: sender.tag) else {
             return
         }
-        
-        coordinator.goToViewController(type: type, schools: viewModel.schools, schoolScores: viewModel.satScores)
+
+        var type: ViewControllerType
+
+        switch buttonTag {
+        case .schoolsList:
+            type = .schoolsList
+        case .mapSearch:
+            type = .mapSearch
+        case .mySchools:
+            type = .mySchools
+        case .topSchools:
+            type = .topSchools
+        case .satSearch:
+            type = .satSearch
+        }
+
+        coordinator.goToViewController(type: type, schools: viewModel.schools, satData: viewModel.satData)
     }
 }

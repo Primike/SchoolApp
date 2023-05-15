@@ -10,7 +10,7 @@ import UIKit
 
 class HomeBottomView: UIView {
     
-    var parentViewWidth: CGFloat
+    private let parentViewWidth: CGFloat
     
     init(viewWidth: CGFloat) {
         self.parentViewWidth = viewWidth
@@ -47,7 +47,7 @@ class HomeBottomView: UIView {
 
     lazy var schoolsListButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "NYC Schools List", viewWidth: parentViewWidth, imageName: "list.star", titleSize: 17, imageSize: 18)
-        button.tag = 0
+        button.tag = HomeButtonTag.schoolsList.rawValue
         return button
     }()
 
@@ -58,7 +58,7 @@ class HomeBottomView: UIView {
 
     lazy var mapSearchButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "Map Search", viewWidth: parentViewWidth, imageName: "map", titleSize: 17, imageSize: 18)
-        button.tag = 1
+        button.tag = HomeButtonTag.mapSearch.rawValue
         return button
     }()
 
@@ -69,7 +69,7 @@ class HomeBottomView: UIView {
 
     lazy var myschoolsButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "My Schools", viewWidth: parentViewWidth, imageName: "bolt.heart", titleSize: 17, imageSize: 18)
-        button.tag = 2
+        button.tag = HomeButtonTag.mySchools.rawValue
         return button
     }()
 
@@ -80,13 +80,13 @@ class HomeBottomView: UIView {
     
     lazy var topSchoolsButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "Top Schools", viewWidth: parentViewWidth, imageName: "star", titleSize: 30, imageSize: 32)
-        button.tag = 3
+        button.tag = HomeButtonTag.topSchools.rawValue
         return button
     }()
 
     lazy var satSearchButton: SchoolAppButton = {
         let button = SchoolAppButton(title: "SAT Search", viewWidth: parentViewWidth, imageName: "books.vertical", titleSize: 30, imageSize: 32)
-        button.tag = 4
+        button.tag = HomeButtonTag.satSearch.rawValue
         return button
     }()
 

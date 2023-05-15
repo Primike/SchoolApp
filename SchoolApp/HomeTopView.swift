@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class HomeTopView: UIView {
+final class HomeTopView: UIView {
     
     lazy var schoolWallpaper: UIImageView = {
-        var image = UIImageView(image: UIImage(named: "schoolwallpaper"))
+        var image = UIImageView(image: UIImage(named: HomeImageName.schoolWallpaper.rawValue))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleToFill
         image.clipsToBounds = true
@@ -19,7 +19,7 @@ class HomeTopView: UIView {
     }()
     
     lazy var pavementWallpaper: UIImageView = {
-        var image = UIImageView(image: UIImage(named: "pavement"))
+        var image = UIImageView(image: UIImage(named: HomeImageName.pavement.rawValue))
         image.contentMode = .scaleToFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -27,6 +27,7 @@ class HomeTopView: UIView {
 
     init() {
         super.init(frame: .zero)
+        
         layout()
     }
 
