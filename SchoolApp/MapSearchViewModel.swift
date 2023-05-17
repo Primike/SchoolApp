@@ -37,7 +37,30 @@ class MapSearchViewModel: MapSearchViewModeling {
         self.schools = schools
         self.schoolsScores = schoolsScores
     }
+      
+    func getSchoolsByMiles() {
+        nearbySchools = []
         
+        let distanceThreshold = miles * 1609.34 // Convert miles to meters
+        
+        // Filter schools within the specified distance
+        nearbySchools = schools.filter { school in
+            let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
+            let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
+            return distance < distanceThreshold
+        }
+        
+        //try using a set and then a for loop checking if it exisits if it does change the value
+        // Adjust the longitude of overlapping schools
+        for i in 0..<nearbySchools.count {
+            for j in 0..<nearbySchools.count {
+                if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
+                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
+                }
+            }
+        }
+    }
+
     func getNearbySchools() {
         nearbySchools = []
 
@@ -60,28 +83,10 @@ class MapSearchViewModel: MapSearchViewModeling {
         }
     }
 
-    func getSchoolsByMiles() {
-        nearbySchools = []
+    func searchMap() {
         
-        let distanceThreshold = miles * 1609.34 // Convert miles to meters
-        
-        // Filter schools within the specified distance
-        nearbySchools = schools.filter { school in
-            let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
-            let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
-            return distance < distanceThreshold
-        }
-        
-        // Adjust the longitude of overlapping schools
-        for i in 0..<nearbySchools.count {
-            for j in 0..<nearbySchools.count {
-                if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
-                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
-                }
-            }
-        }
     }
-
+    
     func getSchool(name: String) -> Int {
         return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
     }
