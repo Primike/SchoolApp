@@ -100,7 +100,7 @@ class TopSchoolsViewModel: TopSchoolsViewModeling, SchoolCellMethods {
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return topSchools[indexPath.row].boro
+        return topSchools[indexPath.row].boro.rawValue
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {

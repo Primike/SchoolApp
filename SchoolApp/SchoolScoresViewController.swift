@@ -39,8 +39,8 @@ class SchoolScoresViewController: UIViewController {
     init(viewModel: SchoolViewModel) {
         self.viewModel = viewModel
         self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
-        schoolScoresTopView = SchoolScoresTopView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.schoolScores, schoolColor: schoolColor)
-        schoolScoresBottomView = SchoolScoresBottomView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.schoolScores, schoolColor: schoolColor)
+        schoolScoresTopView = SchoolScoresTopView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.satData, schoolColor: schoolColor)
+        schoolScoresBottomView = SchoolScoresBottomView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.satData, schoolColor: schoolColor)
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -64,7 +64,7 @@ class SchoolScoresViewController: UIViewController {
                 
         schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
         
-        if viewModel.schoolScores.sat_math_avg_score == "0" {
+        if viewModel.satData.sat_math_avg_score == "0" {
             schoolScoresBottomView.satMathSubView.satSubjectScore.text = "Not Available"
             schoolScoresBottomView.satWritingSubView.satSubjectScore.text = "Not Available"
             schoolScoresBottomView.satReadingSubView.satSubjectScore.text = "Not Available"

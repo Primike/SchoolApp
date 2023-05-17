@@ -8,24 +8,21 @@
 import Foundation
 import UIKit
 
-protocol SchoolsListViewModeling {
-    var schools: [School] { get set }
-    var satData: [SATData] { get set }
-    var searchResults: [School] { get set }
+protocol SchoolsListViewModeling: SchoolCellMethods {
     func getNumOfRowsInSection() -> Int
     func textChanged(searchText: String)
     func getSchool(indexPath: IndexPath) -> School
     func getSATData(indexPath: IndexPath) -> SATData
 }
 
-class SchoolsListViewModel: SchoolsListViewModeling, SchoolCellMethods {
+class SchoolsListViewModel: SchoolsListViewModeling {
     
-    var schools = [School]()
-    var satData = [SATData]()
-    var searchResults = [School]()
+    private let schools: [School]
+    private let satData: [SATData]
+    private var searchResults: [School]
     
-    init(schools: [School], schoolsScores: [SATData]) {
-        self.satData = schoolsScores
+    init(schools: [School], satData: [SATData]) {
+        self.satData = satData
         self.schools = schools
         self.searchResults = schools
     }
@@ -69,7 +66,7 @@ class SchoolsListViewModel: SchoolsListViewModeling, SchoolCellMethods {
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return searchResults[indexPath.row].boro
+        return searchResults[indexPath.row].boro.rawValue
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {

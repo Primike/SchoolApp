@@ -10,11 +10,11 @@ import UIKit
 
 class SchoolViewModel: SchoolColor {
     var school: School
-    var schoolScores: SATData
+    var satData: SATData
 
-    init(school: School, scores: SATData) {
+    init(school: School, satData: SATData) {
         self.school = school
-        self.schoolScores = scores
+        self.satData = satData
     }
 
 }

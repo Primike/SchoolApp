@@ -10,6 +10,16 @@ import UIKit
 
 class SchoolsListHeaderView: UIView {
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        layout()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+         super.init(coder: aDecoder)
+     }
+
     lazy var headerStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
         return stackView
@@ -43,16 +53,6 @@ class SchoolsListHeaderView: UIView {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        layout()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-         super.init(coder: aDecoder)
-     }
 
     private func layout() {
         self.addSubview(headerStackView)

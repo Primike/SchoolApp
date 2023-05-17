@@ -14,16 +14,16 @@ class SchoolsListCoordinator: Coordinating {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
     var schools: [School]
-    var schoolScores: [SATData]
+    var satData: [SATData]
     
-    required init(navigationController: UINavigationController, schools: [School], schoolScores: [SATData]) {
+    required init(navigationController: UINavigationController, schools: [School], satData: [SATData]) {
         self.navigationController = navigationController
         self.schools = schools
-        self.schoolScores = schoolScores
+        self.satData = satData
     }
     
     func start() {
-        let viewModel = SchoolsListViewModel(schools: schools, schoolsScores: schoolScores)
+        let viewModel = SchoolsListViewModel(schools: schools, satData: satData)
         
         let viewController = SchoolsListViewController(viewModel: viewModel)
         viewController.coordinator = self
@@ -31,8 +31,9 @@ class SchoolsListCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func goToSchoolView(school: School, schoolScores: SATData) {
-        let viewModel = SchoolViewModel(school: school, scores: schoolScores)
+    //MARK: Navigates To Individual School View
+    func goToSchoolView(school: School, satData: SATData) {
+        let viewModel = SchoolViewModel(school: school, satData: satData)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         
         childCoordinators.append(coordinator)
@@ -40,17 +41,19 @@ class SchoolsListCoordinator: Coordinating {
         coordinator.start()
     }
         
+    //MARK: Called By Child Coordinator
     func childDidFinish(_ child: Coordinating) {
         if let index = childCoordinators.firstIndex(where: { $0 === child }) {
             childCoordinators.remove(at: index)
         }
     }
     
+    //MARK: Calls Method On Parent Coordinator
     func didFinish() {
         parentCoordinator?.childDidFinish(self)
     }
     
     deinit {
-        print("School List Coordinator")
+        print("School List Coordinator Deinit")
     }
 }

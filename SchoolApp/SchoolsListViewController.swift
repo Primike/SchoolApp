@@ -9,6 +9,19 @@ import UIKit
 
 class SchoolsListViewController: UIViewController {
 
+    private(set) var viewModel: SchoolsListViewModeling
+    weak var coordinator: SchoolsListCoordinator?
+
+    required init(viewModel: SchoolsListViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     lazy var schoolsListHeader: SchoolsListHeaderView = {
         let headerView = SchoolsListHeaderView(frame: .zero)
         var size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -32,35 +45,28 @@ class SchoolsListViewController: UIViewController {
         searchBar.isTranslucent = false
         return searchBar
     }()
-        
-    let viewModel: SchoolsListViewModel
-    weak var coordinator: SchoolsListCoordinator?
-
-    required init(viewModel: SchoolsListViewModel) {
-        self.viewModel = viewModel
-
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-        
+                
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        navigationItem.titleView = schoolsSearchBar
-        schoolsTableView.register(SchoolTableViewCell.self, forCellReuseIdentifier: SchoolTableViewCell.reuseID)
-
+        setup()
         layout()
     }
     
+    //MARK: When View Is Removed This deinits The Coordinator
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if isMovingFromParent {
             coordinator?.didFinish()
         }
+    }
+    
+    private func setup() {
+        view.backgroundColor = .white
+        
+        navigationItem.titleView = schoolsSearchBar
+        
+        schoolsTableView.register(SchoolTableViewCell.self, forCellReuseIdentifier: SchoolTableViewCell.reuseID)
     }
     
     private func layout() {
@@ -80,10 +86,16 @@ class SchoolsListViewController: UIViewController {
 }
 
 extension SchoolsListViewController: UITableViewDataSource {
+    //MARK: Reuses Cells For Memory Optimization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let schoolCell = tableView.dequeueReusableCell(withIdentifier: SchoolTableViewCell.reuseID, for: indexPath) as! SchoolTableViewCell
+        guard let schoolCell = tableView.dequeueReusableCell(withIdentifier: SchoolTableViewCell.reuseID, for: indexPath) as? SchoolTableViewCell else {
+            print("Unable to dequeue SchoolTableViewCell")
+            
+            return UITableViewCell()
+        }
+        
         schoolCell.configure(viewModel: viewModel, indexPath: indexPath)
-
+        
         return schoolCell
     }
 
@@ -91,6 +103,7 @@ extension SchoolsListViewController: UITableViewDataSource {
         return viewModel.getNumOfRowsInSection()
     }
     
+    //MARK: Ensures There Are 4 Cells Shown At A Time Regardless Of Screen Size
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(view.bounds.height/5)
     }
@@ -98,7 +111,7 @@ extension SchoolsListViewController: UITableViewDataSource {
 
 extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.goToSchoolView(school: viewModel.getSchool(indexPath: indexPath), schoolScores: viewModel.getSATData(indexPath: indexPath))
+        coordinator?.goToSchoolView(school: viewModel.getSchool(indexPath: indexPath), satData: viewModel.getSATData(indexPath: indexPath))
     }
 }
 

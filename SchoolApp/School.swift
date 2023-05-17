@@ -10,7 +10,7 @@ import Foundation
 struct School: Decodable {
     let dbn: String
     let school_name: String
-    let boro: String
+    let boro: Borough
     let overview_paragraph: String
     var location: String
     let website: String

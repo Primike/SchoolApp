@@ -46,7 +46,7 @@ class MapSearchCoordinator: Coordinating {
     }
 
     func goToSchoolView(school: School, schoolScores: SATData) {
-        let viewModel = SchoolViewModel(school: school, scores: schoolScores)
+        let viewModel = SchoolViewModel(school: school, satData: schoolScores)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         
         childCoordinators.append(coordinator)

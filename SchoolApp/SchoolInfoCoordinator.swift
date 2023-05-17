@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class SchoolInfoCoordinator: Coordinating {
+    
     weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []

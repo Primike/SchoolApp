@@ -67,7 +67,7 @@ class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return schools[indexPath.row].boro
+        return schools[indexPath.row].boro.rawValue
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {

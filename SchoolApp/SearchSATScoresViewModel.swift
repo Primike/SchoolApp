@@ -122,7 +122,7 @@ class SearchSATScoresViewModel: SchoolCellMethods {
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return calculatedSchools[indexPath.row].boro
+        return calculatedSchools[indexPath.row].boro.rawValue
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {

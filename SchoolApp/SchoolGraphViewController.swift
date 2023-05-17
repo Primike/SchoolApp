@@ -41,7 +41,7 @@ class SchoolGraphViewController: UIViewController {
     }()
     
     lazy var graphBarsView: GraphBarsView = {
-        let view = GraphBarsView(scores: viewModel.schoolScores, schoolColor: schoolColor)
+        let view = GraphBarsView(scores: viewModel.satData, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor

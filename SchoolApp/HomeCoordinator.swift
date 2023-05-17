@@ -32,7 +32,7 @@ class HomeCoordinator: Coordinating {
         
         switch type {
         case .schoolsList:
-            coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, schoolScores: satData)
+            coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, satData: satData)
             
         case .mapSearch:
             coordinator = MapSearchTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)

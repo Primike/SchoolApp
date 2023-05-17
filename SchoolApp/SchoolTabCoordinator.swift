@@ -9,10 +9,11 @@ import Foundation
 import UIKit
 
 class SchoolTabCoordinator: Coordinating {
-    var parentCoordinator: Coordinating?
+    
+    weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
-    var viewModel: SchoolViewModel
+    let viewModel: SchoolViewModel
 
     required init(navigationController: UINavigationController, viewModel: SchoolViewModel) {
         self.navigationController = navigationController
@@ -49,6 +50,6 @@ class SchoolTabCoordinator: Coordinating {
     }
     
     deinit {
-        print("SAT Search Tab Coordinator")
+        print("School View Deinit")
     }
 }

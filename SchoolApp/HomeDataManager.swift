@@ -37,7 +37,7 @@ class HomeDataManager: HomeDataManaging {
         task.resume()
     }
 
-    func getLocalData<T: Decodable>(fileName: String, type: T.Type) -> T? {
+    private func getLocalData<T: Decodable>(fileName: String, type: T.Type) -> T? {
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             print("Unable to locate file: \(fileName).json")
             return nil
