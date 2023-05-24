@@ -12,6 +12,23 @@ import CoreLocation
 
 class AddressSearchViewController: UIViewController {
     
+    let viewModel: MapSearchViewModel
+    weak var coordinator: MapSearchCoordinator?
+    var annotations = [MKPointAnnotation]()
+    var location = CLLocation()
+    var latitude = 0.0
+    var longitude = 0.0
+        
+    init(viewModel: MapSearchViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     lazy var addressSearchHeaderView: AddressSearchHeaderView = {
         var view = AddressSearchHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +42,7 @@ class AddressSearchViewController: UIViewController {
         return map
     }()
     
-    lazy var numberOfSchoolsText: SchoolAppTextField = {
+    lazy var radiusText: SchoolAppTextField = {
         var textField = SchoolAppTextField()
         textField.delegate = self
         return textField
@@ -42,24 +59,6 @@ class AddressSearchViewController: UIViewController {
         button.addTarget(self, action: #selector(enterButtonTapped), for: .primaryActionTriggered)
         return button
     }()
-
-    let viewModel: MapSearchViewModel
-    var nearbySchools = [School]()
-    weak var coordinator: MapSearchCoordinator?
-    var annotations = [MKPointAnnotation]()
-    var location = CLLocation()
-    var latitude = 0.0
-    var longitude = 0.0
-        
-    init(viewModel: MapSearchViewModel) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,44 +73,46 @@ class AddressSearchViewController: UIViewController {
         
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
                 
-                self!.location = location
+                self.location = location
 
-                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
+                self.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
+                self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
                 
-                self!.viewModel.latitude = location.coordinate.latitude
-                self!.viewModel.longitude = location.coordinate.longitude
-                self!.viewModel.getNearbySchools()
-                self!.setupMap()
+                self.viewModel.latitude = location.coordinate.latitude
+                self.viewModel.longitude = location.coordinate.longitude
+                self.viewModel.addressSearch()
+                self.setupMap()
             }
         }
     }
-    
+
     func setupMap() {
-        for i in viewModel.nearbySchools {
-            addMapPin(latitude: i.latitude!, longitude: i.longitude!, label: i.school_name)
+        for school in viewModel.nearbySchools {
+            guard let latitude = school.latitude, let longitude = school.longitude else { continue }
+            addMapPin(latitude: latitude, longitude: longitude, label: school.school_name)
         }
         map.addAnnotations(annotations)
     }
-    
+
     func addMapPin(latitude: String, longitude: String, label: String) {
-        let pin = MKPointAnnotation()
-        pin.coordinate.longitude = Double(longitude)!
-        pin.coordinate.latitude = Double(latitude)!
-        pin.title = label
+        guard let lat = Double(latitude), let long = Double(longitude) else { return }
         
+        let pin = MKPointAnnotation()
+        pin.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        pin.title = label
+
         annotations.append(pin)
     }
-    
+
     func layout() {
         view.addSubview(addressSearchHeaderView)
         view.addSubview(map)
         
-        addressSearchHeaderView.schoolNumberStackView.addSubview(numberOfSchoolsText)
+        addressSearchHeaderView.schoolNumberStackView.addSubview(radiusText)
         addressSearchHeaderView.addressStackView.addSubview(addressText)
         addressSearchHeaderView.addressStackView.addSubview(enterButton)
         
@@ -121,10 +122,10 @@ class AddressSearchViewController: UIViewController {
             addressSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             addressSearchHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            numberOfSchoolsText.leftAnchor.constraint(equalTo: addressText.leftAnchor),
-            numberOfSchoolsText.heightAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.heightAnchor),
-            numberOfSchoolsText.widthAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.widthAnchor, multiplier: 0.3),
-            numberOfSchoolsText.centerYAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.centerYAnchor),
+            radiusText.leftAnchor.constraint(equalTo: addressText.leftAnchor),
+            radiusText.heightAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.heightAnchor),
+            radiusText.widthAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.widthAnchor, multiplier: 0.3),
+            radiusText.centerYAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.centerYAnchor),
             
             addressText.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.7),
             addressText.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.5),
@@ -148,60 +149,38 @@ extension AddressSearchViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         addressSearchHeaderView.errorLabel.isHidden = true
 
-        if addressText.text!.isEmpty {
-            errorHandler(message: "Insert An Address")
+        //MARK: Incase textfield is not properly initialized or connected
+        guard let addressText = addressText.text, let radiusText = radiusText.text else { return }
+
+        do {
+            try viewModel.validateInput(addressText: addressText, radiusText: radiusText)
+        } catch let error as InputError {
+            errorHandler(message: error.localizedDescription)
+            return
+        } catch {
+            errorHandler(message: "Unexpected error: \(error.localizedDescription)")
             return
         }
-        
-        if numberOfSchoolsText.text!.isEmpty{
-            errorHandler(message: "Insert A Number Of Schools")
-            return
-        }
-        
-        if Int(numberOfSchoolsText.text!) == nil{
-            errorHandler(message: "Please Enter An Integer Value")
-            return
-        }
-        
-        if Int(numberOfSchoolsText.text!)! > viewModel.schools.count {
-            errorHandler(message: "Please Type In A Value Less Than \(viewModel.schools.count)")
-            return
-        }
-        
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(addressText.text!) {
-            placemarks, error in
-            let placemark = placemarks?.first
-            self.latitude = placemark?.location?.coordinate.latitude ?? 0.0
-            self.longitude = placemark?.location?.coordinate.longitude ?? 0.0
+
+        //integer value and addresss check
+        viewModel.geocode(address: addressText, radiusText: radiusText) { [weak self] result in
+            guard let self = self else { return }
             
-            if self.latitude == 0.0 || self.longitude == 0.0 {
-                errorHandler(message: "Invalid Address Please Try Again")
-                return
-            }
-            
-            if self.longitude > -73.55 || self.longitude < -74.33 || self.latitude > 41.01 || self.latitude < 40.4 {
-                errorHandler(message: "Please Enter An NYC Address")
-                return
-            }
-            
-            if self.latitude != 0.0 && self.longitude != 0.0 {
-                if Int(self.numberOfSchoolsText.text!) != nil {
-                    self.viewModel.numberOfSchools = Int(self.numberOfSchoolsText.text!)!
-                }
-                self.viewModel.latitude = self.latitude
-                self.viewModel.longitude = self.longitude
-                self.viewModel.getNearbySchools()
+            switch result {
+            case .success(let coordinates):
                 self.map.removeAnnotations(self.annotations)
                 self.annotations = []
                 
-                self.addMapPin(latitude: String(self.latitude), longitude: String(self.longitude), label: "CURRENT LOCATION")
-                self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
+                self.addMapPin(latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), label: "CURRENT LOCATION")
+                self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: true)
                 
                 self.setupMap()
+
+            case .failure(let error):
+                errorHandler(message: error.localizedDescription)
             }
         }
-
+        
         func errorHandler(message: String){
             addressSearchHeaderView.errorLabel.isHidden = false
             addressSearchHeaderView.errorLabel.text = message

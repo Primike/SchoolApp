@@ -18,7 +18,7 @@ protocol MapSearchViewModeling {
     var longitude: Double { get set }
     var miles: Double { get set }
     var numberOfSchools: Int { get set }
-    func getNearbySchools()
+    func addressSearch()
     func getSchoolsByMiles()
     func getSchool(name: String) -> Int
     func getSATScores(index: Int) -> SATData
@@ -37,7 +37,51 @@ class MapSearchViewModel: MapSearchViewModeling {
         self.schools = schools
         self.schoolsScores = schoolsScores
     }
-      
+    
+    func validateInput(addressText: String, radiusText: String) throws {
+        guard !addressText.isEmpty else {
+            throw InputError.emptyAddressText
+        }
+        
+        guard !radiusText.isEmpty else {
+            throw InputError.emptyRadiusText
+        }
+        
+        guard let radius = Int(radiusText), radius < schools.count else {
+            throw InputError.outOfBounds(schools.count)
+        }
+    }
+
+    func geocode(address: String, radiusText: String, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { placemarks, error in
+            guard error == nil else {
+                completion(.failure(GeocodingError.geocodingFailed))
+                return
+            }
+
+            guard let placemark = placemarks?.first,
+                  let latitude = placemark.location?.coordinate.latitude,
+                  let longitude = placemark.location?.coordinate.longitude,
+                  self.isInNYC(latitude: latitude, longitude: longitude) else {
+                completion(.failure(GeocodingError.invalidCoordinates))
+                return
+            }
+            
+            self.searchMap(placeMark: placemark, radius: Double(radiusText) ?? 0.0)
+            completion(.success(CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
+        }
+    }
+
+    func isInNYC(latitude: Double, longitude: Double) -> Bool {
+        let minLat = 40.4
+        let maxLat = 41.01
+        let minLong = -74.33
+        let maxLong = -73.55
+        
+        return latitude >= minLat && latitude <= maxLat && longitude >= minLong && longitude <= maxLong
+    }
+    
     func getSchoolsByMiles() {
         nearbySchools = []
         
@@ -50,18 +94,10 @@ class MapSearchViewModel: MapSearchViewModeling {
             return distance < distanceThreshold
         }
         
-        //try using a set and then a for loop checking if it exisits if it does change the value
-        // Adjust the longitude of overlapping schools
-        for i in 0..<nearbySchools.count {
-            for j in 0..<nearbySchools.count {
-                if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
-                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
-                }
-            }
-        }
+        removeDuplicates()
     }
 
-    func getNearbySchools() {
+    func addressSearch() {
         nearbySchools = []
 
         // Sort the array by distance and take the first 'numberOfSchools' elements
@@ -73,7 +109,31 @@ class MapSearchViewModel: MapSearchViewModeling {
         
         nearbySchools = Array(sortedSchools.prefix(numberOfSchools))
         
-        // Adjust the longitude of overlapping schools
+        removeDuplicates()
+    }
+
+    func searchMap(placeMark: CLPlacemark, radius: Double) {
+        let latituded = placeMark.location?.coordinate.latitude ?? 0.0
+        let longituded = placeMark.location?.coordinate.longitude ?? 0.0
+        
+        let sortedSchools = schools.sorted { school1, school2 in
+            let distance1 = abs(latituded - Double(school1.latitude!)!) + abs(longituded - Double(school1.longitude!)!)
+            let distance2 = abs(latituded - Double(school2.latitude!)!) + abs(longituded - Double(school2.longitude!)!)
+            return distance1 < distance2
+        }
+
+        let distanceThreshold = radius * 1609.34 // Convert miles to meters
+
+        nearbySchools = sortedSchools.filter { school in
+            let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
+            let distance = loc.distance(from: CLLocation(latitude: latituded, longitude: longituded))
+            return distance < distanceThreshold
+        }
+        
+        removeDuplicates()
+    }
+    
+    func removeDuplicates() {
         for i in 0..<nearbySchools.count {
             for j in 0..<nearbySchools.count {
                 if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
@@ -82,11 +142,9 @@ class MapSearchViewModel: MapSearchViewModeling {
             }
         }
     }
-
-    func searchMap() {
-        
-    }
     
+    //convert address to latitude longitude
+    //search nearest schools
     func getSchool(name: String) -> Int {
         return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
     }
