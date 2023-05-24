@@ -44,7 +44,6 @@ class AddressSearchViewController: UIViewController {
     }()
 
     let viewModel: MapSearchViewModel
-    var nearbySchools = [School]()
     weak var coordinator: MapSearchCoordinator?
     var annotations = [MKPointAnnotation]()
     var location = CLLocation()
@@ -189,6 +188,8 @@ extension AddressSearchViewController {
                 if Int(self.numberOfSchoolsText.text!) != nil {
                     self.viewModel.numberOfSchools = Int(self.numberOfSchoolsText.text!)!
                 }
+                
+                //sets addresss latitude and longitude on the vc
                 self.viewModel.latitude = self.latitude
                 self.viewModel.longitude = self.longitude
                 self.viewModel.getNearbySchools()

@@ -50,15 +50,7 @@ class MapSearchViewModel: MapSearchViewModeling {
             return distance < distanceThreshold
         }
         
-        //try using a set and then a for loop checking if it exisits if it does change the value
-        // Adjust the longitude of overlapping schools
-        for i in 0..<nearbySchools.count {
-            for j in 0..<nearbySchools.count {
-                if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
-                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
-                }
-            }
-        }
+        removeDuplicates()
     }
 
     func getNearbySchools() {
@@ -73,7 +65,14 @@ class MapSearchViewModel: MapSearchViewModeling {
         
         nearbySchools = Array(sortedSchools.prefix(numberOfSchools))
         
-        // Adjust the longitude of overlapping schools
+        removeDuplicates()
+    }
+
+    func searchMap() {
+        
+    }
+    
+    func removeDuplicates() {
         for i in 0..<nearbySchools.count {
             for j in 0..<nearbySchools.count {
                 if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
@@ -82,11 +81,9 @@ class MapSearchViewModel: MapSearchViewModeling {
             }
         }
     }
-
-    func searchMap() {
-        
-    }
     
+    //convert address to latitude longitude
+    //search nearest schools
     func getSchool(name: String) -> Int {
         return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
     }

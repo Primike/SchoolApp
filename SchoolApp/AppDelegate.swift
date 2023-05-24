@@ -13,6 +13,7 @@ import Network
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var userLocation: CLLocation?
+    //otherwise deinit
     var coordinator: Coordinating?
     var deviceOrientation = UIInterfaceOrientationMask.portrait
 
