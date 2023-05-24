@@ -52,8 +52,34 @@ class MapSearchViewModel: MapSearchViewModeling {
         }
     }
 
-    func validateAddress(addressText: String) throws {
+    func geocode(address: String, radiusText: String, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { placemarks, error in
+            guard error == nil else {
+                completion(.failure(GeocodingError.geocodingFailed))
+                return
+            }
+
+            guard let placemark = placemarks?.first,
+                  let latitude = placemark.location?.coordinate.latitude,
+                  let longitude = placemark.location?.coordinate.longitude,
+                  self.isInNYC(latitude: latitude, longitude: longitude) else {
+                completion(.failure(GeocodingError.invalidCoordinates))
+                return
+            }
+            
+            self.searchMap(placeMark: placemark, radius: Double(radiusText) ?? 0.0)
+            completion(.success(CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
+        }
+    }
+
+    func isInNYC(latitude: Double, longitude: Double) -> Bool {
+        let minLat = 40.4
+        let maxLat = 41.01
+        let minLong = -74.33
+        let maxLong = -73.55
         
+        return latitude >= minLat && latitude <= maxLat && longitude >= minLong && longitude <= maxLong
     }
     
     func getSchoolsByMiles() {

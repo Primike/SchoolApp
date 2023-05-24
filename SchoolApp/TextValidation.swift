@@ -28,3 +28,8 @@ enum MapValidation: String, Error {
     case invalidAddress = "Invalid Address Please Try Again"
     case outsideZone = "Please Enter An NYC Address"
 }
+
+enum GeocodingError: String, Error {
+    case geocodingFailed = "Invalid Address Please Try Again"
+    case invalidCoordinates = "Please Enter An NYC Address"
+}
