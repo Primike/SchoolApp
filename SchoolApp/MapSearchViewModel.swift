@@ -18,7 +18,7 @@ protocol MapSearchViewModeling {
     var longitude: Double { get set }
     var miles: Double { get set }
     var numberOfSchools: Int { get set }
-    func getNearbySchools()
+    func addressSearch()
     func getSchoolsByMiles()
     func getSchool(name: String) -> Int
     func getSATScores(index: Int) -> SATData
@@ -37,7 +37,25 @@ class MapSearchViewModel: MapSearchViewModeling {
         self.schools = schools
         self.schoolsScores = schoolsScores
     }
-      
+    
+    func validateInput(addressText: String, radiusText: String) throws {
+        guard !addressText.isEmpty else {
+            throw InputError.emptyAddressText
+        }
+        
+        guard !radiusText.isEmpty else {
+            throw InputError.emptyRadiusText
+        }
+        
+        guard let radius = Int(radiusText), radius < schools.count else {
+            throw InputError.outOfBounds(schools.count)
+        }
+    }
+
+    func validateAddress(addressText: String) throws {
+        
+    }
+    
     func getSchoolsByMiles() {
         nearbySchools = []
         
@@ -53,7 +71,7 @@ class MapSearchViewModel: MapSearchViewModeling {
         removeDuplicates()
     }
 
-    func getNearbySchools() {
+    func addressSearch() {
         nearbySchools = []
 
         // Sort the array by distance and take the first 'numberOfSchools' elements
@@ -68,8 +86,25 @@ class MapSearchViewModel: MapSearchViewModeling {
         removeDuplicates()
     }
 
-    func searchMap() {
+    func searchMap(placeMark: CLPlacemark, radius: Double) {
+        let latituded = placeMark.location?.coordinate.latitude ?? 0.0
+        let longituded = placeMark.location?.coordinate.longitude ?? 0.0
         
+        let sortedSchools = schools.sorted { school1, school2 in
+            let distance1 = abs(latituded - Double(school1.latitude!)!) + abs(longituded - Double(school1.longitude!)!)
+            let distance2 = abs(latituded - Double(school2.latitude!)!) + abs(longituded - Double(school2.longitude!)!)
+            return distance1 < distance2
+        }
+
+        let distanceThreshold = radius * 1609.34 // Convert miles to meters
+
+        nearbySchools = sortedSchools.filter { school in
+            let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
+            let distance = loc.distance(from: CLLocation(latitude: latituded, longitude: longituded))
+            return distance < distanceThreshold
+        }
+        
+        removeDuplicates()
     }
     
     func removeDuplicates() {

@@ -25,7 +25,7 @@ class AddressSearchViewController: UIViewController {
         return map
     }()
     
-    lazy var numberOfSchoolsText: SchoolAppTextField = {
+    lazy var radiusText: SchoolAppTextField = {
         var textField = SchoolAppTextField()
         textField.delegate = self
         return textField
@@ -84,7 +84,7 @@ class AddressSearchViewController: UIViewController {
                 
                 self!.viewModel.latitude = location.coordinate.latitude
                 self!.viewModel.longitude = location.coordinate.longitude
-                self!.viewModel.getNearbySchools()
+                self!.viewModel.addressSearch()
                 self!.setupMap()
             }
         }
@@ -110,7 +110,7 @@ class AddressSearchViewController: UIViewController {
         view.addSubview(addressSearchHeaderView)
         view.addSubview(map)
         
-        addressSearchHeaderView.schoolNumberStackView.addSubview(numberOfSchoolsText)
+        addressSearchHeaderView.schoolNumberStackView.addSubview(radiusText)
         addressSearchHeaderView.addressStackView.addSubview(addressText)
         addressSearchHeaderView.addressStackView.addSubview(enterButton)
         
@@ -120,10 +120,10 @@ class AddressSearchViewController: UIViewController {
             addressSearchHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             addressSearchHeaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            numberOfSchoolsText.leftAnchor.constraint(equalTo: addressText.leftAnchor),
-            numberOfSchoolsText.heightAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.heightAnchor),
-            numberOfSchoolsText.widthAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.widthAnchor, multiplier: 0.3),
-            numberOfSchoolsText.centerYAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.centerYAnchor),
+            radiusText.leftAnchor.constraint(equalTo: addressText.leftAnchor),
+            radiusText.heightAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.heightAnchor),
+            radiusText.widthAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.widthAnchor, multiplier: 0.3),
+            radiusText.centerYAnchor.constraint(equalTo: addressSearchHeaderView.schoolNumberStackView.centerYAnchor),
             
             addressText.heightAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.heightAnchor, multiplier: 0.7),
             addressText.widthAnchor.constraint(equalTo: addressSearchHeaderView.addressStackView.widthAnchor, multiplier: 0.5),
@@ -147,29 +147,23 @@ extension AddressSearchViewController {
     @objc func enterButtonTapped(sender: UIButton) {
         addressSearchHeaderView.errorLabel.isHidden = true
 
-        if addressText.text!.isEmpty {
-            errorHandler(message: "Insert An Address")
+        //MARK: Incase textfield is not properly initialized or connected
+        guard let addressText = addressText.text, let radiusText = radiusText.text else { return }
+
+        do {
+            try viewModel.validateInput(addressText: addressText, radiusText: radiusText)
+        } catch let error as InputError {
+            errorHandler(message: error.localizedDescription)
+            return
+        } catch {
+            errorHandler(message: "Unexpected error: \(error.localizedDescription)")
             return
         }
-        
-        if numberOfSchoolsText.text!.isEmpty{
-            errorHandler(message: "Insert A Number Of Schools")
-            return
-        }
-        
-        if Int(numberOfSchoolsText.text!) == nil{
-            errorHandler(message: "Please Enter An Integer Value")
-            return
-        }
-        
-        if Int(numberOfSchoolsText.text!)! > viewModel.schools.count {
-            errorHandler(message: "Please Type In A Value Less Than \(viewModel.schools.count)")
-            return
-        }
+
+        //integer value and addresss check
         
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(addressText.text!) {
-            placemarks, error in
+        geocoder.geocodeAddressString(addressText) { placemarks, error in
             let placemark = placemarks?.first
             self.latitude = placemark?.location?.coordinate.latitude ?? 0.0
             self.longitude = placemark?.location?.coordinate.longitude ?? 0.0
@@ -185,14 +179,18 @@ extension AddressSearchViewController {
             }
             
             if self.latitude != 0.0 && self.longitude != 0.0 {
-                if Int(self.numberOfSchoolsText.text!) != nil {
-                    self.viewModel.numberOfSchools = Int(self.numberOfSchoolsText.text!)!
+                if Int(self.radiusText.text!) != nil {
+                    self.viewModel.numberOfSchools = Int(self.radiusText.text!)!
                 }
                 
                 //sets addresss latitude and longitude on the vc
-                self.viewModel.latitude = self.latitude
-                self.viewModel.longitude = self.longitude
-                self.viewModel.getNearbySchools()
+//                self.viewModel.latitude = self.latitude
+//                self.viewModel.longitude = self.longitude
+//                self.viewModel.addressSearch()
+                
+                guard let first = placemarks?.first else { return }
+                
+                self.viewModel.searchMap(placeMark: first, radius: Double(self.radiusText.text!)!)
                 self.map.removeAnnotations(self.annotations)
                 self.annotations = []
                 

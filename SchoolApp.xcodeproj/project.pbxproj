@@ -31,6 +31,7 @@
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* MapSearchViewModel.swift */; };
 		9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */; };
+		9ECCDCE12A1E5D8A00179539 /* TextValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */; };
 		9ECCFD3B29EF64EE0004F3D1 /* SchoolTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */; };
 		9ECCFD3E29EF652D0004F3D1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */; };
 		9ECCFD4029EF6DC30004F3D1 /* MapSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */; };
@@ -130,6 +131,7 @@
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* MapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewModel.swift; sourceTree = "<group>"; };
 		9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTextField.swift; sourceTree = "<group>"; };
+		9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextValidation.swift; sourceTree = "<group>"; };
 		9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTabBarController.swift; sourceTree = "<group>"; };
 		9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchCoordinator.swift; sourceTree = "<group>"; };
@@ -348,6 +350,14 @@
 			name = Coordinators;
 			sourceTree = "<group>";
 		};
+		9ECCDCDF2A1E5C1F00179539 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		9ECCFD3C29EF651B0004F3D1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +386,7 @@
 		B8149D992888689D00743BD1 /* MapSearch */ = {
 			isa = PBXGroup;
 			children = (
+				9ECCDCDF2A1E5C1F00179539 /* Tools */,
 				9EB743FA29EC60F40041F35E /* Coordinators */,
 				B82F178E28898DE300AA42F1 /* ViewControllers */,
 				B82F178F28898DED00AA42F1 /* ViewModels */,
@@ -961,6 +972,7 @@
 				B880A2BA284E61FF0071E43D /* SATData.swift in Sources */,
 				B86AE965289C24710083FF0A /* BottomSubjectView.swift in Sources */,
 				9EF49E8B29AD8575008122FF /* SchoolAppStackView.swift in Sources */,
+				9ECCDCE12A1E5D8A00179539 /* TextValidation.swift in Sources */,
 				9EB7443529EEFF030041F35E /* SchoolInfoCoordinator.swift in Sources */,
 				9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */,
 				B87C4B8828996B1B0091CD45 /* SchoolComparisonViewController.swift in Sources */,
