@@ -13,7 +13,7 @@ class SchoolAppLabel: UILabel {
     private(set) var labelText: String
     private(set) var labelTextColor: UIColor
     
-    required init(labelText: String, labelTextColor: UIColor) {
+    required init(labelText: String, labelTextColor: UIColor = .black) {
         self.labelText = labelText
         self.labelTextColor = labelTextColor
         

@@ -12,6 +12,7 @@ class LoaderView: UIView {
     
     init() {
         super.init(frame: .zero)
+        
         layout()
     }
 
@@ -19,17 +20,27 @@ class LoaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    lazy var stackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
+    lazy var verticalStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
         return stackView
     }()
     
+    lazy var horizontalStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 15
+        return stackView
+    }()
+
     lazy var appTitleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Schools App", labelTextColor: .black)
+        var label = SchoolAppLabel(labelText: "Schools App")
         label.numberOfLines = 1
         return label
     }()
-    
+
     lazy var appImage: UIImageView = {
         var image = UIImageView(image: UIImage(named: "appimage"))
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -42,36 +53,27 @@ class LoaderView: UIView {
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.startAnimating()
         indicator.color = .systemBlue
+//        indicator.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         return indicator
     }()
     
     private func layout() {
-        translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(verticalStackView)
         
-        addSubview(stackView)
-        addSubview(activityIndicator)
-
-        stackView.addSubview(appTitleLabel)
-        stackView.addSubview(appImage)
+        verticalStackView.addArrangedSubview(horizontalStackView)
+        verticalStackView.addArrangedSubview(activityIndicator)
+        
+        horizontalStackView.addArrangedSubview(appTitleLabel)
+        horizontalStackView.addArrangedSubview(appImage)
         
         NSLayoutConstraint.activate([
-            stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
-            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            verticalStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6),
+            verticalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            verticalStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            appTitleLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
-            appTitleLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            appTitleLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor),
-            appTitleLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.7),
+            appTitleLabel.widthAnchor.constraint(equalTo: verticalStackView.widthAnchor, multiplier: 0.7),
             
-            appImage.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-            appImage.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2),
-            appImage.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2),
-            appImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-            
-            activityIndicator.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            appImage.heightAnchor.constraint(lessThanOrEqualToConstant: 200),
         ])
     }
 }

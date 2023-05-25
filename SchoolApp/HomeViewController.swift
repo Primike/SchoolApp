@@ -26,6 +26,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
 
     lazy var loaderView: LoaderView = {
         let view = LoaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
