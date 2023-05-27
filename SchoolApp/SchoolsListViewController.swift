@@ -26,6 +26,7 @@ class SchoolsListViewController: UIViewController {
         let headerView = SchoolsListHeaderView(frame: .zero)
         var size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         size.width = UIScreen.main.bounds.width
+        size.height = UIScreen.main.bounds.height / 6
         headerView.frame.size = size
         return headerView
     }()
