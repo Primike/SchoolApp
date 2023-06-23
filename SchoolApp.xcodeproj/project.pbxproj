@@ -256,6 +256,15 @@
 			name = Catalog;
 			sourceTree = "<group>";
 		};
+		9EB319782A460A7D007F7601 /* LocalData */ = {
+			isa = PBXGroup;
+			children = (
+				B8736668288061390076632F /* SchoolsData.json */,
+				B873666A288061500076632F /* SATData.json */,
+			);
+			name = LocalData;
+			sourceTree = "<group>";
+		};
 		9EB743FA29EC60F40041F35E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,15 +402,6 @@
 				B8E650AF2889C38A0027716E /* Views */,
 			);
 			name = MapSearch;
-			sourceTree = "<group>";
-		};
-		B819DF172892F0EC00B6C046 /* LocalData */ = {
-			isa = PBXGroup;
-			children = (
-				B8736668288061390076632F /* SchoolsData.json */,
-				B873666A288061500076632F /* SATData.json */,
-			);
-			name = LocalData;
 			sourceTree = "<group>";
 		};
 		B82F178428898C8500AA42F1 /* ViewModels */ = {
@@ -791,7 +791,7 @@
 		B8E8173B2846A45F0052C1AE /* SchoolApp */ = {
 			isa = PBXGroup;
 			children = (
-				B819DF172892F0EC00B6C046 /* LocalData */,
+				9EB319782A460A7D007F7601 /* LocalData */,
 				B8E8176D2846AACE0052C1AE /* Files */,
 				9EB7441329EDD8F50041F35E /* Coordinating */,
 				9E902E1529A442E400A39C77 /* Catalog */,
