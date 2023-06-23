@@ -1,6 +1,6 @@
 # SchoolApp
 
-Hello this app is currently undergoing restructuring and refactoring in order to meet MVVMC standards as well as creating cleaner reusable code. I am also working on pushing it to the App Store once the project is satisfactory 
+Hello this app is currently undergoing restructuring and refactoring from MVC to MVVMC. It is also undergoing a redesign of features
 
 This is an app that users can use to search up high schools
 
