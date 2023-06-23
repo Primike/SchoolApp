@@ -215,12 +215,425 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9E531C0C2885A02000AED087 /* SchoolMap */ = {
+		9E2158702A460CB70015A049 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B82F179328898E5C00AA42F1 /* ViewControllers */,
+				9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */,
 			);
-			name = SchoolMap;
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		9E2158712A460CC10015A049 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9E2158722A460CE80015A049 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				B87473B3284904B200821AC9 /* HomeDataManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		9E2158732A460CF60015A049 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9E446D972A11C8D300B47CBA /* HomeEnums.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		9E2158742A460D030015A049 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		9E2158752A460D130015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B803EAC0286DF99300E7A26B /* HomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E2158762A460D1F0015A049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEE9287B281400EA2090 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E2158772A460D2B0015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8736661288055B60076632F /* HomeTopView.swift */,
+				B8736663288057480076632F /* HomeBottomView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E2158782A460D5A0015A049 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9E2158792A460D650015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E21587A2A460D700015A049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E21587B2A460D750015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E21587C2A460D8D0015A049 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		9E21587D2A460D980015A049 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				9EB743FB29EC611F0041F35E /* MapSearchTabBarCoordinator.swift */,
+				9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		9E21587E2A460DA30015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B841D465288E05110058E959 /* RadiusSearchViewController.swift */,
+				9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E21587F2A460DB10015A049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9EC01278288509230082E7D9 /* MapSearchViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E2158802A460DBD0015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */,
+				B8E650B02889C39E0027716E /* AddressSearchHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E2158812A460DD40015A049 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9EB743FE29EC619D0041F35E /* MySchoolsTabBarCoordinator.swift */,
+				9E2158822A460DDC0015A049 /* Coordinators */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9E2158822A460DDC0015A049 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7440729ECCAAC0041F35E /* MySchoolsCoordinator.swift */,
+				9EB7440929ECD0770041F35E /* SchoolComparisonCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		9E2158832A460DED0015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E2158842A460DF70015A049 /* Comparison */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E2158842A460DF70015A049 /* Comparison */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEF3287DA31400EA2090 /* MySchoolsViewController.swift */,
+				B87C4B8728996B1B0091CD45 /* SchoolComparisonViewController.swift */,
+				9E2158862A460E060015A049 /* Views */,
+				9E2158852A460DFE0015A049 /* ViewController */,
+			);
+			path = Comparison;
+			sourceTree = "<group>";
+		};
+		9E2158852A460DFE0015A049 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B87C4B8B289977D10091CD45 /* ComparisonViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9E2158862A460E060015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B87C4B8D289984F30091CD45 /* ComparisonInfoView.swift */,
+				B87C4B8F2899950A0091CD45 /* ComparisonGraphView.swift */,
+				9E2158872A460E140015A049 /* GraphViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E2158872A460E140015A049 /* GraphViews */ = {
+			isa = PBXGroup;
+			children = (
+				B87C4B992899A62C0091CD45 /* LegendView.swift */,
+				B87C4B95289999250091CD45 /* ComparisonBarsView.swift */,
+			);
+			path = GraphViews;
+			sourceTree = "<group>";
+		};
+		9E2158882A460E380015A049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEF1287D9F6300EA2090 /* MySchoolsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E2158892A460E410015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */,
+				B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E21588A2A460E590015A049 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9E21588B2A460E620015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEEB287BA97B00EA2090 /* TopSchoolsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E21588C2A460E720015A049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B801DEED287BB4BF00EA2090 /* TopSchoolsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E21588D2A460E7B0015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E0ECE29F2DDA600B66965 /* TopSchoolsHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E21588E2A460E8F0015A049 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9ECCFD4129EF72B80004F3D1 /* SATSearchCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9E21588F2A460E990015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B82F179B28899B1C00AA42F1 /* SearchTotalScoreViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E2158902A460EA70015A049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B89D3CF1287F18F8002300D1 /* SearchSATScoresViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E2158912A460EAF0015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8E650AD2889B9A90027716E /* SearchScoresHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E2158922A460EC40015A049 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7443129EEFD4E0041F35E /* SchoolTabCoordinator.swift */,
+				9E2158932A460ECC0015A049 /* Coordinators */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9E2158932A460ECC0015A049 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7443429EEFF030041F35E /* SchoolInfoCoordinator.swift */,
+				9EB7443629EEFF110041F35E /* SchoolScoresCoordinator.swift */,
+				9EB7443829EEFF190041F35E /* SchoolMapCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		9E2158942A460EDF0015A049 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9E2158952A460EF70015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */,
+				9E2158982A460F0D0015A049 /* SchoolMap */,
+				9E2158972A460F030015A049 /* SchoolScores */,
+				9E2158962A460EFE0015A049 /* SchoolInfo */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E2158962A460EFE0015A049 /* SchoolInfo */ = {
+			isa = PBXGroup;
+			children = (
+				9E21589A2A460F200015A049 /* Views */,
+				9E2158992A460F140015A049 /* ViewController */,
+			);
+			path = SchoolInfo;
+			sourceTree = "<group>";
+		};
+		9E2158972A460F030015A049 /* SchoolScores */ = {
+			isa = PBXGroup;
+			children = (
+				9E21589D2A460F400015A049 /* SchoolsGraph */,
+				9E21589C2A460F380015A049 /* Views */,
+				9E21589B2A460F310015A049 /* ViewControllers */,
+			);
+			path = SchoolScores;
+			sourceTree = "<group>";
+		};
+		9E2158982A460F0D0015A049 /* SchoolMap */ = {
+			isa = PBXGroup;
+			children = (
+				9E2158A12A460FA80015A049 /* ViewControllers */,
+			);
+			path = SchoolMap;
+			sourceTree = "<group>";
+		};
+		9E2158992A460F140015A049 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9E21589A2A460F200015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8736671288065BE0076632F /* SchoolInfoTopView.swift */,
+				B87366732880697F0076632F /* SchoolInfoBottomView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E21589B2A460F310015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E21589C2A460F380015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B873667628806CBE0076632F /* SchoolScoresTopView.swift */,
+				B873667828806F3A0076632F /* SchoolScoresBottomView.swift */,
+				B86AE964289C24710083FF0A /* BottomSubjectView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E21589D2A460F400015A049 /* SchoolsGraph */ = {
+			isa = PBXGroup;
+			children = (
+				9E21589F2A460F590015A049 /* Views */,
+				9E21589E2A460F530015A049 /* ViewControllers */,
+			);
+			path = SchoolsGraph;
+			sourceTree = "<group>";
+		};
+		9E21589E2A460F530015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E21589F2A460F590015A049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B873667D288075970076632F /* XAxisView.swift */,
+				B873667F288075AD0076632F /* YAxisView.swift */,
+				B8736681288075BB0076632F /* GraphBarsView.swift */,
+				B87C4B9728999BEE0091CD45 /* BarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E2158A12A460FA80015A049 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		9E824007289879EB000D4BA0 /* SchoolAppTests */ = {
@@ -230,15 +643,6 @@
 				B86AE962289C04130083FF0A /* SchoolListViewModelTests.swift */,
 			);
 			path = SchoolAppTests;
-			sourceTree = "<group>";
-		};
-		9E902E1229A4280B00A39C77 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */,
-			);
-			name = Coordinator;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB319792A460B0A007F7601 /* LocalData */ = {
@@ -261,8 +665,8 @@
 		9EB3197B2A460B42007F7601 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				9ECCFD3C29EF651B0004F3D1 /* Extension */,
-				9EB7441B29EE18CF0041F35E /* Protocols */,
+				9E2158702A460CB70015A049 /* Extension */,
+				9E2158712A460CC10015A049 /* Protocols */,
 				B8729F6C289ABA6D00B7035A /* LoaderView.swift */,
 				9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */,
 				9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */,
@@ -298,12 +702,12 @@
 		9EB3197E2A460B8B007F7601 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				9EF64CBA29A1311F0012F890 /* DataManager */,
-				9EB7441629EDD9390041F35E /* Tools */,
-				B876AF07287712B100718041 /* Coordinators */,
-				B82F178528898CCA00AA42F1 /* ViewControllers */,
-				B82F178428898C8500AA42F1 /* ViewModels */,
-				B8B33B2D2880418F0096118D /* Views */,
+				9E2158722A460CE80015A049 /* DataManager */,
+				9E2158732A460CF60015A049 /* Tools */,
+				9E2158742A460D030015A049 /* Coordinators */,
+				9E2158762A460D1F0015A049 /* ViewModels */,
+				9E2158752A460D130015A049 /* ViewControllers */,
+				9E2158772A460D2B0015A049 /* Views */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -311,10 +715,10 @@
 		9EB319802A460BC0007F7601 /* SchoolsList */ = {
 			isa = PBXGroup;
 			children = (
-				9E902E1229A4280B00A39C77 /* Coordinator */,
-				B82F178628898CEE00AA42F1 /* ViewControllers */,
-				B82F178728898D0300AA42F1 /* ViewModels */,
-				B89D3CF6287F51BD002300D1 /* Views */,
+				9E2158782A460D5A0015A049 /* Coordinator */,
+				9E21587A2A460D700015A049 /* ViewModels */,
+				9E2158792A460D650015A049 /* ViewControllers */,
+				9E21587B2A460D750015A049 /* Views */,
 			);
 			path = SchoolsList;
 			sourceTree = "<group>";
@@ -322,11 +726,11 @@
 		9EB319812A460BD0007F7601 /* MapSearch */ = {
 			isa = PBXGroup;
 			children = (
-				9ECCDCDF2A1E5C1F00179539 /* Tools */,
-				9EB743FA29EC60F40041F35E /* Coordinators */,
-				B82F178E28898DE300AA42F1 /* ViewControllers */,
-				B82F178F28898DED00AA42F1 /* ViewModels */,
-				B8E650AF2889C38A0027716E /* Views */,
+				9E21587C2A460D8D0015A049 /* Tools */,
+				9E21587D2A460D980015A049 /* Coordinators */,
+				9E21587F2A460DB10015A049 /* ViewModels */,
+				9E21587E2A460DA30015A049 /* ViewControllers */,
+				9E2158802A460DBD0015A049 /* Views */,
 			);
 			path = MapSearch;
 			sourceTree = "<group>";
@@ -334,10 +738,10 @@
 		9EB319822A460BEC007F7601 /* MySchools */ = {
 			isa = PBXGroup;
 			children = (
-				9EB743FD29EC618F0041F35E /* Coordinator */,
-				B87C4B89289976E00091CD45 /* ViewControllers */,
-				B82F178B28898DAC00AA42F1 /* ViewModels */,
-				B88891BC2892C84600236F76 /* Views */,
+				9E2158812A460DD40015A049 /* Coordinator */,
+				9E2158882A460E380015A049 /* ViewModels */,
+				9E2158832A460DED0015A049 /* ViewControllers */,
+				9E2158892A460E410015A049 /* Views */,
 			);
 			path = MySchools;
 			sourceTree = "<group>";
@@ -345,10 +749,10 @@
 		9EB319832A460C03007F7601 /* TopSchools */ = {
 			isa = PBXGroup;
 			children = (
-				9EB7440029EC621C0041F35E /* Coordinator */,
-				B82F178928898D5600AA42F1 /* ViewControllers */,
-				B82F178828898D3300AA42F1 /* ViewModels */,
-				B8F5E4C928873888009C4F54 /* Views */,
+				9E21588A2A460E590015A049 /* Coordinator */,
+				9E21588C2A460E720015A049 /* ViewModels */,
+				9E21588B2A460E620015A049 /* ViewControllers */,
+				9E21588D2A460E7B0015A049 /* Views */,
 			);
 			path = TopSchools;
 			sourceTree = "<group>";
@@ -356,10 +760,10 @@
 		9EB319842A460C1D007F7601 /* SATSearch */ = {
 			isa = PBXGroup;
 			children = (
-				9EB7440329EC623D0041F35E /* Coordinator */,
-				B82F178C28898DC100AA42F1 /* ViewControllers */,
-				B82F178D28898DC800AA42F1 /* ViewModels */,
-				B82F17972889989800AA42F1 /* Views */,
+				9E21588E2A460E8F0015A049 /* Coordinator */,
+				9E2158902A460EA70015A049 /* ViewModels */,
+				9E21588F2A460E990015A049 /* ViewControllers */,
+				9E2158912A460EAF0015A049 /* Views */,
 			);
 			path = SATSearch;
 			sourceTree = "<group>";
@@ -367,438 +771,11 @@
 		9EB319852A460C2F007F7601 /* IndividualSchool */ = {
 			isa = PBXGroup;
 			children = (
-				9EB7443029EEFD420041F35E /* Coordinator */,
-				9EB7442D29EEFCF20041F35E /* ViewModel */,
-				B873666C288065060076632F /* ViewControllers */,
+				9E2158922A460EC40015A049 /* Coordinator */,
+				9E2158942A460EDF0015A049 /* ViewModel */,
+				9E2158952A460EF70015A049 /* ViewControllers */,
 			);
 			path = IndividualSchool;
-			sourceTree = "<group>";
-		};
-		9EB743FA29EC60F40041F35E /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				9EB743FB29EC611F0041F35E /* MapSearchTabBarCoordinator.swift */,
-				9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */,
-			);
-			name = Coordinators;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB743FD29EC618F0041F35E /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				9EB743FE29EC619D0041F35E /* MySchoolsTabBarCoordinator.swift */,
-				9EB7440629ECC6E10041F35E /* Coordinators */,
-			);
-			name = Coordinator;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7440029EC621C0041F35E /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */,
-			);
-			name = Coordinator;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7440329EC623D0041F35E /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				9ECCFD4129EF72B80004F3D1 /* SATSearchCoordinator.swift */,
-			);
-			name = Coordinator;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7440629ECC6E10041F35E /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7440729ECCAAC0041F35E /* MySchoolsCoordinator.swift */,
-				9EB7440929ECD0770041F35E /* SchoolComparisonCoordinator.swift */,
-			);
-			name = Coordinators;
-			sourceTree = "<group>";
-		};
-		9EB7441629EDD9390041F35E /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				9E446D972A11C8D300B47CBA /* HomeEnums.swift */,
-			);
-			name = Tools;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7441B29EE18CF0041F35E /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */,
-			);
-			name = Protocols;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7442D29EEFCF20041F35E /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */,
-			);
-			name = ViewModel;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7443029EEFD420041F35E /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7443129EEFD4E0041F35E /* SchoolTabCoordinator.swift */,
-				9EB7443329EEFEF30041F35E /* Coordinators */,
-			);
-			name = Coordinator;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EB7443329EEFEF30041F35E /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7443429EEFF030041F35E /* SchoolInfoCoordinator.swift */,
-				9EB7443629EEFF110041F35E /* SchoolScoresCoordinator.swift */,
-				9EB7443829EEFF190041F35E /* SchoolMapCoordinator.swift */,
-			);
-			name = Coordinators;
-			sourceTree = "<group>";
-		};
-		9ECCDCDF2A1E5C1F00179539 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */,
-			);
-			name = Tools;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9ECCFD3C29EF651B0004F3D1 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */,
-			);
-			name = Extension;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9EF64CBA29A1311F0012F890 /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				B87473B3284904B200821AC9 /* HomeDataManager.swift */,
-			);
-			name = DataManager;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178428898C8500AA42F1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B801DEE9287B281400EA2090 /* HomeViewModel.swift */,
-			);
-			name = ViewModels;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178528898CCA00AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B803EAC0286DF99300E7A26B /* HomeViewController.swift */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178628898CEE00AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178728898D0300AA42F1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
-			);
-			name = ViewModels;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178828898D3300AA42F1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B801DEED287BB4BF00EA2090 /* TopSchoolsViewModel.swift */,
-			);
-			name = ViewModels;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178928898D5600AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B801DEEB287BA97B00EA2090 /* TopSchoolsViewController.swift */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178B28898DAC00AA42F1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B801DEF1287D9F6300EA2090 /* MySchoolsViewModel.swift */,
-			);
-			name = ViewModels;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178C28898DC100AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B82F179B28899B1C00AA42F1 /* SearchTotalScoreViewController.swift */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178D28898DC800AA42F1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B89D3CF1287F18F8002300D1 /* SearchSATScoresViewModel.swift */,
-			);
-			name = ViewModels;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178E28898DE300AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B841D465288E05110058E959 /* RadiusSearchViewController.swift */,
-				9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F178F28898DED00AA42F1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				9EC01278288509230082E7D9 /* MapSearchViewModel.swift */,
-			);
-			name = ViewModels;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B82F179028898E3B00AA42F1 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */,
-			);
-			name = ViewController;
-			sourceTree = "<group>";
-		};
-		B82F179128898E4600AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		B82F179228898E5200AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		B82F179328898E5C00AA42F1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		B82F17972889989800AA42F1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B8E650AD2889B9A90027716E /* SearchScoresHeaderView.swift */,
-			);
-			name = Views;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B873666C288065060076632F /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */,
-				B873666D288065140076632F /* SchoolInfo */,
-				B873666E288065210076632F /* SchoolScores */,
-				9E531C0C2885A02000AED087 /* SchoolMap */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B873666D288065140076632F /* SchoolInfo */ = {
-			isa = PBXGroup;
-			children = (
-				B82F179028898E3B00AA42F1 /* ViewController */,
-				B8736670288065A50076632F /* Views */,
-			);
-			name = SchoolInfo;
-			sourceTree = "<group>";
-		};
-		B873666E288065210076632F /* SchoolScores */ = {
-			isa = PBXGroup;
-			children = (
-				B82F179128898E4600AA42F1 /* ViewControllers */,
-				B873667528806CA80076632F /* Views */,
-				B873666F2880652E0076632F /* SchoolsGraph */,
-			);
-			name = SchoolScores;
-			sourceTree = "<group>";
-		};
-		B873666F2880652E0076632F /* SchoolsGraph */ = {
-			isa = PBXGroup;
-			children = (
-				B82F179228898E5200AA42F1 /* ViewControllers */,
-				B873667B288075830076632F /* Views */,
-			);
-			name = SchoolsGraph;
-			sourceTree = "<group>";
-		};
-		B8736670288065A50076632F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B8736671288065BE0076632F /* SchoolInfoTopView.swift */,
-				B87366732880697F0076632F /* SchoolInfoBottomView.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		B873667528806CA80076632F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B873667628806CBE0076632F /* SchoolScoresTopView.swift */,
-				B873667828806F3A0076632F /* SchoolScoresBottomView.swift */,
-				B86AE964289C24710083FF0A /* BottomSubjectView.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		B873667B288075830076632F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B873667D288075970076632F /* XAxisView.swift */,
-				B873667F288075AD0076632F /* YAxisView.swift */,
-				B8736681288075BB0076632F /* GraphBarsView.swift */,
-				B87C4B9728999BEE0091CD45 /* BarView.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		B876AF07287712B100718041 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */,
-			);
-			name = Coordinators;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B87C4B89289976E00091CD45 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B801DEF3287DA31400EA2090 /* MySchoolsViewController.swift */,
-				B87C4B8728996B1B0091CD45 /* SchoolComparisonViewController.swift */,
-				B87C4B912899950F0091CD45 /* Comparison */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B87C4B912899950F0091CD45 /* Comparison */ = {
-			isa = PBXGroup;
-			children = (
-				B87C4B92289995200091CD45 /* ViewController */,
-				B87C4B93289995550091CD45 /* Views */,
-			);
-			name = Comparison;
-			sourceTree = "<group>";
-		};
-		B87C4B92289995200091CD45 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B87C4B8B289977D10091CD45 /* ComparisonViewController.swift */,
-			);
-			name = ViewController;
-			sourceTree = "<group>";
-		};
-		B87C4B93289995550091CD45 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B87C4B8D289984F30091CD45 /* ComparisonInfoView.swift */,
-				B87C4B8F2899950A0091CD45 /* ComparisonGraphView.swift */,
-				B87C4B94289999050091CD45 /* GraphViews */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		B87C4B94289999050091CD45 /* GraphViews */ = {
-			isa = PBXGroup;
-			children = (
-				B87C4B992899A62C0091CD45 /* LegendView.swift */,
-				B87C4B95289999250091CD45 /* ComparisonBarsView.swift */,
-			);
-			name = GraphViews;
-			sourceTree = "<group>";
-		};
-		B88891BC2892C84600236F76 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */,
-				B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */,
-			);
-			name = Views;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B89D3CF6287F51BD002300D1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */,
-			);
-			name = Views;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B8B33B2D2880418F0096118D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B8736661288055B60076632F /* HomeTopView.swift */,
-				B8736663288057480076632F /* HomeBottomView.swift */,
-			);
-			name = Views;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		B8E650AF2889C38A0027716E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B841D467288E08550058E959 /* RadiusSearchHeaderView.swift */,
-				B8E650B02889C39E0027716E /* AddressSearchHeaderView.swift */,
-			);
-			name = Views;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		B8E817302846A45F0052C1AE = {
@@ -851,15 +828,6 @@
 				B8729F6E289B045000B7035A /* Fixes.swift */,
 			);
 			name = Files;
-			sourceTree = "<group>";
-		};
-		B8F5E4C928873888009C4F54 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				9E2E0ECE29F2DDA600B66965 /* TopSchoolsHeaderView.swift */,
-			);
-			name = Views;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
