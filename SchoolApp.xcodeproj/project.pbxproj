@@ -238,9 +238,27 @@
 				9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */,
 			);
 			name = Coordinator;
+			path = ..;
 			sourceTree = "<group>";
 		};
-		9E902E1529A442E400A39C77 /* Catalog */ = {
+		9EB319792A460B0A007F7601 /* LocalData */ = {
+			isa = PBXGroup;
+			children = (
+				B8736668288061390076632F /* SchoolsData.json */,
+				B873666A288061500076632F /* SATData.json */,
+			);
+			path = LocalData;
+			sourceTree = "<group>";
+		};
+		9EB3197A2A460B30007F7601 /* Coordinating */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7441429EDD9050041F35E /* Coordinating.swift */,
+			);
+			path = Coordinating;
+			sourceTree = "<group>";
+		};
+		9EB3197B2A460B42007F7601 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
 				9ECCFD3C29EF651B0004F3D1 /* Extension */,
@@ -253,16 +271,107 @@
 				9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */,
 				9EF49E8A29AD8575008122FF /* SchoolAppStackView.swift */,
 			);
-			name = Catalog;
+			path = Catalog;
 			sourceTree = "<group>";
 		};
-		9EB319782A460A7D007F7601 /* LocalData */ = {
+		9EB3197C2A460B64007F7601 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				B8736668288061390076632F /* SchoolsData.json */,
-				B873666A288061500076632F /* SATData.json */,
+				B8E1121728747692009C66B6 /* Reachability.swift */,
+				B8E11219287476C1009C66B6 /* CustomError.swift */,
+				9EC012762884F9DE0082E7D9 /* LocationManager.swift */,
+				9EF64CBD29A170770012F890 /* URLs.swift */,
+				9EB7441129EDD8A40041F35E /* ServiceError.swift */,
 			);
-			name = LocalData;
+			path = Service;
+			sourceTree = "<group>";
+		};
+		9EB3197D2A460B76007F7601 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B83017B5284933C700303EEE /* School.swift */,
+				B880A2B9284E61FF0071E43D /* SATData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9EB3197E2A460B8B007F7601 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9EF64CBA29A1311F0012F890 /* DataManager */,
+				9EB7441629EDD9390041F35E /* Tools */,
+				B876AF07287712B100718041 /* Coordinators */,
+				B82F178528898CCA00AA42F1 /* ViewControllers */,
+				B82F178428898C8500AA42F1 /* ViewModels */,
+				B8B33B2D2880418F0096118D /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9EB319802A460BC0007F7601 /* SchoolsList */ = {
+			isa = PBXGroup;
+			children = (
+				9E902E1229A4280B00A39C77 /* Coordinator */,
+				B82F178628898CEE00AA42F1 /* ViewControllers */,
+				B82F178728898D0300AA42F1 /* ViewModels */,
+				B89D3CF6287F51BD002300D1 /* Views */,
+			);
+			path = SchoolsList;
+			sourceTree = "<group>";
+		};
+		9EB319812A460BD0007F7601 /* MapSearch */ = {
+			isa = PBXGroup;
+			children = (
+				9ECCDCDF2A1E5C1F00179539 /* Tools */,
+				9EB743FA29EC60F40041F35E /* Coordinators */,
+				B82F178E28898DE300AA42F1 /* ViewControllers */,
+				B82F178F28898DED00AA42F1 /* ViewModels */,
+				B8E650AF2889C38A0027716E /* Views */,
+			);
+			path = MapSearch;
+			sourceTree = "<group>";
+		};
+		9EB319822A460BEC007F7601 /* MySchools */ = {
+			isa = PBXGroup;
+			children = (
+				9EB743FD29EC618F0041F35E /* Coordinator */,
+				B87C4B89289976E00091CD45 /* ViewControllers */,
+				B82F178B28898DAC00AA42F1 /* ViewModels */,
+				B88891BC2892C84600236F76 /* Views */,
+			);
+			path = MySchools;
+			sourceTree = "<group>";
+		};
+		9EB319832A460C03007F7601 /* TopSchools */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7440029EC621C0041F35E /* Coordinator */,
+				B82F178928898D5600AA42F1 /* ViewControllers */,
+				B82F178828898D3300AA42F1 /* ViewModels */,
+				B8F5E4C928873888009C4F54 /* Views */,
+			);
+			path = TopSchools;
+			sourceTree = "<group>";
+		};
+		9EB319842A460C1D007F7601 /* SATSearch */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7440329EC623D0041F35E /* Coordinator */,
+				B82F178C28898DC100AA42F1 /* ViewControllers */,
+				B82F178D28898DC800AA42F1 /* ViewModels */,
+				B82F17972889989800AA42F1 /* Views */,
+			);
+			path = SATSearch;
+			sourceTree = "<group>";
+		};
+		9EB319852A460C2F007F7601 /* IndividualSchool */ = {
+			isa = PBXGroup;
+			children = (
+				9EB7443029EEFD420041F35E /* Coordinator */,
+				9EB7442D29EEFCF20041F35E /* ViewModel */,
+				B873666C288065060076632F /* ViewControllers */,
+			);
+			path = IndividualSchool;
 			sourceTree = "<group>";
 		};
 		9EB743FA29EC60F40041F35E /* Coordinators */ = {
@@ -272,6 +381,7 @@
 				9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */,
 			);
 			name = Coordinators;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB743FD29EC618F0041F35E /* Coordinator */ = {
@@ -281,6 +391,7 @@
 				9EB7440629ECC6E10041F35E /* Coordinators */,
 			);
 			name = Coordinator;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7440029EC621C0041F35E /* Coordinator */ = {
@@ -289,6 +400,7 @@
 				9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */,
 			);
 			name = Coordinator;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7440329EC623D0041F35E /* Coordinator */ = {
@@ -297,6 +409,7 @@
 				9ECCFD4129EF72B80004F3D1 /* SATSearchCoordinator.swift */,
 			);
 			name = Coordinator;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7440629ECC6E10041F35E /* Coordinators */ = {
@@ -308,20 +421,13 @@
 			name = Coordinators;
 			sourceTree = "<group>";
 		};
-		9EB7441329EDD8F50041F35E /* Coordinating */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7441429EDD9050041F35E /* Coordinating.swift */,
-			);
-			name = Coordinating;
-			sourceTree = "<group>";
-		};
 		9EB7441629EDD9390041F35E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
 				9E446D972A11C8D300B47CBA /* HomeEnums.swift */,
 			);
 			name = Tools;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7441B29EE18CF0041F35E /* Protocols */ = {
@@ -330,6 +436,7 @@
 				9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */,
 			);
 			name = Protocols;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7442D29EEFCF20041F35E /* ViewModel */ = {
@@ -338,6 +445,7 @@
 				9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */,
 			);
 			name = ViewModel;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7443029EEFD420041F35E /* Coordinator */ = {
@@ -347,6 +455,7 @@
 				9EB7443329EEFEF30041F35E /* Coordinators */,
 			);
 			name = Coordinator;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EB7443329EEFEF30041F35E /* Coordinators */ = {
@@ -365,6 +474,7 @@
 				9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */,
 			);
 			name = Tools;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9ECCFD3C29EF651B0004F3D1 /* Extension */ = {
@@ -373,6 +483,7 @@
 				9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */,
 			);
 			name = Extension;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9EF64CBA29A1311F0012F890 /* DataManager */ = {
@@ -381,27 +492,7 @@
 				B87473B3284904B200821AC9 /* HomeDataManager.swift */,
 			);
 			name = DataManager;
-			sourceTree = "<group>";
-		};
-		B804315A28523188004C9BAF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B83017B5284933C700303EEE /* School.swift */,
-				B880A2B9284E61FF0071E43D /* SATData.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		B8149D992888689D00743BD1 /* MapSearch */ = {
-			isa = PBXGroup;
-			children = (
-				9ECCDCDF2A1E5C1F00179539 /* Tools */,
-				9EB743FA29EC60F40041F35E /* Coordinators */,
-				B82F178E28898DE300AA42F1 /* ViewControllers */,
-				B82F178F28898DED00AA42F1 /* ViewModels */,
-				B8E650AF2889C38A0027716E /* Views */,
-			);
-			name = MapSearch;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178428898C8500AA42F1 /* ViewModels */ = {
@@ -410,6 +501,7 @@
 				B801DEE9287B281400EA2090 /* HomeViewModel.swift */,
 			);
 			name = ViewModels;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178528898CCA00AA42F1 /* ViewControllers */ = {
@@ -418,6 +510,7 @@
 				B803EAC0286DF99300E7A26B /* HomeViewController.swift */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178628898CEE00AA42F1 /* ViewControllers */ = {
@@ -426,6 +519,7 @@
 				B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178728898D0300AA42F1 /* ViewModels */ = {
@@ -434,6 +528,7 @@
 				B803EAC2286E1A4700E7A26B /* SchoolsListViewModel.swift */,
 			);
 			name = ViewModels;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178828898D3300AA42F1 /* ViewModels */ = {
@@ -442,6 +537,7 @@
 				B801DEED287BB4BF00EA2090 /* TopSchoolsViewModel.swift */,
 			);
 			name = ViewModels;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178928898D5600AA42F1 /* ViewControllers */ = {
@@ -450,6 +546,7 @@
 				B801DEEB287BA97B00EA2090 /* TopSchoolsViewController.swift */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178B28898DAC00AA42F1 /* ViewModels */ = {
@@ -458,6 +555,7 @@
 				B801DEF1287D9F6300EA2090 /* MySchoolsViewModel.swift */,
 			);
 			name = ViewModels;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178C28898DC100AA42F1 /* ViewControllers */ = {
@@ -466,6 +564,7 @@
 				B82F179B28899B1C00AA42F1 /* SearchTotalScoreViewController.swift */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178D28898DC800AA42F1 /* ViewModels */ = {
@@ -474,6 +573,7 @@
 				B89D3CF1287F18F8002300D1 /* SearchSATScoresViewModel.swift */,
 			);
 			name = ViewModels;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178E28898DE300AA42F1 /* ViewControllers */ = {
@@ -483,6 +583,7 @@
 				9EA40B2F2884F782000DE8A0 /* AddressSearchViewController.swift */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F178F28898DED00AA42F1 /* ViewModels */ = {
@@ -491,6 +592,7 @@
 				9EC01278288509230082E7D9 /* MapSearchViewModel.swift */,
 			);
 			name = ViewModels;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B82F179028898E3B00AA42F1 /* ViewController */ = {
@@ -531,6 +633,7 @@
 				B8E650AD2889B9A90027716E /* SearchScoresHeaderView.swift */,
 			);
 			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B873666C288065060076632F /* ViewControllers */ = {
@@ -542,6 +645,7 @@
 				9E531C0C2885A02000AED087 /* SchoolMap */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B873666D288065140076632F /* SchoolInfo */ = {
@@ -591,18 +695,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		B873667A288074AC0076632F /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				B8E1121728747692009C66B6 /* Reachability.swift */,
-				B8E11219287476C1009C66B6 /* CustomError.swift */,
-				9EC012762884F9DE0082E7D9 /* LocationManager.swift */,
-				9EF64CBD29A170770012F890 /* URLs.swift */,
-				9EB7441129EDD8A40041F35E /* ServiceError.swift */,
-			);
-			name = Service;
-			sourceTree = "<group>";
-		};
 		B873667B288075830076632F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +712,7 @@
 				9EF64CBB29A131A80012F890 /* HomeCoordinator.swift */,
 			);
 			name = Coordinators;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B87C4B89289976E00091CD45 /* ViewControllers */ = {
@@ -630,6 +723,7 @@
 				B87C4B912899950F0091CD45 /* Comparison */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B87C4B912899950F0091CD45 /* Comparison */ = {
@@ -675,17 +769,7 @@
 				B8F86F9028A556140095FDDC /* ComparisonHeaderView.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		B89D3CF5287F516A002300D1 /* SchoolsList */ = {
-			isa = PBXGroup;
-			children = (
-				9E902E1229A4280B00A39C77 /* Coordinator */,
-				B82F178628898CEE00AA42F1 /* ViewControllers */,
-				B82F178728898D0300AA42F1 /* ViewModels */,
-				B89D3CF6287F51BD002300D1 /* Views */,
-			);
-			name = SchoolsList;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B89D3CF6287F51BD002300D1 /* Views */ = {
@@ -694,62 +778,7 @@
 				B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		B89D3CF7287F51F6002300D1 /* TopSchools */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7440029EC621C0041F35E /* Coordinator */,
-				B82F178928898D5600AA42F1 /* ViewControllers */,
-				B82F178828898D3300AA42F1 /* ViewModels */,
-				B8F5E4C928873888009C4F54 /* Views */,
-			);
-			name = TopSchools;
-			sourceTree = "<group>";
-		};
-		B89D3CF8287F520B002300D1 /* IndividualSchoolView */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7443029EEFD420041F35E /* Coordinator */,
-				9EB7442D29EEFCF20041F35E /* ViewModel */,
-				B873666C288065060076632F /* ViewControllers */,
-			);
-			name = IndividualSchoolView;
-			sourceTree = "<group>";
-		};
-		B89D3CF9287F5260002300D1 /* MySchools */ = {
-			isa = PBXGroup;
-			children = (
-				9EB743FD29EC618F0041F35E /* Coordinator */,
-				B87C4B89289976E00091CD45 /* ViewControllers */,
-				B82F178B28898DAC00AA42F1 /* ViewModels */,
-				B88891BC2892C84600236F76 /* Views */,
-			);
-			name = MySchools;
-			sourceTree = "<group>";
-		};
-		B89D3CFA287F5281002300D1 /* SATSearch */ = {
-			isa = PBXGroup;
-			children = (
-				9EB7440329EC623D0041F35E /* Coordinator */,
-				B82F178C28898DC100AA42F1 /* ViewControllers */,
-				B82F178D28898DC800AA42F1 /* ViewModels */,
-				B82F17972889989800AA42F1 /* Views */,
-			);
-			name = SATSearch;
-			sourceTree = "<group>";
-		};
-		B8B33B2C288041880096118D /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				9EF64CBA29A1311F0012F890 /* DataManager */,
-				9EB7441629EDD9390041F35E /* Tools */,
-				B876AF07287712B100718041 /* Coordinators */,
-				B82F178528898CCA00AA42F1 /* ViewControllers */,
-				B82F178428898C8500AA42F1 /* ViewModels */,
-				B8B33B2D2880418F0096118D /* Views */,
-			);
-			name = Home;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B8B33B2D2880418F0096118D /* Views */ = {
@@ -759,6 +788,7 @@
 				B8736663288057480076632F /* HomeBottomView.swift */,
 			);
 			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B8E650AF2889C38A0027716E /* Views */ = {
@@ -768,6 +798,7 @@
 				B8E650B02889C39E0027716E /* AddressSearchHeaderView.swift */,
 			);
 			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B8E817302846A45F0052C1AE = {
@@ -791,20 +822,20 @@
 		B8E8173B2846A45F0052C1AE /* SchoolApp */ = {
 			isa = PBXGroup;
 			children = (
-				9EB319782A460A7D007F7601 /* LocalData */,
+				9EB319792A460B0A007F7601 /* LocalData */,
 				B8E8176D2846AACE0052C1AE /* Files */,
-				9EB7441329EDD8F50041F35E /* Coordinating */,
-				9E902E1529A442E400A39C77 /* Catalog */,
-				B873667A288074AC0076632F /* Service */,
-				B804315A28523188004C9BAF /* Models */,
+				9EB3197A2A460B30007F7601 /* Coordinating */,
+				9EB3197B2A460B42007F7601 /* Catalog */,
+				9EB3197C2A460B64007F7601 /* Service */,
+				9EB3197D2A460B76007F7601 /* Models */,
 				B8E8173C2846A45F0052C1AE /* AppDelegate.swift */,
-				B8B33B2C288041880096118D /* Home */,
-				B89D3CF5287F516A002300D1 /* SchoolsList */,
-				B8149D992888689D00743BD1 /* MapSearch */,
-				B89D3CF9287F5260002300D1 /* MySchools */,
-				B89D3CF7287F51F6002300D1 /* TopSchools */,
-				B89D3CFA287F5281002300D1 /* SATSearch */,
-				B89D3CF8287F520B002300D1 /* IndividualSchoolView */,
+				9EB3197E2A460B8B007F7601 /* Home */,
+				9EB319802A460BC0007F7601 /* SchoolsList */,
+				9EB319812A460BD0007F7601 /* MapSearch */,
+				9EB319822A460BEC007F7601 /* MySchools */,
+				9EB319832A460C03007F7601 /* TopSchools */,
+				9EB319842A460C1D007F7601 /* SATSearch */,
+				9EB319852A460C2F007F7601 /* IndividualSchool */,
 			);
 			path = SchoolApp;
 			sourceTree = "<group>";
@@ -828,6 +859,7 @@
 				9E2E0ECE29F2DDA600B66965 /* TopSchoolsHeaderView.swift */,
 			);
 			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
