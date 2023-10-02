@@ -1,7 +1,5 @@
 # SchoolApp
 
-Hello this app is currently undergoing restructuring and refactoring from MVC to MVVMC. It is also undergoing a redesign of features
-
 This is an app that users can use to search up high schools
 
 This app allows users to search schools by test scores
