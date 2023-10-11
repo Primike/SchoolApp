@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SchoolScoresViewController: UIViewController {
+class SchoolScoresViewController: UIViewController, Coordinated {
     
     lazy var scrollView: UIScrollView = {
         var scrollView = UIScrollView()

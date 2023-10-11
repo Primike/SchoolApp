@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 
-class SchoolMapViewController: UIViewController {
+class SchoolMapViewController: UIViewController, Coordinated {
     
     lazy var titleLabel: SchoolAppLabel = {
         let label = SchoolAppLabel(labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))

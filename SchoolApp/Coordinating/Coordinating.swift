@@ -23,11 +23,7 @@ extension Coordinating {
         set {}
     }
     
-    func childDidFinish(_ child: Coordinating) {
-
-    }
+    func childDidFinish(_ child: Coordinating) {}
     
-    func didFinish() {
-        
-    }
+    func didFinish() {}
 }
