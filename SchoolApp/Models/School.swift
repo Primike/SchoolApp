@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct School: Decodable {
     let dbn: String
@@ -20,6 +21,13 @@ struct School: Decodable {
     var longitude: String?
     var distance: String?
     
+    var coordinate: CLLocationCoordinate2D? {
+        guard let lat = Double(latitude ?? ""), let lon = Double(longitude ?? "") else {
+            return nil
+        }
+        return CLLocationCoordinate2D(latitude: lat, longitude: lon)
+    }
+
     func lowercased() -> String {
         return school_name.lowercased()
     }

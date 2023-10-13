@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 import UIKit
 
 class SchoolViewModel: SchoolColor {
@@ -17,4 +18,7 @@ class SchoolViewModel: SchoolColor {
         self.satData = satData
     }
 
+    var coordinate: CLLocationCoordinate2D? {
+        return school.coordinate
+    }
 }

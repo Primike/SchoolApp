@@ -13,19 +13,7 @@ import CoreLocation
 
 class SchoolMapViewController: UIViewController, Coordinated {
     
-    lazy var titleLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
-        return label
-    }()
-    
-    lazy var map: MKMapView = {
-        let map = MKMapView()
-        map.translatesAutoresizingMaskIntoConstraints = false
-        map.delegate = self
-        return map
-    }()
-    
-    let viewModel: SchoolViewModel
+    private let viewModel: SchoolViewModel
     weak var coordinator: Coordinating?
 
     init(viewModel: SchoolViewModel) {
@@ -38,43 +26,48 @@ class SchoolMapViewController: UIViewController, Coordinated {
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var titleLabel: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
+        return label
+    }()
+    
+    lazy var map: MKMapView = {
+        let map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
+        map.delegate = self
+        map.showsUserLocation = true
+        return map
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-
+        
         setup()
         layout()
     }
         
-    func setup() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-              let userLocation = appDelegate.userLocation,
-              let latitude = Double(viewModel.school.latitude!),
-              let longitude = Double(viewModel.school.longitude!) else {
-            return
-        }
+    private func setup() {
+        guard let coordinate = viewModel.coordinate else { return }
         
-        addMapPin(coordinate: userLocation.coordinate, label: "CURRENT LOCATION")
-        addMapPin(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), label: viewModel.school.school_name)
+        addMapPin(coordinate: coordinate, label: viewModel.school.school_name)
         
-        map.setRegion(MKCoordinateRegion(center: .init(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
+        map.setRegion(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
     }
 
-    func addMapPin(coordinate: CLLocationCoordinate2D, label: String) {
+    private func addMapPin(coordinate: CLLocationCoordinate2D, label: String) {
         let pin = MKPointAnnotation()
         pin.coordinate = coordinate
         pin.title = label
         map.addAnnotation(pin)
     }
     
-    func layout() {
+    private func layout() {
         view.addSubview(titleLabel)
         view.addSubview(map)
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
             titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
@@ -86,27 +79,27 @@ class SchoolMapViewController: UIViewController, Coordinated {
 }
 
 extension SchoolMapViewController: MKMapViewDelegate {
+    //MARK: Called to setup each annotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // Ensure that the annotation is not an instance of MKUserLocation
+        
+        //MARK: Ensure that the location annotation uses a default blue dot
         guard !(annotation is MKUserLocation) else { return nil }
         
         let reuseIdentifier = "annotationView"
         var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
         
-        if #available(iOS 11.0, *) {
-            if view == nil {
-                view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            }
-            view?.displayPriority = .required
-        } else {
-            if view == nil {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            }
+        if view == nil {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         }
         
-        view?.annotation = annotation
-        view?.canShowCallout = true
+        configureAnnotationView(view, for: annotation)
         
         return view
+    }
+    
+    private func configureAnnotationView(_ view: MKAnnotationView?, for annotation: MKAnnotation) {
+        view?.annotation = annotation
+        view?.canShowCallout = true
+        view?.displayPriority = .required
     }
 }
