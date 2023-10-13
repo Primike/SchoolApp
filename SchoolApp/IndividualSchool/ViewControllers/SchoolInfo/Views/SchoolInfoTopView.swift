@@ -10,51 +10,12 @@ import UIKit
 
 class SchoolInfoTopView: UIView {
     
-    lazy var topButtonsStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        return stackView
-    }()
-
-    lazy var schoolInfoStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-
-    lazy var schoolName: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: school.school_name, labelTextColor: schoolColor)
-        label.textAlignment = .left
-        return label
-    }()
-
-    lazy var schoolLocation: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: school.location, labelTextColor: .black)
-        label.textAlignment = .left
-        return label
-    }()
-
-    lazy var schoolPhone: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Phone: \(school.phone_number)", labelTextColor: .black)
-        label.textAlignment = .left
-        return label
-    }()
-
-    lazy var schoolImage: UIImageView = {
-        var image = UIImageView(image: UIImage(systemName: "book.circle"))
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
-        image.tintColor = schoolColor
-        return image
-    }()
+    private let viewModel: SchoolViewModel
     
-    let school: School
-    let schoolColor: UIColor
-    
-    init(frame: CGRect, school: School, schoolColor: UIColor) {
-        self.school = school
-        self.schoolColor = schoolColor
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
         
-        super.init(frame: frame)
+        super.init(frame: .zero)
 
         layout()
     }
@@ -62,12 +23,73 @@ class SchoolInfoTopView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    lazy var topButtonsStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        return stackView
+    }()
 
-    func layout() {
+    lazy var schoolInfoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
+        return stackView
+    }()
+
+    lazy var schoolName: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.text = viewModel.school.school_name
+        label.textColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.numberOfLines = 2
+        return label
+    }()
+
+    lazy var schoolLocation: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .headline).pointSize
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.text = "Address: \(viewModel.school.location)"
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }()
+
+    lazy var schoolPhone: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .headline).pointSize
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.text = "Phone: \(viewModel.school.phone_number)"
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }()
+
+    lazy var schoolImage: UIImageView = {
+        var image = UIImageView(image: UIImage(systemName: "book.circle"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
+        return image
+    }()
+
+    private func layout() {
         self.addSubview(topButtonsStackView)
-        self.addSubview(schoolName)
-        self.addSubview(schoolLocation)
-        self.addSubview(schoolPhone)
+        self.addSubview(schoolInfoStackView)
+        schoolInfoStackView.addArrangedSubview(schoolName)
+        schoolInfoStackView.addArrangedSubview(schoolLocation)
+        schoolInfoStackView.addArrangedSubview(schoolPhone)
         self.addSubview(schoolImage)
         
         NSLayoutConstraint.activate([
@@ -76,21 +98,11 @@ class SchoolInfoTopView: UIView {
             topButtonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             topButtonsStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            schoolName.topAnchor.constraint(equalTo: topButtonsStackView.bottomAnchor),
-            schoolName.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
-            schoolName.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-            schoolName.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            
-            schoolLocation.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
-            schoolLocation.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
-            schoolLocation.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            schoolLocation.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            
-            schoolPhone.topAnchor.constraint(equalTo: schoolLocation.bottomAnchor),
-            schoolPhone.leftAnchor.constraint(equalTo: topButtonsStackView.leftAnchor),
-            schoolPhone.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            schoolPhone.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
-            
+            schoolInfoStackView.topAnchor.constraint(equalTo: topButtonsStackView.bottomAnchor),
+            schoolInfoStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
+            schoolInfoStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            schoolInfoStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+
             schoolImage.topAnchor.constraint(equalTo: schoolPhone.bottomAnchor),
             schoolImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
             schoolImage.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),

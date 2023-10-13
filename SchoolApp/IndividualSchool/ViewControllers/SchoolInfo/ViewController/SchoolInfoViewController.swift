@@ -10,6 +10,29 @@ import UIKit
 
 class SchoolInfoViewController: UIViewController, Coordinated {
     
+    let defaults = UserDefaults.standard
+    var addButtonImage: String
+    private let viewModel: SchoolViewModel
+    weak var coordinator: Coordinating?
+    
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+        
+        let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
+        
+        if savedArray.contains(viewModel.school.dbn) {
+            addButtonImage = "checkmark"
+        } else {
+            addButtonImage = "plus.circle"
+        }
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var scrollView: UIScrollView = {
         var scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +52,7 @@ class SchoolInfoViewController: UIViewController, Coordinated {
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(websiteButtonTapped), for: .primaryActionTriggered)
         button.configuration = .filled()
-        button.tintColor = schoolColor
+        button.tintColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         return button
     }()
     
@@ -37,51 +60,26 @@ class SchoolInfoViewController: UIViewController, Coordinated {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addSchool), for: .primaryActionTriggered)
-        button.tintColor = schoolColor
+        button.tintColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         button.titleLabel!.adjustsFontSizeToFitWidth = true
         button.setImage(UIImage(systemName: addButtonImage, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
         return button
     }()
     
     lazy var schoolInfoBottomView: SchoolInfoBottomView = {
-        var view = SchoolInfoBottomView(frame: CGRect(), school: viewModel.school, schoolColor: schoolColor)
+        var view = SchoolInfoBottomView(viewModel: viewModel)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 50
         view.layer.maskedCorners = [.layerMinXMinYCorner]
-        view.backgroundColor = schoolColor
+        view.backgroundColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
         return view
     }()
     
     lazy var schoolInfoTopView: SchoolInfoTopView = {
-        var view = SchoolInfoTopView(frame: CGRect(), school: viewModel.school, schoolColor: schoolColor)
+        var view = SchoolInfoTopView(viewModel: viewModel)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    let defaults = UserDefaults.standard
-    var addButtonImage: String
-    let viewModel: SchoolViewModel
-    let schoolColor: UIColor
-    weak var coordinator: Coordinating?
-    
-    init(viewModel: SchoolViewModel) {
-        self.viewModel = viewModel
-        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
-        
-        let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
-        
-        if savedArray.contains(viewModel.school.dbn) {
-            addButtonImage = "checkmark"
-        } else {
-            addButtonImage = "plus.circle"
-        }
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,13 +88,11 @@ class SchoolInfoViewController: UIViewController, Coordinated {
         layout()
     }
     
-    func layout() {
+    private func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(screenStackView)
-        
         screenStackView.addArrangedSubview(schoolInfoTopView)
         screenStackView.addArrangedSubview(schoolInfoBottomView)
-        
         schoolInfoTopView.topButtonsStackView.addSubview(schoolWebsiteButton)
         schoolInfoTopView.topButtonsStackView.addSubview(addSchoolButton)
 
