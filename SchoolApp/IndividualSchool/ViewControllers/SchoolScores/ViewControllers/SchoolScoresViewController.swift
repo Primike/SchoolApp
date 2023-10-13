@@ -10,6 +10,31 @@ import UIKit
 
 class SchoolScoresViewController: UIViewController, Coordinated {
     
+    private let viewModel: SchoolViewModel
+    weak var coordinator: Coordinating?
+    
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    lazy var schoolScoresTopView: SchoolScoresTopView = {
+        var view = SchoolScoresTopView(viewModel: viewModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var schoolScoresBottomView: SchoolScoresBottomView = {
+        var view = SchoolScoresBottomView(viewModel: viewModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var scrollView: UIScrollView = {
         var scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,30 +47,6 @@ class SchoolScoresViewController: UIViewController, Coordinated {
         stackView.axis = .vertical
         return stackView
     }()
-
-    let schoolScoresTopView: SchoolScoresTopView
-    let schoolScoresBottomView: SchoolScoresBottomView
-    
-    
-    let schoolColor: UIColor
-    let viewModel: SchoolViewModel
-    weak var coordinator: Coordinating?
-    
-    init(viewModel: SchoolViewModel) {
-        self.viewModel = viewModel
-        self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
-        schoolScoresTopView = SchoolScoresTopView(viewModel: viewModel)
-        schoolScoresBottomView = SchoolScoresBottomView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.satData, schoolColor: schoolColor)
-
-        super.init(nibName: nil, bundle: nil)
-        
-        schoolScoresTopView.graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .touchUpInside)
-
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +55,12 @@ class SchoolScoresViewController: UIViewController, Coordinated {
         layout()
     }
     
-    func style() {
+    private func style() {
         view.backgroundColor = .systemBackground
+        schoolScoresTopView.graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .touchUpInside)
+
+        schoolScoresTopView.backgroundColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
                 
-        schoolScoresTopView.translatesAutoresizingMaskIntoConstraints = false
-        schoolScoresTopView.backgroundColor = schoolColor
-                
-        schoolScoresBottomView.translatesAutoresizingMaskIntoConstraints = false
         
         if viewModel.satData.sat_math_avg_score == "0" {
             schoolScoresBottomView.satMathSubView.satSubjectScore.text = "Not Available"
@@ -69,7 +69,7 @@ class SchoolScoresViewController: UIViewController, Coordinated {
         }
     }
     
-    func layout() {
+    private func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(screenStackView)
 

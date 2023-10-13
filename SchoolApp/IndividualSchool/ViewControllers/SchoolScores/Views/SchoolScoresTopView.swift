@@ -10,7 +10,7 @@ import UIKit
 
 class SchoolScoresTopView: UIView {
     
-    let viewModel: SchoolViewModel
+    private let viewModel: SchoolViewModel
     
     init(viewModel: SchoolViewModel) {
         self.viewModel = viewModel
@@ -94,13 +94,11 @@ class SchoolScoresTopView: UIView {
         return button
     }()
     
-    func layout() {
+    private func layout() {
         self.addSubview(schoolNameLabel)
         self.addSubview(headerStackView)
-        
         headerStackView.addArrangedSubview(collegeBoardImage)
         headerStackView.addArrangedSubview(scoresInfoStackView)
-        
         scoresInfoStackView.addArrangedSubview(scoresLabel)
         scoresInfoStackView.addArrangedSubview(testTakersLabel)
         scoresInfoStackView.addArrangedSubview(graphButton)

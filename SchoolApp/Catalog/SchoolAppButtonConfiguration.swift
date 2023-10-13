@@ -14,7 +14,7 @@ class SchoolAppButtonConfiguration {
         configuration.titleAlignment = .center
         configuration.baseBackgroundColor = .black
         configuration.baseForegroundColor = .white
-        configuration.cornerStyle = .capsule
+        configuration.cornerStyle = .large
         configuration.imagePlacement = .leading
         configuration.imagePadding = 5.0
         return configuration

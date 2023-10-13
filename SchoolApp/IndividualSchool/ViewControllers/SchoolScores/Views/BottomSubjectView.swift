@@ -10,6 +10,23 @@ import UIKit
 
 class BottomSubjectView: UIView {
     
+    let schoolColor: UIColor
+    let subjectName: String
+    let subjectScore: String
+    
+    init(schoolColor: UIColor, subjectName: String, subjectScore: String) {
+        self.schoolColor = schoolColor
+        self.subjectName = subjectName
+        self.subjectScore = subjectScore
+        
+        super.init(frame: .zero)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var satSubjectStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
         stackView.backgroundColor = schoolColor
@@ -49,24 +66,7 @@ class BottomSubjectView: UIView {
         return label
     }()
     
-    let schoolColor: UIColor
-    let subjectName: String
-    let subjectScore: String
-    
-    init(schoolColor: UIColor, subjectName: String, subjectScore: String) {
-        self.schoolColor = schoolColor
-        self.subjectName = subjectName
-        self.subjectScore = subjectScore
-        
-        super.init(frame: .zero)
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func layout() {
+    private func layout() {
         self.addSubview(satSubjectStackView)
         satSubjectStackView.addArrangedSubview(satSubjectLabel)
         satSubjectStackView.addArrangedSubview(satSubjectScore)
