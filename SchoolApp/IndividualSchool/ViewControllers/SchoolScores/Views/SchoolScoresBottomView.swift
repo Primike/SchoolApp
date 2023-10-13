@@ -10,20 +10,28 @@ import UIKit
 
 class SchoolScoresBottomView: UIView {
     
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 20
+        return stackView
+    }()
+    
     lazy var satMathSubView: BottomSubjectView = {
-        var view = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT MATH", subjectScore: schoolScores.sat_math_avg_score)
+        var view = BottomSubjectView(schoolColor: schoolColor, subjectName: "SAT MATH", subjectScore: schoolScores.sat_math_avg_score)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var satWritingSubView: BottomSubjectView = {
-        var view = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT WRITING", subjectScore: schoolScores.sat_writing_avg_score)
+        var view = BottomSubjectView(schoolColor: schoolColor, subjectName: "SAT WRITING", subjectScore: schoolScores.sat_writing_avg_score)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var satReadingSubView: BottomSubjectView = {
-        var view = BottomSubjectView(frame: CGRect(), schoolColor: schoolColor, subjectName: "SAT CRITICAL READING", subjectScore: schoolScores.sat_critical_reading_avg_score)
+        var view = BottomSubjectView(schoolColor: schoolColor, subjectName: "SAT CRITICAL READING", subjectScore: schoolScores.sat_critical_reading_avg_score)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -46,22 +54,16 @@ class SchoolScoresBottomView: UIView {
     }
         
     func layout() {
-        self.addSubview(satMathSubView)
-        self.addSubview(satWritingSubView)
-        self.addSubview(satReadingSubView)
+        self.addSubview(stackView)
+        stackView.addArrangedSubview(satMathSubView)
+        stackView.addArrangedSubview(satWritingSubView)
+        stackView.addArrangedSubview(satReadingSubView)
         
         NSLayoutConstraint.activate([
-            satMathSubView.topAnchor.constraint(equalTo: self.topAnchor),
-            satMathSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-            satMathSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
-
-            satWritingSubView.topAnchor.constraint(equalTo: satMathSubView.bottomAnchor),
-            satWritingSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-            satWritingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
-
-            satReadingSubView.topAnchor.constraint(equalTo: satWritingSubView.bottomAnchor),
-            satReadingSubView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-            satReadingSubView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
+            self.stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
         ])
     }
 }

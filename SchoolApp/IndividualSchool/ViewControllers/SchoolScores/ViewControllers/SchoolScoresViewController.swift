@@ -26,11 +26,6 @@ class SchoolScoresViewController: UIViewController, Coordinated {
     let schoolScoresTopView: SchoolScoresTopView
     let schoolScoresBottomView: SchoolScoresBottomView
     
-    lazy var graphButton: SchoolAppButton = {
-        var button = SchoolAppButton(title: "Scores Graph", viewWidth: view.bounds.width, imageName: nil, titleSize: 20, imageSize: 20)
-        button.addTarget(self, action: #selector(graphButtonTapped), for: .primaryActionTriggered)
-        return button
-    }()
     
     let schoolColor: UIColor
     let viewModel: SchoolViewModel
@@ -39,10 +34,13 @@ class SchoolScoresViewController: UIViewController, Coordinated {
     init(viewModel: SchoolViewModel) {
         self.viewModel = viewModel
         self.schoolColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
-        schoolScoresTopView = SchoolScoresTopView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.satData, schoolColor: schoolColor)
+        schoolScoresTopView = SchoolScoresTopView(viewModel: viewModel)
         schoolScoresBottomView = SchoolScoresBottomView(frame: CGRect(), school: viewModel.school, schoolScores: viewModel.satData, schoolColor: schoolColor)
 
         super.init(nibName: nil, bundle: nil)
+        
+        schoolScoresTopView.graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .touchUpInside)
+
     }
     
     required init?(coder: NSCoder) {
@@ -75,11 +73,9 @@ class SchoolScoresViewController: UIViewController, Coordinated {
         view.addSubview(scrollView)
         scrollView.addSubview(screenStackView)
 
-        screenStackView.addArrangedSubview(schoolScoresTopView)
-        screenStackView.addArrangedSubview(schoolScoresBottomView)
+        screenStackView.addSubview(schoolScoresTopView)
+        screenStackView.addSubview(schoolScoresBottomView)
         
-        schoolScoresTopView.scoresInfoStackView.addSubview(graphButton)
-
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -90,21 +86,16 @@ class SchoolScoresViewController: UIViewController, Coordinated {
             screenStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             screenStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            screenStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1.1),
+            screenStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1),
             screenStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             schoolScoresTopView.topAnchor.constraint(equalTo: screenStackView.topAnchor),
             schoolScoresTopView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.3),
             schoolScoresTopView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
             schoolScoresTopView.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
-            
-            graphButton.leftAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.leftAnchor),
-            graphButton.bottomAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.bottomAnchor),
-            graphButton.heightAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.heightAnchor, multiplier: 0.3),
-            graphButton.widthAnchor.constraint(equalTo: schoolScoresTopView.scoresInfoStackView.widthAnchor),
-            
+                        
             schoolScoresBottomView.topAnchor.constraint(equalTo: schoolScoresTopView.bottomAnchor),
-            schoolScoresBottomView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.7),
+            schoolScoresBottomView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.6),
             schoolScoresBottomView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
         ])
     }

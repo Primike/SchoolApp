@@ -10,13 +10,29 @@ import UIKit
 
 class SchoolScoresTopView: UIView {
     
+    let viewModel: SchoolViewModel
+    
+    init(viewModel: SchoolViewModel) {
+        self.viewModel = viewModel
+
+        super.init(frame: .zero)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: school.school_name, labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: viewModel.school.school_name, labelTextColor: .white)
         return label
     }()
 
     lazy var headerStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 30
         return stackView
     }()
 
@@ -29,76 +45,76 @@ class SchoolScoresTopView: UIView {
     
     lazy var scoresInfoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
         return stackView
     }()
 
-    lazy var scoresLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "SAT Scores", labelTextColor: .white)
+    lazy var scoresLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.text = "SAT Scores"
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.numberOfLines = 1
         return label
     }()
 
-    lazy var testTakersLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Number of test takers: \(schoolScores.num_of_sat_test_takers)", labelTextColor: .white)
+    lazy var testTakersLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .title1).pointSize
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.text = "Number of test takers: \(viewModel.satData.num_of_sat_test_takers)"
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
-    
-    let school: School
-    let schoolScores: SATData
-    let schoolColor: UIColor
-    
-    init(frame: CGRect, school: School, schoolScores: SATData, schoolColor: UIColor) {
-        self.school = school
-        self.schoolColor = schoolColor
-        self.schoolScores = schoolScores
+      
+    lazy var graphButton: UIButton = {
+//        var configuration = UIButton.Configuration.plain()
+//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+//        let button = UIButton(configuration: configuration, primaryAction: nil)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Scores Graph", for: .normal)
+        button.backgroundColor = UIColor.black
+        button.tintColor = UIColor.white
+        button.layer.cornerRadius = 10
         
-        super.init(frame: frame)
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .title3).pointSize
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: largeTitlePointSize)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        return button
+    }()
     
     func layout() {
         self.addSubview(schoolNameLabel)
         self.addSubview(headerStackView)
         
-        headerStackView.addSubview(collegeBoardImage)
-        headerStackView.addSubview(scoresInfoStackView)
+        headerStackView.addArrangedSubview(collegeBoardImage)
+        headerStackView.addArrangedSubview(scoresInfoStackView)
         
-        scoresInfoStackView.addSubview(scoresLabel)
-        scoresInfoStackView.addSubview(testTakersLabel)
+        scoresInfoStackView.addArrangedSubview(scoresLabel)
+        scoresInfoStackView.addArrangedSubview(testTakersLabel)
+        scoresInfoStackView.addArrangedSubview(graphButton)
         
         NSLayoutConstraint.activate([
             schoolNameLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            schoolNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
+            schoolNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
             schoolNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             schoolNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             headerStackView.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor, constant: 5),
-            headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.85),
+            headerStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75),
             headerStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            collegeBoardImage.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
-            collegeBoardImage.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.9),
-            collegeBoardImage.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.4),
-            collegeBoardImage.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
-
-            scoresInfoStackView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
-            scoresInfoStackView.heightAnchor.constraint(equalTo: headerStackView.heightAnchor, multiplier: 0.9),
-            scoresInfoStackView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor, multiplier: 0.5),
-            scoresInfoStackView.centerYAnchor.constraint(equalTo: headerStackView.centerYAnchor),
-            
-            scoresLabel.topAnchor.constraint(equalTo: scoresInfoStackView.topAnchor),
-            scoresLabel.heightAnchor.constraint(equalTo: scoresInfoStackView.heightAnchor, multiplier: 0.3),
-            scoresLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
-            scoresLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
-
-            testTakersLabel.topAnchor.constraint(equalTo: scoresLabel.bottomAnchor),
-            testTakersLabel.heightAnchor.constraint(equalTo: scoresInfoStackView.heightAnchor, multiplier: 0.3),
-            testTakersLabel.widthAnchor.constraint(equalTo: scoresInfoStackView.widthAnchor),
-            testTakersLabel.centerXAnchor.constraint(equalTo: scoresInfoStackView.centerXAnchor),
         ])
     }
 }
