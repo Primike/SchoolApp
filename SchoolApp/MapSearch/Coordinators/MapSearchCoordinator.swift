@@ -25,7 +25,7 @@ class MapSearchCoordinator: Coordinating {
         self.searchType = searchType
     }
     
-    func start() {
+    func start2() {
         let viewController: UIViewController
         switch searchType {
         case .radius:
@@ -42,6 +42,12 @@ class MapSearchCoordinator: Coordinating {
             navigationController.tabBarItem.image = UIImage(systemName: "location.magnifyingglass")
         }
         
+        navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func start() {
+        let viewController = MapFilterViewController(viewModel: viewModel)
+        viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
     }
 
