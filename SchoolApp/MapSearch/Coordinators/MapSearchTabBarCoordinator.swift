@@ -22,22 +22,22 @@ class MapSearchTabBarCoordinator: Coordinating {
     }
     
     func start() {
-        let radiusSearchNavController = UINavigationController()
-        let radiusSearchCoordinator = MapSearchCoordinator(navigationController: radiusSearchNavController, viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData), searchType: .radius)
-        radiusSearchCoordinator.parentCoordinator = self
-        radiusSearchCoordinator.start()
-        childCoordinators.append(radiusSearchCoordinator)
-
-        let addressSearchNavController = UINavigationController()
-        let addressSearchCoordinator = MapSearchCoordinator(navigationController: addressSearchNavController, viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData), searchType: .address)
-        addressSearchCoordinator.parentCoordinator = self
-        addressSearchCoordinator.start()
-        childCoordinators.append(addressSearchCoordinator)
-
-        let tabBarViewController = SchoolTabBarViewController()
-        tabBarViewController.coordinator = self
-        tabBarViewController.setViewControllers([radiusSearchNavController, addressSearchNavController], animated: true)
-        navigationController.pushViewController(tabBarViewController, animated: true)
+//        let radiusSearchNavController = UINavigationController()
+//        let radiusSearchCoordinator = MapSearchCoordinator(navigationController: radiusSearchNavController, viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData), searchType: .radius)
+//        radiusSearchCoordinator.parentCoordinator = self
+//        radiusSearchCoordinator.start()
+//        childCoordinators.append(radiusSearchCoordinator)
+//
+//        let addressSearchNavController = UINavigationController()
+//        let addressSearchCoordinator = MapSearchCoordinator(navigationController: addressSearchNavController, viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData), searchType: .address)
+//        addressSearchCoordinator.parentCoordinator = self
+//        addressSearchCoordinator.start()
+//        childCoordinators.append(addressSearchCoordinator)
+//
+//        let tabBarViewController = SchoolTabBarViewController()
+//        tabBarViewController.coordinator = self
+//        tabBarViewController.setViewControllers([radiusSearchNavController, addressSearchNavController], animated: true)
+//        navigationController.pushViewController(tabBarViewController, animated: true)
     }
     
     func didFinish() {
