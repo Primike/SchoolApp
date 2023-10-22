@@ -88,29 +88,29 @@ class SearchSATScoresViewModel: SchoolCellMethods {
     }
 
     
-    func searchTotalScores() {
-        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_math_avg_score)! +  Int($0.sat_writing_avg_score)! + Int($0.sat_critical_reading_avg_score)! - myTotalScore) < abs(Int($1.sat_math_avg_score)! +  Int($1.sat_writing_avg_score)! + Int($1.sat_critical_reading_avg_score)! - myTotalScore)})
-        
-        calculatedSchoolsScores = sortedScores
-    }
-    
-    func searchMathScores() {
-        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_math_avg_score)! - myTotalScore) < abs(Int($1.sat_math_avg_score)! - myTotalScore)})
-        
-        calculatedSchoolsScores = sortedScores
-    }
-    
-    func searchReadingScores() {
-        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_critical_reading_avg_score)! - myTotalScore) < abs(Int($1.sat_critical_reading_avg_score)! - myTotalScore)})
-        
-        calculatedSchoolsScores = sortedScores
-    }
-    
-    func searchWritingScores() {
-        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_writing_avg_score)! - myTotalScore) < abs(Int($1.sat_writing_avg_score)! - myTotalScore)})
-        
-        calculatedSchoolsScores = sortedScores
-    }
+//    func searchTotalScores() {
+//        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_math_avg_score)! +  Int($0.sat_writing_avg_score)! + Int($0.sat_critical_reading_avg_score)! - myTotalScore) < abs(Int($1.sat_math_avg_score)! +  Int($1.sat_writing_avg_score)! + Int($1.sat_critical_reading_avg_score)! - myTotalScore)})
+//        
+//        calculatedSchoolsScores = sortedScores
+//    }
+//    
+//    func searchMathScores() {
+//        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_math_avg_score)! - myTotalScore) < abs(Int($1.sat_math_avg_score)! - myTotalScore)})
+//        
+//        calculatedSchoolsScores = sortedScores
+//    }
+//    
+//    func searchReadingScores() {
+//        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_critical_reading_avg_score)! - myTotalScore) < abs(Int($1.sat_critical_reading_avg_score)! - myTotalScore)})
+//        
+//        calculatedSchoolsScores = sortedScores
+//    }
+//    
+//    func searchWritingScores() {
+//        let sortedScores = schoolsScores.sorted(by: {abs(Int($0.sat_writing_avg_score)! - myTotalScore) < abs(Int($1.sat_writing_avg_score)! - myTotalScore)})
+//        
+//        calculatedSchoolsScores = sortedScores
+//    }
             
     //MARK: Cell Methods
     func getSchoolName(indexPath: IndexPath) -> String {

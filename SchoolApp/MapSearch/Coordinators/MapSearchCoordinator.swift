@@ -24,29 +24,9 @@ class MapSearchCoordinator: Coordinating {
         self.schools = schools
         self.satData = satData
     }
-
-//    func start2() {
-//        let viewController: UIViewController
-//        switch searchType {
-//        case .radius:
-//            let radiusSearchViewController = RadiusSearchViewController(viewModel: viewModel)
-//            radiusSearchViewController.coordinator = self
-//            viewController = radiusSearchViewController
-//            navigationController.tabBarItem.title = "Radius Search"
-//            navigationController.tabBarItem.image = UIImage(systemName: "mappin.circle.fill")
-//        case .address:
-//            let addressSearchViewController = AddressSearchViewController(viewModel: viewModel)
-//            addressSearchViewController.coordinator = self
-//            viewController = addressSearchViewController
-//            navigationController.tabBarItem.title = "Address Search"
-//            navigationController.tabBarItem.image = UIImage(systemName: "location.magnifyingglass")
-//        }
-//
-//        navigationController.pushViewController(viewController, animated: false)
-//    }
     
     func start() {
-        let viewController = MapFilterViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData))
+        let viewController = MapSearchViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData))
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

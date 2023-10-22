@@ -86,7 +86,7 @@ class MapFilterView: UIView {
     lazy var milesSlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0
-        slider.maximumValue = 10
+        slider.maximumValue = 25
         slider.value = 5
         return slider
     }()

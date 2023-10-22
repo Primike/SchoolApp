@@ -7,12 +7,17 @@
 
 import Foundation
 import UIKit
+import MapKit
+
+protocol MapFilterDelegate: AnyObject {
+    func filterApplied(miles: Float, coordinates: CLLocationCoordinate2D)
+}
 
 class MapFilterViewController: UIViewController {
     
-    let pickerData: [Int] = Array(1...10)
     let viewModel: MapSearchViewModel
     weak var coordinator: MapSearchCoordinator?
+    weak var delegate: MapFilterDelegate?
 
     init(viewModel: MapSearchViewModel) {
         self.viewModel = viewModel
@@ -45,6 +50,15 @@ class MapFilterViewController: UIViewController {
         layout()
     }
     
+    var currentData: [Int] {
+        switch mapFilterView.segmentedControl.selectedSegmentIndex {
+        case 0:
+            return [0, 600, 1000, 1400, 1800, 2000, 2200]
+        default:
+            return [0, 200, 300, 400, 500, 600, 700, 800]
+        }
+    }
+    
     private func setup() {
         mapFilterView.milesSlider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
         mapFilterView.numberPicker.dataSource = self
@@ -52,6 +66,9 @@ class MapFilterViewController: UIViewController {
         mapFilterView.minScorePicker.dataSource = self
         mapFilterView.minScorePicker.delegate = self
         mapFilterView.applyButton.addTarget(self, action: #selector(applyTapped), for: .touchUpInside)
+        
+        mapFilterView.segmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
+
     }
     
     private func layout() {
@@ -69,17 +86,34 @@ class MapFilterViewController: UIViewController {
         mapFilterView.milesLabel.text = "\(Int(sender.value)) Miles"
     }
     
+    @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
+        mapFilterView.minScorePicker.reloadAllComponents()
+    }
+
     @objc func applyTapped(sender: UIButton) {
         let address = mapFilterView.addressText.text ?? ""
         let miles = mapFilterView.milesSlider.value
-        let schoolIndex = mapFilterView.numberPicker.selectedRow(inComponent: 0)
-        let schools = pickerData[schoolIndex]
+        let schoolIndex = mapFilterView.numberPicker.selectedRow(inComponent: 0) + 1
         let scoreIndex = mapFilterView.minScorePicker.selectedRow(inComponent: 0)
-        let score = pickerData[scoreIndex]
+        let score = currentData[scoreIndex]
         let section = mapFilterView.segmentedControl.selectedSegmentIndex
-        print(section)
         
-        self.coordinator?.navigationController.popViewController(animated: true)
+        viewModel.validateAddress(address: address, radius: miles) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let coordinates):
+                self.viewModel.filterByMiles(coordinates: coordinates, miles: Double(miles))
+                self.viewModel.filterByNumberOfSchools(coordinates: coordinates)
+                self.viewModel.modifyDuplicates()
+                self.viewModel.filterBySATData(selectedSegment: section, score: score, number: schoolIndex)
+                self.delegate?.filterApplied(miles: miles, coordinates: coordinates)
+                self.navigationController?.popViewController(animated: true)
+                print(self.viewModel.nearbySchools.count)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -89,10 +123,19 @@ extension MapFilterViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        if pickerView == mapFilterView.numberPicker {
+            return 30
+        } else {
+            return currentData.count
+        }
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(pickerData[row])
+        let array = Array(1...30)
+        if pickerView == mapFilterView.numberPicker {
+            return String(array[row])
+        } else {
+            return String(currentData[row])
+        }
     }
 }
