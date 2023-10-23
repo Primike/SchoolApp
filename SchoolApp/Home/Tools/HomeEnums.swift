@@ -11,16 +11,14 @@ enum ViewControllerType {
     case schoolsList
     case mapSearch
     case mySchools
-    case topSchools
-    case satSearch
+    case about
 }
 
 enum HomeButtonTag: Int {
     case schoolsList = 0
     case mapSearch = 1
     case mySchools = 2
-    case topSchools = 3
-    case satSearch = 4
+    case about = 3
 }
 
 enum HomeImageName: String {

@@ -67,27 +67,33 @@ class HomeBottomView: UIView {
         button.tag = HomeButtonTag.mySchools.rawValue
         return button
     }()
+    
+    lazy var about: UIButton = {
+        let button = SchoolAppButton(title: "About", viewWidth: parentViewWidth, imageName: "questionmark.circle", titleSize: 17, imageSize: 18)
+        button.tag = HomeButtonTag.mySchools.rawValue
+        return button
+    }()
 
     //MARK: SMALL BUTTONS
-    lazy var smallButtonsStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 30
-        return stackView
-    }()
-    
-    lazy var topSchoolsButton: SchoolAppButton = {
-        let button = SchoolAppButton(title: "Top Schools", viewWidth: parentViewWidth, imageName: "star", titleSize: 30, imageSize: 32)
-        button.tag = HomeButtonTag.topSchools.rawValue
-        return button
-    }()
-
-    lazy var satSearchButton: SchoolAppButton = {
-        let button = SchoolAppButton(title: "SAT Search", viewWidth: parentViewWidth, imageName: "books.vertical", titleSize: 30, imageSize: 32)
-        button.tag = HomeButtonTag.satSearch.rawValue
-        return button
-    }()
+//    lazy var smallButtonsStackView: SchoolAppStackView = {
+//        var stackView = SchoolAppStackView()
+//        stackView.axis = .horizontal
+//        stackView.distribution = .fillEqually
+//        stackView.spacing = 30
+//        return stackView
+//    }()
+//
+//    lazy var topSchoolsButton: SchoolAppButton = {
+//        let button = SchoolAppButton(title: "Top Schools", viewWidth: parentViewWidth, imageName: "star", titleSize: 30, imageSize: 32)
+//        button.tag = HomeButtonTag.topSchools.rawValue
+//        return button
+//    }()
+//
+//    lazy var satSearchButton: SchoolAppButton = {
+//        let button = SchoolAppButton(title: "SAT Search", viewWidth: parentViewWidth, imageName: "books.vertical", titleSize: 30, imageSize: 32)
+//        button.tag = HomeButtonTag.satSearch.rawValue
+//        return button
+//    }()
 
     //MARK: BOTTOM VIEW
     lazy var bottomStackView: SchoolAppStackView = {
@@ -118,15 +124,16 @@ class HomeBottomView: UIView {
         
         self.addSubview(appTitleLabel)
         self.addSubview(largeButtonsStackView)
-        self.addSubview(smallButtonsStackView)
+//        self.addSubview(smallButtonsStackView)
         self.addSubview(bottomStackView)
         
         
         largeButtonsStackView.addArrangedSubview(schoolsListButton)
         largeButtonsStackView.addArrangedSubview(mapSearchButton)
         largeButtonsStackView.addArrangedSubview(myschoolsButton)
-        smallButtonsStackView.addArrangedSubview(topSchoolsButton)
-        smallButtonsStackView.addArrangedSubview(satSearchButton)
+        largeButtonsStackView.addArrangedSubview(about)
+//        smallButtonsStackView.addArrangedSubview(topSchoolsButton)
+//        smallButtonsStackView.addArrangedSubview(satSearchButton)
         bottomStackView.addArrangedSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
@@ -140,10 +147,10 @@ class HomeBottomView: UIView {
             largeButtonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
             largeButtonsStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
-            smallButtonsStackView.topAnchor.constraint(equalTo: largeButtonsStackView.bottomAnchor, constant: 15),
-            smallButtonsStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10),
-            smallButtonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-            smallButtonsStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//            smallButtonsStackView.topAnchor.constraint(equalTo: largeButtonsStackView.bottomAnchor, constant: 15),
+//            smallButtonsStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10),
+//            smallButtonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+//            smallButtonsStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             bottomStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             bottomStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.17),

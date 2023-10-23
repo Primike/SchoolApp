@@ -21,7 +21,6 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         self.mapFilterVC = MapFilterViewController(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
         mapFilterVC.delegate = self
-
     }
     
     required init?(coder: NSCoder) {
@@ -36,6 +35,11 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         return map
     }()
     
+    lazy var filterButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(searchTapped))
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +49,7 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
     }
     
     private func setup() {
-        let button = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(searchTapped))
-        navigationItem.rightBarButtonItem = button
+        navigationItem.rightBarButtonItem = filterButton
 
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {

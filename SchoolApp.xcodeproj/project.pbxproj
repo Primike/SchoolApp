@@ -16,6 +16,7 @@
 		9E2E0ED129F2F38600B66965 /* TopSchoolsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */; };
 		9E446D982A11C8D300B47CBA /* HomeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E446D972A11C8D300B47CBA /* HomeEnums.swift */; };
 		9E4631212AE41954001FB843 /* MapFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4631202AE41954001FB843 /* MapFilterView.swift */; };
+		9E4631252AE6E336001FB843 /* SchoolData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4631242AE6E336001FB843 /* SchoolData.swift */; };
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
 		9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824008289879EB000D4BA0 /* SchoolAppTests.swift */; };
 		9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */; };
@@ -78,7 +79,6 @@
 		B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */; };
 		B880A2C0284ED4090071E43D /* SchoolScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */; };
 		B880A2C3284F7F680071E43D /* SchoolGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */; };
-		B880AE28288726F500FB1F28 /* SchoolsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */; };
 		B88891BE2892C86700236F76 /* MySchoolsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */; };
 		B89D3CF2287F18F8002300D1 /* SearchSATScoresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D3CF1287F18F8002300D1 /* SearchSATScoresViewModel.swift */; };
 		B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */; };
@@ -112,6 +112,7 @@
 		9E2E0ED029F2F38600B66965 /* TopSchoolsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSchoolsCoordinator.swift; sourceTree = "<group>"; };
 		9E446D972A11C8D300B47CBA /* HomeEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnums.swift; sourceTree = "<group>"; };
 		9E4631202AE41954001FB843 /* MapFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterView.swift; sourceTree = "<group>"; };
+		9E4631242AE6E336001FB843 /* SchoolData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolData.swift; sourceTree = "<group>"; };
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
 		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
@@ -175,7 +176,6 @@
 		B880A2BD284ED2310071E43D /* SchoolInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfoViewController.swift; sourceTree = "<group>"; };
 		B880A2BF284ED4090071E43D /* SchoolScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScoresViewController.swift; sourceTree = "<group>"; };
 		B880A2C2284F7F680071E43D /* SchoolGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolGraphViewController.swift; sourceTree = "<group>"; };
-		B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListHeaderView.swift; sourceTree = "<group>"; };
 		B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySchoolsHeaderView.swift; sourceTree = "<group>"; };
 		B89D3CF1287F18F8002300D1 /* SearchSATScoresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSATScoresViewModel.swift; sourceTree = "<group>"; };
 		B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
@@ -309,7 +309,6 @@
 		9E21587B2A460D750015A049 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B880AE27288726F500FB1F28 /* SchoolsListHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -683,6 +682,7 @@
 		9EB3197D2A460B76007F7601 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9E4631242AE6E336001FB843 /* SchoolData.swift */,
 				B83017B5284933C700303EEE /* School.swift */,
 				B880A2B9284E61FF0071E43D /* SATData.swift */,
 			);
@@ -948,6 +948,7 @@
 				B880A2C0284ED4090071E43D /* SchoolScoresViewController.swift in Sources */,
 				9E4631212AE41954001FB843 /* MapFilterView.swift in Sources */,
 				B801DEEA287B281400EA2090 /* HomeViewModel.swift in Sources */,
+				9E4631252AE6E336001FB843 /* SchoolData.swift in Sources */,
 				B87473B4284904B200821AC9 /* HomeDataManager.swift in Sources */,
 				9EB7441529EDD9050041F35E /* Coordinating.swift in Sources */,
 				B83017B6284933C700303EEE /* School.swift in Sources */,
@@ -1006,7 +1007,6 @@
 				B801DEEE287BB4BF00EA2090 /* TopSchoolsViewModel.swift in Sources */,
 				B801DEF4287DA31400EA2090 /* MySchoolsViewController.swift in Sources */,
 				9ECCFD4229EF72B80004F3D1 /* SATSearchCoordinator.swift in Sources */,
-				B880AE28288726F500FB1F28 /* SchoolsListHeaderView.swift in Sources */,
 				B880A2BE284ED2310071E43D /* SchoolInfoViewController.swift in Sources */,
 				9EF64CBC29A131A80012F890 /* HomeCoordinator.swift in Sources */,
 			);

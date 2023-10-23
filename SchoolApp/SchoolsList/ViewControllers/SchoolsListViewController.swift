@@ -22,31 +22,28 @@ class SchoolsListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    lazy var schoolsListHeader: SchoolsListHeaderView = {
-        let headerView = SchoolsListHeaderView(frame: .zero)
-        var size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        size.width = UIScreen.main.bounds.width
-        size.height = UIScreen.main.bounds.height / 6
-        headerView.frame.size = size
-        return headerView
-    }()
-
     lazy var schoolsTableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.tableHeaderView = schoolsListHeader
+        tableView.tableHeaderView = searchController.searchBar
         return tableView
     }()
     
-    lazy var schoolsSearchBar: UISearchBar = {
-        var searchBar = UISearchBar()
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = "Search Schools"
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        return searchBar
+    lazy var searchController: UISearchController = {
+        var searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Schools..."
+        definesPresentationContext = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        return searchController
     }()
-                
+    
+    lazy var filterButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "Sort By", style: .plain, target: self, action: #selector(searchTapped))
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,15 +54,13 @@ class SchoolsListViewController: UIViewController {
     //MARK: When View Is Removed This deinits The Coordinator
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if isMovingFromParent {
-            coordinator?.didFinish()
-        }
+        if isMovingFromParent { coordinator?.didFinish() }
     }
     
     private func setup() {
         view.backgroundColor = .white
-        
-        navigationItem.titleView = schoolsSearchBar
+        navigationItem.rightBarButtonItem = filterButton
+        navigationItem.title = "Search Schools"
         
         schoolsTableView.register(SchoolTableViewCell.self, forCellReuseIdentifier: SchoolTableViewCell.reuseID)
     }
@@ -73,7 +68,6 @@ class SchoolsListViewController: UIViewController {
     private func layout() {
         schoolsTableView.delegate = self
         schoolsTableView.dataSource = self
-        schoolsSearchBar.delegate = self
 
         view.addSubview(schoolsTableView)
 
@@ -83,6 +77,32 @@ class SchoolsListViewController: UIViewController {
             schoolsTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             schoolsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc func searchTapped() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        // Add your choices
+        actionSheet.addAction(UIAlertAction(title: "Choice 1", style: .default, handler: { _ in
+            // Handle Choice 1
+            print("Choice 1 selected")
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Choice 2", style: .default, handler: { _ in
+            // Handle Choice 2
+            print("Choice 2 selected")
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Choice 3", style: .default, handler: { _ in
+            // Handle Choice 3
+            print("Choice 3 selected")
+        }))
+        
+        // Add cancel action
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // Present the action sheet
+        present(actionSheet, animated: true, completion: nil)
     }
 }
 
@@ -116,9 +136,9 @@ extension SchoolsListViewController: UITableViewDelegate {
     }
 }
 
-extension SchoolsListViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.textChanged(searchText: searchText)
+extension SchoolsListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel.textChanged(searchText: searchController.searchBar.text ?? "")
         schoolsTableView.reloadData()
     }
 }

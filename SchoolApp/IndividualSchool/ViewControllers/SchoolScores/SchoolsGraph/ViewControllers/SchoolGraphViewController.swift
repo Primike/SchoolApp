@@ -75,6 +75,11 @@ class SchoolGraphViewController: UIViewController {
         layout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        graphBarsView.animateBars()
+    }
+    
     private func layout() {
         view.addSubview(screenStackView)
 

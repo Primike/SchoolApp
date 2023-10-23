@@ -65,7 +65,9 @@ class MapFilterViewController: UIViewController {
         mapFilterView.numberPicker.delegate = self
         mapFilterView.minScorePicker.dataSource = self
         mapFilterView.minScorePicker.delegate = self
-        mapFilterView.applyButton.addTarget(self, action: #selector(applyTapped), for: .touchUpInside)
+        
+        mapFilterView.applyButton.addTarget(self, action: #selector(applyTouched), for: .touchDown)
+        mapFilterView.applyButton.addTarget(self, action: #selector(applyTapped), for: [.touchUpInside, .touchUpOutside])
         
         mapFilterView.segmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
 
@@ -90,7 +92,17 @@ class MapFilterViewController: UIViewController {
         mapFilterView.minScorePicker.reloadAllComponents()
     }
 
+    @objc func applyTouched() {
+        UIView.animate(withDuration: 0.1) {
+            self.mapFilterView.applyButton.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }
+    }
+
     @objc func applyTapped(sender: UIButton) {
+        UIView.animate(withDuration: 0.1) {
+            self.mapFilterView.applyButton.transform = CGAffineTransform.identity
+        }
+
         let address = mapFilterView.addressText.text ?? ""
         let miles = mapFilterView.milesSlider.value
         let schoolIndex = mapFilterView.numberPicker.selectedRow(inComponent: 0) + 1

@@ -93,8 +93,8 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         homeBottomView.schoolsListButton.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
         homeBottomView.mapSearchButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         homeBottomView.myschoolsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        homeBottomView.topSchoolsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        homeBottomView.satSearchButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        homeBottomView.about.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+//        homeBottomView.satSearchButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
     }
             
@@ -132,10 +132,8 @@ extension HomeViewController {
             type = .mapSearch
         case .mySchools:
             type = .mySchools
-        case .topSchools:
-            type = .topSchools
-        case .satSearch:
-            type = .satSearch
+        case .about:
+            type = .mySchools
         }
 
         coordinator.goToViewController(type: type, schools: viewModel.schools, satData: viewModel.satData)

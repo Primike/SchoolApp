@@ -40,11 +40,8 @@ class HomeCoordinator: Coordinating {
         case .mySchools:
             coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)
             
-        case .topSchools:
-            coordinator = TopSchoolsCoordinator(navigationController: navigationController, schools: schools, schoolScores: satData)
-
-        case .satSearch:
-            coordinator = SATSearchCoordinator(navigationController: navigationController, schools: schools, schoolScores: satData)
+        case .about:
+            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)
         }
         
         childCoordinators.append(coordinator)

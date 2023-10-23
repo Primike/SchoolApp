@@ -28,6 +28,9 @@ class GraphBarsView: UIView {
         return view
     }()
     
+    var mathBarHeightConstraint: NSLayoutConstraint?
+    var writingBarHeightConstraint: NSLayoutConstraint?
+    var readingBarHeightConstraint: NSLayoutConstraint?
     var schoolScores: SATData
     var schoolColor: UIColor
     var graphHeightValues = [Float]()
@@ -57,21 +60,38 @@ class GraphBarsView: UIView {
         self.addSubview(writingBar)
         self.addSubview(readingBar)
         
+        mathBarHeightConstraint = mathBar.heightAnchor.constraint(equalToConstant: 0)
+        writingBarHeightConstraint = writingBar.heightAnchor.constraint(equalToConstant: 0)
+        readingBarHeightConstraint = readingBar.heightAnchor.constraint(equalToConstant: 0)
+        
         NSLayoutConstraint.activate([
             mathBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             mathBar.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            mathBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: CGFloat(graphHeightValues[0])),
+            mathBarHeightConstraint!,
             mathBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
             
             writingBar.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             writingBar.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            writingBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: CGFloat(graphHeightValues[1])),
+            writingBarHeightConstraint!,
             writingBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
             
             readingBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             readingBar.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            readingBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: CGFloat(graphHeightValues[2])),
+            readingBarHeightConstraint!,
             readingBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
         ])
     }
+
+    func animateBars() {
+        // Update height constraints to desired values
+        mathBarHeightConstraint?.constant = self.frame.height * CGFloat(graphHeightValues[0])
+        writingBarHeightConstraint?.constant = self.frame.height * CGFloat(graphHeightValues[1])
+        readingBarHeightConstraint?.constant = self.frame.height * CGFloat(graphHeightValues[2])
+        
+        // Animate the changes
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+        }
+    }
+
 }
