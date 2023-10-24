@@ -24,6 +24,7 @@ class MapSearchViewModel {
         self.nearbySchools = []
     }
     
+    // MARK: - Create Pins
     func getPins() -> [MKAnnotation] {
         var pins = [MKPointAnnotation]()
         
@@ -40,6 +41,7 @@ class MapSearchViewModel {
         return pins
     }
     
+    // MARK: - Validate Address
     func validateAddress(address: String, radius: Float, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void) {
         
         if address.isEmpty {
@@ -63,7 +65,6 @@ class MapSearchViewModel {
                 return
             }
             
-//            self.searchMap(placeMark: placemark, radius: Double(radius) ?? 0.0)
             completion(.success(CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
         }
     }
@@ -75,6 +76,7 @@ class MapSearchViewModel {
         return latitude >= minLat && latitude <= maxLat && longitude >= minLong && longitude <= maxLong
     }
     
+    // MARK: - Filter View Controller Coordinate Methods
     func filterByMiles(coordinates: CLLocationCoordinate2D, miles: Double) {
         let latitude = coordinates.latitude
         let longitude = coordinates.longitude
@@ -87,23 +89,28 @@ class MapSearchViewModel {
             return distance <= distanceThreshold
         }
         
-        print(nearbySchools.count)
+        filterByProximity(coordinates: coordinates)
     }
     
-//    func filterByNumberOfSchools(coordinates: CLLocationCoordinate2D) {
-//        let latitude = coordinates.latitude
-//        let longitude = coordinates.longitude
-//
-//        nearbySchools = nearbySchools.sorted { school1, school2 in
-//            let distance1 = abs(latitude - Double(school1.latitude!)!) + abs(longitude - Double(school1.longitude!)!)
-//            let distance2 = abs(latitude - Double(school2.latitude!)!) + abs(longitude - Double(school2.longitude!)!)
-//            return distance1 < distance2
-//        }
-//        
-//        print(nearbySchools.count)
-//    }
+    private func filterByProximity(coordinates: CLLocationCoordinate2D) {
+        let latitude = coordinates.latitude
+        let longitude = coordinates.longitude
 
-    func modifyDuplicates() {
+        nearbySchools = nearbySchools.sorted { data1, data2 in
+            let coordinates1 = data1.school.coordinates
+            let coordinates2 = data2.school.coordinates
+            
+            let distance1 = abs(latitude - coordinates1.latitude) + abs(longitude - coordinates1.longitude)
+            let distance2 = abs(latitude - coordinates2.latitude) + abs(longitude - coordinates2.longitude)
+            
+            return distance1 < distance2
+        }
+        
+        modifyDuplicates()
+        print(nearbySchools.count)
+    }
+
+    private func modifyDuplicates() {
         for i in 0..<nearbySchools.count {
             for j in 0..<nearbySchools.count {
                 if i != j && nearbySchools[i].school.latitude == nearbySchools[j].school.latitude && nearbySchools[i].school.longitude == nearbySchools[j].school.longitude {
@@ -113,6 +120,7 @@ class MapSearchViewModel {
         }
     }
     
+    // MARK: - Filter View Controller SAT Data Methods
     enum TopSchoolsCategory {
         case math
         case reading
@@ -120,10 +128,11 @@ class MapSearchViewModel {
         case combined
     }
         
-    func filterBySATData(selectedSegment: Int, score: Int, number: Int) {
+    func filterBySATData(selectedSegment: Int, score: String, count: String) {
         let sections: [TopSchoolsCategory] = [.combined, .math, .reading, .writing]
         let category = sections[selectedSegment]
         var filtered = [SchoolData]()
+        let score = Int(score) ?? 0
         
         for school in nearbySchools {
             switch category {
@@ -142,8 +151,7 @@ class MapSearchViewModel {
             }
         }
         
-        nearbySchools = Array(filtered.prefix(number))
-        print(nearbySchools.count)
+        if let number = Int(count) { nearbySchools = Array(filtered.prefix(number)) }
     }
 
     func getSchoolData(name: String) -> SchoolData? {

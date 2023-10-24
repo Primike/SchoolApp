@@ -9,22 +9,30 @@ import Foundation
 import UIKit
 
 class MapSearchCoordinator: Coordinating {
+    
     weak var parentCoordinator: Coordinating?
-    var navigationController: UINavigationController
-    var childCoordinators: [Coordinating] = []
-    var schoolsData: [SchoolData]
+    private let navigationController: UINavigationController
+    private var childCoordinators: [Coordinating] = []
+    private let viewModel: MapSearchViewModel
     
     required init(navigationController: UINavigationController, schoolsData: [SchoolData]) {
         self.navigationController = navigationController
-        self.schoolsData = schoolsData
+        self.viewModel = MapSearchViewModel(schoolsData: schoolsData)
     }
 
     func start() {
-        let viewController = MapSearchViewController(viewModel: MapSearchViewModel(schoolsData: schoolsData))
+        let viewController = MapSearchViewController(viewModel: viewModel)
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
 
+    func goToFilterView(viewController: MapSearchViewController) {
+        let mapFilter = MapFilterViewController(viewModel: viewModel)
+        mapFilter.coordinator = self
+        mapFilter.delegate = viewController
+        navigationController.pushViewController(mapFilter, animated: true)
+    }
+    
     func goToSchoolView(schoolData: SchoolData) {
         let viewModel = SchoolViewModel(schoolData: schoolData)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
@@ -40,8 +48,11 @@ class MapSearchCoordinator: Coordinating {
         }
     }
 
+    func didFinish() {
+        parentCoordinator?.childDidFinish(self)
+    }
+
     deinit {
         print("Map Search Coordinator")
     }
 }
-

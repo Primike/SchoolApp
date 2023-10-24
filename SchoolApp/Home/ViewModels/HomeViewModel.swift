@@ -86,28 +86,44 @@ final class HomeViewModel: HomeViewModeling {
         
     // MARK: - Create A Merged Text For Search Functionalities, Coordinates Check
     private func schoolsDataModifier() {
-        schools = schools.map { school in
-            var modifiedSchool = school
+        schools = schools.map { data in
+            var school = data
 
-            if let index = modifiedSchool.location.firstIndex(of: "(") {
-                modifiedSchool.location = String(modifiedSchool.location[..<index])
+            if let index = school.location.firstIndex(of: "(") {
+                school.location = String(school.location[..<index])
             }
 
-            var mergedText = modifiedSchool.school_name + modifiedSchool.location
+            var text = school.school_name + school.location + getBorough(boro: school.boro)
             let charactersToRemove = Set(" ,.-():/")
-            mergedText = mergedText.filter { !charactersToRemove.contains($0) }
-            mergedText = mergedText.replacingOccurrences(of: "&", with: "and")
-            modifiedSchool.mergedText = mergedText
+            
+            text = text.filter { !charactersToRemove.contains($0) }
+            text = text.replacingOccurrences(of: "&", with: "and")
+            school.mergedText = text
 
-            if modifiedSchool.latitude == nil || modifiedSchool.longitude == nil {
-                modifiedSchool.latitude = "0"
-                modifiedSchool.longitude = "0"
+            if school.latitude == nil || school.longitude == nil {
+                school.latitude = "0"
+                school.longitude = "0"
             }
 
-            return modifiedSchool
+            return school
         }
     }
 
+    private func getBorough(boro: Borough) -> String {
+        switch boro {
+        case .manhattan:
+            return "manhattan"
+        case .bronx:
+            return "bronx"
+        case .brooklyn:
+            return "brooklyn"
+        case .queens:
+            return "queens"
+        case .statenIsland:
+            return "statenIsland"
+        }
+    }
+    
     // MARK: - Filter Out Incomplete Scores
     private func satDataModifier() {
         satData = satData.filter { satRecord in

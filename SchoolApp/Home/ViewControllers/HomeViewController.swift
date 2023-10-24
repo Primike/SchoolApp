@@ -102,10 +102,17 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     }
 
     func addButtons() {
-        homeBottomView.schoolsListButton.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
-        homeBottomView.mapSearchButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        homeBottomView.myschoolsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        homeBottomView.about.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        homeBottomView.schoolsListButton.addTarget(self, action: #selector(buttonTouched), for: .touchDown)
+        homeBottomView.schoolsListButton.addTarget(self, action: #selector(buttonTapped), for: [.touchUpInside, .touchUpOutside])
+
+        homeBottomView.mapSearchButton.addTarget(self, action: #selector(buttonTouched), for: .touchDown)
+        homeBottomView.mapSearchButton.addTarget(self, action: #selector(buttonTapped), for: [.touchUpInside, .touchUpOutside])
+
+        homeBottomView.myschoolsButton.addTarget(self, action: #selector(buttonTouched), for: .touchDown)
+        homeBottomView.myschoolsButton.addTarget(self, action: #selector(buttonTapped), for: [.touchUpInside, .touchUpOutside])
+
+        homeBottomView.about.addTarget(self, action: #selector(buttonTouched), for: .touchDown)
+        homeBottomView.about.addTarget(self, action: #selector(buttonTapped), for: [.touchUpInside, .touchUpOutside])        
     }
             
     func layout() {
@@ -123,8 +130,19 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
 }
 
 extension HomeViewController {
+    @objc func buttonTouched(sender: UIButton) {
+        UIView.animate(withDuration: 0.1) {
+            sender.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }
+    }
+
     @objc func buttonTapped(sender: UIButton) {
+        UIView.animate(withDuration: 0.1) {
+            sender.transform = CGAffineTransform.identity
+        }
+
         guard let type = ViewControllerType(rawValue: sender.tag) else { return }
+    
         coordinator?.goToViewController(type: type, schoolsData: viewModel.getSchoolsData())
     }
 }

@@ -51,7 +51,7 @@ class SchoolsListViewController: UIViewController {
         layout()
     }
     
-    //MARK: When View Is Removed This deinits The Coordinator
+    // MARK: When View Is Removed This deinits The Coordinator
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if isMovingFromParent { coordinator?.didFinish() }
@@ -82,27 +82,28 @@ class SchoolsListViewController: UIViewController {
     @objc func searchTapped() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        // Add your choices
-        actionSheet.addAction(UIAlertAction(title: "Choice 1", style: .default, handler: { _ in
-            // Handle Choice 1
-            print("Choice 1 selected")
+        actionSheet.addAction(UIAlertAction(title: "Sort By Relevance", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            
+            self.viewModel.isSorted = false
+            self.filterTable()
+        }))
+                
+        actionSheet.addAction(UIAlertAction(title: "Sort By SAT Score", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+
+            self.viewModel.isSorted = true
+            self.filterTable()
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Choice 2", style: .default, handler: { _ in
-            // Handle Choice 2
-            print("Choice 2 selected")
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Choice 3", style: .default, handler: { _ in
-            // Handle Choice 3
-            print("Choice 3 selected")
-        }))
-        
-        // Add cancel action
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        // Present the action sheet
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func filterTable() {
+        viewModel.textChanged(searchText: searchController.searchBar.text ?? "")
+        schoolsTableView.reloadData()
     }
 }
 
@@ -138,8 +139,7 @@ extension SchoolsListViewController: UITableViewDelegate {
 
 extension SchoolsListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        viewModel.textChanged(searchText: searchController.searchBar.text ?? "")
-        schoolsTableView.reloadData()
+        filterTable()
     }
 }
 

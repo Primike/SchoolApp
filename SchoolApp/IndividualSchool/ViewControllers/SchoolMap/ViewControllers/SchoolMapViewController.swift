@@ -26,6 +26,13 @@ class SchoolMapViewController: UIViewController, Coordinated {
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        return stackView
+    }()
+    
     lazy var titleLabel: SchoolAppLabel = {
         let label = SchoolAppLabel(labelText: "\(viewModel.schoolData.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro))
         return label
@@ -64,16 +71,17 @@ class SchoolMapViewController: UIViewController, Coordinated {
     }
     
     private func layout() {
-        view.addSubview(titleLabel)
-        view.addSubview(map)
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(map)
         
         NSLayoutConstraint.activate([
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            map.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            map.widthAnchor.constraint(equalTo: view.widthAnchor),
-            map.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
         ])
     }
 }

@@ -17,6 +17,6 @@ class SchoolViewModel: SchoolColor {
     }
     
     var coordinate: CLLocationCoordinate2D? {
-        return schoolData.school.coordinate
+        return schoolData.school.coordinates
     }
 }

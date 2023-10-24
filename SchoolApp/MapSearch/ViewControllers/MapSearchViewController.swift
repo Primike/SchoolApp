@@ -12,15 +12,13 @@ import CoreLocation
 
 class MapSearchViewController: UIViewController, MapFilterDelegate {
     
-    let viewModel: MapSearchViewModel
     weak var coordinator: MapSearchCoordinator?
-    var mapFilterVC: MapFilterViewController
+    private let viewModel: MapSearchViewModel
     
     init(viewModel: MapSearchViewModel) {
         self.viewModel = viewModel
-        self.mapFilterVC = MapFilterViewController(viewModel: viewModel)
+        
         super.init(nibName: nil, bundle: nil)
-        mapFilterVC.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -48,8 +46,14 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         view.backgroundColor = .systemBackground
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent { coordinator?.didFinish() }
+    }
+
     private func setup() {
         navigationItem.rightBarButtonItem = filterButton
+        navigationItem.title = "Map Search"
 
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
@@ -70,7 +74,7 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
             map.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             map.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             map.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            map.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -83,10 +87,16 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         map.removeAnnotations(map.annotations)
         map.addAnnotations(viewModel.getPins())
         self.map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02 * Double(miles), longitudeDelta: 0.03 * Double(miles))), animated: true)
+        
+        let addressPin = MKPointAnnotation()
+        addressPin.coordinate = coordinates
+        addressPin.title = "CURRENT ADDRESS"
+        
+        map.addAnnotation(addressPin)
     }
 
     @objc func searchTapped() {
-        self.navigationController?.pushViewController(mapFilterVC, animated: true)
+        coordinator?.goToFilterView(viewController: self)
     }
 }
 
@@ -104,17 +114,23 @@ extension MapSearchViewController: MKMapViewDelegate {
         guard !(annotation is MKUserLocation) else { return nil }
         
         let reuseIdentifier = "annotationView"
-        var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKMarkerAnnotationView
         
         if view == nil {
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        }
+        
+        if annotation.title == "CURRENT ADDRESS" {
+            view?.markerTintColor = .blue
+        } else {
+            view?.markerTintColor = .red
         }
         
         configureAnnotationView(view, for: annotation)
         
         return view
     }
-    
+
     private func configureAnnotationView(_ view: MKAnnotationView?, for annotation: MKAnnotation) {
         view?.annotation = annotation
         view?.canShowCallout = true

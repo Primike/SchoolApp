@@ -30,7 +30,7 @@
 		9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC012762884F9DE0082E7D9 /* LocationManager.swift */; };
 		9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC01278288509230082E7D9 /* MapSearchViewModel.swift */; };
 		9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */; };
-		9ECCDCE12A1E5D8A00179539 /* TextValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */; };
+		9ECCDCE12A1E5D8A00179539 /* MapErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCDCE02A1E5D8A00179539 /* MapErrors.swift */; };
 		9ECCFD3B29EF64EE0004F3D1 /* SchoolTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */; };
 		9ECCFD3E29EF652D0004F3D1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */; };
 		9ECCFD4029EF6DC30004F3D1 /* MapSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */; };
@@ -119,7 +119,7 @@
 		9EC012762884F9DE0082E7D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9EC01278288509230082E7D9 /* MapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewModel.swift; sourceTree = "<group>"; };
 		9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTextField.swift; sourceTree = "<group>"; };
-		9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextValidation.swift; sourceTree = "<group>"; };
+		9ECCDCE02A1E5D8A00179539 /* MapErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapErrors.swift; sourceTree = "<group>"; };
 		9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTabBarController.swift; sourceTree = "<group>"; };
 		9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		9ECCFD3F29EF6DC30004F3D1 /* MapSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchCoordinator.swift; sourceTree = "<group>"; };
@@ -290,17 +290,10 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		9E21587B2A460D750015A049 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		9E21587C2A460D8D0015A049 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9ECCDCE02A1E5D8A00179539 /* TextValidation.swift */,
+				9ECCDCE02A1E5D8A00179539 /* MapErrors.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -635,7 +628,6 @@
 				9E2158782A460D5A0015A049 /* Coordinator */,
 				9E21587A2A460D700015A049 /* ViewModels */,
 				9E2158792A460D650015A049 /* ViewControllers */,
-				9E21587B2A460D750015A049 /* Views */,
 			);
 			path = SchoolsList;
 			sourceTree = "<group>";
@@ -863,7 +855,7 @@
 				B880A2BA284E61FF0071E43D /* SATData.swift in Sources */,
 				B86AE965289C24710083FF0A /* BottomSubjectView.swift in Sources */,
 				9EF49E8B29AD8575008122FF /* SchoolAppStackView.swift in Sources */,
-				9ECCDCE12A1E5D8A00179539 /* TextValidation.swift in Sources */,
+				9ECCDCE12A1E5D8A00179539 /* MapErrors.swift in Sources */,
 				9EC012772884F9DE0082E7D9 /* LocationManager.swift in Sources */,
 				B87C4B8828996B1B0091CD45 /* SchoolComparisonViewController.swift in Sources */,
 				B801DEF2287D9F6300EA2090 /* MySchoolsViewModel.swift in Sources */,

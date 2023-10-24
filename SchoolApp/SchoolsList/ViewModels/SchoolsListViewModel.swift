@@ -9,16 +9,17 @@ import Foundation
 import UIKit
 
 protocol SchoolsListViewModeling: SchoolCellMethods {
+    var isSorted: Bool { get set }
     func getNumOfRowsInSection() -> Int
     func textChanged(searchText: String)
     func getSchool(indexPath: IndexPath) -> SchoolData
-    func getSATData(indexPath: IndexPath) -> SATData
 }
 
 class SchoolsListViewModel: SchoolsListViewModeling {
     
     private let schoolsData: [SchoolData]
     private var searchResults: [SchoolData]
+    var isSorted = false
     
     init(schoolsData: [SchoolData]) {
         self.schoolsData = schoolsData
@@ -45,17 +46,17 @@ class SchoolsListViewModel: SchoolsListViewModeling {
         } else {
             searchResults = schoolsData
         }
+        
+        if isSorted {
+            searchResults = searchResults.sorted { $0.sat.totalScore > $1.sat.totalScore }
+        }
     }
 
     func getSchool(indexPath: IndexPath) -> SchoolData {
         return searchResults[indexPath.row]
     }
-    
-    func getSATData(indexPath: IndexPath) -> SATData {
-        return searchResults[indexPath.row].sat
-    }
-    
-    //MARK: Cell Setup Methods
+                
+    // MARK: - Cell Setup Methods
     func getSchoolName(indexPath: IndexPath) -> String {
         return searchResults[indexPath.row].school.school_name
     }
@@ -72,4 +73,3 @@ class SchoolsListViewModel: SchoolsListViewModeling {
         return getColor(schoolBoro: searchResults[indexPath.row].school.boro)
     }
 }
-

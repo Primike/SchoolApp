@@ -14,9 +14,14 @@ struct SATData: Decodable {
     var sat_math_avg_score: String
     var sat_writing_avg_score: String
 
-    // Default initializer for Decodable will be generated automatically
+    var totalScore: Int {
+        let readingScore = Int(sat_critical_reading_avg_score) ?? 0
+        let mathScore = Int(sat_math_avg_score) ?? 0
+        let writingScore = Int(sat_writing_avg_score) ?? 0
+        
+        return readingScore + mathScore + writingScore
+    }
 
-    // Custom initializer that only takes dbn
     init(dbn: String) {
         self.dbn = dbn
         self.num_of_sat_test_takers = "Not Available"
@@ -25,4 +30,3 @@ struct SATData: Decodable {
         self.sat_writing_avg_score = "0"
     }
 }
-
