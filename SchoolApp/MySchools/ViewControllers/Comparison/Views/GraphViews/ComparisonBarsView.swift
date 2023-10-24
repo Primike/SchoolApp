@@ -16,13 +16,13 @@ class ComparisonBarsView: UIView {
     }()
     
     lazy var mathBar: BarView = {
-        var view = BarView(sectionScore: schoolScores.sat_math_avg_score, schoolColor: .black)
+        var view = BarView(sectionScore: sat1.sat_math_avg_score, schoolColor: .black)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var mathBar2: BarView = {
-        var view = BarView(sectionScore: schoolScores2.sat_math_avg_score, schoolColor: .brown)
+        var view = BarView(sectionScore: sat2.sat_math_avg_score, schoolColor: .brown)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -33,13 +33,13 @@ class ComparisonBarsView: UIView {
     }()
 
     lazy var writingBar: BarView = {
-        var view = BarView(sectionScore: schoolScores.sat_writing_avg_score, schoolColor: .black)
+        var view = BarView(sectionScore: sat1.sat_writing_avg_score, schoolColor: .black)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var writingBar2: BarView = {
-        var view = BarView(sectionScore: schoolScores2.sat_writing_avg_score, schoolColor: .brown)
+        var view = BarView(sectionScore: sat2.sat_writing_avg_score, schoolColor: .brown)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,41 +50,41 @@ class ComparisonBarsView: UIView {
     }()
 
     lazy var readingBar: BarView = {
-        var view = BarView(sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: .black)
+        var view = BarView(sectionScore: sat1.sat_critical_reading_avg_score, schoolColor: .black)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var readingBar2: BarView = {
-        var view = BarView(sectionScore: schoolScores2.sat_critical_reading_avg_score, schoolColor: .brown)
+        var view = BarView(sectionScore: sat2.sat_critical_reading_avg_score, schoolColor: .brown)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var schoolScores: SATData
-    let schoolScores2: SATData
+    var sat1: SATData
+    let sat2: SATData
     let schoolColor: UIColor
     var graphHeightValues = [Float]()
     
-    init(frame: CGRect, scores: SATData, scores2: SATData, schoolColor: UIColor) {
+    init(sat1: SATData, sat2: SATData, schoolColor: UIColor) {
         self.schoolColor = schoolColor
-        self.schoolScores = scores
-        self.schoolScores2 = scores2
+        self.sat1 = sat1
+        self.sat2 = sat2
         
-        let score1 = Int(scores.sat_math_avg_score) ?? 0
+        let score1 = Int(sat1.sat_math_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score1)/Double(800)))
-        let score2 = Int(scores.sat_writing_avg_score) ?? 0
+        let score2 = Int(sat1.sat_writing_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score2)/Double(800)))
-        let score3 = Int(scores.sat_critical_reading_avg_score) ?? 0
+        let score3 = Int(sat1.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score3)/Double(800)))
-        let score4 = Int(scores2.sat_math_avg_score) ?? 0
+        let score4 = Int(sat2.sat_math_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score4)/Double(800)))
-        let score5 = Int(scores2.sat_writing_avg_score) ?? 0
+        let score5 = Int(sat2.sat_writing_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score5)/Double(800)))
-        let score6 = Int(scores2.sat_critical_reading_avg_score) ?? 0
+        let score6 = Int(sat2.sat_critical_reading_avg_score) ?? 0
         graphHeightValues.append(Float(Double(score6)/Double(800)))
         
-        super.init(frame: frame)
+        super.init(frame: .zero)
         layout()
     }
     

@@ -92,9 +92,9 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
 
 extension MapSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let index = viewModel.getSchool(name: view.annotation!.title!!)
-
-        coordinator?.goToSchoolView(school: viewModel.nearbySchools[index], schoolScores: viewModel.getSATScores(index: index))
+        guard let schoolData = viewModel.getSchoolData(name: view.annotation!.title!!) else { return }
+        
+        coordinator?.goToSchoolView(schoolData: schoolData)
     }
     
     //MARK: Called to setup each annotation

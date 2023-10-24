@@ -46,21 +46,17 @@ class ComparisonViewController: UIViewController {
     let comparisonInfoView2: ComparisonInfoView
     let comparisonGraphView: ComparisonGraphView
 
-    var school: School
-    var schoolScores: SATData
-    var school2: School
-    var schoolScores2: SATData
+    var school1: SchoolData
+    var school2: SchoolData
     var schoolColor = UIColor.systemBlue
     
-    init(school1: School, scores1: SATData, school2: School, scores2: SATData) {
-        self.school = school1
-        self.schoolScores = scores1
+    init(school1: SchoolData, school2: SchoolData) {
+        self.school1 = school1
         self.school2 = school2
-        self.schoolScores2 = scores2
         
-        self.comparisonInfoView = ComparisonInfoView(frame: CGRect(), school: school, color: .black)
-        self.comparisonInfoView2 = ComparisonInfoView(frame: CGRect(), school: school2, color: .brown)
-        self.comparisonGraphView = ComparisonGraphView(frame: CGRect(), scores: scores1, scores2: scores2, schoolColor: schoolColor)
+        self.comparisonInfoView = ComparisonInfoView(school: school1, color: .black)
+        self.comparisonInfoView2 = ComparisonInfoView(school: school2, color: .brown)
+        self.comparisonGraphView = ComparisonGraphView(school1: school1, school2: school2, schoolColor: schoolColor)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -80,24 +76,24 @@ class ComparisonViewController: UIViewController {
         view.backgroundColor = .white
                 
         comparisonInfoView.translatesAutoresizingMaskIntoConstraints = false
-        if schoolScores.dbn != "0" {
-            comparisonInfoView.testtakersLabel.text = "Test Takes: \(schoolScores.num_of_sat_test_takers)"
-            comparisonInfoView.mathLabel.text = "Math Score: \(schoolScores.sat_math_avg_score)"
-            comparisonInfoView.writingLabel.text = "Writing Score: \(schoolScores.sat_writing_avg_score)"
-            comparisonInfoView.readingLabel.text = "Reading Score: \(schoolScores.sat_critical_reading_avg_score)"
+        if school1.sat.dbn != "0" {
+            comparisonInfoView.testtakersLabel.text = "Test Takes: \(school1.sat.num_of_sat_test_takers)"
+            comparisonInfoView.mathLabel.text = "Math Score: \(school1.sat.sat_math_avg_score)"
+            comparisonInfoView.writingLabel.text = "Writing Score: \(school1.sat.sat_writing_avg_score)"
+            comparisonInfoView.readingLabel.text = "Reading Score: \(school1.sat.sat_critical_reading_avg_score)"
         }
         
         comparisonInfoView2.translatesAutoresizingMaskIntoConstraints = false
-        if schoolScores2.dbn != "0" {
-            comparisonInfoView2.testtakersLabel.text = "Test Takes: \(schoolScores2.num_of_sat_test_takers)"
-            comparisonInfoView2.mathLabel.text = "Math Score: \(schoolScores2.sat_math_avg_score)"
-            comparisonInfoView2.writingLabel.text = "Writing Score: \(schoolScores2.sat_writing_avg_score)"
-            comparisonInfoView2.readingLabel.text = "Reading Score: \(schoolScores2.sat_critical_reading_avg_score)"
+        if school2.sat.dbn != "0" {
+            comparisonInfoView2.testtakersLabel.text = "Test Takes: \(school2.sat.num_of_sat_test_takers)"
+            comparisonInfoView2.mathLabel.text = "Math Score: \(school2.sat.sat_math_avg_score)"
+            comparisonInfoView2.writingLabel.text = "Writing Score: \(school2.sat.sat_writing_avg_score)"
+            comparisonInfoView2.readingLabel.text = "Reading Score: \(school2.sat.sat_critical_reading_avg_score)"
         }
         
         comparisonGraphView.translatesAutoresizingMaskIntoConstraints = false
-        comparisonGraphView.legendView.school1Label.text = school.school_name
-        comparisonGraphView.legendView.school2Label.text = school.school_name
+        comparisonGraphView.legendView.school1Label.text = school1.school.school_name
+        comparisonGraphView.legendView.school2Label.text = school2.school.school_name
                 
     }
     
@@ -166,14 +162,14 @@ class ComparisonViewController: UIViewController {
                 }
                 
                 strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.addMapPin(latitude: self!.school.latitude!, longitude: self!.school.longitude!, label: self!.school.school_name)
-                strongSelf.addMapPin(latitude: self!.school2.latitude!, longitude: self!.school2.longitude!, label: self!.school2.school_name)
+                strongSelf.addMapPin(latitude: self!.school1.school.latitude!, longitude: self!.school1.school.longitude!, label: self!.school1.school.school_name)
+                strongSelf.addMapPin(latitude: self!.school2.school.latitude!, longitude: self!.school2.school.longitude!, label: self!.school2.school.school_name)
 
                 strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
                 
                 let loc = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                let distance1 = loc.distance(from: CLLocation(latitude: Double(self!.school.latitude!) ?? 0.0, longitude: Double(self!.school.longitude!) ?? 0.0))
-                let distance2 = loc.distance(from: CLLocation(latitude: Double(self!.school2.latitude!) ?? 0.0, longitude: Double(self!.school2.longitude!) ?? 0.0))
+                let distance1 = loc.distance(from: CLLocation(latitude: Double(self!.school1.school.latitude!) ?? 0.0, longitude: Double(self!.school1.school.longitude!) ?? 0.0))
+                let distance2 = loc.distance(from: CLLocation(latitude: Double(self!.school2.school.latitude!) ?? 0.0, longitude: Double(self!.school2.school.longitude!) ?? 0.0))
                 
                 self!.comparisonInfoView.distanceLabel.text = "Distance: \(round(distance1/1609.34 * 100) / 100.0) miles"
                 self!.comparisonInfoView2.distanceLabel.text = "Distance: \(round(distance2/1609.34 * 100) / 100.0) miles"

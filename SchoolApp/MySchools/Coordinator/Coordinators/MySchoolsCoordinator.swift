@@ -29,8 +29,8 @@ class MySchoolsCoordinator: Coordinating {
 
     }
     
-    func goToSchoolView(school: School, schoolScores: SATData) {
-        let viewModel = SchoolViewModel(school: school, satData: schoolScores)
+    func goToSchoolView(schoolData: SchoolData) {
+        let viewModel = SchoolViewModel(schoolData: schoolData)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         
         childCoordinators.append(coordinator)

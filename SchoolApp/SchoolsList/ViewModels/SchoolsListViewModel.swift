@@ -11,23 +11,21 @@ import UIKit
 protocol SchoolsListViewModeling: SchoolCellMethods {
     func getNumOfRowsInSection() -> Int
     func textChanged(searchText: String)
-    func getSchool(indexPath: IndexPath) -> School
+    func getSchool(indexPath: IndexPath) -> SchoolData
     func getSATData(indexPath: IndexPath) -> SATData
 }
 
 class SchoolsListViewModel: SchoolsListViewModeling {
     
-    private let schools: [School]
-    private let satData: [SATData]
-    private var searchResults: [School]
+    private let schoolsData: [SchoolData]
+    private var searchResults: [SchoolData]
     
-    init(schools: [School], satData: [SATData]) {
-        self.satData = satData
-        self.schools = schools
-        self.searchResults = schools
+    init(schoolsData: [SchoolData]) {
+        self.schoolsData = schoolsData
+        self.searchResults = schoolsData
     }
     
-    //MARK: TableView Methods
+    // MARK: - TableView Methods
     func getNumOfRowsInSection() -> Int {
         return searchResults.count
     }
@@ -40,45 +38,38 @@ class SchoolsListViewModel: SchoolsListViewModeling {
                 .filter { !unwantedCharacters.contains($0) }
                 .lowercased()
 
-            searchResults = schools.filter { school in
-                return school.mergedText!.lowercased().contains(search)
+            searchResults = schoolsData.filter { school in
+                let text = school.school.mergedText ?? ""
+                return text.lowercased().contains(search)
             }
         } else {
-            searchResults = schools
+            searchResults = schoolsData
         }
     }
 
-    func getSchool(indexPath: IndexPath) -> School {
+    func getSchool(indexPath: IndexPath) -> SchoolData {
         return searchResults[indexPath.row]
     }
     
     func getSATData(indexPath: IndexPath) -> SATData {
-        return satData.first(where: {$0.dbn == searchResults[indexPath.row].dbn}) ?? SATData()
+        return searchResults[indexPath.row].sat
     }
     
     //MARK: Cell Setup Methods
     func getSchoolName(indexPath: IndexPath) -> String {
-        return searchResults[indexPath.row].school_name
+        return searchResults[indexPath.row].school.school_name
     }
     
     func getSchoolAddress(indexPath: IndexPath) -> String {
-        return searchResults[indexPath.row].location
+        return searchResults[indexPath.row].school.location
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return searchResults[indexPath.row].boro.rawValue
+        return searchResults[indexPath.row].school.boro.rawValue
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {
-        return getColor(schoolBoro: searchResults[indexPath.row].boro)
+        return getColor(schoolBoro: searchResults[indexPath.row].school.boro)
     }
-    
-//    func sortByScore() {
-//        searchResults = searchResults.sort { score1, score2 in
-//            let totalScore1 = Int(score1.sat_critical_reading_avg_score)! + Int(score1.sat_math_avg_score)! + Int(score1.sat_writing_avg_score)!
-//            let totalScore2 = Int(score2.sat_critical_reading_avg_score)! + Int(score2.sat_math_avg_score)! + Int(score2.sat_writing_avg_score)!
-//            return totalScore1 > totalScore2
-//        }
-//    }
 }
 

@@ -10,24 +10,39 @@ import UIKit
 
 class ComparisonInfoView: UIView {
     
+    let school: SchoolData
+    let color: UIColor
+    
+    init(school: SchoolData, color: UIColor) {
+        self.school = school
+        self.color = color
+        
+        super.init(frame: .zero)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     lazy var schoolInfoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView()
         return stackView
     }()
 
     lazy var schoolName: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: school.school_name, labelTextColor: color)
+        var label = SchoolAppLabel(labelText: school.school.school_name, labelTextColor: color)
         return label
     }()
     
     
     lazy var schoolLocation: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: school.location, labelTextColor: color)
+        var label = SchoolAppLabel(labelText: school.school.location, labelTextColor: color)
         return label
     }()
     
     lazy var schoolPhone: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Phone: \(school.phone_number)", labelTextColor: color)
+        var label = SchoolAppLabel(labelText: "Phone: \(school.school.phone_number)", labelTextColor: color)
         return label
     }()
     
@@ -55,22 +70,7 @@ class ComparisonInfoView: UIView {
         var label = SchoolAppLabel(labelText: "Reading Score: Not Available", labelTextColor: color)
         return label
     }()
-    
-    let school: School
-    let color: UIColor
-    
-    init(frame: CGRect, school: School, color: UIColor) {
-        self.school = school
-        self.color = color
         
-        super.init(frame: frame)
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func layout() {
         self.addSubview(schoolInfoStackView)
         

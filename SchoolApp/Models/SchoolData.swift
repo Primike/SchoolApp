@@ -8,6 +8,6 @@
 import Foundation
 
 struct SchoolData {
-    let school: School
-    let sat: SATData
+    var school: School
+    var sat: SATData
 }

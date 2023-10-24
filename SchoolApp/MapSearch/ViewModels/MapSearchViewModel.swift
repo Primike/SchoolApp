@@ -14,33 +14,33 @@ protocol MapSearchViewModeling {
 }
 
 class MapSearchViewModel {
-    var schools = [School]()
-    var schoolsScores = [SATData]()
-    var nearbySchools = [School]()
+    var schoolsData: [SchoolData]
+    var nearbySchools: [SchoolData]
     var latitude = 0.0
     var longitude = 0.0
     
-    init(schools: [School], schoolsScores: [SATData]) {
-        self.schools = schools
-        self.schoolsScores = schoolsScores
+    init(schoolsData: [SchoolData]) {
+        self.schoolsData = schoolsData
+        self.nearbySchools = []
     }
     
     func getPins() -> [MKAnnotation] {
         var pins = [MKPointAnnotation]()
         
-        for school in nearbySchools {
+        for data in nearbySchools {
+            let school = data.school
             let pin = MKPointAnnotation()
+            
             pin.coordinate.longitude = Double(school.longitude!)!
             pin.coordinate.latitude = Double(school.latitude!)!
             pin.title = school.school_name
-            
             pins.append(pin)
         }
 
         return pins
     }
     
-    func validateAddress(address: String, radius: Float, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void)  {
+    func validateAddress(address: String, radius: Float, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void) {
         
         if address.isEmpty {
             completion(.success(CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
@@ -80,7 +80,8 @@ class MapSearchViewModel {
         let longitude = coordinates.longitude
         let distanceThreshold = miles * 1609.34 // Convert miles to meters
         
-        nearbySchools = schools.filter { school in
+        nearbySchools = schoolsData.filter { data in
+            let school = data.school
             let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
             let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
             return distance <= distanceThreshold
@@ -89,24 +90,24 @@ class MapSearchViewModel {
         print(nearbySchools.count)
     }
     
-    func filterByNumberOfSchools(coordinates: CLLocationCoordinate2D) {
-        let latitude = coordinates.latitude
-        let longitude = coordinates.longitude
-
-        nearbySchools = nearbySchools.sorted { school1, school2 in
-            let distance1 = abs(latitude - Double(school1.latitude!)!) + abs(longitude - Double(school1.longitude!)!)
-            let distance2 = abs(latitude - Double(school2.latitude!)!) + abs(longitude - Double(school2.longitude!)!)
-            return distance1 < distance2
-        }
-        
-        print(nearbySchools.count)
-    }
+//    func filterByNumberOfSchools(coordinates: CLLocationCoordinate2D) {
+//        let latitude = coordinates.latitude
+//        let longitude = coordinates.longitude
+//
+//        nearbySchools = nearbySchools.sorted { school1, school2 in
+//            let distance1 = abs(latitude - Double(school1.latitude!)!) + abs(longitude - Double(school1.longitude!)!)
+//            let distance2 = abs(latitude - Double(school2.latitude!)!) + abs(longitude - Double(school2.longitude!)!)
+//            return distance1 < distance2
+//        }
+//        
+//        print(nearbySchools.count)
+//    }
 
     func modifyDuplicates() {
         for i in 0..<nearbySchools.count {
             for j in 0..<nearbySchools.count {
-                if i != j && nearbySchools[i].latitude == nearbySchools[j].latitude && nearbySchools[i].longitude == nearbySchools[j].longitude {
-                    nearbySchools[j].longitude = "\(Double(nearbySchools[j].longitude!)! + 0.0007 - 0.00009 * Double(j))"
+                if i != j && nearbySchools[i].school.latitude == nearbySchools[j].school.latitude && nearbySchools[i].school.longitude == nearbySchools[j].school.longitude {
+                    nearbySchools[j].school.longitude = "\(Double(nearbySchools[j].school.longitude!)! + 0.0007 - 0.00009 * Double(j))"
                 }
             }
         }
@@ -122,22 +123,20 @@ class MapSearchViewModel {
     func filterBySATData(selectedSegment: Int, score: Int, number: Int) {
         let sections: [TopSchoolsCategory] = [.combined, .math, .reading, .writing]
         let category = sections[selectedSegment]
-        var filtered = [School]()
+        var filtered = [SchoolData]()
         
         for school in nearbySchools {
-            let satData = schoolsScores.first { $0.dbn == school.dbn } ?? SATData()
-            
             switch category {
             case .math:
-                if Int(satData.sat_math_avg_score) ?? 0 >= score { filtered.append(school) }
+                if Int(school.sat.sat_math_avg_score) ?? 0 >= score { filtered.append(school) }
             case .reading:
-                if Int(satData.sat_critical_reading_avg_score) ?? 0 >= score { filtered.append(school) }
+                if Int(school.sat.sat_critical_reading_avg_score) ?? 0 >= score { filtered.append(school) }
             case .writing:
-                if Int(satData.sat_writing_avg_score) ?? 0 >= score { filtered.append(school) }
+                if Int(school.sat.sat_writing_avg_score) ?? 0 >= score { filtered.append(school) }
             case .combined:
-                let math = Int(satData.sat_math_avg_score) ?? 0
-                let reading = Int(satData.sat_critical_reading_avg_score) ?? 0
-                let writing = Int(satData.sat_writing_avg_score) ?? 0
+                let math = Int(school.sat.sat_math_avg_score) ?? 0
+                let reading = Int(school.sat.sat_critical_reading_avg_score) ?? 0
+                let writing = Int(school.sat.sat_writing_avg_score) ?? 0
                 
                 if math + reading + writing >= score { filtered.append(school) }
             }
@@ -147,11 +146,7 @@ class MapSearchViewModel {
         print(nearbySchools.count)
     }
 
-    func getSchool(name: String) -> Int {
-        return nearbySchools.firstIndex(where: {$0.school_name == name}) ?? 0
-    }
-    
-    func getSATScores(index: Int) -> SATData {
-        return schoolsScores.first(where: {$0.dbn == nearbySchools[index].dbn}) ?? SATData(dbn: nearbySchools[index].dbn)
+    func getSchoolData(name: String) -> SchoolData? {
+        return nearbySchools.first { $0.school.school_name == name }
     }
 }

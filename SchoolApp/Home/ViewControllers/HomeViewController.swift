@@ -30,9 +30,11 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         return view
     }()
 
-    lazy var homeBottomView: HomeBottomView = {
-        let view = HomeBottomView(viewWidth: view.frame.width)
-        return view
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        return stackView
     }()
     
     lazy var homeTopView: HomeTopView = {
@@ -40,10 +42,17 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         return view
     }()
 
+    lazy var homeBottomView: HomeBottomView = {
+        let view = HomeBottomView(viewWidth: view.frame.width)
+        return view
+    }()
+    
     lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = view.layer.bounds
-        gradient.colors = [UIColor.clear.cgColor, UIColor(red: 101/255, green: 37/255, blue: 122/255, alpha: 0.8).cgColor]
+        gradient.colors = [
+            UIColor(red: 200/255, green: 185/255, blue: 150/255, alpha: 0.6).cgColor,
+            UIColor(red: 37/255, green: 22/255, blue: 15/255, alpha: 0.8).cgColor ]
         return gradient
     }()
             
@@ -59,11 +68,14 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         super.viewDidLoad()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradient.frame = view.bounds
+    }
+
     func showAlert(error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
-        }))
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in }))
         
         present(alert, animated: true)
     }
@@ -86,7 +98,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         
         addButtons()
         layout()
-        homeTopView.layer.addSublayer(gradient)
+        homeBottomView.layer.insertSublayer(gradient, at: 0)
     }
 
     func addButtons() {
@@ -94,48 +106,25 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         homeBottomView.mapSearchButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         homeBottomView.myschoolsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         homeBottomView.about.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//        homeBottomView.satSearchButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-
     }
             
     func layout() {
-        view.addSubview(homeTopView)
-        view.addSubview(homeBottomView)
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(homeTopView)
+        stackView.addArrangedSubview(homeBottomView)
             
         NSLayoutConstraint.activate([
-            homeTopView.topAnchor.constraint(equalTo: view.topAnchor),
-            homeTopView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            homeTopView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            homeTopView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            homeBottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            homeBottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            homeBottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            homeBottomView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
-                        
+            stackView.topAnchor.constraint(equalTo: view.topAnchor),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
 
 extension HomeViewController {
     @objc func buttonTapped(sender: UIButton) {
-        guard let coordinator = coordinator,  let buttonTag = HomeButtonTag(rawValue: sender.tag) else {
-            return
-        }
-
-        var type: ViewControllerType
-
-        switch buttonTag {
-        case .schoolsList:
-            type = .schoolsList
-        case .mapSearch:
-            type = .mapSearch
-        case .mySchools:
-            type = .mySchools
-        case .about:
-            type = .mySchools
-        }
-
-        coordinator.goToViewController(type: type, schools: viewModel.schools, satData: viewModel.satData)
+        guard let type = ViewControllerType(rawValue: sender.tag) else { return }
+        coordinator?.goToViewController(type: type, schoolsData: viewModel.getSchoolsData())
     }
 }

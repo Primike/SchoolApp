@@ -27,7 +27,7 @@ class SchoolMapViewController: UIViewController, Coordinated {
     }
     
     lazy var titleLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(labelText: "\(viewModel.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.school.boro))
+        let label = SchoolAppLabel(labelText: "\(viewModel.schoolData.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro))
         return label
     }()
     
@@ -51,7 +51,7 @@ class SchoolMapViewController: UIViewController, Coordinated {
     private func setup() {
         guard let coordinate = viewModel.coordinate else { return }
         
-        addMapPin(coordinate: coordinate, label: viewModel.school.school_name)
+        addMapPin(coordinate: coordinate, label: viewModel.schoolData.school.school_name)
         
         map.setRegion(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
     }

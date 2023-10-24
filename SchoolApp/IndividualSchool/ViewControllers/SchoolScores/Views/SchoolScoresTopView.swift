@@ -24,7 +24,7 @@ class SchoolScoresTopView: UIView {
     }
     
     lazy var schoolNameLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: viewModel.school.school_name, labelTextColor: .white)
+        var label = SchoolAppLabel(labelText: viewModel.schoolData.school.school_name, labelTextColor: .white)
         return label
     }()
 
@@ -69,7 +69,7 @@ class SchoolScoresTopView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .title1).pointSize
         label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = "Number of test takers: \(viewModel.satData.num_of_sat_test_takers)"
+        label.text = "Number of test takers: \(viewModel.schoolData.sat.num_of_sat_test_takers)"
         label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center

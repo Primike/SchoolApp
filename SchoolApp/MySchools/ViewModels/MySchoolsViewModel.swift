@@ -9,49 +9,37 @@ import Foundation
 import UIKit
 
 protocol MySchoolsViewModeling {
-    var schools: [School] { get set }
-    var schoolsScores: [SATData] { get set }
+    var schoolsData: [SchoolData] { get set }
     func mySchools()
 }
 
 class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
     
-    var schools = [School]()
-    var schoolsScores = [SATData]()
+    var schoolsData: [SchoolData]
     
-    init(schools: [School], schoolsScores: [SATData]) {
-        self.schools = schools
-        self.schoolsScores = schoolsScores
+    init(schoolsData: [SchoolData]) {
+        self.schoolsData = schoolsData
         mySchools()
     }
     
     func mySchools() {
-        var mySchools = [School]()
-        var mySchoolsScores = [SATData]()
+        var mySchools = [SchoolData]()
         
         let defaults = UserDefaults.standard
         let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
 
-        for i in savedArray {
-            if let school = schools.first(where: {$0.dbn == i}) {
+        for id in savedArray {
+            if let school = schoolsData.first(where: { $0.school.dbn == id }) {
                 mySchools.append(school)
             }
         }
         
-        for i in mySchools {
-            if let scores = schoolsScores.first(where: {$0.dbn == i.dbn}) {
-                mySchoolsScores.append(scores)
-            } else {
-                mySchoolsScores.append(SATData())
-            }
-        }
-        self.schools = mySchools
-        self.schoolsScores = mySchoolsScores
+        self.schoolsData = mySchools
         
-        for i in 0..<schools.count {
-            for j in 0..<schools.count {
-                if i != j && schools[i].latitude == schools[j].latitude && schools[i].longitude == schools[j].longitude {
-                    schools[j].longitude = "\(Double(schools[j].longitude!)! + 0.0007 - 0.00009*Double(j))"
+        for i in 0..<schoolsData.count {
+            for j in 0..<schoolsData.count {
+                if i != j && schoolsData[i].school.latitude == schoolsData[j].school.latitude && schoolsData[i].school.longitude == schoolsData[j].school.longitude {
+                    schoolsData[j].school.longitude = "\(Double(schoolsData[j].school.longitude!)! + 0.0007 - 0.00009*Double(j))"
                 }
             }
         }
@@ -59,19 +47,19 @@ class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
     
     //MARK: Cell Methods    
     func getSchoolName(indexPath: IndexPath) -> String {
-        return schools[indexPath.row].school_name
+        return schoolsData[indexPath.row].school.school_name
     }
     
     func getSchoolAddress(indexPath: IndexPath) -> String {
-        return schools[indexPath.row].location
+        return schoolsData[indexPath.row].school.location
     }
 
     func getSchoolBoro(indexPath: IndexPath) -> String {
-        return schools[indexPath.row].boro.rawValue
+        return schoolsData[indexPath.row].school.boro.rawValue
     }
     
     func getSchoolColor(indexPath: IndexPath) -> UIColor {
-        return getColor(schoolBoro: schools[indexPath.row].boro)
+        return getColor(schoolBoro: schoolsData[indexPath.row].school.boro)
     }
 
     func getColor(schoolBoro: String) -> UIColor {
@@ -88,6 +76,5 @@ class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
             return .systemGreen
         }
     }
-
 }
 

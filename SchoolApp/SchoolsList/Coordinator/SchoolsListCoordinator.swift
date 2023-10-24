@@ -11,29 +11,26 @@ import UIKit
 class SchoolsListCoordinator: Coordinating {
     
     weak var parentCoordinator: Coordinating?
-    var navigationController: UINavigationController
-    var childCoordinators: [Coordinating] = []
-    var schools: [School]
-    var satData: [SATData]
+    private let navigationController: UINavigationController
+    private var childCoordinators: [Coordinating] = []
+    private let schoolsData: [SchoolData]
     
-    required init(navigationController: UINavigationController, schools: [School], satData: [SATData]) {
+    required init(navigationController: UINavigationController, schoolsData: [SchoolData]) {
         self.navigationController = navigationController
-        self.schools = schools
-        self.satData = satData
+        self.schoolsData = schoolsData
     }
     
     func start() {
-        let viewModel = SchoolsListViewModel(schools: schools, satData: satData)
-        
+        let viewModel = SchoolsListViewModel(schoolsData: schoolsData)
         let viewController = SchoolsListViewController(viewModel: viewModel)
         viewController.coordinator = self
         
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    //MARK: Navigates To Individual School View
-    func goToSchoolView(school: School, satData: SATData) {
-        let viewModel = SchoolViewModel(school: school, satData: satData)
+    // MARK: - Navigates To Individual School View
+    func goToSchoolView(schoolData: SchoolData) {
+        let viewModel = SchoolViewModel(schoolData: schoolData)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         
         childCoordinators.append(coordinator)
@@ -41,14 +38,14 @@ class SchoolsListCoordinator: Coordinating {
         coordinator.start()
     }
         
-    //MARK: Called By Child Coordinator
+    // MARK: - Called By Child Coordinator
     func childDidFinish(_ child: Coordinating) {
         if let index = childCoordinators.firstIndex(where: { $0 === child }) {
             childCoordinators.remove(at: index)
         }
     }
     
-    //MARK: Calls Method On Parent Coordinator
+    // MARK: - Calls Method On Parent Coordinator
     func didFinish() {
         parentCoordinator?.childDidFinish(self)
     }

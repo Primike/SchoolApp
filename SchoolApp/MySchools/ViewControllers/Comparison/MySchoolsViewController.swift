@@ -53,7 +53,7 @@ class MySchoolsViewController: UIViewController {
     }
             
     func mySchoolsEmpty() {
-        if mySchoolsViewModel.schools.count > 0 {
+        if mySchoolsViewModel.schoolsData.count > 0 {
             mySchoolsHeaderView.mySchoolsLabel.text = "My Schools"
         }
     }
@@ -86,7 +86,7 @@ extension MySchoolsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mySchoolsViewModel.schools.count
+        return mySchoolsViewModel.schoolsData.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,6 +98,7 @@ extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         schoolsTableView.reloadData()
     
-        coordinator?.goToSchoolView(school: mySchoolsViewModel.schools[indexPath.row], schoolScores: mySchoolsViewModel.schoolsScores[indexPath.row])
+        
+        coordinator?.goToSchoolView(schoolData: mySchoolsViewModel.schoolsData[indexPath.row])
     }
 }

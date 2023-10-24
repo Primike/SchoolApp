@@ -59,10 +59,10 @@ class SchoolScoresViewController: UIViewController, Coordinated {
         view.backgroundColor = .systemBackground
         schoolScoresTopView.graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .touchUpInside)
 
-        schoolScoresTopView.backgroundColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
+        schoolScoresTopView.backgroundColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
                 
         
-        if viewModel.satData.sat_math_avg_score == "0" {
+        if viewModel.schoolData.sat.sat_math_avg_score == "0" {
             schoolScoresBottomView.satMathSubView.satSubjectScore.text = "Not Available"
             schoolScoresBottomView.satWritingSubView.satSubjectScore.text = "Not Available"
             schoolScoresBottomView.satReadingSubView.satSubjectScore.text = "Not Available"

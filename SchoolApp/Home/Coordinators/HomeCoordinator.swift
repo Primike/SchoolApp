@@ -10,8 +10,8 @@ import UIKit
 
 class HomeCoordinator: Coordinating {
     
-    var childCoordinators: [Coordinating] = []
-    var navigationController: UINavigationController
+    private let navigationController: UINavigationController
+    private var childCoordinators: [Coordinating] = []
 
     public required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -20,28 +20,24 @@ class HomeCoordinator: Coordinating {
     func start() {
         let dataManager = HomeDataManager()
         let viewModel = HomeViewModel(dataManager: dataManager)
-        
         let viewController = HomeViewController(viewModel: viewModel)
         viewController.coordinator = self
         
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func goToViewController(type: ViewControllerType, schools: [School], satData: [SATData]) {
+    func goToViewController(type: ViewControllerType, schoolsData: [SchoolData]) {
         let coordinator: Coordinating
         
         switch type {
         case .schoolsList:
-            coordinator = SchoolsListCoordinator(navigationController: navigationController, schools: schools, satData: satData)
-            
+            coordinator = SchoolsListCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         case .mapSearch:
-            coordinator = MapSearchCoordinator(navigationController: navigationController, schools: schools, satData: satData)
-
+            coordinator = MapSearchCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         case .mySchools:
-            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)
-            
+            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         case .about:
-            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schools: schools, satData: satData)
+            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         }
         
         childCoordinators.append(coordinator)
@@ -53,9 +49,5 @@ class HomeCoordinator: Coordinating {
         if let index = childCoordinators.firstIndex(where: { $0 === child }) {
             childCoordinators.remove(at: index)
         }
-    }
-    
-    deinit {
-        print("Home Coordinator Deinit")
     }
 }

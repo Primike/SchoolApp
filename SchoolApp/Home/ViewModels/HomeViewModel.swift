@@ -8,23 +8,23 @@
 import Foundation
 
 protocol HomeViewModeling {
-    var schools: [School] { get }
-    var satData: [SATData] { get }
     var delegate: HomeViewModelDelegate? { get set }
     func fetchData()
+    func getSchoolsData() -> [SchoolData]
 }
 
-//classes only Anyobject for weak refrences
+//classes only AnyObject for weak refrences
 protocol HomeViewModelDelegate: AnyObject {
     func didUpdate()
 }
 
 final class HomeViewModel: HomeViewModeling {
     
-    private let dataManager: HomeDataManaging
-    private(set) var schools = [School]()
-    private(set) var satData = [SATData]()
     weak var delegate: HomeViewModelDelegate?
+    private let dataManager: HomeDataManaging
+    private var schools = [School]()
+    private var satData = [SATData]()
+    private var schoolsData = [SchoolData]()
     
     required init(dataManager: HomeDataManaging) {
         self.dataManager = dataManager
@@ -36,20 +36,18 @@ final class HomeViewModel: HomeViewModeling {
         dispatchGroup.enter()
         dispatchGroup.enter()
 
-        fetchSchools {
-            dispatchGroup.leave()
-        }
-
-        fetchSATData {
-            dispatchGroup.leave()
-        }
+        fetchSchools { dispatchGroup.leave() }
+        fetchSATData { dispatchGroup.leave() }
 
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self = self, let delegate = self.delegate else { return }
+            
+            self.createSchoolData()
             delegate.didUpdate()
         }
     }
 
+    // MARK: - API Calls
     private func fetchSchools(completion: @escaping () -> Void) {
         dataManager.getSchools(url: URLs.schoolsURL.value) { [weak self] (result) in
             guard let self = self else { return }
@@ -63,7 +61,7 @@ final class HomeViewModel: HomeViewModeling {
                 self.schools = schools
             }
             
-            self.schools = self.schoolsDataModifier(results: self.schools)
+            self.schoolsDataModifier()
             completion()
         }
     }
@@ -81,47 +79,55 @@ final class HomeViewModel: HomeViewModeling {
                 self.satData = satData
             }
             
-            self.satData = self.satDataModifier(satData: self.satData)
+            self.satDataModifier()
             completion()
         }
     }
-    
-    //MARK: Modify data to improve search results
-    private func schoolsDataModifier(results: [School]) -> [School] {
-        return results.map { school in
-            var updatedSchool = school
+        
+    // MARK: - Create A Merged Text For Search Functionalities, Coordinates Check
+    private func schoolsDataModifier() {
+        schools = schools.map { school in
+            var modifiedSchool = school
 
-            if let index = updatedSchool.location.firstIndex(of: "(") {
-                updatedSchool.location = String(updatedSchool.location[..<index])
+            if let index = modifiedSchool.location.firstIndex(of: "(") {
+                modifiedSchool.location = String(modifiedSchool.location[..<index])
             }
 
-            let mergedText = updatedSchool.school_name + updatedSchool.location
+            var mergedText = modifiedSchool.school_name + modifiedSchool.location
             let charactersToRemove = Set(" ,.-():/")
-            let mergedTextWithoutSpecialChars = mergedText.filter { !charactersToRemove.contains($0) }
-            let finalMergedText = mergedTextWithoutSpecialChars.replacingOccurrences(of: "&", with: "and")
-            updatedSchool.mergedText = finalMergedText
+            mergedText = mergedText.filter { !charactersToRemove.contains($0) }
+            mergedText = mergedText.replacingOccurrences(of: "&", with: "and")
+            modifiedSchool.mergedText = mergedText
 
-            if updatedSchool.latitude == nil || updatedSchool.longitude == nil {
-                updatedSchool.latitude = "0"
-                updatedSchool.longitude = "0"
+            if modifiedSchool.latitude == nil || modifiedSchool.longitude == nil {
+                modifiedSchool.latitude = "0"
+                modifiedSchool.longitude = "0"
             }
 
-            return updatedSchool
+            return modifiedSchool
         }
     }
 
-    //MARK: If an element has incomplete scores replace with SATDATA() for app features
-    private func satDataModifier(satData: [SATData]) -> [SATData] {
-        let modifiedSatData = satData.map { satRecord -> SATData in
-            if Int(satRecord.sat_critical_reading_avg_score) != nil,
-               Int(satRecord.sat_math_avg_score) != nil,
-               Int(satRecord.sat_writing_avg_score) != nil {
-                return satRecord
-            } else {
-                return SATData()
-            }
+    // MARK: - Filter Out Incomplete Scores
+    private func satDataModifier() {
+        satData = satData.filter { satRecord in
+            return Int(satRecord.sat_critical_reading_avg_score) != nil &&
+                   Int(satRecord.sat_math_avg_score) != nil &&
+                   Int(satRecord.sat_writing_avg_score) != nil
         }
-        
-        return modifiedSatData
+    }
+    
+    // MARK: - Create Combined Data Model
+    private func createSchoolData() {
+        for school in schools {
+            let satData = satData.first { $0.dbn == school.dbn } ?? SATData(dbn: school.dbn)
+            let schoolData = SchoolData(school: school, sat: satData)
+            
+            schoolsData.append(schoolData)
+        }
+    }
+    
+    func getSchoolsData() -> [SchoolData] {
+        return schoolsData
     }
 }

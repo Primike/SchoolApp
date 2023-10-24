@@ -12,24 +12,22 @@ class MySchoolsTabBarCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
-    var schools: [School]
-    var satData: [SATData]
+    var schoolsData: [SchoolData]
     
-    required init(navigationController: UINavigationController, schools: [School], satData: [SATData]) {
+    required init(navigationController: UINavigationController, schoolsData: [SchoolData]) {
         self.navigationController = navigationController
-        self.schools = schools
-        self.satData = satData
+        self.schoolsData = schoolsData
     }
-    
+
     func start() {
         let mySchoolsNavController = UINavigationController()
-        let mySchoolsCoordinator = MySchoolsCoordinator(navigationController: mySchoolsNavController, viewModel: MySchoolsViewModel(schools: schools, schoolsScores: satData))
+        let mySchoolsCoordinator = MySchoolsCoordinator(navigationController: mySchoolsNavController, viewModel: MySchoolsViewModel(schoolsData: schoolsData))
         mySchoolsCoordinator.parentCoordinator = self
         mySchoolsCoordinator.start()
         childCoordinators.append(mySchoolsCoordinator)
 
         let schoolComparisonNavController = UINavigationController()
-        let schoolComparisonCoordinator = SchoolComparisonCoordinator(navigationController: schoolComparisonNavController, viewModel: MySchoolsViewModel(schools: schools, schoolsScores: satData))
+        let schoolComparisonCoordinator = SchoolComparisonCoordinator(navigationController: schoolComparisonNavController, viewModel: MySchoolsViewModel(schoolsData: schoolsData))
         schoolComparisonCoordinator.parentCoordinator = self
         schoolComparisonCoordinator.start()
         childCoordinators.append(schoolComparisonCoordinator)

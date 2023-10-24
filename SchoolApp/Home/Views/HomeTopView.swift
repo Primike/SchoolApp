@@ -17,13 +17,6 @@ final class HomeTopView: UIView {
         image.clipsToBounds = true
         return image
     }()
-    
-    lazy var pavementWallpaper: UIImageView = {
-        var image = UIImageView(image: UIImage(named: HomeImageName.pavement.rawValue))
-        image.contentMode = .scaleToFill
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
 
     init() {
         super.init(frame: .zero)
@@ -39,18 +32,12 @@ final class HomeTopView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(schoolWallpaper)
-        self.addSubview(pavementWallpaper)
 
         NSLayoutConstraint.activate([
             schoolWallpaper.topAnchor.constraint(equalTo: self.topAnchor),
-            schoolWallpaper.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.55),
+            schoolWallpaper.heightAnchor.constraint(equalTo: self.heightAnchor),
             schoolWallpaper.widthAnchor.constraint(equalTo: self.widthAnchor),
             schoolWallpaper.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
-            pavementWallpaper.topAnchor.constraint(equalTo: schoolWallpaper.bottomAnchor),
-            pavementWallpaper.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.45),
-            pavementWallpaper.widthAnchor.constraint(equalTo: self.widthAnchor),
-            pavementWallpaper.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
 }

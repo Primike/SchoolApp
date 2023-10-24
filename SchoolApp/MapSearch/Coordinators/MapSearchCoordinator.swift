@@ -12,27 +12,21 @@ class MapSearchCoordinator: Coordinating {
     weak var parentCoordinator: Coordinating?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinating] = []
-    var schools: [School]
-    var satData: [SATData]
+    var schoolsData: [SchoolData]
     
-    enum SearchType {
-        case radius, address
-    }
-    
-    required init(navigationController: UINavigationController, schools: [School], satData: [SATData]) {
+    required init(navigationController: UINavigationController, schoolsData: [SchoolData]) {
         self.navigationController = navigationController
-        self.schools = schools
-        self.satData = satData
+        self.schoolsData = schoolsData
     }
-    
+
     func start() {
-        let viewController = MapSearchViewController(viewModel: MapSearchViewModel(schools: schools, schoolsScores: satData))
+        let viewController = MapSearchViewController(viewModel: MapSearchViewModel(schoolsData: schoolsData))
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
 
-    func goToSchoolView(school: School, schoolScores: SATData) {
-        let viewModel = SchoolViewModel(school: school, satData: schoolScores)
+    func goToSchoolView(schoolData: SchoolData) {
+        let viewModel = SchoolViewModel(schoolData: schoolData)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)
         
         childCoordinators.append(coordinator)

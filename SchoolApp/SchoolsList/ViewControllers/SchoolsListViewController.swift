@@ -132,7 +132,7 @@ extension SchoolsListViewController: UITableViewDataSource {
 
 extension SchoolsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.goToSchoolView(school: viewModel.getSchool(indexPath: indexPath), satData: viewModel.getSATData(indexPath: indexPath))
+        coordinator?.goToSchoolView(schoolData: viewModel.getSchool(indexPath: indexPath))
     }
 }
 

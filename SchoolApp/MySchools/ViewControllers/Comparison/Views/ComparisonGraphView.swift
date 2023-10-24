@@ -29,7 +29,7 @@ class ComparisonGraphView: UIView {
     }()
     
     lazy var comparisonBarsView: ComparisonBarsView = {
-        var view = ComparisonBarsView(frame: CGRect(), scores: schoolScores, scores2: schoolScores2, schoolColor: schoolColor)
+        var view = ComparisonBarsView(sat1: school1.sat, sat2: school2.sat, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor
@@ -37,16 +37,16 @@ class ComparisonGraphView: UIView {
     }()
     
     
-    var schoolScores: SATData
-    let schoolScores2: SATData
+    var school1: SchoolData
+    let school2: SchoolData
     let schoolColor: UIColor
     
-    init(frame: CGRect, scores: SATData, scores2: SATData, schoolColor: UIColor) {
+    init(school1: SchoolData, school2: SchoolData, schoolColor: UIColor) {
         self.schoolColor = schoolColor
-        self.schoolScores = scores
-        self.schoolScores2 = scores2
+        self.school1 = school1
+        self.school2 = school2
                 
-        super.init(frame: frame)
+        super.init(frame: .zero)
         layout()
     }
     

@@ -42,8 +42,8 @@ class SchoolInfoTopView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
         label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = viewModel.school.school_name
-        label.textColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
+        label.text = viewModel.schoolData.school.school_name
+        label.textColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
         label.numberOfLines = 2
@@ -55,7 +55,7 @@ class SchoolInfoTopView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .headline).pointSize
         label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = "Address: \(viewModel.school.location)"
+        label.text = "Address: \(viewModel.schoolData.school.location)"
         label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
@@ -68,7 +68,7 @@ class SchoolInfoTopView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .headline).pointSize
         label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = "Phone: \(viewModel.school.phone_number)"
+        label.text = "Phone: \(viewModel.schoolData.school.phone_number)"
         label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
@@ -80,7 +80,7 @@ class SchoolInfoTopView: UIView {
         var image = UIImageView(image: UIImage(systemName: "book.circle"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.tintColor = viewModel.getColor(schoolBoro: viewModel.school.boro)
+        image.tintColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
         return image
     }()
 

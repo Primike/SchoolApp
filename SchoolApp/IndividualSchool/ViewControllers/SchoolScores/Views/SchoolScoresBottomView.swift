@@ -28,19 +28,19 @@ class SchoolScoresBottomView: UIView {
     }()
     
     lazy var satMathSubView: BottomSubjectView = {
-        var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.school.boro), subjectName: "SAT MATH", subjectScore: viewModel.satData.sat_math_avg_score)
+        var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro), subjectName: "SAT MATH", subjectScore: viewModel.schoolData.sat.sat_math_avg_score)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var satWritingSubView: BottomSubjectView = {
-        var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.school.boro), subjectName: "SAT WRITING", subjectScore: viewModel.satData.sat_writing_avg_score)
+        var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro), subjectName: "SAT WRITING", subjectScore: viewModel.schoolData.sat.sat_writing_avg_score)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var satReadingSubView: BottomSubjectView = {
-        var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.school.boro), subjectName: "SAT CRITICAL READING", subjectScore: viewModel.satData.sat_critical_reading_avg_score)
+        var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro), subjectName: "SAT CRITICAL READING", subjectScore: viewModel.schoolData.sat.sat_critical_reading_avg_score)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

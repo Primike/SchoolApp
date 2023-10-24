@@ -10,8 +10,6 @@ import UIKit
 
 protocol Coordinating: AnyObject {
     var parentCoordinator: Coordinating? { get set }
-    var navigationController: UINavigationController { get set }
-    var childCoordinators: [Coordinating] { get set }
     func start()
     func childDidFinish(_ child: Coordinating)
     func didFinish()

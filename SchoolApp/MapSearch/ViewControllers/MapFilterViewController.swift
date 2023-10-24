@@ -116,7 +116,6 @@ class MapFilterViewController: UIViewController {
             switch result {
             case .success(let coordinates):
                 self.viewModel.filterByMiles(coordinates: coordinates, miles: Double(miles))
-                self.viewModel.filterByNumberOfSchools(coordinates: coordinates)
                 self.viewModel.modifyDuplicates()
                 self.viewModel.filterBySATData(selectedSegment: section, score: score, number: schoolIndex)
                 self.delegate?.filterApplied(miles: miles, coordinates: coordinates)

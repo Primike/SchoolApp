@@ -20,7 +20,7 @@ struct School: Decodable {
     var latitude: String?
     var longitude: String?
     var distance: String?
-    
+        
     var coordinate: CLLocationCoordinate2D? {
         guard let lat = Double(latitude ?? ""), let lon = Double(longitude ?? "") else {
             return nil

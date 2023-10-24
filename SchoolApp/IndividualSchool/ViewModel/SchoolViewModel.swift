@@ -10,15 +10,13 @@ import CoreLocation
 import UIKit
 
 class SchoolViewModel: SchoolColor {
-    var school: School
-    var satData: SATData
-
-    init(school: School, satData: SATData) {
-        self.school = school
-        self.satData = satData
+    var schoolData: SchoolData
+    
+    init(schoolData: SchoolData) {
+        self.schoolData = schoolData
     }
-
+    
     var coordinate: CLLocationCoordinate2D? {
-        return school.coordinate
+        return schoolData.school.coordinate
     }
 }

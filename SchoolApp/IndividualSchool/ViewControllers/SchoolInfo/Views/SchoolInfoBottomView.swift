@@ -50,7 +50,7 @@ class SchoolInfoBottomView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .title1).pointSize
         label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = viewModel.school.overview_paragraph
+        label.text = viewModel.schoolData.school.overview_paragraph
         label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
