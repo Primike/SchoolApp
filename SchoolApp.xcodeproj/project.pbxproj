@@ -17,12 +17,13 @@
 		9E4631252AE6E336001FB843 /* SchoolData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4631242AE6E336001FB843 /* SchoolData.swift */; };
 		9E46312B2AE81B7F001FB843 /* SchoolDataModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E46312A2AE81B7F001FB843 /* SchoolDataModifier.swift */; };
 		9E46312D2AE9E033001FB843 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E46312C2AE9E033001FB843 /* NotificationExtension.swift */; };
+		9E4631302AEAC8CE001FB843 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E46312F2AEAC8CE001FB843 /* Enums.swift */; };
+		9E4631332AEAE6ED001FB843 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4631322AEAE6ED001FB843 /* AboutViewController.swift */; };
 		9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */; };
 		9E824009289879EB000D4BA0 /* SchoolAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824008289879EB000D4BA0 /* SchoolAppTests.swift */; };
 		9E902E1429A4281B00A39C77 /* SchoolsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */; };
 		9E902E1929A4482800A39C77 /* SchoolAppButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */; };
 		9EB7440829ECCAAC0041F35E /* MySchoolsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7440729ECCAAC0041F35E /* MySchoolsCoordinator.swift */; };
-		9EB7441229EDD8A40041F35E /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441129EDD8A40041F35E /* ServiceError.swift */; };
 		9EB7441529EDD9050041F35E /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441429EDD9050041F35E /* Coordinating.swift */; };
 		9EB7441A29EE18C90041F35E /* SchoolCellMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */; };
 		9EB7442F29EEFD080041F35E /* SchoolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */; };
@@ -75,7 +76,7 @@
 		B88891BE2892C86700236F76 /* MySchoolsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */; };
 		B8C96D0D284AFB340001142C /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */; };
 		B8E1121828747692009C66B6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1121728747692009C66B6 /* Reachability.swift */; };
-		B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E11219287476C1009C66B6 /* CustomError.swift */; };
+		B8E1121A287476C1009C66B6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E11219287476C1009C66B6 /* Errors.swift */; };
 		B8E8173D2846A45F0052C1AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E8173C2846A45F0052C1AE /* AppDelegate.swift */; };
 		B8E817412846A45F0052C1AE /* SchoolsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */; };
 		B8E817462846A4600052C1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E817452846A4600052C1AE /* Assets.xcassets */; };
@@ -103,13 +104,14 @@
 		9E4631242AE6E336001FB843 /* SchoolData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolData.swift; sourceTree = "<group>"; };
 		9E46312A2AE81B7F001FB843 /* SchoolDataModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDataModifier.swift; sourceTree = "<group>"; };
 		9E46312C2AE9E033001FB843 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
+		9E46312F2AEAC8CE001FB843 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		9E4631322AEAE6ED001FB843 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
 		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
 		9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListCoordinator.swift; sourceTree = "<group>"; };
 		9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppButtonConfiguration.swift; sourceTree = "<group>"; };
 		9EB7440729ECCAAC0041F35E /* MySchoolsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySchoolsCoordinator.swift; sourceTree = "<group>"; };
-		9EB7441129EDD8A40041F35E /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 		9EB7441429EDD9050041F35E /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
 		9EB7441929EE18C90041F35E /* SchoolCellMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCellMethods.swift; sourceTree = "<group>"; };
 		9EB7442E29EEFD080041F35E /* SchoolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewModel.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 		B88891BD2892C86700236F76 /* MySchoolsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySchoolsHeaderView.swift; sourceTree = "<group>"; };
 		B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
 		B8E1121728747692009C66B6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		B8E11219287476C1009C66B6 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		B8E11219287476C1009C66B6 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		B8E817392846A45F0052C1AE /* SchoolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E8173C2846A45F0052C1AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		9E2158702A460CB70015A049 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */,
 				9ECCFD3D29EF652D0004F3D1 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
@@ -226,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				9E446D972A11C8D300B47CBA /* HomeEnums.swift */,
-				9E46312A2AE81B7F001FB843 /* SchoolDataModifier.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				9ECCDCE02A1E5D8A00179539 /* MapErrors.swift */,
+				9E46312F2AEAC8CE001FB843 /* Enums.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -396,6 +399,9 @@
 			isa = PBXGroup;
 			children = (
 				9ECCFD3A29EF64EE0004F3D1 /* SchoolTabBarController.swift */,
+				9E2158962A460EFE0015A049 /* SchoolInfo */,
+				9E2158972A460F030015A049 /* SchoolScores */,
+				9E2158982A460F0D0015A049 /* SchoolMap */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -501,8 +507,30 @@
 		9E4631262AE73743001FB843 /* About */ = {
 			isa = PBXGroup;
 			children = (
+				9E4631312AEAE6E0001FB843 /* ViewController */,
 			);
 			path = About;
+			sourceTree = "<group>";
+		};
+		9E46312E2AEAB879001FB843 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */,
+				9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */,
+				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
+				9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */,
+				9EF49E8A29AD8575008122FF /* SchoolAppStackView.swift */,
+				B8729F6C289ABA6D00B7035A /* LoaderView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9E4631312AEAE6E0001FB843 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9E4631322AEAE6ED001FB843 /* AboutViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		9E824007289879EB000D4BA0 /* SchoolAppTests */ = {
@@ -536,27 +564,21 @@
 			children = (
 				9E2158702A460CB70015A049 /* Extension */,
 				9E2158712A460CC10015A049 /* Protocols */,
-				B8729F6C289ABA6D00B7035A /* LoaderView.swift */,
-				9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */,
-				9E13C36F29A44B0900638778 /* SchoolAppLabel.swift */,
-				9EC4212B29AD3D2400049C6D /* SchoolAppTextField.swift */,
-				B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */,
-				9EF64CBF29A19C5F0012F890 /* SchoolAppButton.swift */,
-				9EF49E8A29AD8575008122FF /* SchoolAppStackView.swift */,
+				9E46312E2AEAB879001FB843 /* UI */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
 		};
-		9EB3197C2A460B64007F7601 /* Service */ = {
+		9EB3197C2A460B64007F7601 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				9E46312A2AE81B7F001FB843 /* SchoolDataModifier.swift */,
 				B8E1121728747692009C66B6 /* Reachability.swift */,
-				B8E11219287476C1009C66B6 /* CustomError.swift */,
+				B8E11219287476C1009C66B6 /* Errors.swift */,
 				9EC012762884F9DE0082E7D9 /* LocationManager.swift */,
 				9EF64CBD29A170770012F890 /* URLs.swift */,
-				9EB7441129EDD8A40041F35E /* ServiceError.swift */,
 			);
-			path = Service;
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		9EB3197D2A460B76007F7601 /* Models */ = {
@@ -572,8 +594,8 @@
 		9EB3197E2A460B8B007F7601 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				9E2158722A460CE80015A049 /* DataManager */,
 				9E2158732A460CF60015A049 /* Tools */,
+				9E2158722A460CE80015A049 /* DataManager */,
 				9E2158742A460D030015A049 /* Coordinators */,
 				9E2158762A460D1F0015A049 /* ViewModels */,
 				9E2158752A460D130015A049 /* ViewControllers */,
@@ -618,13 +640,10 @@
 		9EB319852A460C2F007F7601 /* IndividualSchool */ = {
 			isa = PBXGroup;
 			children = (
+				883527D22AD7635500473368 /* Tools */,
 				9E2158922A460EC40015A049 /* Coordinators */,
 				9E2158942A460EDF0015A049 /* ViewModel */,
 				9E2158952A460EF70015A049 /* ViewControllers */,
-				9E2158962A460EFE0015A049 /* SchoolInfo */,
-				9E2158972A460F030015A049 /* SchoolScores */,
-				9E2158982A460F0D0015A049 /* SchoolMap */,
-				883527D22AD7635500473368 /* Tools */,
 			);
 			path = IndividualSchool;
 			sourceTree = "<group>";
@@ -650,11 +669,11 @@
 		B8E8173B2846A45F0052C1AE /* SchoolApp */ = {
 			isa = PBXGroup;
 			children = (
-				9EB319792A460B0A007F7601 /* LocalData */,
 				B8E8176D2846AACE0052C1AE /* Files */,
+				9EB319792A460B0A007F7601 /* LocalData */,
 				9EB3197A2A460B30007F7601 /* Coordinating */,
 				9EB3197B2A460B42007F7601 /* Catalog */,
-				9EB3197C2A460B64007F7601 /* Service */,
+				9EB3197C2A460B64007F7601 /* Tools */,
 				9EB3197D2A460B76007F7601 /* Models */,
 				B8E8173C2846A45F0052C1AE /* AppDelegate.swift */,
 				9EB3197E2A460B8B007F7601 /* Home */,
@@ -794,7 +813,7 @@
 				B8736680288075AD0076632F /* YAxisView.swift in Sources */,
 				9E531C0E2885A03400AED087 /* SchoolMapViewController.swift in Sources */,
 				9EC01279288509230082E7D9 /* MapSearchViewModel.swift in Sources */,
-				B8E1121A287476C1009C66B6 /* CustomError.swift in Sources */,
+				B8E1121A287476C1009C66B6 /* Errors.swift in Sources */,
 				9EC4212C29AD3D2400049C6D /* SchoolAppTextField.swift in Sources */,
 				9EF64CC029A19C5F0012F890 /* SchoolAppButton.swift in Sources */,
 				9E13C37029A44B0900638778 /* SchoolAppLabel.swift in Sources */,
@@ -815,7 +834,9 @@
 				B8729F6D289ABA6D00B7035A /* LoaderView.swift in Sources */,
 				B87C4B8E289984F30091CD45 /* ComparisonInfoView.swift in Sources */,
 				B880A2BA284E61FF0071E43D /* SATData.swift in Sources */,
+				9E4631302AEAC8CE001FB843 /* Enums.swift in Sources */,
 				B86AE965289C24710083FF0A /* BottomSubjectView.swift in Sources */,
+				9E4631332AEAE6ED001FB843 /* AboutViewController.swift in Sources */,
 				9EF49E8B29AD8575008122FF /* SchoolAppStackView.swift in Sources */,
 				9ECCDCE12A1E5D8A00179539 /* MapErrors.swift in Sources */,
 				9E46312D2AE9E033001FB843 /* NotificationExtension.swift in Sources */,
@@ -827,7 +848,6 @@
 				9ECCFD3E29EF652D0004F3D1 /* UIViewController+Extension.swift in Sources */,
 				B8736664288057480076632F /* HomeBottomView.swift in Sources */,
 				B873667928806F3A0076632F /* SchoolScoresBottomView.swift in Sources */,
-				9EB7441229EDD8A40041F35E /* ServiceError.swift in Sources */,
 				B87C4B9A2899A62C0091CD45 /* LegendView.swift in Sources */,
 				9E46312B2AE81B7F001FB843 /* SchoolDataModifier.swift in Sources */,
 				B803EAC3286E1A4700E7A26B /* SchoolsListViewModel.swift in Sources */,

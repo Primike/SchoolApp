@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Network
 
-final class HomeViewController: UIViewController, HomeViewModelDelegate {
+class HomeViewController: UIViewController, HomeViewModelDelegate {
     
     private(set) var viewModel: HomeViewModeling
     weak var coordinator: HomeCoordinator?
@@ -56,9 +56,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     }()
             
     override func viewDidLoad() {
-        if !Reachability.isConnected {
-            showAlert(error: AlertErrors.noConnection.rawValue)
-        }
+        if !Reachability.isConnected { showAlert(error: AlertErrors.noConnection.rawValue) }
         
         displayLoader()
         viewModel.fetchData()
@@ -67,19 +65,22 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         super.viewDidLoad()
     }
     
+    // MARK: - Gradient Dynamic Size
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradient.frame = view.bounds
     }
 
-    func showAlert(error: String) {
+    // MARK: - Alerts
+    private func showAlert(error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in }))
         
         present(alert, animated: true)
     }
 
-    func displayLoader() {
+    // MARK: - Loader View
+    private func displayLoader() {
         view.addSubview(loaderView)
         
         NSLayoutConstraint.activate([
@@ -90,6 +91,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         ])
     }
 
+    // MARK: - After Finishing API Calls
     func didUpdate() {
         for subview in view.subviews {
             subview.removeFromSuperview()
@@ -100,7 +102,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         homeBottomView.layer.insertSublayer(gradient, at: 0)
     }
 
-    func addButtons() {
+    private func addButtons() {
         homeBottomView.schoolsListButton.addTarget(self, action: #selector(buttonTouched), for: .touchDown)
         homeBottomView.schoolsListButton.addTarget(self, action: #selector(buttonTapped), for: [.touchUpInside, .touchUpOutside])
 
@@ -114,7 +116,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         homeBottomView.about.addTarget(self, action: #selector(buttonTapped), for: [.touchUpInside, .touchUpOutside])        
     }
             
-    func layout() {
+    private func layout() {
         view.addSubview(stackView)
         stackView.addArrangedSubview(homeTopView)
         stackView.addArrangedSubview(homeBottomView)

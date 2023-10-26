@@ -10,8 +10,8 @@ import UIKit
 
 class MySchoolsViewController: UIViewController {
     
-    private let mySchoolsViewModel: MySchoolsViewModel
     weak var coordinator: MySchoolsCoordinator?
+    private let mySchoolsViewModel: MySchoolsViewModel
     var compareClicked = false
     var selectedCount = 0
     var cellIndex1 = 0
@@ -84,6 +84,7 @@ class MySchoolsViewController: UIViewController {
         ])
     }
 
+    // MARK: - If Compare Button Tapped VC Goes Into Compare Mode
     @objc func compareTapped() {
         compareClicked = !compareClicked
         compareButton.title = compareClicked ? "Cancel" : "Compare Two"
@@ -95,9 +96,11 @@ class MySchoolsViewController: UIViewController {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         }
+        
         tableView.reloadData()
     }
 
+    // MARK: - If Add School Selected/Deselected In School View The TableView Will Reload
     @objc func handleUserDataUpdate() {
         DispatchQueue.main.async {
             self.mySchoolsViewModel.mySchools()
@@ -111,15 +114,7 @@ extension MySchoolsViewController: UITableViewDataSource {
         let schoolCell = SchoolTableViewCell()
         schoolCell.configure(viewModel: mySchoolsViewModel, indexPath: indexPath)
         schoolCell.schoolBoro.text = "\(indexPath.row + 1)"
-        schoolCell.selectionStyle = .none  // Prevents the default gray background on selection
-
-        // Set accessoryType based on cell's selection status
-        if compareClicked && tableView.indexPathsForSelectedRows?.contains(indexPath) == true {
-            schoolCell.accessoryType = .checkmark
-        } else {
-            schoolCell.accessoryType = .none
-        }
-
+        schoolCell.selectionStyle = .none
         return schoolCell
     }
 
@@ -136,13 +131,13 @@ extension MySchoolsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if compareClicked {
             let cell = tableView.cellForRow(at: indexPath)
-            cell?.accessoryType = .detailDisclosureButton
+            cell?.accessoryType = .checkmark
 
-            // Transition to the comparison view when two schools are selected
+            // MARK: Transition To The Comparison View When Two Schools Are Selected
             if let selectedRows = tableView.indexPathsForSelectedRows, selectedRows.count == 2 {
                 let school1 = mySchoolsViewModel.schoolsData[selectedRows[0].row]
                 let school2 = mySchoolsViewModel.schoolsData[selectedRows[1].row]
-                navigationController?.present(ComparisonViewController(school1: school1, school2: school2), animated: true)
+                coordinator?.goToComparison(school1: school1, school2: school2)
 
                 for indexPath in selectedRows {
                     tableView.deselectRow(at: indexPath, animated: true)

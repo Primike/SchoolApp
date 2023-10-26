@@ -13,7 +13,7 @@ import CoreLocation
 class MapSearchViewController: UIViewController, MapFilterDelegate {
     
     weak var coordinator: MapSearchCoordinator?
-    private let viewModel: MapSearchViewModel
+    private var viewModel: MapSearchViewModeling
     
     init(viewModel: MapSearchViewModel) {
         self.viewModel = viewModel
@@ -34,7 +34,7 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
     }()
     
     lazy var filterButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(searchTapped))
+        let button = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterTapped))
         return button
     }()
     
@@ -51,6 +51,7 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         if isMovingFromParent { coordinator?.didFinish() }
     }
 
+    // MARK: - Gets User Location And Centers The Initial Map View Accordingly
     private func setup() {
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.title = "Map Search"
@@ -58,13 +59,17 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                                                
-                self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.04)), animated: true)
-                self.viewModel.latitude = location.coordinate.latitude
-                self.viewModel.longitude = location.coordinate.longitude
+                                             
+                self.viewModel.currentCoordinates = location.coordinate
                 self.setupMap(coordinates: location.coordinate)
+                self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.04)), animated: true)
             }
         }
+    }
+    
+    private func setupMap(coordinates: CLLocationCoordinate2D) {
+        viewModel.filterByCoordinates(coordinates: coordinates, miles: 1)
+        map.addAnnotations(viewModel.getPins())
     }
     
     private func layout() {
@@ -77,12 +82,8 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
             map.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
-    func setupMap(coordinates: CLLocationCoordinate2D) {
-        viewModel.filterByMiles(coordinates: coordinates, miles: 1)
-        map.addAnnotations(viewModel.getPins())
-    }
-    
+        
+    // MARK: - Called When Apply Button Clicked In Filter VC. Reloads The Maps Annotations
     func filterApplied(miles: Float, coordinates: CLLocationCoordinate2D) {
         map.removeAnnotations(map.annotations)
         map.addAnnotations(viewModel.getPins())
@@ -95,22 +96,24 @@ class MapSearchViewController: UIViewController, MapFilterDelegate {
         map.addAnnotation(addressPin)
     }
 
-    @objc func searchTapped() {
+    @objc func filterTapped() {
         coordinator?.goToFilterView(viewController: self)
     }
 }
 
 extension MapSearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let schoolData = viewModel.getSchoolData(name: view.annotation!.title!!) else { return }
+        let title = view.annotation?.title ?? ""
+        
+        guard let schoolData = viewModel.getSchoolData(name: title ?? "") else { return }
         
         coordinator?.goToSchoolView(schoolData: schoolData)
     }
     
-    //MARK: Called to setup each annotation
+    // MARK: - Called to setup each annotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        //MARK: Ensure that the location annotation uses a default blue dot
+        // MARK: Ensure that the location annotation uses a default blue dot
         guard !(annotation is MKUserLocation) else { return nil }
         
         let reuseIdentifier = "annotationView"

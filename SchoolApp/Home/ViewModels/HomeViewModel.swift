@@ -18,7 +18,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func didUpdate()
 }
 
-final class HomeViewModel: HomeViewModeling {
+class HomeViewModel: HomeViewModeling {
     
     weak var delegate: HomeViewModelDelegate?
     private let dataManager: HomeDataManaging
@@ -84,53 +84,13 @@ final class HomeViewModel: HomeViewModeling {
         }
     }
         
-    // MARK: - Create A Merged Text For Search Functionalities, Coordinates Check
+    // MARK: - Data Modifiers
     private func schoolsDataModifier() {
-        schools = schools.map { data in
-            var school = data
-
-            if let index = school.location.firstIndex(of: "(") {
-                school.location = String(school.location[..<index])
-            }
-
-            var text = school.school_name + school.location + getBorough(boro: school.boro)
-            let charactersToRemove = Set(" ,.-():/")
-            
-            text = text.filter { !charactersToRemove.contains($0) }
-            text = text.replacingOccurrences(of: "&", with: "and")
-            school.mergedText = text
-
-            if school.latitude == nil || school.longitude == nil {
-                school.latitude = "0"
-                school.longitude = "0"
-            }
-
-            return school
-        }
+        schools = SchoolDataModifier.modifySchoolData(schools: schools)
     }
 
-    private func getBorough(boro: Borough) -> String {
-        switch boro {
-        case .manhattan:
-            return "manhattan"
-        case .bronx:
-            return "bronx"
-        case .brooklyn:
-            return "brooklyn"
-        case .queens:
-            return "queens"
-        case .statenIsland:
-            return "statenIsland"
-        }
-    }
-    
-    // MARK: - Filter Out Incomplete Scores
     private func satDataModifier() {
-        satData = satData.filter { satRecord in
-            return Int(satRecord.sat_critical_reading_avg_score) != nil &&
-                   Int(satRecord.sat_math_avg_score) != nil &&
-                   Int(satRecord.sat_writing_avg_score) != nil
-        }
+        satData = SchoolDataModifier.modifySATData(satData: satData)
     }
     
     // MARK: - Create Combined Data Model

@@ -37,6 +37,7 @@ class ComparisonViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: - Information
     lazy var infoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .horizontal)
         stackView.spacing = 10
@@ -63,12 +64,14 @@ class ComparisonViewController: UIViewController {
         return divider
     }()
     
+    // MARK: - Graph
     lazy var graphView: ComparisonGraphView = {
         var graph = ComparisonGraphView(school1: school1, school2: school2)
         graph.translatesAutoresizingMaskIntoConstraints = false
         return graph
     }()
     
+    // MARK: - Map
     lazy var map: MKMapView = {
         var map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -84,43 +87,50 @@ class ComparisonViewController: UIViewController {
         setup()
     }
     
+    // MARK: - Animates Bars
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        graphView.comparisonBarsView.animateBars()
+    }
+
+    // MARK: - If There Is SAT Data It Will Be Displayed
     private func style() {
         view.backgroundColor = .white
-                
+        graphView.comparisonBarsView.animateBars()
+        
         if school1.sat.dbn != "0" {
-            infoView1.testtakersLabel.text = "Test Takes: \(school1.sat.num_of_sat_test_takers)"
+            infoView1.testtakersLabel.text = "Test Takers: \(school1.sat.num_of_sat_test_takers)"
             infoView1.mathLabel.text = "Math Score: \(school1.sat.sat_math_avg_score)"
             infoView1.writingLabel.text = "Writing Score: \(school1.sat.sat_writing_avg_score)"
             infoView1.readingLabel.text = "Reading Score: \(school1.sat.sat_critical_reading_avg_score)"
         }
         
         if school2.sat.dbn != "0" {
-            infoView2.testtakersLabel.text = "Test Takes: \(school2.sat.num_of_sat_test_takers)"
+            infoView2.testtakersLabel.text = "Test Takers: \(school2.sat.num_of_sat_test_takers)"
             infoView2.mathLabel.text = "Math Score: \(school2.sat.sat_math_avg_score)"
             infoView2.writingLabel.text = "Writing Score: \(school2.sat.sat_writing_avg_score)"
             infoView2.readingLabel.text = "Reading Score: \(school2.sat.sat_critical_reading_avg_score)"
         }
     }
         
+    // MARK: - Sets Up The Map Pins And Distance Label
     private func setup() {
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
-                guard let strongSelf = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
-                strongSelf.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
-                strongSelf.addMapPin(latitude: self!.school1.school.latitude!, longitude: self!.school1.school.longitude!, label: self!.school1.school.school_name)
-                strongSelf.addMapPin(latitude: self!.school2.school.latitude!, longitude: self!.school2.school.longitude!, label: self!.school2.school.school_name)
+                self.addMapPin(latitude: String(location.coordinate.latitude), longitude: String(location.coordinate.longitude), label: "CURRENT LOCATION")
+                self.addMapPin(latitude: self.school1.school.latitude!, longitude: self.school1.school.longitude!, label: self.school1.school.school_name)
+                self.addMapPin(latitude: self.school2.school.latitude!, longitude: self.school2.school.longitude!, label: self.school2.school.school_name)
 
-                strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
+                self.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)), animated: true)
                 
                 let loc = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                let distance1 = loc.distance(from: CLLocation(latitude: Double(self!.school1.school.latitude!) ?? 0.0, longitude: Double(self!.school1.school.longitude!) ?? 0.0))
-                let distance2 = loc.distance(from: CLLocation(latitude: Double(self!.school2.school.latitude!) ?? 0.0, longitude: Double(self!.school2.school.longitude!) ?? 0.0))
+                let distance1 = loc.distance(from: CLLocation(latitude: Double(self.school1.school.latitude!) ?? 0.0, longitude: Double(self.school1.school.longitude!) ?? 0.0))
+                let distance2 = loc.distance(from: CLLocation(latitude: Double(self.school2.school.latitude!) ?? 0.0, longitude: Double(self.school2.school.longitude!) ?? 0.0))
                 
-                self!.infoView1.distanceLabel.text = "Distance: \(round(distance1/1609.34 * 100) / 100.0) miles"
-                self!.infoView2.distanceLabel.text = "Distance: \(round(distance2/1609.34 * 100) / 100.0) miles"
+                self.infoView1.distanceLabel.text = "Distance: \(round(distance1/1609.34 * 100) / 100.0) miles"
+                self.infoView2.distanceLabel.text = "Distance: \(round(distance2/1609.34 * 100) / 100.0) miles"
             }
         }
     }
@@ -180,21 +190,27 @@ class ComparisonViewController: UIViewController {
 }
 
 extension ComparisonViewController: MKMapViewDelegate {
+    // MARK: - Called to setup each annotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-         let reuseIdentifier = "annotationView"
-         var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
-         if #available(iOS 11.0, *) {
-             if view == nil {
-                 view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-             }
-             view?.displayPriority = .required
-         } else {
-             if view == nil {
-                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-             }
-         }
-         view?.annotation = annotation
-         view?.canShowCallout = true
-         return view
-     }
+        
+        // MARK: Ensure that the location annotation uses a default blue dot
+        guard !(annotation is MKUserLocation) else { return nil }
+        
+        let reuseIdentifier = "annotationView"
+        var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        
+        if view == nil {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        }
+        
+        configureAnnotationView(view, for: annotation)
+        
+        return view
+    }
+    
+    private func configureAnnotationView(_ view: MKAnnotationView?, for annotation: MKAnnotation) {
+        view?.annotation = annotation
+        view?.canShowCallout = true
+        view?.displayPriority = .required
+    }
 }

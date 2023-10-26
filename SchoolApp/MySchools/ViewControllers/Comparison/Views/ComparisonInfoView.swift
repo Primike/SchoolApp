@@ -90,7 +90,7 @@ class ComparisonInfoView: UIView {
         return label
     }()
         
-    func layout() {
+    private func layout() {
         self.addSubview(stackView)
         
         stackView.addArrangedSubview(schoolName)

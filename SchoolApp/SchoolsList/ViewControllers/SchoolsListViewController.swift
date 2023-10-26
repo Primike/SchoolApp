@@ -9,8 +9,8 @@ import UIKit
 
 class SchoolsListViewController: UIViewController {
 
-    private(set) var viewModel: SchoolsListViewModeling
     weak var coordinator: SchoolsListCoordinator?
+    private(set) var viewModel: SchoolsListViewModeling
 
     required init(viewModel: SchoolsListViewModel) {
         self.viewModel = viewModel
@@ -40,7 +40,7 @@ class SchoolsListViewController: UIViewController {
     }()
     
     lazy var filterButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "Sort By", style: .plain, target: self, action: #selector(searchTapped))
+        let button = UIBarButtonItem(title: "Sort By", style: .plain, target: self, action: #selector(filterTapped))
         return button
     }()
 
@@ -51,7 +51,7 @@ class SchoolsListViewController: UIViewController {
         layout()
     }
     
-    // MARK: When View Is Removed This deinits The Coordinator
+    // MARK: - When View Is Removed This deinits The Coordinator
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if isMovingFromParent { coordinator?.didFinish() }
@@ -79,7 +79,8 @@ class SchoolsListViewController: UIViewController {
         ])
     }
     
-    @objc func searchTapped(sender: UIBarButtonItem) {
+    // MARK: - This Shows The Filter By Options
+    @objc func filterTapped(sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Sort By Relevance", style: .default, handler: { [weak self] _ in
@@ -112,7 +113,7 @@ class SchoolsListViewController: UIViewController {
 }
 
 extension SchoolsListViewController: UITableViewDataSource {
-    //MARK: Reuses Cells For Memory Optimization
+    // MARK: - Reuses Cells For Memory Optimization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let schoolCell = tableView.dequeueReusableCell(withIdentifier: SchoolTableViewCell.reuseID, for: indexPath) as? SchoolTableViewCell else {
             print("Unable to dequeue SchoolTableViewCell")
@@ -129,13 +130,14 @@ extension SchoolsListViewController: UITableViewDataSource {
         return viewModel.getNumOfRowsInSection()
     }
     
-    //MARK: Ensures There Are 4 Cells Shown At A Time Regardless Of Screen Size
+    // MARK: - Ensures There Are 4 Cells Shown At A Time Regardless Of Screen Size
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(view.bounds.height/5)
     }
 }
 
 extension SchoolsListViewController: UITableViewDelegate {
+    // MARK: - Goes To School View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         coordinator?.goToSchoolView(schoolData: viewModel.getSchool(indexPath: indexPath))
     }

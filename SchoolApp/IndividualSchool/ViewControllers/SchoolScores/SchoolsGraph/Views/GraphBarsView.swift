@@ -27,6 +27,7 @@ class GraphBarsView: UIView {
         layout()
     }
 
+    // MARK: - Bars For The Graph
     lazy var mathBar: BarView = {
         let view = BarView(sectionScore: satData.sat_math_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +50,7 @@ class GraphBarsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Sets Up Bars Height Constraints
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         layer.borderWidth = 3

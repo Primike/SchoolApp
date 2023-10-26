@@ -26,6 +26,7 @@ class YAxisView: UIView {
         return stackView
     }()
     
+    // MARK: - Labels Displaying Y Axis Values
     lazy var label800: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "800 -", fontSize: .largeTitle)
         return label

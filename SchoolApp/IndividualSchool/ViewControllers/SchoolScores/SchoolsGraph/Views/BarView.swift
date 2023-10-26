@@ -10,8 +10,8 @@ import UIKit
 
 class BarView: UIView {
     
-    var sectionScore: String
-    var schoolColor: UIColor
+    private let sectionScore: String
+    private let schoolColor: UIColor
     
     init(sectionScore: String, schoolColor: UIColor) {
         self.sectionScore = sectionScore
@@ -22,6 +22,7 @@ class BarView: UIView {
         layout()
     }
 
+    // MARK: - Bar View
     lazy var bar: SchoolAppLabel = {
         let label = SchoolAppLabel(labelText: sectionScore, fontSize: .largeTitle)
         label.backgroundColor = schoolColor

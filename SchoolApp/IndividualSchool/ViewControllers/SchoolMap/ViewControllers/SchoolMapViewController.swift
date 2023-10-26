@@ -54,6 +54,7 @@ class SchoolMapViewController: UIViewController, Coordinated {
         layout()
     }
         
+    // MARK: - Adds Pin For School Location
     private func setup() {
         guard let coordinate = viewModel.coordinates else { return }
         

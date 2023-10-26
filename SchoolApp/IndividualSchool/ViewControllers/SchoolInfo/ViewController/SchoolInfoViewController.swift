@@ -35,11 +35,13 @@ class SchoolInfoViewController: UIViewController, Coordinated {
         return stackView
     }()
     
+    // MARK: - Top View
     lazy var infoTopView: SchoolInfoTopView = {
         var view = SchoolInfoTopView(viewModel: viewModel)
         return view
     }()
-
+    
+    // MARK: - Bottom View
     lazy var infoBottomView: SchoolInfoBottomView = {
         var view = SchoolInfoBottomView(viewModel: viewModel)
         view.layer.cornerRadius = 50
@@ -102,6 +104,7 @@ extension SchoolInfoViewController {
         UIApplication.shared.open(url) { success in }
     }
     
+    // MARK: - Saves School Id In UserDefaults And Notifies Any Observers
     @objc func addSchool(sender: UIButton) {
         NotificationCenter.default.post(name: .userDataDidUpdate, object: nil)
         

@@ -54,6 +54,7 @@ class SchoolScoresViewController: UIViewController, Coordinated {
         layout()
     }
     
+    // MARK: - If Scores Are Missing Label Text Will Change
     private func style() {
         view.backgroundColor = .systemBackground
         schoolScoresTopView.graphButton.addTarget(self, action: #selector(graphButtonTapped), for: .touchUpInside)

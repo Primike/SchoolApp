@@ -23,6 +23,7 @@ class SchoolInfoTopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Buttons
     lazy var buttonsStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .horizontal)
         return stackView
@@ -46,6 +47,7 @@ class SchoolInfoTopView: UIView {
         return button
     }()
 
+    // MARK: - School Info
     lazy var infoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
         stackView.distribution = .fillProportionally
@@ -76,6 +78,7 @@ class SchoolInfoTopView: UIView {
         return label
     }()
 
+    // MARK: - Image
     lazy var schoolImage: UIImageView = {
         var image = UIImageView(image: UIImage(systemName: "book.circle"))
         image.translatesAutoresizingMaskIntoConstraints = false

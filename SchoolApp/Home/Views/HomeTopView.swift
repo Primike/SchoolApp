@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class HomeTopView: UIView {
+class HomeTopView: UIView {
     
     lazy var schoolWallpaper: UIImageView = {
         var image = UIImageView(image: UIImage(named: HomeImageName.schoolWallpaper.rawValue))

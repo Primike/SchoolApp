@@ -30,7 +30,7 @@ class HomeBottomView: UIView {
 
     }()
         
-    //MARK: LARGE BUTTONS
+    // MARK: - BUTTONS
     lazy var largeButtonsStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
         stackView.distribution = .fillEqually
@@ -59,7 +59,7 @@ class HomeBottomView: UIView {
     
     lazy var about: SchoolAppButton = {
         let button = SchoolAppButton(title: "About", viewWidth: parentViewWidth, imageName: "questionmark.circle", titleSize: 17, imageSize: 18)
-        button.tag = ViewControllerType.mySchools.rawValue
+        button.tag = ViewControllerType.about.rawValue
         return button
     }()
 

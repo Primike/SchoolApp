@@ -11,13 +11,20 @@ import MapKit
 import CoreLocation
 
 protocol MapSearchViewModeling {
+    var nearbySchools: [SchoolData] { get }
+    var currentCoordinates: CLLocationCoordinate2D { get set }
+    func getPins() -> [MKAnnotation]
+    func validateAddress(address: String, radius: Float, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void)
+    func filterByCoordinates(coordinates: CLLocationCoordinate2D, miles: Double)
+    func filterBySATData(selectedSegment: Int, score: String, count: String)
+    func getSchoolData(name: String) -> SchoolData?
 }
 
-class MapSearchViewModel {
-    var schoolsData: [SchoolData]
+class MapSearchViewModel: MapSearchViewModeling {
+    
+    private let schoolsData: [SchoolData]
     var nearbySchools: [SchoolData]
-    var latitude = 0.0
-    var longitude = 0.0
+    var currentCoordinates = CLLocationCoordinate2D()
     
     init(schoolsData: [SchoolData]) {
         self.schoolsData = schoolsData
@@ -45,7 +52,7 @@ class MapSearchViewModel {
     func validateAddress(address: String, radius: Float, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void) {
         
         if address.isEmpty {
-            completion(.success(CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
+            completion(.success(currentCoordinates))
             return
         }
         
@@ -69,90 +76,25 @@ class MapSearchViewModel {
         }
     }
     
-    func isLocatedInNYC(latitude: Double, longitude: Double) -> Bool {
+    private func isLocatedInNYC(latitude: Double, longitude: Double) -> Bool {
         let minLat = 40.4, maxLat = 41.01
         let minLong = -74.33, maxLong = -73.55
         
         return latitude >= minLat && latitude <= maxLat && longitude >= minLong && longitude <= maxLong
     }
     
-    // MARK: - Filter View Controller Coordinate Methods
-    func filterByMiles(coordinates: CLLocationCoordinate2D, miles: Double) {
-        let latitude = coordinates.latitude
-        let longitude = coordinates.longitude
-        let distanceThreshold = miles * 1609.34 // Convert miles to meters
-        
-        nearbySchools = schoolsData.filter { data in
-            let school = data.school
-            let loc = CLLocation(latitude: Double(school.latitude!)!, longitude: Double(school.longitude!)!)
-            let distance = loc.distance(from: CLLocation(latitude: latitude, longitude: longitude))
-            return distance <= distanceThreshold
-        }
-        
-        filterByProximity(coordinates: coordinates)
-    }
-    
-    private func filterByProximity(coordinates: CLLocationCoordinate2D) {
-        let latitude = coordinates.latitude
-        let longitude = coordinates.longitude
-
-        nearbySchools = nearbySchools.sorted { data1, data2 in
-            let coordinates1 = data1.school.coordinates
-            let coordinates2 = data2.school.coordinates
-            
-            let distance1 = abs(latitude - coordinates1.latitude) + abs(longitude - coordinates1.longitude)
-            let distance2 = abs(latitude - coordinates2.latitude) + abs(longitude - coordinates2.longitude)
-            
-            return distance1 < distance2
-        }
-        
-        modifyDuplicates()
-    }
-
-    private func modifyDuplicates() {
-        for i in 0..<nearbySchools.count {
-            for j in 0..<nearbySchools.count {
-                if i != j && nearbySchools[i].school.latitude == nearbySchools[j].school.latitude && nearbySchools[i].school.longitude == nearbySchools[j].school.longitude {
-                    nearbySchools[j].school.longitude = "\(Double(nearbySchools[j].school.longitude!)! + 0.0007 - 0.00009 * Double(j))"
-                }
-            }
-        }
-    }
-    
-    // MARK: - Filter View Controller SAT Data Methods
-    enum TopSchoolsCategory {
-        case math
-        case reading
-        case writing
-        case combined
+    // MARK: - Filter The Data By Given Parameters
+    func filterByCoordinates(coordinates: CLLocationCoordinate2D, miles: Double) {
+        nearbySchools = SchoolDataModifier.filterByMiles(schoolsData: schoolsData, coordinates: coordinates, miles: miles)
+        nearbySchools = SchoolDataModifier.filterByProximity(nearbySchools: nearbySchools, coordinates: coordinates)
+        nearbySchools = SchoolDataModifier.modifyCoordinateDuplicates(nearbySchools: nearbySchools)
     }
         
     func filterBySATData(selectedSegment: Int, score: String, count: String) {
-        let sections: [TopSchoolsCategory] = [.combined, .math, .reading, .writing]
-        let category = sections[selectedSegment]
-        var filtered = [SchoolData]()
-        let score = Int(score) ?? 0
-        
-        for school in nearbySchools {
-            switch category {
-            case .math:
-                if Int(school.sat.sat_math_avg_score) ?? 0 >= score { filtered.append(school) }
-            case .reading:
-                if Int(school.sat.sat_critical_reading_avg_score) ?? 0 >= score { filtered.append(school) }
-            case .writing:
-                if Int(school.sat.sat_writing_avg_score) ?? 0 >= score { filtered.append(school) }
-            case .combined:
-                let math = Int(school.sat.sat_math_avg_score) ?? 0
-                let reading = Int(school.sat.sat_critical_reading_avg_score) ?? 0
-                let writing = Int(school.sat.sat_writing_avg_score) ?? 0
-                
-                if math + reading + writing >= score { filtered.append(school) }
-            }
-        }
-        
-        if let number = Int(count) { nearbySchools = Array(filtered.prefix(number)) }
+        nearbySchools = SchoolDataModifier.filterBySATData(nearbySchools: nearbySchools, selectedSegment: selectedSegment, score: score, count: count)
     }
 
+    // MARK: - Get SchoolData For Annotation Name
     func getSchoolData(name: String) -> SchoolData? {
         return nearbySchools.first { $0.school.school_name == name }
     }

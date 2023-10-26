@@ -27,11 +27,4 @@ struct School: Decodable {
         }
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
-
-    func lowercased() -> String {
-        return school_name.lowercased()
-    }
-    func uppercased() -> String {
-        return school_name.uppercased() 
-    }
 }

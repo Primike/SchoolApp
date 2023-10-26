@@ -45,9 +45,6 @@ class ComparisonGraphView: UIView {
     
     lazy var comparisonBarsView: ComparisonBarsView = {
         var view = ComparisonBarsView(sat1: school1.sat, sat2: school2.sat)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 3
-        view.layer.borderColor = UIColor.black.cgColor
         return view
     }()
     

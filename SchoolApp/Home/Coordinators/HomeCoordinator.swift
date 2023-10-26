@@ -37,7 +37,9 @@ class HomeCoordinator: Coordinating {
         case .mySchools:
             coordinator = MySchoolsCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         case .about:
-            coordinator = MySchoolsCoordinator(navigationController: navigationController, schoolsData: schoolsData)
+            let aboutVC = AboutViewController()
+            navigationController.pushViewController(aboutVC, animated: true)
+            return
         }
         
         childCoordinators.append(coordinator)

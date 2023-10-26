@@ -14,10 +14,12 @@ class MapSearchCoordinator: Coordinating {
     private let navigationController: UINavigationController
     private var childCoordinators: [Coordinating] = []
     private let viewModel: MapSearchViewModel
+    private let filterVC: MapFilterViewController
     
     required init(navigationController: UINavigationController, schoolsData: [SchoolData]) {
         self.navigationController = navigationController
         self.viewModel = MapSearchViewModel(schoolsData: schoolsData)
+        self.filterVC = MapFilterViewController(viewModel: viewModel)
     }
 
     func start() {
@@ -26,13 +28,15 @@ class MapSearchCoordinator: Coordinating {
         navigationController.pushViewController(viewController, animated: true)
     }
 
+    // MARK: - Goes To Filter View
     func goToFilterView(viewController: MapSearchViewController) {
-        let mapFilter = MapFilterViewController(viewModel: viewModel)
-        mapFilter.coordinator = self
-        mapFilter.delegate = viewController
-        navigationController.pushViewController(mapFilter, animated: true)
+//        let mapFilter = MapFilterViewController(viewModel: viewModel)
+        filterVC.coordinator = self
+        filterVC.delegate = viewController
+        navigationController.pushViewController(filterVC, animated: true)
     }
     
+    // MARK: - Goes To School View
     func goToSchoolView(schoolData: SchoolData) {
         let viewModel = SchoolViewModel(schoolData: schoolData)
         let coordinator = SchoolTabCoordinator(navigationController: navigationController, viewModel: viewModel)

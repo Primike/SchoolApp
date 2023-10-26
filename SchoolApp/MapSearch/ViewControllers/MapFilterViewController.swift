@@ -15,10 +15,10 @@ protocol MapFilterDelegate: AnyObject {
 
 class MapFilterViewController: UIViewController {
     
-    let viewModel: MapSearchViewModel
     weak var coordinator: MapSearchCoordinator?
     weak var delegate: MapFilterDelegate?
-    let schoolsNumber = ["All"] + Array(1...30).map { String($0) }
+    private let viewModel: MapSearchViewModel
+    let schoolsNumber = ["All"] + Array(1...50).map { String($0) }
 
     init(viewModel: MapSearchViewModel) {
         self.viewModel = viewModel
@@ -51,7 +51,8 @@ class MapFilterViewController: UIViewController {
         layout()
     }
     
-    var currentData: [String] {
+    // MARK: - Data For Pickers
+    var pickerData: [String] {
         switch filterView.segmentedControl.selectedSegmentIndex {
         case 0:
             return ["Any", "600", "800", "1000", "1200", "1400", "1800", "2000"]
@@ -84,6 +85,7 @@ class MapFilterViewController: UIViewController {
         ])
     }
     
+    // MARK: - Filter Options Functions
     @objc func sliderValueChanged(_ sender: UISlider) {
         filterView.milesLabel.text = "\(Int(sender.value)) Miles"
     }
@@ -106,7 +108,7 @@ class MapFilterViewController: UIViewController {
         let address = filterView.addressText.text ?? ""
         let miles = filterView.milesSlider.value
         let schools = schoolsNumber[filterView.numberPicker.selectedRow(inComponent: 0)]
-        let score = currentData[filterView.minScorePicker.selectedRow(inComponent: 0)]
+        let score = pickerData[filterView.minScorePicker.selectedRow(inComponent: 0)]
         let section = filterView.segmentedControl.selectedSegmentIndex
         
         viewModel.validateAddress(address: address, radius: miles) { [weak self] result in
@@ -114,7 +116,7 @@ class MapFilterViewController: UIViewController {
             
             switch result {
             case .success(let coordinates):
-                self.viewModel.filterByMiles(coordinates: coordinates, miles: Double(miles))
+                self.viewModel.filterByCoordinates(coordinates: coordinates, miles: Double(miles))
                 self.viewModel.filterBySATData(selectedSegment: section, score: score, count: schools)
                 
                 self.delegate?.filterApplied(miles: miles, coordinates: coordinates)
@@ -135,7 +137,7 @@ extension MapFilterViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         if pickerView == filterView.numberPicker {
             return schoolsNumber.count
         } else {
-            return currentData.count
+            return pickerData.count
         }
     }
 
@@ -143,7 +145,7 @@ extension MapFilterViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         if pickerView == filterView.numberPicker {
             return schoolsNumber[row]
         } else {
-            return currentData[row]
+            return pickerData[row]
         }
     }
 }

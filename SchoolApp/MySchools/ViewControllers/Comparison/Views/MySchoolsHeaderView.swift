@@ -42,7 +42,7 @@ class MySchoolsHeaderView: UIView {
          super.init(coder: aDecoder)
     }
         
-    func layout() {
+    private func layout() {
         self.addSubview(stackView)
         
         stackView.addArrangedSubview(heartImage)

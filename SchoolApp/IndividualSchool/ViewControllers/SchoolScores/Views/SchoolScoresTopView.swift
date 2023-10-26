@@ -23,6 +23,7 @@ class SchoolScoresTopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - School Name
     lazy var schoolNameLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: viewModel.schoolData.school.school_name, fontSize: .largeTitle)
         label.textColor = .white
@@ -44,6 +45,7 @@ class SchoolScoresTopView: UIView {
         return image
     }()
     
+    // MARK: - Test Taker Info
     lazy var scoresInfoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
         stackView.distribution = .fillEqually
@@ -66,6 +68,7 @@ class SchoolScoresTopView: UIView {
         return label
     }()
       
+    // MARK: - Button To Display Graph
     lazy var graphButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false

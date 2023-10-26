@@ -33,15 +33,7 @@ class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
             }
         }
         
-        self.schoolsData = mySchools
-        
-        for i in 0..<schoolsData.count {
-            for j in 0..<schoolsData.count {
-                if i != j && schoolsData[i].school.latitude == schoolsData[j].school.latitude && schoolsData[i].school.longitude == schoolsData[j].school.longitude {
-                    schoolsData[j].school.longitude = "\(Double(schoolsData[j].school.longitude!)! + 0.0007 - 0.00009*Double(j))"
-                }
-            }
-        }
+        self.schoolsData = SchoolDataModifier.modifyCoordinateDuplicates(nearbySchools: mySchools)
     }
     
     //MARK: Cell Methods    

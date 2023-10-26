@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class SchoolTabBarViewController: UITabBarController {
+    
     var coordinator: Coordinating?
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -18,7 +19,7 @@ class SchoolTabBarViewController: UITabBarController {
         }
     }
     
-    func dismissViewController() {
+    private func dismissViewController() {
         coordinator?.didFinish()
     }
 
