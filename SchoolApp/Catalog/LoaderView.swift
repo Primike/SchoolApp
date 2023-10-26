@@ -35,8 +35,9 @@ class LoaderView: UIView {
         return stackView
     }()
 
-    lazy var appTitleLabel: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "Schools App")
+    lazy var appTitleLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "Schools App", fontSize: .largeTitle)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.numberOfLines = 1
         return label
     }()

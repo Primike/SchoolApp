@@ -40,7 +40,7 @@ class ComparisonViewController: UIViewController {
     lazy var infoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .horizontal)
         stackView.spacing = 10
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
@@ -155,6 +155,7 @@ class ComparisonViewController: UIViewController {
             infoStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.9),
             infoStackView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
             
+            infoView1.widthAnchor.constraint(equalTo: infoView2.widthAnchor, multiplier: 1),
             verticalDivider.widthAnchor.constraint(equalToConstant: 5),
             
             graphView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.3),

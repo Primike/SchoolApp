@@ -10,60 +10,69 @@ import UIKit
 
 class GraphBarsView: UIView {
     
+    private let satData: SATData
+    private let schoolColor: UIColor
+    private var graphHeightValues = [Double]()
+    private var mathBarHeightConstraint: NSLayoutConstraint?
+    private var writingBarHeightConstraint: NSLayoutConstraint?
+    private var readingBarHeightConstraint: NSLayoutConstraint?
+    
+    init(satData: SATData, schoolColor: UIColor) {
+        self.schoolColor = schoolColor
+        self.satData = satData
+                
+        super.init(frame: .zero)
+
+        setup()
+        layout()
+    }
+
     lazy var mathBar: BarView = {
-        let view = BarView(sectionScore: schoolScores.sat_math_avg_score, schoolColor: schoolColor)
+        let view = BarView(sectionScore: satData.sat_math_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var writingBar: BarView = {
-        let view = BarView(sectionScore: schoolScores.sat_writing_avg_score, schoolColor: schoolColor)
+        let view = BarView(sectionScore: satData.sat_writing_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var readingBar: BarView = {
-        let view = BarView(sectionScore: schoolScores.sat_critical_reading_avg_score, schoolColor: schoolColor)
+        let view = BarView(sectionScore: satData.sat_critical_reading_avg_score, schoolColor: schoolColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    var mathBarHeightConstraint: NSLayoutConstraint?
-    var writingBarHeightConstraint: NSLayoutConstraint?
-    var readingBarHeightConstraint: NSLayoutConstraint?
-    var schoolScores: SATData
-    var schoolColor: UIColor
-    var graphHeightValues = [Float]()
-    
-    init(scores: SATData, schoolColor: UIColor) {
-        self.schoolColor = schoolColor
-        self.schoolScores = scores
-        
-        let score1 = Int(scores.sat_math_avg_score) ?? 0
-        graphHeightValues.append(Float(Double(score1)/Double(800)))
-        let score2 = Int(scores.sat_writing_avg_score) ?? 0
-        graphHeightValues.append(Float(Double(score2)/Double(800)))
-        let score3 = Int(scores.sat_critical_reading_avg_score) ?? 0
-        graphHeightValues.append(Float(Double(score3)/Double(800)))
-        
-        super.init(frame: .zero)
-
-        layout()
-    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func layout() {
-        self.addSubview(mathBar)
-        self.addSubview(writingBar)
-        self.addSubview(readingBar)
-        
+    private func setup() {
+        translatesAutoresizingMaskIntoConstraints = false
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.black.cgColor
+        backgroundColor = .systemBackground
+
+        let score1 = Double(satData.sat_math_avg_score) ?? 0
+        let score2 = Double(satData.sat_writing_avg_score) ?? 0
+        let score3 = Double(satData.sat_critical_reading_avg_score) ?? 0
+
+        graphHeightValues.append(score1/Double(800))
+        graphHeightValues.append(score2/Double(800))
+        graphHeightValues.append(score3/Double(800))
+
         mathBarHeightConstraint = mathBar.heightAnchor.constraint(equalToConstant: 0)
         writingBarHeightConstraint = writingBar.heightAnchor.constraint(equalToConstant: 0)
         readingBarHeightConstraint = readingBar.heightAnchor.constraint(equalToConstant: 0)
-        
+    }
+    
+    private func layout() {
+        self.addSubview(mathBar)
+        self.addSubview(writingBar)
+        self.addSubview(readingBar)
+                
         NSLayoutConstraint.activate([
             mathBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             mathBar.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -93,5 +102,4 @@ class GraphBarsView: UIView {
             self.layoutIfNeeded()
         }
     }
-
 }

@@ -27,12 +27,14 @@ class ComparisonInfoView: UIView {
 
     lazy var stackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
-        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
     lazy var schoolName: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: schoolData.school.school_name, fontSize: .largeTitle)
+        var label = SchoolAppLabel(labelText: schoolData.school.school_name, fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textColor = color
         label.numberOfLines = 2
         return label
@@ -40,6 +42,7 @@ class ComparisonInfoView: UIView {
     
     lazy var schoolLocation: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: schoolData.school.location, fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         label.numberOfLines = 2
         return label
@@ -47,36 +50,42 @@ class ComparisonInfoView: UIView {
     
     lazy var schoolPhone: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Phone: \(schoolData.school.phone_number)", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         return label
     }()
     
     lazy var distanceLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Distance: Not Available", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         return label
     }()
     
     lazy var testtakersLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Test Takers: Not Available", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         return label
     }()
     
     lazy var mathLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Math Score: Not Available", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         return label
     }()
 
     lazy var writingLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Writing Score: Not Available", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         return label
     }()
     
     lazy var readingLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Reading Score: Not Available", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue", size: 100)
         label.textColor = color
         return label
     }()

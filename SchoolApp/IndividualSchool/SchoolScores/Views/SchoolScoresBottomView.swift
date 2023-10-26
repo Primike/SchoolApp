@@ -28,19 +28,16 @@ class SchoolScoresBottomView: UIView {
     
     lazy var satMathSubView: BottomSubjectView = {
         var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro), subjectName: "SAT MATH", subjectScore: viewModel.schoolData.sat.sat_math_avg_score)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var satWritingSubView: BottomSubjectView = {
         var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro), subjectName: "SAT WRITING", subjectScore: viewModel.schoolData.sat.sat_writing_avg_score)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var satReadingSubView: BottomSubjectView = {
         var view = BottomSubjectView(schoolColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro), subjectName: "SAT CRITICAL READING", subjectScore: viewModel.schoolData.sat.sat_critical_reading_avg_score)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -48,7 +45,7 @@ class SchoolScoresBottomView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
         
-    func layout() {
+    private func layout() {
         self.addSubview(stackView)
         stackView.addArrangedSubview(satMathSubView)
         stackView.addArrangedSubview(satWritingSubView)

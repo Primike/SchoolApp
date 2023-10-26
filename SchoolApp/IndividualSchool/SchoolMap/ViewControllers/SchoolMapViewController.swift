@@ -13,8 +13,8 @@ import CoreLocation
 
 class SchoolMapViewController: UIViewController, Coordinated {
     
-    private let viewModel: SchoolViewModel
     weak var coordinator: Coordinating?
+    private let viewModel: SchoolViewModel
 
     init(viewModel: SchoolViewModel) {
         self.viewModel = viewModel
@@ -32,8 +32,9 @@ class SchoolMapViewController: UIViewController, Coordinated {
         return stackView
     }()
     
-    lazy var titleLabel: SchoolAppLabel2 = {
-        let label = SchoolAppLabel2(labelText: "\(viewModel.schoolData.school.school_name) Map", labelTextColor: viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro))
+    lazy var titleLabel: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: "\(viewModel.schoolData.school.school_name) Map", fontSize: .largeTitle)
+        label.textColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
         return label
     }()
     
@@ -47,7 +48,6 @@ class SchoolMapViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         
         setup()
@@ -55,7 +55,7 @@ class SchoolMapViewController: UIViewController, Coordinated {
     }
         
     private func setup() {
-        guard let coordinate = viewModel.coordinate else { return }
+        guard let coordinate = viewModel.coordinates else { return }
         
         addMapPin(coordinate: coordinate, label: viewModel.schoolData.school.school_name)
         

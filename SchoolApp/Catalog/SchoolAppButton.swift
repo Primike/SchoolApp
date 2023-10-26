@@ -35,6 +35,7 @@ class SchoolAppButton: UIButton {
     private func setupButton() {
         translatesAutoresizingMaskIntoConstraints = false
         
+        contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         configuration = SchoolAppButtonConfiguration.configuration
         configuration?.title = title
         configuration?.attributedTitle?.font = UIFont(name:"HelveticaNeue", size: CGFloat(Int(viewWidth))/titleSize)

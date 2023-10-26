@@ -37,13 +37,11 @@ class SchoolInfoViewController: UIViewController, Coordinated {
     
     lazy var infoTopView: SchoolInfoTopView = {
         var view = SchoolInfoTopView(viewModel: viewModel)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     lazy var infoBottomView: SchoolInfoBottomView = {
         var view = SchoolInfoBottomView(viewModel: viewModel)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 50
         view.layer.maskedCorners = [.layerMinXMinYCorner]
         view.backgroundColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
@@ -56,12 +54,12 @@ class SchoolInfoViewController: UIViewController, Coordinated {
 
         setup()
         layout()
-        checkMySchools()
     }
     
     private func setup() {
         infoTopView.websiteButton.addTarget(self, action: #selector(websiteButtonTapped), for: .primaryActionTriggered)
         infoTopView.addSchoolButton.addTarget(self, action: #selector(addSchool), for: .primaryActionTriggered)
+        infoTopView.addSchoolButton.setImage(UIImage(systemName: viewModel.getAddSchoolButtonImageName(), withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
     }
     
     private func layout() {
@@ -86,16 +84,7 @@ class SchoolInfoViewController: UIViewController, Coordinated {
             infoTopView.schoolImage.rightAnchor.constraint(equalTo: infoTopView.addSchoolButton.rightAnchor),
         ])
     }
-    
-    private func checkMySchools() {
-        let savedArray = UserDefaults.standard.object(forKey: "array") as? [String] ?? [String]()
-        var imageName = "plus.circle"
         
-        if savedArray.contains(viewModel.schoolData.school.dbn) { imageName = "checkmark" }
-        
-        infoTopView.addSchoolButton.setImage(UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
-    }
-    
     private func showAlert() {
         let alert = UIAlertController(title: "Added To My Schools!", message: "", preferredStyle: .alert)
         
@@ -114,20 +103,12 @@ extension SchoolInfoViewController {
     }
     
     @objc func addSchool(sender: UIButton) {
-        var savedSchools = UserDefaults.standard.object(forKey: "array") as? [String] ?? [String]()
         NotificationCenter.default.post(name: .userDataDidUpdate, object: nil)
         
-        if savedSchools.contains(viewModel.schoolData.school.dbn) {
-            infoTopView.addSchoolButton.setImage(UIImage(systemName: "plus.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
-            
-            UserDefaults.standard.set(savedSchools.filter { $0 != viewModel.schoolData.school.dbn }, forKey: "array")
-        } else {
-            infoTopView.addSchoolButton.setImage(UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
-            
-            savedSchools.append(viewModel.schoolData.school.dbn)
-            UserDefaults.standard.set(savedSchools, forKey: "array")
-            
-            self.showAlert()
-        }
+        let (imageName, willShowAlert) = viewModel.addOrRemoveSchool()
+        
+        infoTopView.addSchoolButton.setImage(UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold, scale: .large)), for: .normal)
+
+        if willShowAlert { showAlert() }
     }
 }

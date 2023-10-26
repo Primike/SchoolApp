@@ -49,14 +49,13 @@ class SchoolInfoTopView: UIView {
     lazy var infoStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
         stackView.distribution = .fillProportionally
-        stackView.spacing = 10
         return stackView
     }()
 
-    lazy var nameLabel: SchoolAppLabel = {
+    lazy var schoolNameLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: viewModel.schoolData.school.school_name, fontSize: .largeTitle)
         let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
         label.textAlignment = .left
         label.numberOfLines = 2
@@ -64,13 +63,15 @@ class SchoolInfoTopView: UIView {
     }()
 
     lazy var locationLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Address: \(viewModel.schoolData.school.location)", fontSize: .headline)
+        var label = SchoolAppLabel(labelText: "Address: \(viewModel.schoolData.school.location)", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textAlignment = .left
         return label
     }()
 
     lazy var phoneLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Phone: \(viewModel.schoolData.school.phone_number)", fontSize: .headline)
+        var label = SchoolAppLabel(labelText: "Phone: \(viewModel.schoolData.school.phone_number)", fontSize: .title3)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textAlignment = .left
         return label
     }()
@@ -90,7 +91,7 @@ class SchoolInfoTopView: UIView {
         buttonsStackView.addSubview(websiteButton)
         buttonsStackView.addSubview(addSchoolButton)
         self.addSubview(infoStackView)
-        infoStackView.addArrangedSubview(nameLabel)
+        infoStackView.addArrangedSubview(schoolNameLabel)
         infoStackView.addArrangedSubview(locationLabel)
         infoStackView.addArrangedSubview(phoneLabel)
         self.addSubview(schoolImage)
@@ -115,6 +116,8 @@ class SchoolInfoTopView: UIView {
             infoStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             infoStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
+            schoolNameLabel.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.5),
+            
             schoolImage.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor),
             schoolImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
             schoolImage.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),

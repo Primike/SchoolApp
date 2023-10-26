@@ -18,6 +18,7 @@ class MySchoolsHeaderView: UIView {
 
     lazy var mySchoolsLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Add Schools And They Will Appear Here!", fontSize: .largeTitle)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textColor = .white
         return label
     }()

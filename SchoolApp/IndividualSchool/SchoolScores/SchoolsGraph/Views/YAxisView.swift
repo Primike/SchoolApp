@@ -10,52 +10,6 @@ import UIKit
 
 class YAxisView: UIView {
     
-    lazy var label800: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "800 -", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        return label
-    }()
-
-    lazy var stackView600: SchoolAppStackView = {
-        var stackView = SchoolAppStackView(type: .horizontal)
-        return stackView
-    }()
-    
-    lazy var label600: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "600 -", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        return label
-    }()
-
-    lazy var stackView400: SchoolAppStackView = {
-        var stackView = SchoolAppStackView(type: .horizontal)
-        return stackView
-    }()
-    
-    lazy var label400: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "400 -", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        return label
-    }()
-
-    lazy var stackView200: SchoolAppStackView = {
-        var stackView = SchoolAppStackView(type: .horizontal)
-        return stackView
-    }()
-    
-    lazy var label200: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "200 -", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        return label
-    }()
-
-    lazy var label0: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "0 -", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Italics", size: 15.0)
-        return label
-    }()
-
-    
     init() {
         super.init(frame: .zero)
         
@@ -65,50 +19,59 @@ class YAxisView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    lazy var stackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView(type: .vertical)
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
     
-    func layout() {
-        self.addSubview(label800)
-        self.addSubview(stackView600)
-        self.addSubview(stackView400)
-        self.addSubview(stackView200)
-        self.addSubview(label0)
+    lazy var label800: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "800 -", fontSize: .largeTitle)
+        return label
+    }()
+
+    lazy var label600: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "600 -", fontSize: .largeTitle)
+        return label
+    }()
+
+    lazy var label400: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "400 -", fontSize: .largeTitle)
+        return label
+    }()
+
+    lazy var label200: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "200 -", fontSize: .largeTitle)
+        return label
+    }()
+
+    lazy var label0: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "0 -", fontSize: .largeTitle)
+        return label
+    }()
         
-        stackView600.addSubview(label600)
-        stackView400.addSubview(label400)
-        stackView200.addSubview(label200)
+    private func layout() {
+        translatesAutoresizingMaskIntoConstraints = false
         
+        self.addSubview(stackView)
+        stackView.addArrangedSubview(label800)
+        stackView.addArrangedSubview(label600)
+        stackView.addArrangedSubview(label400)
+        stackView.addArrangedSubview(label200)
+        stackView.addArrangedSubview(label0)
+                
         NSLayoutConstraint.activate([
-            label800.topAnchor.constraint(equalTo: self.topAnchor),
-            label800.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            label800.widthAnchor.constraint(equalTo: self.widthAnchor),
+            stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            stackView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            stackView600.topAnchor.constraint(equalTo: label800.bottomAnchor),
-            stackView600.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
-            stackView600.widthAnchor.constraint(equalTo: self.widthAnchor),
-            
-            label600.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            label600.widthAnchor.constraint(equalTo: self.widthAnchor),
-            label600.centerYAnchor.constraint(equalTo: stackView600.centerYAnchor),
-            
-            stackView400.topAnchor.constraint(equalTo: stackView600.bottomAnchor),
-            stackView400.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
-            stackView400.widthAnchor.constraint(equalTo: self.widthAnchor),
-            
-            label400.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            label400.widthAnchor.constraint(equalTo: self.widthAnchor),
-            label400.centerYAnchor.constraint(equalTo: stackView400.centerYAnchor),
-            
-            stackView200.bottomAnchor.constraint(equalTo: label0.topAnchor),
-            stackView200.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
-            stackView200.widthAnchor.constraint(equalTo: self.widthAnchor),
-            
-            label200.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            label200.widthAnchor.constraint(equalTo: self.widthAnchor),
-            label200.centerYAnchor.constraint(equalTo: stackView200.centerYAnchor),
-            
-            label0.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            label0.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05),
-            label0.widthAnchor.constraint(equalTo: self.widthAnchor),
+            label800.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
+            label600.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
+            label400.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
+            label200.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
+            label0.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
         ])
     }
 }

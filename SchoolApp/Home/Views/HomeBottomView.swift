@@ -26,9 +26,6 @@ class HomeBottomView: UIView {
     lazy var appTitleLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "High School Hunt NYC", fontSize: .largeTitle)
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
-        let attributedString = NSMutableAttributedString(string: "High School Hunt NYC")
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: "High School Hunt NYC".count))
-        label.attributedText = attributedString
         return label
 
     }()
@@ -66,18 +63,18 @@ class HomeBottomView: UIView {
         return button
     }()
 
-    //MARK: BOTTOM VIEW
+    // MARK: - BOTTOM VIEW
     lazy var bottomStackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
         stackView.layer.cornerRadius = 40
         stackView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         stackView.backgroundColor = UIColor.white
-        stackView.distribution = .fillProportionally
         return stackView
     }()
     
     lazy var welcomeLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "Welcome", fontSize: .largeTitle)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         return label
     }()
     
@@ -92,7 +89,7 @@ class HomeBottomView: UIView {
         largeButtonsStackView.addArrangedSubview(mapSearchButton)
         largeButtonsStackView.addArrangedSubview(myschoolsButton)
         largeButtonsStackView.addArrangedSubview(about)
-        bottomStackView.addArrangedSubview(welcomeLabel)
+        bottomStackView.addSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
             appTitleLabel.topAnchor.constraint(equalTo: self.topAnchor),
@@ -109,6 +106,10 @@ class HomeBottomView: UIView {
             bottomStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
             bottomStackView.widthAnchor.constraint(equalTo: self.widthAnchor),
             bottomStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            welcomeLabel.topAnchor.constraint(equalTo: bottomStackView.topAnchor),
+            welcomeLabel.heightAnchor.constraint(equalTo: bottomStackView.heightAnchor, multiplier: 0.8),
+            welcomeLabel.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor)
         ])
     }
 }

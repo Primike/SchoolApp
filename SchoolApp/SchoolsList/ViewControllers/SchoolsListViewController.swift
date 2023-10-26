@@ -79,7 +79,7 @@ class SchoolsListViewController: UIViewController {
         ])
     }
     
-    @objc func searchTapped() {
+    @objc func searchTapped(sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Sort By Relevance", style: .default, handler: { [weak self] _ in
@@ -97,6 +97,10 @@ class SchoolsListViewController: UIViewController {
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
         
         present(actionSheet, animated: true, completion: nil)
     }

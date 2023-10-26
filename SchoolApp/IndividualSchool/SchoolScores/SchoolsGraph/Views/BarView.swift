@@ -10,13 +10,6 @@ import UIKit
 
 class BarView: UIView {
     
-    lazy var bar: SchoolAppLabel2 = {
-        let label = SchoolAppLabel2(labelText: sectionScore, labelTextColor: .white)
-        label.backgroundColor = schoolColor
-        label.font = UIFont(name:"HelveticaNeue", size: 30.0)
-        return label
-    }()
-    
     var sectionScore: String
     var schoolColor: UIColor
     
@@ -29,11 +22,19 @@ class BarView: UIView {
         layout()
     }
 
+    lazy var bar: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: sectionScore, fontSize: .largeTitle)
+        label.backgroundColor = schoolColor
+        label.font = UIFont(name:"HelveticaNeue", size: 30.0)
+        label.textColor = .white
+        return label
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func layout() {
+    private func layout() {
         self.addSubview(bar)
         
         NSLayoutConstraint.activate([

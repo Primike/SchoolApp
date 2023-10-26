@@ -10,53 +10,8 @@ import UIKit
 
 class SchoolGraphViewController: UIViewController {
 
-    lazy var screenStackView: SchoolAppStackView = {
-        let stackView = SchoolAppStackView(type: .vertical)
-        return stackView
-    }()
-    
-    lazy var arrowImage: UIImageView = {
-        let image = UIImageView(image: UIImage(systemName: "arrow.down"))
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
-        image.tintColor = .black
-        return image
-    }()
-
-    lazy var schoolNameLabel: SchoolAppLabel = {
-        let label = SchoolAppLabel(labelText: viewModel.schoolData.school.school_name, fontSize: .largeTitle)
-        label.textColor = schoolColor
-        label.numberOfLines = 2
-        return label
-    }()
-
-    lazy var topStackView: SchoolAppStackView = {
-        let stackView = SchoolAppStackView(type: .horizontal)
-        return stackView
-    }()
-    
-    lazy var yAxisView: YAxisView = {
-        let view = YAxisView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var graphBarsView: GraphBarsView = {
-        let view = GraphBarsView(scores: viewModel.schoolData.sat, schoolColor: schoolColor)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 3
-        view.layer.borderColor = UIColor.black.cgColor
-        view.backgroundColor = .systemBackground
-        return view
-    }()
-    lazy var xAxisView: XAxisView = {
-        let view = XAxisView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    let schoolColor: UIColor
-    let viewModel: SchoolViewModel
+    private let schoolColor: UIColor
+    private let viewModel: SchoolViewModel
 
     init(viewModel: SchoolViewModel) {
         self.viewModel = viewModel
@@ -64,11 +19,45 @@ class SchoolGraphViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    lazy var stackView: SchoolAppStackView = {
+        let stackView = SchoolAppStackView(type: .vertical)
+        return stackView
+    }()
     
+    lazy var schoolNameLabel: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: viewModel.schoolData.school.school_name, fontSize: .largeTitle)
+        label.textColor = schoolColor
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
+        label.numberOfLines = 2
+        return label
+    }()
+
+    lazy var middleStackView: SchoolAppStackView = {
+        let stackView = SchoolAppStackView(type: .horizontal)
+        stackView.spacing = 5
+        return stackView
+    }()
+    
+    lazy var yAxisView: YAxisView = {
+        let view = YAxisView()
+        return view
+    }()
+    
+    lazy var graphBarsView: GraphBarsView = {
+        let view = GraphBarsView(satData: viewModel.schoolData.sat, schoolColor: schoolColor)
+        return view
+    }()
+    
+    lazy var xAxisView: XAxisView = {
+        let view = XAxisView()
+        return view
+    }()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -82,50 +71,35 @@ class SchoolGraphViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubview(screenStackView)
+        view.addSubview(stackView)
 
-        screenStackView.addSubview(arrowImage)
-        screenStackView.addSubview(schoolNameLabel)
-        screenStackView.addSubview(topStackView)
-        screenStackView.addSubview(xAxisView)
-        
-        topStackView.addSubview(yAxisView)
-        topStackView.addSubview(graphBarsView)
-        
+        stackView.addSubview(schoolNameLabel)
+        stackView.addSubview(middleStackView)
+        middleStackView.addArrangedSubview(yAxisView)
+        middleStackView.addArrangedSubview(graphBarsView)
+        stackView.addSubview(xAxisView)
+                
         NSLayoutConstraint.activate([
-            screenStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
-            screenStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            screenStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            screenStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            arrowImage.topAnchor.constraint(equalTo: screenStackView.topAnchor),
-            arrowImage.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),
-            arrowImage.widthAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),
-            arrowImage.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
+            schoolNameLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
+            schoolNameLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1),
+            schoolNameLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.9),
+            schoolNameLabel.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
             
-            schoolNameLabel.topAnchor.constraint(equalTo: arrowImage.bottomAnchor),
-            schoolNameLabel.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.1),
-            schoolNameLabel.widthAnchor.constraint(equalTo: screenStackView.widthAnchor, multiplier: 0.9),
-            schoolNameLabel.centerXAnchor.constraint(equalTo: screenStackView.centerXAnchor),
+            middleStackView.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor, constant: 10),
+            middleStackView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            middleStackView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.7),
+            middleStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             
-            topStackView.topAnchor.constraint(equalTo: schoolNameLabel.bottomAnchor),
-            topStackView.leftAnchor.constraint(equalTo: screenStackView.leftAnchor),
-            topStackView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.8),
-            topStackView.widthAnchor.constraint(equalTo: screenStackView.widthAnchor),
+            yAxisView.widthAnchor.constraint(equalTo: middleStackView.widthAnchor, multiplier: 0.1),
             
-            yAxisView.topAnchor.constraint(equalTo: topStackView.topAnchor),
-            yAxisView.leftAnchor.constraint(equalTo: topStackView.leftAnchor),
-            yAxisView.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
-            yAxisView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.1),
-            
-            graphBarsView.topAnchor.constraint(equalTo: topStackView.topAnchor),
-            graphBarsView.leftAnchor.constraint(equalTo: yAxisView.rightAnchor),
-            graphBarsView.heightAnchor.constraint(equalTo: topStackView.heightAnchor),
-            graphBarsView.widthAnchor.constraint(equalTo: topStackView.widthAnchor, multiplier: 0.9),
-            
+            xAxisView.topAnchor.constraint(equalTo: middleStackView.bottomAnchor, constant: 5),
             xAxisView.widthAnchor.constraint(equalTo: graphBarsView.widthAnchor),
-            xAxisView.heightAnchor.constraint(equalTo: screenStackView.heightAnchor, multiplier: 0.05),
-            xAxisView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
+            xAxisView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
             xAxisView.leftAnchor.constraint(equalTo: graphBarsView.leftAnchor),
         ])
     }

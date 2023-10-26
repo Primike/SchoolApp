@@ -412,9 +412,9 @@
 		9E2158972A460F030015A049 /* SchoolScores */ = {
 			isa = PBXGroup;
 			children = (
-				9E21589D2A460F400015A049 /* SchoolsGraph */,
-				9E21589C2A460F380015A049 /* Views */,
 				9E21589B2A460F310015A049 /* ViewControllers */,
+				9E21589C2A460F380015A049 /* Views */,
+				9E21589D2A460F400015A049 /* SchoolsGraph */,
 			);
 			path = SchoolScores;
 			sourceTree = "<group>";
@@ -465,8 +465,8 @@
 		9E21589D2A460F400015A049 /* SchoolsGraph */ = {
 			isa = PBXGroup;
 			children = (
-				9E21589F2A460F590015A049 /* Views */,
 				9E21589E2A460F530015A049 /* ViewControllers */,
+				9E21589F2A460F590015A049 /* Views */,
 			);
 			path = SchoolsGraph;
 			sourceTree = "<group>";

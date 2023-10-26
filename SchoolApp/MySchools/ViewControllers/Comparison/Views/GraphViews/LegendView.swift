@@ -40,6 +40,7 @@ class LegendView: UIView {
     
     lazy var school1Label: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: schoolName1, fontSize: .largeTitle)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.numberOfLines = 2
         return label
     }()
@@ -59,6 +60,7 @@ class LegendView: UIView {
     
     lazy var school2Label: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: schoolName2, fontSize: .largeTitle)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textColor = .brown
         label.numberOfLines = 2
         return label

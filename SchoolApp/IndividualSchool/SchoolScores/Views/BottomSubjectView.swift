@@ -10,9 +10,9 @@ import UIKit
 
 class BottomSubjectView: UIView {
     
-    let schoolColor: UIColor
-    let subjectName: String
-    let subjectScore: String
+    private let schoolColor: UIColor
+    private let subjectName: String
+    private let subjectScore: String
     
     init(schoolColor: UIColor, subjectName: String, subjectScore: String) {
         self.schoolColor = schoolColor
@@ -35,26 +35,27 @@ class BottomSubjectView: UIView {
         stackView.layer.cornerRadius = 10
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
-
         return stackView
     }()
 
     lazy var satSubjectLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: subjectName, fontSize: .largeTitle)
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         label.textColor = .white
         label.numberOfLines = 2
         return label
     }()
 
     lazy var satSubjectScore: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Score: \(subjectScore)/800", fontSize: .title1)
+        var label = SchoolAppLabel(labelText: "Score: \(subjectScore)/800", fontSize: .largeTitle)
+        label.font = UIFont(name:"HelveticaNeue", size: 100.0)
         label.textColor = .white
         return label
     }()
     
     private func layout() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(satSubjectStackView)
         satSubjectStackView.addArrangedSubview(satSubjectLabel)
         satSubjectStackView.addArrangedSubview(satSubjectScore)

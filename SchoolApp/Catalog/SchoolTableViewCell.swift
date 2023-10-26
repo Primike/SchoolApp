@@ -26,29 +26,31 @@ class SchoolTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    lazy var schoolInfoStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView(type: .horizontal)
+    lazy var infoStackView: SchoolAppStackView = {
+        var stackView = SchoolAppStackView(type: .vertical)
+        stackView.distribution = .fillProportionally
         return stackView
     }()
 
-    lazy var schoolName: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+    lazy var schoolName: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "", fontSize: .largeTitle)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
 
-    lazy var schoolAddress: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue", size: 20.0)
-        label.numberOfLines = 1
+    lazy var schoolAddress: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "", fontSize: .largeTitle)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
 
-    lazy var schoolBoro: SchoolAppLabel2 = {
-        var label = SchoolAppLabel2(labelText: "", labelTextColor: .black)
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
+    lazy var schoolBoro: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "", fontSize: .largeTitle)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 50.0)
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 1
@@ -67,22 +69,22 @@ class SchoolTableViewCell: UITableViewCell {
     }
 
     private func setup() {
-        self.layer.borderWidth = 5
-        self.layer.borderColor = UIColor.systemFill.cgColor
-        self.layer.cornerRadius = 20
-        self.layer.masksToBounds = true
-        self.accessoryType = .disclosureIndicator
-        self.selectionStyle = .none
+        layer.borderWidth = 5
+        layer.borderColor = UIColor.systemFill.cgColor
+        layer.cornerRadius = 20
+        layer.masksToBounds = true
+        accessoryType = .disclosureIndicator
+        selectionStyle = .none
     }
 
     private func layout() {
         self.addSubview(cellStackView)
 
-        cellStackView.addSubview(schoolInfoStackView)
+        cellStackView.addSubview(infoStackView)
         cellStackView.addSubview(schoolBoro)
 
-        schoolInfoStackView.addSubview(schoolName)
-        schoolInfoStackView.addSubview(schoolAddress)
+        infoStackView.addArrangedSubview(schoolName)
+        infoStackView.addArrangedSubview(schoolAddress)
 
         NSLayoutConstraint.activate([
             cellStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9),
@@ -90,20 +92,12 @@ class SchoolTableViewCell: UITableViewCell {
             cellStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             cellStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 
-            schoolInfoStackView.topAnchor.constraint(equalTo: cellStackView.topAnchor),
-            schoolInfoStackView.leftAnchor.constraint(equalTo: cellStackView.leftAnchor),
-            schoolInfoStackView.heightAnchor.constraint(equalTo: cellStackView.heightAnchor),
-            schoolInfoStackView.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.7),
+            infoStackView.topAnchor.constraint(equalTo: cellStackView.topAnchor),
+            infoStackView.leftAnchor.constraint(equalTo: cellStackView.leftAnchor),
+            infoStackView.heightAnchor.constraint(equalTo: cellStackView.heightAnchor, multiplier: 0.8),
+            infoStackView.widthAnchor.constraint(equalTo: cellStackView.widthAnchor, multiplier: 0.7),
 
-            schoolName.topAnchor.constraint(equalTo: schoolInfoStackView.topAnchor),
-            schoolName.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
-            schoolName.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.5),
-            schoolName.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor),
-
-            schoolAddress.topAnchor.constraint(equalTo: schoolName.bottomAnchor),
-            schoolAddress.leftAnchor.constraint(equalTo: schoolInfoStackView.leftAnchor),
-            schoolAddress.heightAnchor.constraint(equalTo: schoolInfoStackView.heightAnchor, multiplier: 0.3),
-            schoolAddress.widthAnchor.constraint(equalTo: schoolInfoStackView.widthAnchor, multiplier: 0.9),
+            schoolName.heightAnchor.constraint(equalTo: infoStackView.heightAnchor, multiplier: 0.6),
 
             schoolBoro.topAnchor.constraint(equalTo: cellStackView.topAnchor),
             schoolBoro.rightAnchor.constraint(equalTo: cellStackView.rightAnchor),

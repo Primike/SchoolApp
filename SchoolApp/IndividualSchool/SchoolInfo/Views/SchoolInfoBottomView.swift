@@ -25,15 +25,14 @@ class SchoolInfoBottomView: UIView {
     
     lazy var stackView: SchoolAppStackView = {
         var stackView = SchoolAppStackView(type: .vertical)
-        stackView.distribution = .equalSpacing
         stackView.spacing = 10
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
     lazy var aboutLabel: SchoolAppLabel = {
         var label = SchoolAppLabel(labelText: "About:", fontSize: .largeTitle)
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 2
@@ -41,7 +40,8 @@ class SchoolInfoBottomView: UIView {
     }()
 
     lazy var schoolDescription: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: viewModel.schoolData.school.overview_paragraph, fontSize: .title1)
+        var label = SchoolAppLabel(labelText: viewModel.schoolData.school.overview_paragraph, fontSize: .largeTitle)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 100.0)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -49,6 +49,8 @@ class SchoolInfoBottomView: UIView {
     }()
         
     private func layout() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(stackView)
         stackView.addArrangedSubview(aboutLabel)
         stackView.addArrangedSubview(schoolDescription)
@@ -58,6 +60,8 @@ class SchoolInfoBottomView: UIView {
             stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            aboutLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.15)
         ])
     }
 }
