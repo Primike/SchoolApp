@@ -107,7 +107,6 @@ class MapSearchViewModel {
         }
         
         modifyDuplicates()
-        print(nearbySchools.count)
     }
 
     private func modifyDuplicates() {

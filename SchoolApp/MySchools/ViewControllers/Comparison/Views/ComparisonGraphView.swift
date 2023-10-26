@@ -10,8 +10,23 @@ import UIKit
 
 class ComparisonGraphView: UIView {
     
+    var school1: SchoolData
+    let school2: SchoolData
+    
+    init(school1: SchoolData, school2: SchoolData) {
+        self.school1 = school1
+        self.school2 = school2
+                
+        super.init(frame: .zero)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     lazy var legendView: LegendView = {
-        var view = LegendView(frame: CGRect(), schoolName1: "SCHOOL 1", schoolName2: "SCHOOL 2")
+        var view = LegendView(schoolName1: school1.school.school_name, schoolName2: school2.school.school_name)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -29,32 +44,14 @@ class ComparisonGraphView: UIView {
     }()
     
     lazy var comparisonBarsView: ComparisonBarsView = {
-        var view = ComparisonBarsView(sat1: school1.sat, sat2: school2.sat, schoolColor: schoolColor)
+        var view = ComparisonBarsView(sat1: school1.sat, sat2: school2.sat)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor
         return view
     }()
     
-    
-    var school1: SchoolData
-    let school2: SchoolData
-    let schoolColor: UIColor
-    
-    init(school1: SchoolData, school2: SchoolData, schoolColor: UIColor) {
-        self.schoolColor = schoolColor
-        self.school1 = school1
-        self.school2 = school2
-                
-        super.init(frame: .zero)
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-        
-    func layout() {
+    private func layout() {
         self.addSubview(legendView)
         self.addSubview(yAxisView)
         self.addSubview(comparisonBarsView)
@@ -64,21 +61,21 @@ class ComparisonGraphView: UIView {
             legendView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             legendView.rightAnchor.constraint(equalTo: self.rightAnchor),
             legendView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1),
-            legendView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            legendView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             
-            yAxisView.topAnchor.constraint(equalTo: legendView.bottomAnchor),
+            yAxisView.topAnchor.constraint(equalTo: legendView.bottomAnchor, constant: 8),
             yAxisView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            yAxisView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
+            yAxisView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.65),
             yAxisView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.1),
             
-            comparisonBarsView.topAnchor.constraint(equalTo: legendView.bottomAnchor),
+            comparisonBarsView.topAnchor.constraint(equalTo: legendView.bottomAnchor, constant: 8),
             comparisonBarsView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            comparisonBarsView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
+            comparisonBarsView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.65),
             comparisonBarsView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             
             xAxisView.topAnchor.constraint(equalTo: comparisonBarsView.bottomAnchor),
             xAxisView.leftAnchor.constraint(equalTo: comparisonBarsView.leftAnchor),
-            xAxisView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            xAxisView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
             xAxisView.widthAnchor.constraint(equalTo: comparisonBarsView.widthAnchor),
         ])
     }

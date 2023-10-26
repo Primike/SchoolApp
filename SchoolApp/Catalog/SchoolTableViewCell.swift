@@ -22,32 +22,32 @@ class SchoolTableViewCell: UITableViewCell {
     }
 
     lazy var cellStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
+        var stackView = SchoolAppStackView(type: .vertical)
         return stackView
     }()
 
     lazy var schoolInfoStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
+        var stackView = SchoolAppStackView(type: .horizontal)
         return stackView
     }()
 
-    lazy var schoolName: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
+    lazy var schoolName: SchoolAppLabel2 = {
+        var label = SchoolAppLabel2(labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         label.textAlignment = .left
         return label
     }()
 
-    lazy var schoolAddress: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
+    lazy var schoolAddress: SchoolAppLabel2 = {
+        var label = SchoolAppLabel2(labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue", size: 20.0)
         label.numberOfLines = 1
         label.textAlignment = .left
         return label
     }()
 
-    lazy var schoolBoro: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "", labelTextColor: .black)
+    lazy var schoolBoro: SchoolAppLabel2 = {
+        var label = SchoolAppLabel2(labelText: "", labelTextColor: .black)
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true

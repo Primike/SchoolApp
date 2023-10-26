@@ -35,9 +35,9 @@ class HomeCoordinator: Coordinating {
         case .mapSearch:
             coordinator = MapSearchCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         case .mySchools:
-            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schoolsData: schoolsData)
+            coordinator = MySchoolsCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         case .about:
-            coordinator = MySchoolsTabBarCoordinator(navigationController: navigationController, schoolsData: schoolsData)
+            coordinator = MySchoolsCoordinator(navigationController: navigationController, schoolsData: schoolsData)
         }
         
         childCoordinators.append(coordinator)

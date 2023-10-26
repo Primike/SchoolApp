@@ -31,8 +31,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     }()
 
     lazy var stackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .vertical
+        var stackView = SchoolAppStackView(type: .vertical)
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -132,7 +131,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
 extension HomeViewController {
     @objc func buttonTouched(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
-            sender.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
     }
 

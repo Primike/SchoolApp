@@ -23,16 +23,9 @@ class HomeBottomView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    lazy var appTitleLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
+    lazy var appTitleLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "High School Hunt NYC", fontSize: .largeTitle)
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
-        label.textColor = .black
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.numberOfLines = 1
-        label.text = "High School Hunt NYC"
         let attributedString = NSMutableAttributedString(string: "High School Hunt NYC")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: "High School Hunt NYC".count))
         label.attributedText = attributedString
@@ -42,8 +35,7 @@ class HomeBottomView: UIView {
         
     //MARK: LARGE BUTTONS
     lazy var largeButtonsStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .vertical
+        var stackView = SchoolAppStackView(type: .vertical)
         stackView.distribution = .fillEqually
         stackView.spacing = 15
         return stackView
@@ -76,25 +68,16 @@ class HomeBottomView: UIView {
 
     //MARK: BOTTOM VIEW
     lazy var bottomStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
+        var stackView = SchoolAppStackView(type: .vertical)
         stackView.layer.cornerRadius = 40
         stackView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         stackView.backgroundColor = UIColor.white
-        stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         return stackView
     }()
     
-    lazy var welcomeLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.textColor = .black
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.numberOfLines = 1
-        label.text = "Welcome"
+    lazy var welcomeLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "Welcome", fontSize: .largeTitle)
         return label
     }()
     

@@ -10,64 +10,11 @@ import UIKit
 
 class ComparisonBarsView: UIView {
     
-    lazy var mathStackView: SchoolAppStackView = {
-        var view = SchoolAppStackView()
-        return view
-    }()
-    
-    lazy var mathBar: BarView = {
-        var view = BarView(sectionScore: sat1.sat_math_avg_score, schoolColor: .black)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    lazy var mathBar2: BarView = {
-        var view = BarView(sectionScore: sat2.sat_math_avg_score, schoolColor: .brown)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    lazy var writingStackView: SchoolAppStackView = {
-        var view = SchoolAppStackView()
-        return view
-    }()
-
-    lazy var writingBar: BarView = {
-        var view = BarView(sectionScore: sat1.sat_writing_avg_score, schoolColor: .black)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    lazy var writingBar2: BarView = {
-        var view = BarView(sectionScore: sat2.sat_writing_avg_score, schoolColor: .brown)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    lazy var readingStackView: SchoolAppStackView = {
-        var view = SchoolAppStackView()
-        return view
-    }()
-
-    lazy var readingBar: BarView = {
-        var view = BarView(sectionScore: sat1.sat_critical_reading_avg_score, schoolColor: .black)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    lazy var readingBar2: BarView = {
-        var view = BarView(sectionScore: sat2.sat_critical_reading_avg_score, schoolColor: .brown)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     var sat1: SATData
     let sat2: SATData
-    let schoolColor: UIColor
     var graphHeightValues = [Float]()
     
-    init(sat1: SATData, sat2: SATData, schoolColor: UIColor) {
-        self.schoolColor = schoolColor
+    init(sat1: SATData, sat2: SATData) {
         self.sat1 = sat1
         self.sat2 = sat2
         
@@ -87,7 +34,58 @@ class ComparisonBarsView: UIView {
         super.init(frame: .zero)
         layout()
     }
+
+    lazy var mathStackView: SchoolAppStackView = {
+        var view = SchoolAppStackView(type: .horizontal)
+        return view
+    }()
     
+    lazy var mathBar: BarView = {
+        var view = BarView(sectionScore: sat1.sat_math_avg_score, schoolColor: .black)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var mathBar2: BarView = {
+        var view = BarView(sectionScore: sat2.sat_math_avg_score, schoolColor: .brown)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var writingStackView: SchoolAppStackView = {
+        var view = SchoolAppStackView(type: .horizontal)
+        return view
+    }()
+
+    lazy var writingBar: BarView = {
+        var view = BarView(sectionScore: sat1.sat_writing_avg_score, schoolColor: .black)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var writingBar2: BarView = {
+        var view = BarView(sectionScore: sat2.sat_writing_avg_score, schoolColor: .brown)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var readingStackView: SchoolAppStackView = {
+        var view = SchoolAppStackView(type: .horizontal)
+        return view
+    }()
+
+    lazy var readingBar: BarView = {
+        var view = BarView(sectionScore: sat1.sat_critical_reading_avg_score, schoolColor: .black)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var readingBar2: BarView = {
+        var view = BarView(sectionScore: sat2.sat_critical_reading_avg_score, schoolColor: .brown)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

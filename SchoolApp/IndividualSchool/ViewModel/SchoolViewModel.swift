@@ -19,4 +19,8 @@ class SchoolViewModel: SchoolColor {
     var coordinate: CLLocationCoordinate2D? {
         return schoolData.school.coordinates
     }
+    
+    var websiteURL: URL? {
+        return URL(string: "https://\(schoolData.school.website)")
+    }
 }

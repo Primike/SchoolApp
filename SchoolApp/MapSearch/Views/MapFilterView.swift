@@ -21,28 +21,20 @@ class MapFilterView: UIView {
     }
     
     lazy var stackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .vertical
+        var stackView = SchoolAppStackView(type: .vertical)
         stackView.spacing = 15
         return stackView
     }()
     
     // MARK: - ADDRESS
     lazy var addressStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .horizontal
+        var stackView = SchoolAppStackView(type: .horizontal)
         return stackView
     }()
 
-    lazy var addressLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = "Address:"
-        label.adjustsFontSizeToFitWidth = true
+    lazy var addressLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "Address:", fontSize: .largeTitle)
         label.textAlignment = .left
-        label.numberOfLines = 2
         return label
     }()
     
@@ -64,22 +56,14 @@ class MapFilterView: UIView {
 
     // MARK: - MILES
     lazy var milesStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .vertical
+        var stackView = SchoolAppStackView(type: .vertical)
         stackView.spacing = 10
         stackView.distribution = .fillEqually
         return stackView
     }()
 
-    lazy var milesLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue", size: largeTitlePointSize)
-        label.text = "5 Miles"
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.numberOfLines = 1
+    lazy var milesLabel: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: "5 Miles", fontSize: .largeTitle)
         return label
     }()
 
@@ -93,22 +77,14 @@ class MapFilterView: UIView {
     
     // MARK: - NUMBER OF SCHOOLS
     lazy var schoolNumberStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .horizontal
+        var stackView = SchoolAppStackView(type: .horizontal)
         stackView.spacing = 10
         stackView.distribution = .fillEqually
         return stackView
     }()
 
-    lazy var maxNumberLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue", size: largeTitlePointSize)
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.numberOfLines = 1
-        label.text = "Maximum Schools:"
+    lazy var maxNumberLabel: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: "Maximum Schools:", fontSize: .largeTitle)
         return label
     }()
     
@@ -119,15 +95,9 @@ class MapFilterView: UIView {
     }()
     
     // MARK: - SUBJECT TYPE
-    lazy var filterByScoreLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: largeTitlePointSize)
-        label.text = "Filter By Section And Score:"
-        label.adjustsFontSizeToFitWidth = true
+    lazy var filterByScoreLabel: SchoolAppLabel = {
+        var label = SchoolAppLabel(labelText: "Filter By Section And Score:", fontSize: .largeTitle)
         label.textAlignment = .left
-        label.numberOfLines = 1
         return label
     }()
 
@@ -142,22 +112,14 @@ class MapFilterView: UIView {
     
     // MARK: MINIMUM SCORE
     lazy var minScoreStackView: SchoolAppStackView = {
-        var stackView = SchoolAppStackView()
-        stackView.axis = .horizontal
+        var stackView = SchoolAppStackView(type: .horizontal)
         stackView.spacing = 10
         stackView.distribution = .fillEqually
         return stackView
     }()
 
-    lazy var minScoreLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let largeTitlePointSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
-        label.font = UIFont(name: "HelveticaNeue", size: largeTitlePointSize)
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.numberOfLines = 1
-        label.text = "Minimum Score:"
+    lazy var minScoreLabel: SchoolAppLabel = {
+        let label = SchoolAppLabel(labelText: "Minimum Score:", fontSize: .largeTitle)
         return label
     }()
     

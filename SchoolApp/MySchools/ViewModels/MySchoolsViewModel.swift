@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol MySchoolsViewModeling {
-    var schoolsData: [SchoolData] { get set }
+    var schoolsData: [SchoolData] { get }
     func mySchools()
 }
 
@@ -25,8 +25,7 @@ class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
     func mySchools() {
         var mySchools = [SchoolData]()
         
-        let defaults = UserDefaults.standard
-        let savedArray = defaults.object(forKey: "array") as? [String] ?? [String]()
+        let savedArray = UserDefaults.standard.object(forKey: "array") as? [String] ?? [String]()
 
         for id in savedArray {
             if let school = schoolsData.first(where: { $0.school.dbn == id }) {
@@ -61,20 +60,4 @@ class MySchoolsViewModel: MySchoolsViewModeling, SchoolCellMethods {
     func getSchoolColor(indexPath: IndexPath) -> UIColor {
         return getColor(schoolBoro: schoolsData[indexPath.row].school.boro)
     }
-
-    func getColor(schoolBoro: String) -> UIColor {
-        switch schoolBoro {
-        case "M":
-            return UIColor.systemBlue
-        case "X":
-            return .systemOrange
-        case "K":
-            return UIColor.systemRed
-        case "Q":
-            return UIColor.systemPurple
-        default:
-            return .systemGreen
-        }
-    }
 }
-

@@ -71,7 +71,6 @@ class MapFilterViewController: UIViewController {
         filterView.applyButton.addTarget(self, action: #selector(applyTapped), for: [.touchUpInside, .touchUpOutside])
         
         filterView.segmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
-
     }
     
     private func layout() {

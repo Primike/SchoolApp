@@ -10,7 +10,11 @@ import UIKit
 
 class SchoolAppStackView: UIStackView {
     
-    init() {
+    var type: NSLayoutConstraint.Axis
+    
+    init(type: NSLayoutConstraint.Axis) {
+        self.type = type
+        
         super.init(frame: .zero)
         layout()
     }
@@ -21,5 +25,6 @@ class SchoolAppStackView: UIStackView {
     
     private func layout() {
         translatesAutoresizingMaskIntoConstraints = false
+        axis = type
     }
 }
