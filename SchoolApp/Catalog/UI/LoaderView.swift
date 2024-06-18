@@ -36,7 +36,7 @@ class LoaderView: UIView {
     }()
 
     lazy var appTitleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "Schools App", fontSize: .largeTitle)
+        var label = SchoolAppLabel(labelText: "NYC High School Hunt", fontSize: .largeTitle)
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.numberOfLines = 1
         return label

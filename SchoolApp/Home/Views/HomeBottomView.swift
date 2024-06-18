@@ -24,7 +24,7 @@ class HomeBottomView: UIView {
     }
 
     lazy var appTitleLabel: SchoolAppLabel = {
-        var label = SchoolAppLabel(labelText: "High School Hunt NYC", fontSize: .largeTitle)
+        var label = SchoolAppLabel(labelText: "NYC High School Hunt", fontSize: .largeTitle)
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         return label
 

@@ -79,7 +79,7 @@ class SchoolMapViewController: UIViewController, Coordinated {
             stackView.topAnchor.constraint(equalTo: view.topAnchor),
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor),
             stackView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
             titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
         ])
