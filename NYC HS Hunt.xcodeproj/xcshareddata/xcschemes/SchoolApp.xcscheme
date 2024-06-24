@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8E817382846A45F0052C1AE"
-               BuildableName = "SchoolApp.app"
-               BlueprintName = "SchoolApp"
-               ReferencedContainer = "container:SchoolApp.xcodeproj">
+               BuildableName = "NYC HS Hunt.app"
+               BlueprintName = "NYC HS Hunt"
+               ReferencedContainer = "container:NYC HS Hunt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9E824005289879EB000D4BA0"
-               BuildableName = "SchoolAppTests.xctest"
-               BlueprintName = "SchoolAppTests"
-               ReferencedContainer = "container:SchoolApp.xcodeproj">
+               BuildableName = "NYC HS HuntTests.xctest"
+               BlueprintName = "NYC HS HuntTests"
+               ReferencedContainer = "container:NYC HS Hunt.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "B8E817582846A4600052C1AE"
                BuildableName = "SchoolAppUITests.xctest"
                BlueprintName = "SchoolAppUITests"
-               ReferencedContainer = "container:SchoolApp.xcodeproj">
+               ReferencedContainer = "container:NYC HS Hunt.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8E817382846A45F0052C1AE"
-            BuildableName = "SchoolApp.app"
-            BlueprintName = "SchoolApp"
-            ReferencedContainer = "container:SchoolApp.xcodeproj">
+            BuildableName = "NYC HS Hunt.app"
+            BlueprintName = "NYC HS Hunt"
+            ReferencedContainer = "container:NYC HS Hunt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
@@ -86,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8E817382846A45F0052C1AE"
-            BuildableName = "SchoolApp.app"
-            BlueprintName = "SchoolApp"
-            ReferencedContainer = "container:SchoolApp.xcodeproj">
+            BuildableName = "NYC HS Hunt.app"
+            BlueprintName = "NYC HS Hunt"
+            ReferencedContainer = "container:NYC HS Hunt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

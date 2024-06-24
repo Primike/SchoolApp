@@ -107,7 +107,7 @@
 		9E46312F2AEAC8CE001FB843 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		9E4631322AEAE6ED001FB843 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		9E531C0D2885A03400AED087 /* SchoolMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapViewController.swift; sourceTree = "<group>"; };
-		9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E824006289879EB000D4BA0 /* NYC HS HuntTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NYC HS HuntTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E824008289879EB000D4BA0 /* SchoolAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppTests.swift; sourceTree = "<group>"; };
 		9E902E1329A4281B00A39C77 /* SchoolsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListCoordinator.swift; sourceTree = "<group>"; };
 		9E902E1829A4482800A39C77 /* SchoolAppButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAppButtonConfiguration.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		B8C96D0C284AFB340001142C /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
 		B8E1121728747692009C66B6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B8E11219287476C1009C66B6 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		B8E817392846A45F0052C1AE /* SchoolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8E817392846A45F0052C1AE /* NYC HS Hunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NYC HS Hunt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E8173C2846A45F0052C1AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8E817402846A45F0052C1AE /* SchoolsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsListViewController.swift; sourceTree = "<group>"; };
 		B8E817452846A4600052C1AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -660,8 +660,8 @@
 		B8E8173A2846A45F0052C1AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B8E817392846A45F0052C1AE /* SchoolApp.app */,
-				9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */,
+				B8E817392846A45F0052C1AE /* NYC HS Hunt.app */,
+				9E824006289879EB000D4BA0 /* NYC HS HuntTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -702,9 +702,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9E824005289879EB000D4BA0 /* SchoolAppTests */ = {
+		9E824005289879EB000D4BA0 /* NYC HS HuntTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9E82400C289879EB000D4BA0 /* Build configuration list for PBXNativeTarget "SchoolAppTests" */;
+			buildConfigurationList = 9E82400C289879EB000D4BA0 /* Build configuration list for PBXNativeTarget "NYC HS HuntTests" */;
 			buildPhases = (
 				9E824002289879EB000D4BA0 /* Sources */,
 				9E824003289879EB000D4BA0 /* Frameworks */,
@@ -715,14 +715,14 @@
 			dependencies = (
 				9E82400B289879EB000D4BA0 /* PBXTargetDependency */,
 			);
-			name = SchoolAppTests;
+			name = "NYC HS HuntTests";
 			productName = SchoolAppTests;
-			productReference = 9E824006289879EB000D4BA0 /* SchoolAppTests.xctest */;
+			productReference = 9E824006289879EB000D4BA0 /* NYC HS HuntTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B8E817382846A45F0052C1AE /* SchoolApp */ = {
+		B8E817382846A45F0052C1AE /* NYC HS Hunt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8E817632846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolApp" */;
+			buildConfigurationList = B8E817632846A4600052C1AE /* Build configuration list for PBXNativeTarget "NYC HS Hunt" */;
 			buildPhases = (
 				B8E817352846A45F0052C1AE /* Sources */,
 				B8E817362846A45F0052C1AE /* Frameworks */,
@@ -732,9 +732,9 @@
 			);
 			dependencies = (
 			);
-			name = SchoolApp;
+			name = "NYC HS Hunt";
 			productName = SchoolApp;
-			productReference = B8E817392846A45F0052C1AE /* SchoolApp.app */;
+			productReference = B8E817392846A45F0052C1AE /* NYC HS Hunt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -756,7 +756,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B8E817342846A45F0052C1AE /* Build configuration list for PBXProject "SchoolApp" */;
+			buildConfigurationList = B8E817342846A45F0052C1AE /* Build configuration list for PBXProject "NYC HS Hunt" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -769,8 +769,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B8E817382846A45F0052C1AE /* SchoolApp */,
-				9E824005289879EB000D4BA0 /* SchoolAppTests */,
+				B8E817382846A45F0052C1AE /* NYC HS Hunt */,
+				9E824005289879EB000D4BA0 /* NYC HS HuntTests */,
 			);
 		};
 /* End PBXProject section */
@@ -886,7 +886,7 @@
 /* Begin PBXTargetDependency section */
 		9E82400B289879EB000D4BA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B8E817382846A45F0052C1AE /* SchoolApp */;
+			target = B8E817382846A45F0052C1AE /* NYC HS Hunt */;
 			targetProxy = 9E82400A289879EB000D4BA0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -917,7 +917,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolApp.app/SchoolApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NYC HS Hunt.app/NYC HS Hunt";
 			};
 			name = Debug;
 		};
@@ -935,7 +935,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolApp.app/SchoolApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NYC HS Hunt.app/NYC HS Hunt";
 			};
 			name = Release;
 		};
@@ -1065,18 +1065,21 @@
 				DEVELOPMENT_TEAM = MDPY9LF665;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SchoolApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "NYC HS Hunt";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Location Access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = primike.SchoolApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = primike.NYCHSHunt;
+				PRODUCT_NAME = "NYC HS Hunt";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1093,18 +1096,21 @@
 				DEVELOPMENT_TEAM = MDPY9LF665;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SchoolApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "NYC HS Hunt";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Location Access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = primike.SchoolApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = primike.NYCHSHunt;
+				PRODUCT_NAME = "NYC HS Hunt";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1114,7 +1120,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9E82400C289879EB000D4BA0 /* Build configuration list for PBXNativeTarget "SchoolAppTests" */ = {
+		9E82400C289879EB000D4BA0 /* Build configuration list for PBXNativeTarget "NYC HS HuntTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E82400D289879EB000D4BA0 /* Debug */,
@@ -1123,7 +1129,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8E817342846A45F0052C1AE /* Build configuration list for PBXProject "SchoolApp" */ = {
+		B8E817342846A45F0052C1AE /* Build configuration list for PBXProject "NYC HS Hunt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8E817612846A4600052C1AE /* Debug */,
@@ -1132,7 +1138,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8E817632846A4600052C1AE /* Build configuration list for PBXNativeTarget "SchoolApp" */ = {
+		B8E817632846A4600052C1AE /* Build configuration list for PBXNativeTarget "NYC HS Hunt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8E817642846A4600052C1AE /* Debug */,
