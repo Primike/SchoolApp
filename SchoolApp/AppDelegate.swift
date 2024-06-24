@@ -45,10 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func askLocation() {
         LocationManager.shared.getUserLocation { [weak self] location in
-            guard let self = self else {
-                return
-            }
-            
+            guard let self = self else { return }
+            print(location)
             self.userLocation = location
         }
     }

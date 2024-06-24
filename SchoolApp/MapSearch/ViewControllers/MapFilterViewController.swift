@@ -85,6 +85,17 @@ class MapFilterViewController: UIViewController {
         ])
     }
     
+    // MARK: - Shows alert for bad address
+    private func showAlert() {
+        let alert = UIAlertController(title: "Invalid Address", message: "", preferredStyle: .alert)
+        
+        present(alert, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+
     // MARK: - Filter Options Functions
     @objc func sliderValueChanged(_ sender: UISlider) {
         filterView.milesLabel.text = "\(Int(sender.value)) Miles"
@@ -123,6 +134,7 @@ class MapFilterViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             case .failure(let error):
                 print(error.localizedDescription)
+                showAlert()
             }
         }
     }

@@ -51,6 +51,10 @@ class SchoolsListViewController: UIViewController {
         layout()
     }
     
+    deinit {
+        print("list vc")
+    }
+    
     // MARK: - When View Is Removed This deinits The Coordinator
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -139,7 +143,11 @@ extension SchoolsListViewController: UITableViewDataSource {
 extension SchoolsListViewController: UITableViewDelegate {
     // MARK: - Goes To School View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.goToSchoolView(schoolData: viewModel.getSchool(indexPath: indexPath))
+        guard let coordinator = coordinator else {
+            return
+        }
+        
+        coordinator.goToSchoolView(schoolData: viewModel.getSchool(indexPath: indexPath))
     }
 }
 

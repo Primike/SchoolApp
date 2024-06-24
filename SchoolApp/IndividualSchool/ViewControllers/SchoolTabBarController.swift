@@ -14,9 +14,7 @@ class SchoolTabBarViewController: UITabBarController {
         
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if isMovingFromParent {
-            dismissViewController()
-        }
+        dismissViewController()
     }
     
     private func dismissViewController() {

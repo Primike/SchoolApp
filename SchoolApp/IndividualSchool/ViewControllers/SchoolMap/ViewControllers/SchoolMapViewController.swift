@@ -35,6 +35,7 @@ class SchoolMapViewController: UIViewController, Coordinated {
     lazy var titleLabel: SchoolAppLabel = {
         let label = SchoolAppLabel(labelText: "\(viewModel.schoolData.school.school_name) Map", fontSize: .largeTitle)
         label.textColor = viewModel.getColor(schoolBoro: viewModel.schoolData.school.boro)
+        label.numberOfLines = 2
         return label
     }()
     
@@ -52,6 +53,10 @@ class SchoolMapViewController: UIViewController, Coordinated {
         
         setup()
         layout()
+        
+        LocationManager.shared.getUserLocation { [weak self] location in
+            self?.centerMapOnUserLocation(location: location)
+        }
     }
         
     // MARK: - Adds Pin For School Location
@@ -83,6 +88,11 @@ class SchoolMapViewController: UIViewController, Coordinated {
 
             titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
         ])
+    }
+    
+    private func centerMapOnUserLocation(location: CLLocation) {
+        let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        map.setRegion(region, animated: true)
     }
 }
 

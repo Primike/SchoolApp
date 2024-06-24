@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MapFilterView: UIView {
+class MapFilterView: UIView, UITextFieldDelegate {
     
     init() {
         super.init(frame: .zero)
@@ -52,6 +52,7 @@ class MapFilterView: UIView {
         textField.textColor = .black
         textField.backgroundColor = .white
         textField.placeholder = " Default: Current Location  "
+        textField.delegate = self
 
         return textField
     }()
@@ -195,6 +196,10 @@ class MapFilterView: UIView {
             applyButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.05),
             applyButton.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
         ])
-
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

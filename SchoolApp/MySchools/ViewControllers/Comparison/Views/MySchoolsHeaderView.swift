@@ -20,6 +20,7 @@ class MySchoolsHeaderView: UIView {
         var label = SchoolAppLabel(labelText: "Add Schools And They Will Appear Here!", fontSize: .largeTitle)
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 100)
         label.textColor = .white
+        label.numberOfLines = 2
         return label
     }()
 
